@@ -2,7 +2,7 @@
 import { TextEffect } from "@/components/ui/text-effect";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ChevronLeftIcon, ChevronRightIcon, ArrowDownIcon } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon, ArrowDownIcon, ExternalLinkIcon, MaximizeIcon, ArrowUpRightIcon } from 'lucide-react';
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -11,6 +11,7 @@ import {
   MorphingDialogImage,
   MorphingDialogSubtitle,
   MorphingDialogContainer,
+  MorphingDialogClose,
 } from '@/components/core/morphing-dialog';
 import { ScrollArea } from '@/components/website/scroll-area';
 
@@ -278,10 +279,10 @@ export function ProspectingSection() {
                 style={{
                   borderRadius: '8px',
                 }}
-                className='border border-gray-200/60 bg-white shadow-sm hover:shadow-md transition-shadow'
+                className='group relative border border-gray-200/60 bg-white shadow-sm hover:shadow-lg hover:border-brand-blue/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer h-[136px] flex flex-col'
               >
-                <div className='flex items-start p-4 text-left'>
-                  {/* The image that shows in the card */}
+                {/* Top section with logo and title */}
+                <div className='flex items-start p-4 pb-2'>
                   <div className='h-12 w-12 rounded-md overflow-hidden bg-gray-100 flex-shrink-0 mr-3'>
                     <img
                       src={item.image}
@@ -289,11 +290,22 @@ export function ProspectingSection() {
                       className='h-full w-full object-cover object-center'
                     />
                   </div>
-                  <div className='flex flex-col items-start justify-center space-y-1'>
-                    <h3 className='text-sm font-medium text-black text-left'>{item.title}</h3>
-                    <p className='text-xs text-gray-600 text-left'>{item.subtitle}</p>
+                  <div className='flex flex-col items-start justify-center space-y-1 flex-1 min-w-0'>
+                    <h3 className='text-sm font-medium text-black text-left group-hover:text-brand-blue transition-colors truncate w-full'>{item.title}</h3>
+                    <p className='text-xs text-gray-600 text-left truncate w-full'>{item.subtitle}</p>
                   </div>
                 </div>
+                
+                {/* Call to action button that spans full width */}
+                <div className="mt-auto border-t border-gray-100 w-full">
+                  <div className="bg-brand-blue/5 group-hover:bg-brand-blue/10 w-full py-2 px-3 text-sm font-medium text-brand-blue flex items-center justify-center transition-colors">
+                    <span>View details</span>
+                    <ArrowUpRightIcon className="h-3.5 w-3.5 ml-1.5" />
+                  </div>
+                </div>
+                
+                {/* Hover indicator overlay */}
+                <div className="absolute inset-0 bg-brand-blue/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg pointer-events-none"></div>
               </MorphingDialogTrigger>
               <MorphingDialogContainer>
                 <MorphingDialogContent
@@ -304,6 +316,8 @@ export function ProspectingSection() {
                   }}
                   className='relative w-[500px] border border-gray-100 bg-white my-8'
                 >
+                  <MorphingDialogClose className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm rounded-full p-1.5 shadow-md" />
+                  
                   {item.video ? (
                     <div className="flex flex-col max-h-[85vh]">
                       {/* Video with no padding/margin for edge-to-edge appearance */}
@@ -381,25 +395,25 @@ export function ProspectingSection() {
         <div className="relative mb-2">
           <TextEffect
             as="h2"
-            className="text-balance text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto"
+            className="text-balance text-center text-3xl sm:text-4xl font-extrabold text-black max-w-3xl mx-auto"
             speedReveal={1.2}
             speedSegment={0.6}
             delay={1.2}
             per="word"
             trigger={triggerAnimation}
           >
-            SpeakerDrive is Perfect For
+            SpeakerDrive is Perfect For...
           </TextEffect>
         </div>
         
-        {/* New subheadline text */}
+        {/* New subheadline text - Updated to match "SpeakerDrive is the go-to..." styling */}
         <motion.p 
-          className="text-center text-lg text-gray-600 max-w-2xl mx-auto mt-4 mb-8"
+          className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-8"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           transition={{ duration: 0.5, delay: 1.4 }}
         >
-          SpeakerDrive helps professionals who speak, train, and consult take control of their business development. Our platform is specifically designed for:
+          SpeakerDrive helps professionals who speak, train, and consult take control of their business development.
         </motion.p>
       </div>
 
@@ -566,7 +580,7 @@ export function ProspectingSection() {
               viewport={{ once: true }}
               className="p-6"
             >
-              <h3 className="text-xl md:text-2xl font-bold text-brand-blue mb-3">
+              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
                 These opportunities are out there waiting for you.
               </h3>
               <p className="text-lg text-gray-700">
@@ -577,7 +591,7 @@ export function ProspectingSection() {
           
           {/* Visual transition elements - gradient from blue to red */}
           <div className="flex flex-col items-center">
-            <div className="h-16 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
+            <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
             
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
               <ArrowDownIcon className="h-5 w-5 text-red-600" />

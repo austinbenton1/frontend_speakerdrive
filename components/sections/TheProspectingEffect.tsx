@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TriangleIcon as ExclamationTriangleIcon, CheckCircleIcon } from 'lucide-react';
+import { TriangleIcon as ExclamationTriangleIcon, CheckCircleIcon, ArrowDownIcon } from 'lucide-react';
 
 export function TheProspectingEffect() {
   return (
@@ -34,9 +34,9 @@ export function TheProspectingEffect() {
               Stuck Waiting for Referrals?
             </motion.h2>
             
-            {/* Updated subheadline copy - removed the "Like most experts..." part */}
+            {/* Updated subheadline copy - made left-aligned */}
             <motion.p 
-              className="text-lg text-gray-600 max-w-2xl mx-auto"
+              className="text-lg text-gray-600 max-w-2xl mx-auto text-left"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -75,8 +75,26 @@ export function TheProspectingEffect() {
             </motion.div>
           </div>
           
-          {/* Moved "Are you actively prospecting..." below the graphic with gradient styling */}
-          <div className="max-w-xl mx-auto mb-2">
+          {/* Visual transition from red to blue section - MOVED above blue text */}
+          <div className="flex flex-col items-center py-6">
+            <div className="h-24 w-1 bg-gradient-to-b from-red-300/70 to-brand-blue/50"></div>
+            
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-100 my-3">
+              <ArrowDownIcon className="h-5 w-5 text-brand-blue" />
+            </div>
+            
+            <div className="h-8 w-px bg-gradient-to-b from-brand-blue/50 to-transparent"></div>
+          </div>
+          
+          {/* Triangle icon in a circle - NOW BLUE instead of red */}
+          <div className="flex justify-center mb-6">
+            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 border border-blue-100">
+              <ExclamationTriangleIcon className="h-8 w-8 text-brand-blue" />
+            </div>
+          </div>
+          
+          {/* Moved "Are you actively prospecting..." BELOW the gradient line */}
+          <div className="max-w-3xl mx-auto mt-6 mb-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -84,11 +102,11 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-xl sm:text-2xl">
-                Are you actively prospecting, or just hoping for referrals?
+              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-3xl sm:text-4xl mb-3">
+                Prospecting Is The Key
               </h3>
-              <p className="text-gray-600 mt-1 text-lg font-medium">
-                Like most experts, you might not be actively prospecting for NEW business.
+              <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto pb-1">
+                You need to be actively prospecting for NEW business.
               </p>
             </motion.div>
           </div>
@@ -109,8 +127,10 @@ export function TheProspectingEffect() {
             >
               <div className="p-6 border-0">
                 <div className="flex items-center mb-4">
-                  <CheckCircleIcon className="h-6 w-6 text-brand-blue mr-2" />
-                  <h3 className="text-xl font-bold text-gray-800">Prospecting Is The Key</h3>
+                  <h3 className="text-xl font-bold text-gray-800">
+                    <CheckCircleIcon className="h-6 w-6 text-brand-blue mr-2 inline-block" />
+                    Here's How
+                  </h3>
                 </div>
                 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">

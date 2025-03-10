@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
 
@@ -103,7 +103,7 @@ export function FeatureTwoItem({
             {isStep1 
               ? "All the right gigs in one place, searchable and filterable to match your expertise."
               : isStep2 
-              ? "Get your foot in the door and bypass gatekeepers. 3 Ways to Connect." 
+              ? "Get your foot in the door and bypass gatekeepers." 
               : isStep3
               ? "Create effortless outreach in one click."
               : description}
@@ -161,23 +161,14 @@ export function FeatureTwoItem({
                 </div>
               </div>
             ) : (
-              <>
+              <div className="space-y-6">
                 {features?.map((feature, index) => (
-                  <div className="flex items-start gap-3 mb-5" key={index}>
-                    <div className="mt-1 flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#2D2D87]/10">
-                      <Check className="h-4 w-4 text-[#2D2D87]" />
-                    </div>
-                    <div>
-                      <p className="text-base font-semibold text-[#292929]">
-                        {feature.title}
-                      </p>
-                      <p className="text-sm text-[#555] mt-1">
-                        {feature.description}
-                      </p>
-                    </div>
+                  <div key={index}>
+                    <h4 className="text-base font-semibold text-[#292929]">{feature.title}</h4>
+                    <p className="text-sm text-[#555] mt-1">{feature.description}</p>
                   </div>
                 ))}
-              </>
+              </div>
             )}
 
             {/* CTA Link with animated underline */}
