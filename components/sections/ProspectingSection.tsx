@@ -54,7 +54,7 @@ const SAMPLE_ITEMS = [
   {
     title: "BCCC Corporate Citizenship Conference",
     subtitle: "Boston College",
-    image: "/BCCC Corporate Citizenship Conference-mh.png",
+    image: "/BCCC.png",
     description: "**At A Glance**\nThe BCCC International Corporate Citizenship Conference addresses corporate social responsibility and sustainability strategies for impactful business practices.\n\n**Target Audience**\nCorporate Social Responsibility Executives, Sustainability Practitioners, Corporate Citizenship Professionals\n\n**Best For**\nSpeakers and consultants specializing in corporate social responsibility. Best for industry leaders seeking practical insights – driving community engagement through responsible business.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4c1f4667ee1496ac6413.mp4"
   },
@@ -75,7 +75,7 @@ const SAMPLE_ITEMS = [
   {
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
-    image: "/FactRight Due Diligence Conference-mh.png",
+    image: "/FactRight.png",
     description: "**At A Glance**\nThe FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.\n\n**Target Audience**\nWealth Managers, Registered Investment Advisors, Investment Advisors\n\n**Best For**\nWealth managers and investment advisors specializing in alternative investments. Best for those seeking to deepen due diligence skills within investment management.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb5698b96946edd23833cb.mp4"
   },

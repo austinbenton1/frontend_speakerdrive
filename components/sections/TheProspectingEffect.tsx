@@ -7,7 +7,7 @@ export function TheProspectingEffect() {
   return (
     <div className="-mt-20 pt-0 pb-20">
       {/* Main container with gradient background - ONLY for top section */}
-      <div className="bg-gradient-to-b from-red-50/10 via-red-50/30 to-red-50/5 pt-10 pb-10">
+      <div className="bg-gradient-to-b from-red-50/10 via-red-50/30 to-red-50/5 pt-10 pb-6">
         <div className="container mx-auto max-w-5xl px-4">
           {/* Section Title with warning icon */}
           <div className="mb-6 text-center pt-0">
@@ -51,7 +51,7 @@ export function TheProspectingEffect() {
           </div>
           
           {/* Inconsistent Prospecting box - still in the colored section */}
-          <div className="mx-auto max-w-2xl mb-10">
+          <div className="mx-auto max-w-2xl mb-6">
             <motion.div 
               className="flex flex-col rounded-xl overflow-hidden shadow-lg"
               initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ export function TheProspectingEffect() {
           </div>
           
           {/* Moved "Are you actively prospecting..." below the graphic with gradient styling */}
-          <div className="max-w-xl mx-auto mb-8">
+          <div className="max-w-xl mx-auto mb-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -84,10 +84,10 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-lg sm:text-xl">
+              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-xl sm:text-2xl">
                 Are you actively prospecting, or just hoping for referrals?
               </h3>
-              <p className="text-gray-600 mt-3">
+              <p className="text-gray-600 mt-1 text-lg font-medium">
                 Like most experts, you might not be actively prospecting for NEW business.
               </p>
             </motion.div>
@@ -96,10 +96,10 @@ export function TheProspectingEffect() {
       </div>
       
       {/* COMPLETELY NEW SECTION with pure white background */}
-      <div className="bg-white py-10">
+      <div className="bg-white py-4">
         <div className="container mx-auto max-w-5xl px-4">
           {/* Solution Section - Removed the quote entirely */}
-          <div className="max-w-xl mx-auto mb-12">
+          <div className="max-w-xl mx-auto mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
