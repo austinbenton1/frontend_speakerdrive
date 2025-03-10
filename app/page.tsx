@@ -13,7 +13,12 @@ import { Check, Circle, Rocket, UserCircle2, Zap, ArrowRight } from 'lucide-reac
 import Link from "next/link";
 
 // Pricing toggle component
-function PricingToggle({ isAnnual, setIsAnnual }) {
+interface PricingToggleProps {
+  isAnnual: boolean;
+  setIsAnnual: (value: boolean) => void;
+}
+
+function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
   return (
     <div className="flex items-center justify-center gap-4 mb-10">
       <span className={`text-sm font-medium ${!isAnnual ? 'text-black' : 'text-gray-500'}`}>Monthly</span>
@@ -35,7 +40,24 @@ function PricingToggle({ isAnnual, setIsAnnual }) {
 }
 
 // Pricing Card component
-function PricingCard({ plan, isPopular = false, isAnnual }) {
+interface PricingCardProps {
+  plan: {
+    name: string;
+    description: string;
+    price: {
+      monthly: number;
+      annually?: number;
+    };
+    icon: React.ReactNode;
+    ctaLink?: string;
+    features: Array<{ text: string }>;
+    priceSubtitle?: string;
+  };
+  isPopular?: boolean;
+  isAnnual: boolean;
+}
+
+function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
   const monthly = plan.price.monthly;
   const annually = plan.price.annually || monthly * 10; // Default to 10x monthly for annual
   const currentPrice = isAnnual ? annually : monthly;

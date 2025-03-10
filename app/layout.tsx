@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter as InterFont } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const inter = InterFont({
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  preload: true,
-  adjustFontFallback: true
 });
 
 export const metadata: Metadata = {
