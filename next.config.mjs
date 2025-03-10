@@ -6,18 +6,29 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   
-  // Use static export for Netlify
-  output: 'export',
-  
-  // Disable TypeScript type checking during builds
-  typescript: {
-    ignoreBuildErrors: true,
+  // Add proper MIME type configuration for videos
+  async headers() {
+    return [
+      {
+        source: "/(.*).mp4",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "video/mp4",
+          },
+        ],
+      },
+      {
+        source: "/(.*).webm",
+        headers: [
+          {
+            key: "Content-Type",
+            value: "video/webm",
+          },
+        ],
+      },
+    ];
   },
-  
-  // Disable image optimization for static export
-  images: {
-    unoptimized: true,
-  }
 };
 
 export default nextConfig;

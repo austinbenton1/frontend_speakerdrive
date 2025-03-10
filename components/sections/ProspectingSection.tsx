@@ -18,22 +18,27 @@ const SPEAKER_TYPES = [
   {
     title: 'Keynote Speakers',
     image: '/Keynote Speaker.png',
+    description: 'Find more main-stage opportunities and command higher fees'
   },
   {
     title: 'Coaches',
     image: '/Coach.png',
+    description: 'Discover organizations actively seeking coaching expertise'
   },
   {
     title: 'Trainer / Facilitators',
     image: '/Trainer Facilitator.png',
+    description: 'Fill your calendar with workshops that value your expertise'
   },
   {
     title: 'Consultants',
     image: '/Consultant.png',
+    description: 'Connect with clients looking for your specialized consulting solutions'
   },
   {
     title: 'Thought Leaders',
     image: '/Expert Thought Leader.png',
+    description: 'Locate platforms eager to showcase your innovative ideas'
   },
 ];
 
@@ -386,6 +391,16 @@ export function ProspectingSection() {
             SpeakerDrive is Perfect For
           </TextEffect>
         </div>
+        
+        {/* New subheadline text */}
+        <motion.p 
+          className="text-center text-lg text-gray-600 max-w-2xl mx-auto mt-4 mb-8"
+          initial={{ opacity: 0, y: 10 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
+        >
+          SpeakerDrive helps professionals who speak, train, and consult take control of their business development. Our platform is specifically designed for:
+        </motion.p>
       </div>
 
       {/* Speaker Types Controls Section - removed the heading */}
@@ -455,12 +470,12 @@ export function ProspectingSection() {
                   duration: 0.5
                 }}
               >
-                <div className="px-2">
+                <div className="px-2 flex flex-col h-full">
                   {/* Label goes above image with no margin */}
-                  <h4 className="text-lg font-semibold text-center">{type.title}</h4>
+                  <h4 className="text-lg font-semibold text-center mb-2">{type.title}</h4>
                   
-                  {/* Shorter container height - reduced from previous values */}
-                  <div className="h-72 sm:h-[20rem] md:h-[22rem] flex items-center justify-center">
+                  {/* Shorter container height with fixed aspect ratio for the image */}
+                  <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center">
                     {/* Different styling based on image type with smaller scale */}
                     {type.title === 'Coaches' && (
                       <img
@@ -503,6 +518,11 @@ export function ProspectingSection() {
                       />
                     )}
                   </div>
+                  
+                  {/* Description text below image */}
+                  <div className="mt-2 text-center">
+                    <p className="text-sm text-gray-700 px-4 line-clamp-2 h-10">{type.description}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -533,18 +553,38 @@ export function ProspectingSection() {
         }
       `}</style>
       
-      {/* Visual transition connector to Referral Trap section - now completely white */}
+      {/* Visual transition connector to Referral Trap section - now with positive gradient and copy */}
       <div className="bg-white pt-8 pb-10"> 
         <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
-          <div className="text-center">
-            <p className="text-lg md:text-xl text-gray-500 font-medium">But there's a challenge many speakers face...</p>
+          {/* New positive message with custom styling and glow */}
+          <div className="text-center mb-6 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="p-6"
+            >
+              <h3 className="text-xl md:text-2xl font-bold text-brand-blue mb-3">
+                These opportunities are out there waiting for you.
+              </h3>
+              <p className="text-lg text-gray-700">
+                So why are so many talented experts still struggling to fill their calendars?
+              </p>
+            </motion.div>
           </div>
           
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
-            <ArrowDownIcon className="h-5 w-5 text-red-600" />
+          {/* Visual transition elements - gradient from blue to red */}
+          <div className="flex flex-col items-center">
+            <div className="h-16 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
+            
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
+              <ArrowDownIcon className="h-5 w-5 text-red-600" />
+            </div>
+            
+            <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
           </div>
-          
-          <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
         </div>
       </div>
     </div>

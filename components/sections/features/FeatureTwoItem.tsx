@@ -76,6 +76,11 @@ export function FeatureTwoItem({
     }
   };
   
+  // Check if this is Step 1, Step 2, or Step 3 and use custom content
+  const isStep1 = title === "Find Qualified Leads" || (stepNumber === 1);
+  const isStep2 = title === "Unlock Contact Info" || (stepNumber === 2);
+  const isStep3 = title === "Craft Outreach" || (stepNumber === 3);
+  
   return (
     <div className="bg-stone-50 px-4 py-12 sm:py-16">
       <div className="container mx-auto max-w-5xl">
@@ -89,10 +94,19 @@ export function FeatureTwoItem({
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#292929] mb-3 leading-tight">
-            Connect With Decision-Makers
+            {isStep1 ? "Find Your Ideal Opportunities" :
+             isStep2 ? "Get Direct Access" : 
+             isStep3 ? "Start Meaningful Conversations" : 
+             "Connect With Decision-Makers"}
           </h2>
           <p className="text-lg sm:text-xl text-[#555] max-w-2xl">
-            {description}
+            {isStep1 
+              ? "All the right gigs in one place, searchable and filterable to match your expertise."
+              : isStep2 
+              ? "Get your foot in the door and bypass gatekeepers. 3 Ways to Connect." 
+              : isStep3
+              ? "Create effortless outreach in one click."
+              : description}
           </p>
         </div>
 
@@ -100,21 +114,71 @@ export function FeatureTwoItem({
         <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center gap-8">
           {/* LEFT COL: Feature bullets + CTA */}
           <div className="w-full lg:w-2/5">
-            {features?.map((feature, index) => (
-              <div className="flex items-start gap-3 mb-5" key={index}>
-                <div className="mt-1 flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#2D2D87]/10">
-                  <Check className="h-4 w-4 text-[#2D2D87]" />
-                </div>
+            {isStep2 ? (
+              <div className="space-y-6">
                 <div>
-                  <p className="text-base font-semibold text-[#292929]">
-                    {feature.title}
-                  </p>
+                  <h4 className="text-base font-semibold text-[#292929]">Contact Emails</h4>
                   <p className="text-sm text-[#555] mt-1">
-                    {feature.description}
+                    For roles like Director Of Events, Chief People Officer, HR Directors, and Conference Organizers.
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-base font-semibold text-[#292929]">Event Emails</h4>
+                  <p className="text-sm text-[#555] mt-1">
+                    Validated addresses for event@, conference@, and speakers@ type emails that reach planning teams.
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-base font-semibold text-[#292929]">Event URLs</h4>
+                  <p className="text-sm text-[#555] mt-1">
+                    Direct links to application forms like Calls For Speakers, Session Submissions, and Speaker Registration Portals.
                   </p>
                 </div>
               </div>
-            ))}
+            ) : isStep3 ? (
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-base font-semibold text-[#292929]">Perfect Personalization</h4>
+                  <p className="text-sm text-[#555] mt-1">
+                    SpeakerDrive adapts each message to match the specific event, organization, contact and more.
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-base font-semibold text-[#292929]">Multi-Channel Options</h4>
+                  <p className="text-sm text-[#555] mt-1">
+                    Choose between email, LinkedIn, or application submissions based on your unlock type.
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 className="text-base font-semibold text-[#292929]">Tailored to Your Services</h4>
+                  <p className="text-sm text-[#555] mt-1">
+                    Easily customize your focus —from keynotes to workshops, coaching to consulting—with each outreach.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <>
+                {features?.map((feature, index) => (
+                  <div className="flex items-start gap-3 mb-5" key={index}>
+                    <div className="mt-1 flex-shrink-0 flex items-center justify-center w-6 h-6 rounded-full bg-[#2D2D87]/10">
+                      <Check className="h-4 w-4 text-[#2D2D87]" />
+                    </div>
+                    <div>
+                      <p className="text-base font-semibold text-[#292929]">
+                        {feature.title}
+                      </p>
+                      <p className="text-sm text-[#555] mt-1">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </>
+            )}
 
             {/* CTA Link with animated underline */}
             <motion.div

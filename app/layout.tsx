@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as InterFont } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const inter = Inter({
+const inter = InterFont({
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true
 });
 
 export const metadata: Metadata = {
   title: "SpeakerDrive",
   description:
     "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
-  icons: null
+  icons: {
+    icon: false,
+    apple: false,
+    shortcut: false
+  }
 };
 
 export default function RootLayout({
