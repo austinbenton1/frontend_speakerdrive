@@ -12,8 +12,14 @@ import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect
 import { Check, Circle, Rocket, UserCircle2, Zap, ArrowRight } from 'lucide-react';
 import Link from "next/link";
 
+// Define types for the pricing components
+interface PricingToggleProps {
+  isAnnual: boolean;
+  setIsAnnual: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 // Pricing toggle component
-function PricingToggle({ isAnnual, setIsAnnual }) {
+function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
   return (
     <div className="flex items-center justify-center gap-4 mb-10">
       <span className={`text-sm font-medium ${!isAnnual ? 'text-black' : 'text-gray-500'}`}>Monthly</span>
@@ -34,8 +40,34 @@ function PricingToggle({ isAnnual, setIsAnnual }) {
   );
 }
 
+// Define types for pricing features
+interface PricingFeature {
+  text: string;
+}
+
+// Define types for pricing plan
+interface PricingPlan {
+  name: string;
+  description: string;
+  price: {
+    monthly: number;
+    annually?: number;
+  };
+  icon: React.ReactNode;
+  ctaLink?: string;
+  features: PricingFeature[];
+  priceSubtitle?: string;
+}
+
+// Define types for pricing card props
+interface PricingCardProps {
+  plan: PricingPlan;
+  isPopular?: boolean;
+  isAnnual: boolean;
+}
+
 // Pricing Card component
-function PricingCard({ plan, isPopular = false, isAnnual }) {
+function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
   const monthly = plan.price.monthly;
   const annually = plan.price.annually || monthly * 10; // Default to 10x monthly for annual
   const currentPrice = isAnnual ? annually : monthly;
@@ -109,7 +141,7 @@ function PricingCard({ plan, isPopular = false, isAnnual }) {
 export default function LandingPage() {
   const [isAnnual, setIsAnnual] = useState(false);
   
-  const plans = [
+  const plans: PricingPlan[] = [
     {
       name: "Business",
       description: "For solo entrepreneurs",
