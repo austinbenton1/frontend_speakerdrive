@@ -67,15 +67,33 @@ export function ImageComparison({
 
   // Process children to find left and right images and slider
   const leftImage = React.Children.toArray(children).find(
-    (child) => React.isValidElement(child) && child.props.position === 'left'
+    (child) => {
+      if (React.isValidElement(child)) {
+        const props = child.props as any;
+        return props.position === 'left';
+      }
+      return false;
+    }
   );
   
   const rightImage = React.Children.toArray(children).find(
-    (child) => React.isValidElement(child) && child.props.position === 'right'
+    (child) => {
+      if (React.isValidElement(child)) {
+        const props = child.props as any;
+        return props.position === 'right';
+      }
+      return false;
+    }
   );
   
   const slider = React.Children.toArray(children).find(
-    (child) => React.isValidElement(child) && !child.props.position
+    (child) => {
+      if (React.isValidElement(child)) {
+        const props = child.props as any;
+        return !props.position;
+      }
+      return false;
+    }
   );
 
   return (

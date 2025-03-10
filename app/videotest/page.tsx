@@ -57,7 +57,9 @@ export default function VideoTestPage() {
                 loop
                 playsInline
                 preload="metadata"
-                ref={el => el && addVideoEventListeners(el, video.name)}
+                ref={(el) => {
+                  if (el) addVideoEventListeners(el, video.name);
+                }}
               >
                 <source src={video.path} type={video.type} />
                 <p>Your browser doesn't support HTML5 video.</p>

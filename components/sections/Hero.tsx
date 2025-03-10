@@ -28,7 +28,7 @@ const floatLeft = {
     transition: {
       duration: 3,
       repeat: Infinity,
-      repeatType: "reverse",
+      repeatType: "reverse" as const,
       ease: "easeInOut",
     },
   },
@@ -50,7 +50,7 @@ const floatRight = {
     transition: {
       duration: 3.5,
       repeat: Infinity,
-      repeatType: "reverse",
+      repeatType: "reverse" as const,
       ease: "easeInOut",
     },
   },

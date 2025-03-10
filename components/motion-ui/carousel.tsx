@@ -10,6 +10,8 @@ import {
   useTransform,
   useSpring,
   type MotionValue,
+  PanInfo,
+  HTMLMotionProps,
 } from "framer-motion";
 
 interface CarouselProps {
@@ -27,7 +29,7 @@ interface CarouselProps {
 }
 
 interface CarouselContextProps {
-  carouselRef: React.RefObject<HTMLDivElement>;
+  carouselRef: React.RefObject<HTMLDivElement | null>;
   api?: {
     canScrollPrev: boolean;
     canScrollNext: boolean;
@@ -71,7 +73,7 @@ const Carousel = React.forwardRef<
     },
     ref
   ) => {
-    const carouselRef = React.useRef<HTMLDivElement>(null);
+    const carouselRef = React.useRef<HTMLDivElement | null>(null);
     const [currentIndex, setCurrentIndex] = React.useState(index);
     const [maxIndex, setMaxIndex] = React.useState(
       carouselItems ? carouselItems - 1 : 0
@@ -158,21 +160,45 @@ const Carousel = React.forwardRef<
 );
 Carousel.displayName = "Carousel";
 
+interface CarouselContentProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "ref"> {
+  className?: string;
+  transition?: any;
+}
+
 const CarouselContent = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    transition?: any;
-  }
+  CarouselContentProps
 >(({ className, transition, ...props }, ref) => {
   const { carouselRef, currentIndex, disableDrag } = useCarousel();
   const x = useMotionValue(0);
   const containerWidth = useMotionValue(0);
   const contentWidth = useMotionValue(0);
+
+  // Create a single derived motion value that combines all three values
+  const combinedValues = useMotionValue<[number, number, number]>([0, 0, 0]);
+
+  // Update the combined value whenever any of the individual values change
+  React.useEffect(() => {
+    const updateCombinedValues = () => {
+      combinedValues.set([x.get(), containerWidth.get(), contentWidth.get()]);
+    };
+
+    const unsubscribeX = x.on("change", updateCombinedValues);
+    const unsubscribeContainer = containerWidth.on("change", updateCombinedValues);
+    const unsubscribeContent = contentWidth.on("change", updateCombinedValues);
+
+    return () => {
+      unsubscribeX();
+      unsubscribeContainer();
+      unsubscribeContent();
+    };
+  }, [x, containerWidth, contentWidth, combinedValues]);
+
   const dragProgress = useTransform(
-    [x, containerWidth, contentWidth],
-    ([x, containerWidth, contentWidth]) => {
-      const maxDistance = contentWidth - containerWidth;
-      return maxDistance === 0 ? 0 : x / -maxDistance;
+    combinedValues,
+    ([xVal, containerWidthVal, contentWidthVal]) => {
+      const maxDistance = contentWidthVal - containerWidthVal;
+      return maxDistance === 0 ? 0 : xVal / -maxDistance;
     }
   );
 
@@ -232,6 +258,7 @@ const CarouselContent = React.forwardRef<
         style={{ x }}
         className={cn("flex", className)}
         transition={appliedTransition}
+        // @ts-ignore - Ignoring type mismatch between React and Framer Motion event handlers
         {...props}
       />
     </div>

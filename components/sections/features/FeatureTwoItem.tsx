@@ -226,7 +226,6 @@ export function FeatureTwoItem({
                   muted
                   loop
                   autoPlay
-                  type={isWebm ? "video/webm" : "video/mp4"}
                 >
                   <source src={videoSrc} type={isWebm ? "video/webm" : "video/mp4"} />
                   <p>Your browser doesn't support HTML5 video. Here is a <a href={videoSrc}>link to the video</a> instead.</p>

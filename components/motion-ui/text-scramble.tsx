@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 interface TextScrambleProps {
   children: string;
   className?: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
   trigger?: boolean;
   onScrambleComplete?: () => void;
 }

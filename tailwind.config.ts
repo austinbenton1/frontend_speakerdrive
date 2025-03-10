@@ -62,7 +62,7 @@ const config: Config = {
     },
   },
   plugins: [
-    function ({ addUtilities }) {
+    function ({ addUtilities }: { addUtilities: any }) {
       addUtilities({
         '.scrollbar-hide': {
           /* For Chrome, Safari and Opera */
