@@ -34,7 +34,7 @@ export function TheProspectingEffect() {
               Stuck Waiting for Referrals?
             </motion.h2>
             
-            {/* Updated subheadline copy */}
+            {/* Updated subheadline copy - removed the "Like most experts..." part */}
             <motion.p 
               className="text-lg text-gray-600 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
@@ -42,7 +42,7 @@ export function TheProspectingEffect() {
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              Relying on word-of-mouth alone puts your business growth at the mercy of others. Like most experts, you might not be actively prospecting for NEW business.
+              Relying on word-of-mouth alone puts your business growth at the mercy of others.
               
               <br /><br />
               
@@ -60,7 +60,7 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
             >
               <div className="bg-red-600 py-3 px-4">
-                <h3 className="font-bold text-white text-center text-xl">The Referral Trap</h3>
+                <h3 className="font-bold text-white text-center text-xl">The Cost Of Inconsistent Prospecting</h3>
               </div>
               <div className="bg-white p-4">
                 {/* Image container with landscape aspect ratio */}
@@ -75,7 +75,7 @@ export function TheProspectingEffect() {
             </motion.div>
           </div>
           
-          {/* Moved "Are you actively prospecting..." below the graphic */}
+          {/* Moved "Are you actively prospecting..." below the graphic with gradient styling */}
           <div className="max-w-xl mx-auto mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -84,9 +84,12 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="text-lg sm:text-xl text-gray-600">
+              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-lg sm:text-xl">
                 Are you actively prospecting, or just hoping for referrals?
               </h3>
+              <p className="text-gray-600 mt-3">
+                Like most experts, you might not be actively prospecting for NEW business.
+              </p>
             </motion.div>
           </div>
         </div>
