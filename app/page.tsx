@@ -116,7 +116,7 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
               : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
           } mb-6`}
         >
-          {isPopular ? 'Get Advanced' : `Get ${plan.name}`}
+          {isPopular ? 'Get Growth' : `Get ${plan.name}`}
         </Link>
         
         {/* Feature list header */}
@@ -143,7 +143,7 @@ export default function LandingPage() {
   
   const plans: PricingPlan[] = [
     {
-      name: "Business",
+      name: "Free Trial",
       description: "For solo entrepreneurs",
       price: {
         monthly: 19,
@@ -159,7 +159,7 @@ export default function LandingPage() {
       ]
     },
     {
-      name: "Advanced",
+      name: "Growth",
       description: "As your business scales",
       price: {
         monthly: 299,
@@ -177,7 +177,7 @@ export default function LandingPage() {
       ]
     },
     {
-      name: "Plus",
+      name: "Premium",
       description: "For more complex businesses",
       price: {
         monthly: 2300,
@@ -299,9 +299,9 @@ export default function LandingPage() {
         <section id="pricing" className="py-12 md:py-20 bg-gray-50">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">Simple, transparent pricing</h1>
+              <h1 className="text-3xl md:text-5xl font-bold mb-4">Ready To Start? We Make It Easy</h1>
               <p className="text-lg text-gray-600 mb-10">
-                Choose the plan that's right for your speaking business. All plans include a 14-day free trial.
+                You don't even need a credit card
               </p>
               
               <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />

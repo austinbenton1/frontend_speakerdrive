@@ -1,8 +1,9 @@
 "use client";
-import { TextEffect } from "@/components/ui/text-effect";
+
+import { ArrowRight, ChevronLeftIcon, ChevronRightIcon, ArrowDownIcon, ExternalLinkIcon, MaximizeIcon, ArrowUpRightIcon, Mail, Link, AtSign } from 'lucide-react';
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { ChevronLeftIcon, ChevronRightIcon, ArrowDownIcon, ExternalLinkIcon, MaximizeIcon, ArrowUpRightIcon } from 'lucide-react';
+import { TextEffect } from "@/components/ui/text-effect";
 import {
   MorphingDialog,
   MorphingDialogTrigger,
@@ -14,6 +15,8 @@ import {
   MorphingDialogClose,
 } from '@/components/core/morphing-dialog';
 import { ScrollArea } from '@/components/website/scroll-area';
+import { TransitionPanel } from '@/components/motion-ui/transition-panel';
+import { cn } from '@/lib/utils';
 
 const SPEAKER_TYPES = [
   {
@@ -121,6 +124,148 @@ const formatDescription = (description: string) => {
   );
 };
 
+// Contact Info Feature panel data
+const CONTACT_FEATURES = [
+  {
+    title: 'Contact Emails',
+    description: 'Find direct emails for key decision-makers at organizations you want to speak for.',
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf43363da759182090e12d.mp4",
+    icon: <Mail className="mr-2 h-5 w-5" />,
+    gradient: "from-brand-blue to-blue-500"
+  },
+  {
+    title: 'Event Emails',
+    description: 'Get access to validated event and conference email addresses for easier outreach.',
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf408504d6597dbd3827ef.mp4",
+    icon: <AtSign className="mr-2 h-5 w-5" />,
+    gradient: "from-green-500 to-emerald-400"
+  },
+  {
+    title: 'Event URLs',
+    description: 'Find direct links to application forms and speaker submission portals.',
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf4b3d7be80c24c3f0aa65.mp4",
+    icon: <Link className="mr-2 h-5 w-5" />,
+    gradient: "from-green-500 to-emerald-400"
+  },
+];
+
+// Contact Feature Panel Component
+function ContactFeaturePanel() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
+
+  return (
+    <div className='overflow-auto py-16 sm:overflow-hidden'>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
+        <h2 className='mb-8 text-center text-3xl text-zinc-900 sm:text-4xl font-bold'>
+          The SpeakerDrive Message Composer
+        </h2>
+        <div className='mb-10 overflow-x-auto [scrollbar-width:none]'>
+          <div className='flex min-w-max items-center justify-center space-x-5'>
+            {CONTACT_FEATURES.map((feature, index) => {
+              return (
+                <button
+                  key={index}
+                  type='button'
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setDirection(index > activeIndex ? 1 : -1);
+                  }}
+                  className={cn(
+                    'relative rounded-lg px-5 py-3 text-base font-medium transition-all duration-200',
+                    'transform hover:-translate-y-1 active:translate-y-0',
+                    'cursor-pointer flex items-center justify-center gap-1.5',
+                    'ring-offset-2 focus:outline-none focus:ring-2 focus:ring-brand-blue',
+                    'my-2',
+                    index === activeIndex
+                      ? `bg-gradient-to-r ${feature.gradient} text-white shadow-md shadow-${feature.gradient.split(" ")[0].replace("from-", "")}/20`
+                      : 'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md border border-gray-100'
+                  )}
+                >
+                  {feature.icon}
+                  {feature.title}
+                  {index === activeIndex ? (
+                    <CheckCircleIcon className="ml-2 h-4 w-4" />
+                  ) : (
+                    <ArrowRight className="ml-2 h-4 w-4 opacity-70" />
+                  )}
+                  
+                  {index === activeIndex && (
+                    <motion.span 
+                      className={`absolute inset-0 rounded-lg bg-gradient-to-r ${feature.gradient} opacity-20 -z-10`}
+                      layoutId="highlight"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+      <div className='flex justify-center'>
+        <TransitionPanel
+          className='aspect-video w-[800px] max-w-full overflow-hidden rounded-xl border border-brand-blue/30 shadow-lg'
+          activeIndex={activeIndex}
+          custom={direction}
+          transition={{
+            ease: 'easeOut',
+            duration: 0.3,
+          }}
+          variants={{
+            enter: (direction) => ({
+              x: direction > 0 ? 32 : -32,
+              opacity: 0.8,
+            }),
+            center: {
+              x: 0,
+              opacity: 1,
+            },
+            exit: (direction) => ({
+              x: direction < 0 ? 32 : -32,
+              opacity: 0.8,
+            }),
+          }}
+        >
+          {CONTACT_FEATURES.map((feature, index) => (
+            <div
+              className='relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl'
+              key={feature.title}
+            >
+              {feature.video ? (
+                <div className="w-full h-full overflow-hidden relative">
+                  {/* Decorative gradient overlay to provide a subtle effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-t ${index === 0 ? 'from-brand-blue/5' : 'from-green-500/5'} to-transparent z-10 pointer-events-none`}></div>
+                  
+                  {/* Video element with object-cover to fill the space */}
+                  <video
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src={feature.video} type="video/mp4" />
+                    <p>Your browser doesn't support HTML5 video.</p>
+                  </video>
+                </div>
+              ) : (
+                <>
+                  <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 to-blue-100 z-0"></div>
+                  <div className="relative z-10 p-8 max-w-xl">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900">{feature.title}</h3>
+                    <p className="text-lg text-gray-700">{feature.description}</p>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </TransitionPanel>
+      </div>
+    </div>
+  );
+}
+
 export function ProspectingSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -129,8 +274,8 @@ export function ProspectingSection() {
     amount: 0.3
   });
   
-  // Use state to control the trigger rather than passing isInView directly
-  const [triggerAnimation, setTriggerAnimation] = useState(false);
+  // Set triggerAnimation to true by default instead of depending on isInView
+  const [triggerAnimation, setTriggerAnimation] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   
@@ -159,12 +304,8 @@ export function ProspectingSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   
-  // Set trigger to true when section comes into view
-  useEffect(() => {
-    if (isInView) {
-      setTriggerAnimation(true);
-    }
-  }, [isInView]);
+  // Note: We're not setting triggerAnimation based on isInView anymore
+  // since we want it always visible
 
   // Calculate the maximum index based on number of cards and how many to show
   // Now using SPEAKER_TYPES.length - 1 to allow navigating to see the very last item
@@ -207,9 +348,9 @@ export function ProspectingSection() {
   };
 
   return (
-    <div className="bg-white pt-24 pb-0 sm:pt-32 sm:pb-0" ref={sectionRef}>
+    <div className="bg-white pt-10 pb-0 sm:pt-12 sm:pb-0" ref={sectionRef}>
       {/* Centered container for headings */}
-      <div className="container mx-auto max-w-4xl text-center px-4 mb-16">
+      <div className="container mx-auto max-w-4xl text-center px-4 mb-8">
         {/* Animated Headline - First Line */}
         <div className="relative mb-2">
           <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
@@ -257,15 +398,14 @@ export function ProspectingSection() {
         {/* Subheading - Reduced width with max-w-lg instead of max-w-2xl */}
         <motion.p
           className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
         >
           SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
         
         {/* MorphingDialog Grid - 6 conference cards in a grid */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {SAMPLE_ITEMS.map((item, index) => (
             <MorphingDialog
               key={index}
@@ -381,8 +521,11 @@ export function ProspectingSection() {
           ))}
         </div>
         
+        {/* Insert the Contact Feature Panel here */}
+        <ContactFeaturePanel />
+        
         {/* Visual separator between sections */}
-        <div className="mt-32 mb-16 relative">
+        <div className="mt-24 mb-12 relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
           <div className="flex justify-center">
             <div className="bg-white px-6 py-1 relative -top-3 rounded-full border border-gray-200">
@@ -409,9 +552,8 @@ export function ProspectingSection() {
         {/* New subheadline text - Updated to match "SpeakerDrive is the go-to..." styling */}
         <motion.p 
           className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-8"
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: 1.4 }}
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
         >
           SpeakerDrive helps professionals who speak, train, and consult take control of their business development.
         </motion.p>
@@ -477,12 +619,8 @@ export function ProspectingSection() {
                   width: `${getCardWidth()}px`,
                   marginRight: '15px' // Reduced from 20px to bring items closer
                 }}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  delay: 0.8 + idx * 0.1,
-                  duration: 0.5
-                }}
               >
                 <div className="px-2 flex flex-col h-full">
                   {/* Label goes above image with no margin */}
@@ -574,10 +712,8 @@ export function ProspectingSection() {
           <div className="text-center mb-6 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 1, y: 0 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
               className="p-6"
             >
               <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
@@ -604,3 +740,6 @@ export function ProspectingSection() {
     </div>
   );
 }
+
+// Import for the CheckCircleIcon component
+import { Check as CheckCircleIcon } from "lucide-react";
