@@ -14,11 +14,7 @@ export const metadata: Metadata = {
   title: "SpeakerDrive",
   description:
     "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
-  icons: {
-    icon: false,
-    apple: false,
-    shortcut: false
-  }
+  icons: null
 };
 
 export default function RootLayout({
