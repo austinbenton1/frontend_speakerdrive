@@ -213,7 +213,7 @@ function ContactFeaturePanel() {
             duration: 0.3,
           }}
           variants={{
-            enter: (direction) => ({
+            enter: (direction: number) => ({
               x: direction > 0 ? 32 : -32,
               opacity: 0.8,
             }),
@@ -221,7 +221,7 @@ function ContactFeaturePanel() {
               x: 0,
               opacity: 1,
             },
-            exit: (direction) => ({
+            exit: (direction: number) => ({
               x: direction < 0 ? 32 : -32,
               opacity: 0.8,
             }),
