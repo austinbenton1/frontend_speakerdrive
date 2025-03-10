@@ -14,8 +14,7 @@ export const metadata: Metadata = {
   title: "SpeakerDrive",
   description:
     "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
-  // The issue is with this icons object - false values aren't valid for these properties
-  // Let's remove it since we don't want to use the default icons
+  // Remove the invalid icons object that causes TypeScript errors
   icons: undefined
 };
 

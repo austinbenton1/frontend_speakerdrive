@@ -111,7 +111,7 @@ export function TheProspectingEffect() {
                 </div>
                 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
-                  <p>Your business transforms when you have a repeatable prospecting process.</p>
+                  <p>SpeakerDrive helps you break free from this cycle with a consistent, effective prospecting system.</p>
                   
                   <p>Incorporating a small part of your day - consistently - to prospecting will change your business.</p>
                   
