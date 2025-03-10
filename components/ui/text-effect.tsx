@@ -7,30 +7,42 @@ import {
   Transition,
   Variant,
   Variants,
-} from "motion/react";
+} from "framer-motion";
 import React from "react";
 
 export type PresetType = "blur" | "fade-in-blur" | "scale" | "fade" | "slide";
-
 export type PerType = "word" | "char" | "line";
 
 export type TextEffectProps = {
-  children: string;
+  /** The text to animate. */
+  children: string | React.ReactNode;
+  /** Split text by word, char, or line. */
   per?: PerType;
+  /** Which HTML element to render, e.g. "h1", "p", "span", etc. */
   as?: keyof React.JSX.IntrinsicElements;
+  /** Custom framer-motion variants, if you want more control. */
   variants?: {
     container?: Variants;
     item?: Variants;
   };
+  /** Tailwind classes or custom class name. */
   className?: string;
+  /** Animation preset style. Default is now "fade-in-blur". */
   preset?: PresetType;
+  /** Delay in seconds before the animation starts. */
   delay?: number;
+  /** Speed factor controlling overall reveal time. Lower = slower reveal. */
   speedReveal?: number;
+  /** Speed factor controlling each segment's transition. */
   speedSegment?: number;
+  /** Whether to show/hide the text effect. */
   trigger?: boolean;
+  /** Callbacks for animation start/end. */
   onAnimationComplete?: () => void;
   onAnimationStart?: () => void;
+  /** Extra class for each segment's wrapper. */
   segmentWrapperClassName?: string;
+  /** Additional transitions for the container and segments. */
   containerTransition?: Transition;
   segmentTransition?: Transition;
   style?: React.CSSProperties;
@@ -42,6 +54,7 @@ const defaultStaggerTimes: Record<PerType, number> = {
   line: 0.1,
 };
 
+/** Basic container animation: fade in while staggering child items. */
 const defaultContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -51,18 +64,19 @@ const defaultContainerVariants: Variants = {
     },
   },
   exit: {
+    opacity: 0,
     transition: { staggerChildren: 0.05, staggerDirection: -1 },
   },
 };
 
+/** Basic item animation: fade in/out. */
 const defaultItemVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-  },
+  visible: { opacity: 1 },
   exit: { opacity: 0 },
 };
 
+/** Animation presets for container + items. */
 const presetVariants: Record<
   PresetType,
   { container: Variants; item: Variants }
@@ -109,31 +123,20 @@ const presetVariants: Record<
   },
 };
 
+/** Single segment animation component. */
 const AnimationComponent: React.FC<{
   segment: string;
   variants: Variants;
-  per: "line" | "word" | "char";
+  per: PerType;
   segmentWrapperClassName?: string;
 }> = React.memo(({ segment, variants, per, segmentWrapperClassName }) => {
-  const content =
-    per === "line" ? (
-      <motion.span variants={variants} className="block">
-        {segment}
-      </motion.span>
-    ) : per === "word" ? (
-      <motion.span
-        aria-hidden="true"
-        variants={variants}
-        className="inline-block whitespace-pre"
-      >
-        {segment}
-      </motion.span>
-    ) : (
+  // If splitting by char, we nest each char in a motion.span
+  if (per === "char") {
+    return (
       <motion.span className="inline-block whitespace-pre">
-        {segment.split("").map((char, charIndex) => (
+        {segment.split("").map((char, i) => (
           <motion.span
-            key={`char-${charIndex}`}
-            aria-hidden="true"
+            key={`char-${i}`}
             variants={variants}
             className="inline-block whitespace-pre"
           >
@@ -142,33 +145,60 @@ const AnimationComponent: React.FC<{
         ))}
       </motion.span>
     );
-
-  if (!segmentWrapperClassName) {
-    return content;
   }
 
-  const defaultWrapperClassName = per === "line" ? "block" : "inline-block";
+  // Otherwise, entire segment is one motion.span
+  const content = (
+    <motion.span
+      variants={variants}
+      className={per === "line" ? "block" : "inline-block whitespace-pre"}
+    >
+      {segment}
+    </motion.span>
+  );
+
+  if (!segmentWrapperClassName) return content;
 
   return (
-    <span className={cn(defaultWrapperClassName, segmentWrapperClassName)}>
+    <span
+      className={cn(
+        per === "line" ? "block" : "inline-block",
+        segmentWrapperClassName
+      )}
+    >
       {content}
     </span>
   );
 });
-
 AnimationComponent.displayName = "AnimationComponent";
 
-const splitText = (text: string, per: "line" | "word" | "char") => {
+/** Check if the text contains HTML tags */
+const containsHtml = (text: string): boolean => {
+  return /<[^>]*>/i.test(text);
+};
+
+/** Splits text by line, word, or preserves whitespace for char. */
+const splitText = (text: string, per: PerType) => {
+  // Make sure we're working with a string
+  if (typeof text !== 'string') {
+    return [''];
+  }
+  
+  // If text contains HTML, treat it as a single segment to avoid breaking HTML
+  if (containsHtml(text)) {
+    return [text];
+  }
+  
   if (per === "line") return text.split("\n");
+  // "word" or "char": we keep whitespace with this approach
   return text.split(/(\s+)/);
 };
 
+/** Helper to add transitions to container/item variants. */
 const hasTransition = (
   variant: Variant
 ): variant is TargetAndTransition & { transition?: Transition } => {
-  return (
-    typeof variant === "object" && variant !== null && "transition" in variant
-  );
+  return typeof variant === "object" && variant !== null && "transition" in variant;
 };
 
 const createVariantsWithTransition = (
@@ -177,39 +207,39 @@ const createVariantsWithTransition = (
 ): Variants => {
   if (!transition) return baseVariants;
 
-  const { exit: _, ...mainTransition } = transition;
+  const { exit: exitTransition, ...mainTransition } = transition;
 
   return {
     ...baseVariants,
     visible: {
       ...baseVariants.visible,
       transition: {
-        ...(hasTransition(baseVariants.visible)
-          ? baseVariants.visible.transition
-          : {}),
+        ...(hasTransition(baseVariants.visible) ? baseVariants.visible.transition : {}),
         ...mainTransition,
       },
     },
     exit: {
       ...baseVariants.exit,
       transition: {
-        ...(hasTransition(baseVariants.exit)
-          ? baseVariants.exit.transition
-          : {}),
-        ...mainTransition,
+        ...(hasTransition(baseVariants.exit) ? baseVariants.exit.transition : {}),
+        ...(exitTransition || mainTransition),
         staggerDirection: -1,
       },
     },
   };
 };
 
+/**
+ * The main TextEffect component that animates text by splitting
+ * into line, word, or char segments and applying framer-motion transitions.
+ */
 export function TextEffect({
   children,
   per = "word",
   as = "p",
   variants,
   className,
-  preset = "fade",
+  preset = "fade-in-blur", // changed default to "fade-in-blur"
   delay = 0,
   speedReveal = 1,
   speedSegment = 1,
@@ -221,36 +251,36 @@ export function TextEffect({
   segmentTransition,
   style,
 }: TextEffectProps) {
-  const segments = splitText(children, per);
+  // Convert children to string safely
+  const textContent = typeof children === 'string' ? children : React.isValidElement(children) 
+    ? React.Children.toArray(children).map(child => 
+        typeof child === 'string' ? child : ''
+      ).join('')
+    : '';
+  
+  const segments = splitText(textContent, per);
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
+  // Use the user's variants, or fall back to the chosen preset
   const baseVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };
 
-  const stagger = defaultStaggerTimes[per] / speedReveal;
-
+  // The stagger is shortened or lengthened based on "speedReveal"
+  const stagger = (defaultStaggerTimes[per] ?? 0.05) / speedReveal;
+  // The segment transition duration is adjusted by "speedSegment"
   const baseDuration = 0.3 / speedSegment;
 
-  const customStagger = hasTransition(variants?.container?.visible ?? {})
-    ? (variants?.container?.visible as TargetAndTransition).transition
-        ?.staggerChildren
-    : undefined;
-
-  const customDelay = hasTransition(variants?.container?.visible ?? {})
-    ? (variants?.container?.visible as TargetAndTransition).transition
-        ?.delayChildren
-    : undefined;
-
+  // Merge user-provided container transitions
   const computedVariants = {
     container: createVariantsWithTransition(
       variants?.container || baseVariants.container,
       {
-        staggerChildren: customStagger ?? stagger,
-        delayChildren: customDelay ?? delay,
+        staggerChildren: stagger,
+        delayChildren: delay,
         ...containerTransition,
         exit: {
-          staggerChildren: customStagger ?? stagger,
+          staggerChildren: stagger,
           staggerDirection: -1,
         },
       }
@@ -261,8 +291,34 @@ export function TextEffect({
     }),
   };
 
+  // If children contains React elements (like spans with gradient styling),
+  // use a simpler animation approach that won't try to split the content
+  if (React.isValidElement(children)) {
+    return (
+      <AnimatePresence mode="wait">
+        {trigger && (
+          <MotionTag
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={computedVariants.container}
+            className={className}
+            onAnimationComplete={onAnimationComplete}
+            onAnimationStart={onAnimationStart}
+            style={style}
+          >
+            {/* Simply wrap the children in a motion element */}
+            <motion.span variants={computedVariants.item}>
+              {children}
+            </motion.span>
+          </MotionTag>
+        )}
+      </AnimatePresence>
+    );
+  }
+
   return (
-    <AnimatePresence mode="popLayout">
+    <AnimatePresence mode="wait">
       {trigger && (
         <MotionTag
           initial="hidden"
@@ -274,7 +330,9 @@ export function TextEffect({
           onAnimationStart={onAnimationStart}
           style={style}
         >
-          {per !== "line" ? <span className="sr-only">{children}</span> : null}
+          {/* For screen readers, show entire text once, hidden visually if per!==line */}
+          {per !== "line" ? <span className="sr-only">{textContent}</span> : null}
+
           {segments.map((segment, index) => (
             <AnimationComponent
               key={`${per}-${index}-${segment}`}

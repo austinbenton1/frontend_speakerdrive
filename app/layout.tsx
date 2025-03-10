@@ -1,13 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter as InterFont } from "next/font/google";
+import { cn } from "@/lib/utils";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = InterFont({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  adjustFontFallback: true
+});
 
 export const metadata: Metadata = {
-  title: "Motion Agent",
+  title: "SpeakerDrive",
   description:
-    "Motion Agent - Build your dream website. The only AI agent that understands web design",
+    "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
+  icons: {
+    icon: false,
+    apple: false,
+    shortcut: false
+  }
 };
 
 export default function RootLayout({
@@ -17,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased bg-black`}>
+      <body className={cn(inter.className, "antialiased bg-white text-black")}>
         {children}
       </body>
     </html>

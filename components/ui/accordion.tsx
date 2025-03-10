@@ -6,7 +6,7 @@ import {
   Variants,
   Variant,
   MotionConfig,
-} from "motion/react";
+} from "framer-motion";
 import { cn } from "@/lib/utils";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
