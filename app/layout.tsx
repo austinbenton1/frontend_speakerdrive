@@ -14,11 +14,9 @@ export const metadata: Metadata = {
   title: "SpeakerDrive",
   description:
     "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
-  icons: {
-    icon: false,
-    apple: false,
-    shortcut: false
-  }
+  // The issue is with this icons object - false values aren't valid for these properties
+  // Let's remove it since we don't want to use the default icons
+  icons: undefined
 };
 
 export default function RootLayout({
