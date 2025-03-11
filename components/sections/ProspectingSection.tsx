@@ -17,6 +17,7 @@ import {
 import { ScrollArea } from '@/components/website/scroll-area';
 import { TransitionPanel } from '@/components/motion-ui/transition-panel';
 import { cn } from '@/lib/utils';
+import { VideoCard } from '@/components/ui/VideoCard';
 
 const SPEAKER_TYPES = [
   {
@@ -403,6 +404,18 @@ export function ProspectingSection() {
         >
           SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
+        
+        {/* New Video Card */}
+        <div className="mt-12 flex justify-center">
+          <VideoCard 
+            videoSrc={SAMPLE_ITEMS[0].video}
+            thumbnailSrc="/BOMA_card.png"
+            title={SAMPLE_ITEMS[0].title}
+            duration="3:15"
+            publishedTime="2 weeks ago"
+            onClick={() => console.log("Video clicked")}
+          />
+        </div>
         
         {/* MorphingDialog Grid - 6 conference cards in a grid */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">

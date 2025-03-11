@@ -233,7 +233,8 @@ export default function LandingPage() {
                 description: "New leads added daily.",
               },
             ]}
-            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb25da2d5867d8cf31812d.mp4"
+            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d6591f37395f36.mp4"
+            captionText="Search by events or contacts"
           />
         </section>
 
@@ -257,7 +258,8 @@ export default function LandingPage() {
                 description: "Connect with decision-makers on LinkedIn.",
               },
             ]}
-            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb26a4f00f58e2218e0cf6.mp4"
+            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee03d10887974dc27c8.mp4"
+            captionText="Unlock contact info"
           />
         </section>
 
@@ -281,7 +283,8 @@ export default function LandingPage() {
                 description: "See what messages perform best.",
               },
             ]}
-            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb33823ea7268250330cdb.mp4"
+            externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d659631e395f35.mp4"
+            captionText="Generate outreach in 1 click"
           />
         </section>
 

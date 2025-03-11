@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect } from "react";
+import { VideoCaption } from "@/components/ui/VideoCaption";
 
 interface FeatureItem {
   title: string;
@@ -17,6 +18,7 @@ interface FeatureTwoItemProps {
   videoSrc?: string;
   externalVideoSrc?: string;
   stepNumber?: number;
+  captionText?: string;
 }
 
 export function FeatureTwoItem({
@@ -27,6 +29,7 @@ export function FeatureTwoItem({
   videoSrc,
   externalVideoSrc,
   stepNumber,
+  captionText,
 }: FeatureTwoItemProps) {
   const isLocalVideo = Boolean(videoSrc);
   const isExternalVideo = Boolean(externalVideoSrc);
@@ -195,33 +198,51 @@ export function FeatureTwoItem({
           {/* RIGHT COL: Video or Image - Now larger (3/5 instead of 1/2) */}
           <div className="w-full lg:w-3/5" ref={videoContainerRef}>
             {isExternalVideo ? (
-              <div className="rounded-xl border border-neutral-200 shadow-lg overflow-hidden">
-                <video
-                  ref={videoRef}
+              captionText ? (
+                <VideoCaption
+                  src={externalVideoSrc}
+                  title={title}
+                  caption={captionText}
                   className="w-full rounded-xl"
-                  playsInline
-                  muted
-                  loop
-                  autoPlay
-                >
-                  <source src={externalVideoSrc} type="video/mp4" />
-                  <p>Your browser doesn't support HTML5 video. Here is a <a href={externalVideoSrc}>link to the video</a> instead.</p>
-                </video>
-              </div>
+                />
+              ) : (
+                <div className="rounded-xl border border-neutral-200 shadow-lg overflow-hidden">
+                  <video
+                    ref={videoRef}
+                    className="w-full rounded-xl"
+                    playsInline
+                    muted
+                    loop
+                    autoPlay
+                  >
+                    <source src={externalVideoSrc} type="video/mp4" />
+                    <p>Your browser doesn't support HTML5 video. Here is a <a href={externalVideoSrc}>link to the video</a> instead.</p>
+                  </video>
+                </div>
+              )
             ) : isLocalVideo ? (
-              <div className="rounded-xl border border-neutral-200 shadow-lg overflow-hidden">
-                <video
-                  ref={videoRef}
+              captionText ? (
+                <VideoCaption
+                  src={videoSrc}
+                  title={title}
+                  caption={captionText}
                   className="w-full rounded-xl"
-                  playsInline
-                  muted
-                  loop
-                  autoPlay
-                >
-                  <source src={videoSrc} type={isWebm ? "video/webm" : "video/mp4"} />
-                  <p>Your browser doesn't support HTML5 video. Here is a <a href={videoSrc}>link to the video</a> instead.</p>
-                </video>
-              </div>
+                />
+              ) : (
+                <div className="rounded-xl border border-neutral-200 shadow-lg overflow-hidden">
+                  <video
+                    ref={videoRef}
+                    className="w-full rounded-xl"
+                    playsInline
+                    muted
+                    loop
+                    autoPlay
+                  >
+                    <source src={videoSrc} type={isWebm ? "video/webm" : "video/mp4"} />
+                    <p>Your browser doesn't support HTML5 video. Here is a <a href={videoSrc}>link to the video</a> instead.</p>
+                  </video>
+                </div>
+              )
             ) : (
               <div className="rounded-xl border border-neutral-200 shadow-lg">
                 <img
