@@ -197,12 +197,12 @@ export function FeatureTwoItem({
 
           {/* RIGHT COL: Video or Image - Now larger (3/5 instead of 1/2) */}
           <div className="w-full lg:w-3/5" ref={videoContainerRef}>
-            {isExternalVideo ? (
+            {isExternalVideo && externalVideoSrc ? (
               captionText ? (
                 <VideoCaption
                   src={externalVideoSrc}
                   title={title}
-                  caption={captionText}
+                  caption={captionText || ""}
                   className="w-full rounded-xl"
                 />
               ) : (
@@ -220,12 +220,12 @@ export function FeatureTwoItem({
                   </video>
                 </div>
               )
-            ) : isLocalVideo ? (
+            ) : isLocalVideo && videoSrc ? (
               captionText ? (
                 <VideoCaption
                   src={videoSrc}
                   title={title}
-                  caption={captionText}
+                  caption={captionText || ""}
                   className="w-full rounded-xl"
                 />
               ) : (
@@ -246,7 +246,7 @@ export function FeatureTwoItem({
             ) : (
               <div className="rounded-xl border border-neutral-200 shadow-lg">
                 <img
-                  src={imageSrc}
+                  src={imageSrc || ""}
                   alt="Feature"
                   className="w-full h-auto rounded-xl"
                 />
