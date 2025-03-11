@@ -37,6 +37,7 @@ function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
 // Define types for pricing features
 interface PricingFeature {
   text: string;
+  disabled?: boolean;
 }
 
 // Define types for pricing plan
@@ -114,16 +115,20 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
         </Link>
         
         {/* Feature list header */}
-        <div className="text-sm text-gray-500 mb-4 font-medium">
-          Free features
-        </div>
+        <div className="mb-4"></div>
         
         {/* Feature list */}
         <div className="space-y-3">
           {plan.features.map((feature, i) => (
-            <div key={i} className="flex items-start gap-2">
-              <Check className={`h-5 w-5 flex-shrink-0 mt-0.5 ${isPopular ? 'text-green-500' : 'text-gray-500'}`} />
-              <span className="text-sm text-gray-700">{feature.text}</span>
+            <div key={i} className="flex items-center gap-2">
+              {feature.disabled ? (
+                <div className="h-5 w-5 flex-shrink-0 text-red-500">✕</div>
+              ) : (
+                <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
+              )}
+              <span className={`text-sm ${feature.disabled ? 'text-gray-400' : 'text-gray-700'}`}>
+                {feature.text}
+              </span>
             </div>
           ))}
         </div>
@@ -138,54 +143,56 @@ export default function PricingPage() {
   const plans: PricingPlan[] = [
     {
       name: "Free Trial",
-      description: "For solo entrepreneurs",
+      description: "Try it risk free",
       price: {
-        monthly: 19,
-        annually: 190
+        monthly: 0,
+        annually: 0
       },
       icon: <Circle className="h-9 w-9" />,
       ctaLink: "/signup",
       features: [
-        { text: "10 inventory locations" },
-        { text: "24/7 chat support" },
-        { text: "Localized global selling (3 markets)" },
-        { text: "POS Lite" },
+        { text: "10 Unlocks" },
+        { text: "Message Composer" },
+        { text: "Gmail Integration" },
+        { text: "SpeakerDrive Tools" },
+        { text: "Bulk Exports", disabled: true },
+        { text: "Advanced Integrations", disabled: true },
       ]
     },
     {
       name: "Growth",
-      description: "As your business scales",
+      description: "Just getting started",
       price: {
-        monthly: 299,
-        annually: 2990
+        monthly: 49,
+        annually: 490
       },
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "/signup",
       features: [
-        { text: "Custom reports and analytics" },
-        { text: "100 inventory locations" },
-        { text: "Enhanced 24/7 chat support" },
-        { text: "Localized global selling (3 markets)" },
-        { text: "15 additional staff accounts" },
-        { text: "10x checkout capacity" },
+        { text: "300 Unlocks / Month" },
+        { text: "Message Composer" },
+        { text: "Gmail Integration" },
+        { text: "SpeakerDrive Tools" },
+        { text: "Bulk Exports", disabled: true },
+        { text: "Advanced Integrations", disabled: true },
       ]
     },
     {
       name: "Premium",
-      description: "For more complex businesses",
+      description: "For power users",
       price: {
-        monthly: 2300,
-        annually: 23000
+        monthly: 129,
+        annually: 1290
       },
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "/signup",
       features: [
-        { text: "Custom reports and analytics" },
-        { text: "200 inventory locations" },
-        { text: "Priority 24/7 phone support" },
-        { text: "Localized global selling (50 markets)" },
-        { text: "Unlimited staff accounts" },
-        { text: "Fully customizable checkout with 40x capacity" },
+        { text: "1,000 Unlocks / Month" },
+        { text: "Message Composer" },
+        { text: "Gmail Integration" },
+        { text: "SpeakerDrive Tools" },
+        { text: "Bulk Exports" },
+        { text: "Advanced Integrations" },
       ]
     }
   ];
@@ -197,7 +204,6 @@ export default function PricingPage() {
         companyName="SpeakerDrive"
         logo={<img src="/SpeakerDrive Logo - Long.png" alt="SpeakerDrive" className="h-8" />}
         links={[
-          { label: "Features", href: "#features" },
           { label: "Pricing", href: "/pricing" },
           { label: "Contact", href: "#contact" },
         ]}
@@ -233,65 +239,70 @@ export default function PricingPage() {
         {/* Feature comparison table with more compact margins */}
         <section className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl font-bold text-center mb-10">Compare Plans</h2>
+            <h2 className="text-2xl font-bold text-center mb-6">All SpeakerDrive plans come with...</h2>
+            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+              Every plan includes these powerful features to help you find and book more speaking opportunities
+            </p>
             
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200 border rounded-lg">
-                <thead className="bg-gray-100">
-                  <tr>
-                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Feature
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Free Trial
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-green-600 uppercase tracking-wider">
-                      Growth
-                    </th>
-                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Premium
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Available leads</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">10/month</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-500 font-medium text-center">100/month</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Unlimited</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Search filters</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Basic</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-500 font-medium text-center">Advanced</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">All filters</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Email verification</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                      <Check className="h-5 w-5 text-green-500 mx-auto" />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-500 font-medium text-center">
-                      <Check className="h-5 w-5 text-green-500 mx-auto" />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                      <Check className="h-5 w-5 text-green-500 mx-auto" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Outreach templates</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Basic</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-500 font-medium text-center">AI-powered</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Custom</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Multi-user access</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">-</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-green-500 font-medium text-center">15 accounts</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">Unlimited</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Unlocks */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-900">Unlock Contact Info</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Contact Emails</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Event Emails</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Event URLs</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Messaging */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-900">Smart Messaging</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Email Composer</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">LinkedIn Composer</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Application Composer</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Tools */}
+                <div className="bg-white p-6 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-4 text-gray-900">Useful Tools</h3>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Ask SpeakerDrive AI</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Email & Mobile Finder</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <span className="text-gray-700">Company Lookup</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -300,94 +311,41 @@ export default function PricingPage() {
         <section id="faq" className="bg-white">
           <div className="max-w-4xl mx-auto px-4">
             <FAQ
-              title="Frequently Asked Questions"
-              description="Find answers to common questions about SpeakerDrive pricing and features."
+              title="FAQs"
+              description=""
               content={[
                 {
-                  title: "What is SpeakerDrive?",
-                  value: "what-is",
-                  content: "SpeakerDrive is a platform that helps speakers, coaches, and experts find speaking opportunities, contact decision makers, and craft personalized outreach.",
+                  title: "What's included in the free trial?",
+                  value: "trial-includes",
+                  content: "The free trial includes up to 10 unlocks. You can search for opportunities, unlock contact information, and use our AI-powered outreach tools with no restrictions.",
                 },
                 {
-                  title: "How does it work?",
-                  value: "how-works",
-                  content: "We aggregate speaking opportunities from around the web, verify contact information, and provide tools to help you manage your outreach and track your applications.",
+                  title: "Do I need a credit card to start?",
+                  value: "credit-card",
+                  content: "No, you don't need a credit card to start your free trial. You can try SpeakerDrive risk-free and only enter payment information if you decide to continue after the trial.",
                 },
                 {
-                  title: "How much does it cost?",
-                  value: "pricing",
-                  content: "We offer free and paid plans starting at $19/month. The free trial includes basic opportunity discovery, while paid plans include contact information, outreach templates, and advanced tracking features.",
-                },
-                {
-                  title: "How many new opportunities are added each week?",
-                  value: "new-opps",
-                  content: "We add approximately 50-100 new speaking opportunities each week across various industries and locations.",
-                },
-                {
-                  title: "Can I cancel my subscription anytime?",
-                  value: "cancel",
-                  content: "Yes, you can cancel your subscription at any time. You'll continue to have access until the end of your billing period.",
-                },
-                {
-                  title: "Is there a free trial?",
-                  value: "free-trial",
-                  content: "Yes, all paid plans include a 14-day free trial. No credit card required to get started.",
+                  title: "Can I change plans anytime?",
+                  value: "change-plans",
+                  content: "Yes, you can upgrade, downgrade, or cancel your plan at any time.",
                 },
                 {
                   title: "What happens when I hit my monthly lead limit?",
                   value: "lead-limit",
                   content: "When you reach your monthly lead limit, you can upgrade to a higher tier plan to access more leads, or wait until your next billing cycle when your lead count resets.",
                 },
+                {
+                  title: "Is there a long-term contract?",
+                  value: "cancel",
+                  content: "No, all plans are month-to-month with no long-term commitment required. You can cancel anytime and won't be charged for future months.",
+                },
+                {
+                  title: "Do you offer team or agency pricing?",
+                  value: "team-pricing",
+                  content: "Yes, we offer custom plans if you need more leads. Agencies can also get custom pricing - contact us to discuss your needs.",
+                },
               ]}
             />
-          </div>
-        </section>
-        
-        {/* New CTA section inspired by the image but with brand colors */}
-        <section className="py-24 relative overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 py-8 relative">
-            {/* Decorative elements */}
-            <div className="absolute -left-8 top-8 w-16 h-16">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-brand-blue/20">
-                <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" strokeWidth="8" />
-              </svg>
-            </div>
-            <div className="absolute right-20 bottom-0 w-8 h-8">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-brand-green/30">
-                <path d="M50,10 L90,50 L50,90 L10,50 Z" fill="currentColor" />
-              </svg>
-            </div>
-            <div className="absolute right-4 top-4 w-12 h-12">
-              <svg viewBox="0 0 100 100" className="w-full h-full text-amber-300/40">
-                <path d="M50,10 L61,39 L92,39 L67,57 L77,86 L50,68 L23,86 L33,57 L8,39 L39,39 Z" fill="currentColor" />
-              </svg>
-            </div>
-            
-            {/* Content */}
-            <div className="text-center">
-              <h2 className="text-5xl md:text-6xl font-extrabold mb-8">
-                Ready to grow your speaking business?
-              </h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-                Join thousands of speakers who use SpeakerDrive to find more opportunities and grow their business.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="/pricing" 
-                  className="inline-flex items-center justify-center rounded-lg bg-white border border-gray-200 text-gray-800 px-6 py-3 text-base font-medium hover:bg-gray-50 transition-colors"
-                >
-                  View pricing
-                </a>
-                <a
-                  href="/signup"
-                  className="inline-flex items-center justify-center rounded-lg bg-brand-blue text-white px-6 py-3 text-base font-medium shadow-md hover:bg-blue-600 transition-colors"
-                >
-                  Start free trial
-                </a>
-              </div>
-              <p className="mt-4 text-sm text-gray-500">No credit card required</p>
-            </div>
           </div>
         </section>
       </main>
