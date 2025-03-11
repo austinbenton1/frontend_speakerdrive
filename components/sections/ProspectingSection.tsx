@@ -423,8 +423,7 @@ export function ProspectingSection() {
               }}
             >
               <MorphingDialogTrigger
-                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white'
-                className='group relative cursor-pointer overflow-hidden transition-all duration-300'
+                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 bg-white'
               >
                 {/* Container with moderate padding */}
                 <div className="w-full aspect-[4/3] overflow-hidden p-0">
