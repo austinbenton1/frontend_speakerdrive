@@ -359,7 +359,7 @@ export function ProspectingSection() {
       {/* Centered container for headings */}
       <div className="container mx-auto max-w-4xl text-center px-4 mb-8">
         {/* Animated Headline - First Line */}
-        <div className="relative mb-2">
+        <div className="relative mb-4">
           <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
           <div className="text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
             <TextEffect
@@ -403,8 +403,8 @@ export function ProspectingSection() {
         </div>
 
         {/* Subheading - Reduced width with max-w-lg instead of max-w-2xl */}
-        <motion.p
-          className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto"
+        <motion.p 
+          className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto mb-16"
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
         >
@@ -412,7 +412,7 @@ export function ProspectingSection() {
         </motion.p>
         
         {/* Conference Grid with Images - Three rows of two */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-6">
           {SAMPLE_ITEMS.map((item, index) => (
             <MorphingDialog
               key={index}
@@ -423,14 +423,15 @@ export function ProspectingSection() {
               }}
             >
               <MorphingDialogTrigger
-                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300'
+                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 bg-white'
+                className='group relative cursor-pointer overflow-hidden transition-all duration-300'
               >
                 {/* Container with moderate padding */}
-                <div className="w-full aspect-[4/3] overflow-hidden bg-white p-8">
+                <div className="w-full aspect-[4/3] overflow-hidden p-0">
                   <img 
                     src={item.previewImage} 
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 
@@ -517,7 +518,9 @@ export function ProspectingSection() {
         </div>
         
         {/* Insert the Contact Feature Panel here */}
-        <ContactFeaturePanel />
+        <div className="mt-24">
+          <ContactFeaturePanel />
+        </div>
         
         {/* Visual separator between sections */}
         <div className="mt-24 mb-12 relative">

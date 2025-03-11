@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Link from 'next/link';
 import { TextScramble } from '../motion-ui/text-scramble';
 
 export function Footer5() {
@@ -79,13 +80,16 @@ export function Footer5() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Legal links */}
           <div className="flex gap-x-6">
-            <a href="https://google.com" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors" target="_blank" rel="noopener noreferrer">
-              Privacy Policy
-            </a>
-            <a href="https://google.com" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors" target="_blank" rel="noopener noreferrer">
-              Terms of Service
-            </a>
-          </div>
+              <Link href="/legal/privacy" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/legal/terms" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+                Disclaimer
+              </Link>
+            </div>
           
           {/* Text scramble - fixed to ensure visibility */}
           <div className="h-6 flex items-center">
