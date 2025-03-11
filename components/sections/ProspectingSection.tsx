@@ -47,40 +47,29 @@ const SPEAKER_TYPES = [
   },
 ];
 
-// Sample morphing dialog items - now only the 6 conference cards
+// Sample morphing dialog items 
 const SAMPLE_ITEMS = [
-  {
-    title: "2025 BOMA Winter Issues Forum",
-    subtitle: "BOMA International",
-    image: "/2025 BOMA Winter Issues Forum-mh.png",
-    description: "**At A Glance**\nThe 2025 BOMA Winter Issues Forum addresses key legislative challenges impacting the commercial real estate sector through expert-led discussions and stakeholder engagement.\n\n**Target Audience**\nBuilding Owners, Property Managers, Real Estate Executives\n\n**Best For**\nSpeakers and consultants specializing in commercial real estate advocacy. Best for those with practical experience in navigating legislative issues and engaging with policymakers.",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4738456f013d733d91c1.mp4"
-  },
   {
     title: "BCCC Corporate Citizenship Conference",
     subtitle: "Boston College",
     image: "/BCCC.png",
+    previewImage: "/1_BCCC.png",
     description: "**At A Glance**\nThe BCCC International Corporate Citizenship Conference addresses corporate social responsibility and sustainability strategies for impactful business practices.\n\n**Target Audience**\nCorporate Social Responsibility Executives, Sustainability Practitioners, Corporate Citizenship Professionals\n\n**Best For**\nSpeakers and consultants specializing in corporate social responsibility. Best for industry leaders seeking practical insights – driving community engagement through responsible business.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4c1f4667ee1496ac6413.mp4"
   },
   {
-    title: "REimagine! 2025",
-    subtitle: "California Association of REALTORS",
-    image: "/REimagine! 2025-mh.png",
-    description: "**At A Glance**\nThe REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.\n\n**Target Audience**\nReal Estate Professionals, Tech-Driven Nonprofit Leaders, Social Impact Professionals\n\n**Best For**\nSpeakers and consultants specializing in real estate and social impact. Best for those focused on integrating technology and social responsibility into practice.",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4fd9fef41b1e5cfda728.mp4"
-  },
-  {
-    title: "Identiverse 2025",
-    subtitle: "CyberRisk Alliance",
-    image: "/Identiverse 2025-mh.png",
-    description: "**At A Glance**\nIdentiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.\n\n**Target Audience**\nCompliance and Risk Management Professionals, Development and Engineering Experts, Privacy and Data Protection Professionals, Security Operations and Analysts, Identity and Security Architects\n\n**Best For**\nExperts and consultants specializing in identity security and data protection. Best for professionals focused on practical solutions - enhancing compliance and risk management practices.",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb52d7def776eaa4befddc.mp4"
+    title: "2025 BOMA Winter Issues Forum",
+    subtitle: "BOMA International",
+    image: "/2025 BOMA Winter Issues Forum-mh.png",
+    previewImage: "/2_BOMA.png",
+    description: "**At A Glance**\nThe BOMA Winter Issues Forum brings together building owners, managers, and facility professionals to discuss pressing industry challenges and innovative solutions.\n\n**Target Audience**\nCommercial Real Estate Executives, Building Owners, Property Managers, Facility Management Professionals\n\n**Best For**\nIndustry experts specializing in commercial real estate, sustainability, smart buildings, and property management trends. Ideal for those focused on practical applications that generate ROI.",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4b93b8ead34edd309e56.mp4"
   },
   {
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
     image: "/FactRight.png",
+    previewImage: "/3_FactRight.png",
     description: "**At A Glance**\nThe FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.\n\n**Target Audience**\nWealth Managers, Registered Investment Advisors, Investment Advisors\n\n**Best For**\nWealth managers and investment advisors specializing in alternative investments. Best for those seeking to deepen due diligence skills within investment management.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb5698b96946edd23833cb.mp4"
   },
@@ -88,8 +77,25 @@ const SAMPLE_ITEMS = [
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
     image: "/Forth Roadmap Conference-mh.png",
+    previewImage: "/4_Forth.png",
     description: "**At A Glance**\nThe Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.\n\n**Target Audience**\nElectric Vehicle Industry Leaders, Policymakers in Transportation, Charging Infrastructure Providers\n\n**Best For**\nSpeakers and facilitators specializing in electric vehicle technology and public policy. Best for those passionate about equity and sustainable mobility solutions.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb59ce54acb49abdd5369a.mp4"
+  },
+  {
+    title: "Identiverse 2025",
+    subtitle: "CyberRisk Alliance",
+    image: "/Identiverse 2025-mh.png",
+    previewImage: "/5_Identiverse.png",
+    description: "**At A Glance**\nIdentiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.\n\n**Target Audience**\nCompliance and Risk Management Professionals, Development and Engineering Experts, Privacy and Data Protection Professionals, Security Operations and Analysts, Identity and Security Architects\n\n**Best For**\nExperts and consultants specializing in identity security and data protection. Best for professionals focused on practical solutions - enhancing compliance and risk management practices.",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb52d7def776eaa4befddc.mp4"
+  },
+  {
+    title: "REimagine! 2025",
+    subtitle: "California Association of REALTORS",
+    image: "/REimagine! 2025-mh.png",
+    previewImage: "/6_REimagine.png",
+    description: "**At A Glance**\nThe REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.\n\n**Target Audience**\nReal Estate Professionals, Tech-Driven Nonprofit Leaders, Social Impact Professionals\n\n**Best For**\nSpeakers and consultants specializing in real estate and social impact. Best for those focused on integrating technology and social responsibility into practice.",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4fd9fef41b1e5cfda728.mp4"
   }
 ];
 
@@ -180,7 +186,7 @@ function ContactFeaturePanel() {
                     'my-2',
                     index === activeIndex
                       ? `bg-gradient-to-r ${feature.gradient} text-white shadow-md shadow-${feature.gradient.split(" ")[0].replace("from-", "")}/20`
-                      : 'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md border border-gray-100'
+                      : 'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md'
                   )}
                 >
                   {feature.icon}
@@ -280,6 +286,9 @@ export function ProspectingSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   
+  // State for managing the VideoCard dialog
+  const [isVideoCardDialogOpen, setIsVideoCardDialogOpen] = useState(false);
+  
   // How many cards to show at once based on screen width
   const [cardsToShow, setCardsToShow] = useState(3);
   
@@ -304,9 +313,6 @@ export function ProspectingSection() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
-  // Note: We're not setting triggerAnimation based on isInView anymore
-  // since we want it always visible
 
   // Calculate the maximum index based on number of cards and how many to show
   // Now using SPEAKER_TYPES.length - 1 to allow navigating to see the very last item
@@ -405,20 +411,8 @@ export function ProspectingSection() {
           SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
         
-        {/* New Video Card */}
-        <div className="mt-12 flex justify-center">
-          <VideoCard 
-            videoSrc={SAMPLE_ITEMS[0].video}
-            thumbnailSrc="/BOMA_card.png"
-            title={SAMPLE_ITEMS[0].title}
-            duration="3:15"
-            publishedTime="2 weeks ago"
-            onClick={() => console.log("Video clicked")}
-          />
-        </div>
-        
-        {/* MorphingDialog Grid - 6 conference cards in a grid */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+        {/* Conference Grid with Images - Three rows of two */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {SAMPLE_ITEMS.map((item, index) => (
             <MorphingDialog
               key={index}
@@ -429,45 +423,33 @@ export function ProspectingSection() {
               }}
             >
               <MorphingDialogTrigger
-                style={{
-                  borderRadius: '8px',
-                }}
-                className='group relative border border-gray-200/60 bg-white shadow-sm hover:shadow-lg hover:border-brand-blue/20 hover:-translate-y-1 transition-all duration-300 cursor-pointer h-[136px] flex flex-col'
+                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300'
               >
-                {/* Top section with logo and title */}
-                <div className='flex items-start p-4 pb-2'>
-                  <div className='h-12 w-12 rounded-md overflow-hidden bg-gray-100 flex-shrink-0 mr-3'>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className='h-full w-full object-cover object-center'
-                    />
-                  </div>
-                  <div className='flex flex-col items-start justify-center space-y-1 flex-1 min-w-0'>
-                    <h3 className='text-sm font-medium text-black text-left group-hover:text-brand-blue transition-colors truncate w-full'>{item.title}</h3>
-                    <p className='text-xs text-gray-600 text-left truncate w-full'>{item.subtitle}</p>
-                  </div>
+                {/* Container with moderate padding */}
+                <div className="w-full aspect-[4/3] overflow-hidden bg-white p-8">
+                  <img 
+                    src={item.previewImage} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
                 
-                {/* Call to action button that spans full width */}
-                <div className="mt-auto border-t border-gray-100 w-full">
-                  <div className="bg-brand-blue/5 group-hover:bg-brand-blue/10 w-full py-2 px-3 text-sm font-medium text-brand-blue flex items-center justify-center transition-colors">
-                    <span>View details</span>
-                    <ArrowUpRightIcon className="h-3.5 w-3.5 ml-1.5" />
+                {/* Hover overlay with subtle gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <div className="p-4 text-white">
+                    <h3 className="font-medium text-sm">{item.title}</h3>
+                    <p className="text-xs text-white/90">{item.subtitle}</p>
                   </div>
                 </div>
-                
-                {/* Hover indicator overlay */}
-                <div className="absolute inset-0 bg-brand-blue/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg pointer-events-none"></div>
               </MorphingDialogTrigger>
               <MorphingDialogContainer>
                 <MorphingDialogContent
                   style={{
                     borderRadius: '12px',
-                    overflow: 'hidden', // Ensure nothing extends beyond the rounded corners
-                    maxHeight: '85vh',  // Ensure there's space at top and bottom
+                    overflow: 'hidden',
+                    maxHeight: '85vh',
                   }}
-                  className='relative w-[500px] border border-gray-100 bg-white my-8'
+                  className='relative w-[500px] bg-white my-8'
                 >
                   <MorphingDialogClose className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm rounded-full p-1.5 shadow-md" />
                   
@@ -636,11 +618,8 @@ export function ProspectingSection() {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <div className="px-2 flex flex-col h-full">
-                  {/* Label goes above image with no margin */}
-                  <h4 className="text-lg font-semibold text-center mb-2">{type.title}</h4>
-                  
                   {/* Shorter container height with fixed aspect ratio for the image */}
-                  <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center">
+                  <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center p-6 bg-white">
                     {/* Different styling based on image type with smaller scale */}
                     {type.title === 'Coaches' && (
                       <img
@@ -682,11 +661,6 @@ export function ProspectingSection() {
                         style={{ transform: 'scale(0.85)' }}
                       />
                     )}
-                  </div>
-                  
-                  {/* Description text below image */}
-                  <div className="mt-2 text-center">
-                    <p className="text-sm text-gray-700 px-4 line-clamp-2 h-10">{type.description}</p>
                   </div>
                 </div>
               </motion.div>
