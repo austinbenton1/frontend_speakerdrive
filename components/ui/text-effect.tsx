@@ -3,9 +3,10 @@ import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   motion,
-  type Transition as FramerTransition,
+  Transition,
   Variants,
-  type Target,
+  Target,
+  TargetAndTransition
 } from "framer-motion";
 import React from "react";
 
@@ -42,8 +43,8 @@ export type TextEffectProps = {
   /** Extra class for each segment's wrapper. */
   segmentWrapperClassName?: string;
   /** Additional transitions for the container and segments. */
-  containerTransition?: FramerTransition;
-  segmentTransition?: FramerTransition;
+  containerTransition?: Transition;
+  segmentTransition?: Transition;
   style?: React.CSSProperties;
 };
 
@@ -183,7 +184,10 @@ const splitText = (text: string, per: PerType) => {
 
 const hasTransition = (variant: any): boolean => {
   return (
-    typeof variant === "object" && variant !== null && "transition" in variant
+    typeof variant === "object" && 
+    variant !== null && 
+    "transition" in variant &&
+    typeof (variant as TargetAndTransition).transition === "object"
   );
 };
 
@@ -191,9 +195,9 @@ const hasTransition = (variant: any): boolean => {
  * Use a type that intersects with FramerTransition 
  * to allow an optional "exit" field. 
  */
-type TransitionWithExit = FramerTransition & {
-  exit?: FramerTransition;
-};
+interface TransitionWithExit extends Transition {
+  exit?: Transition; 
+}
 
 const createVariantsWithTransition = (
   baseVariants: Variants,
@@ -202,22 +206,25 @@ const createVariantsWithTransition = (
   if (!transition) return baseVariants;
 
   const { exit: exitTransition, ...mainTransition } = transition;
+  const visibleVariant = baseVariants.visible as TargetAndTransition;
+  const exitVariant = baseVariants.exit as TargetAndTransition;
+
   return {
     ...baseVariants,
     visible: {
-      ...baseVariants.visible,
+      ...visibleVariant,
       transition: {
-        ...(hasTransition(baseVariants.visible)
-          ? baseVariants.visible.transition
+        ...(hasTransition(visibleVariant)
+          ? visibleVariant.transition
           : {}),
         ...mainTransition,
       },
     },
     exit: {
-      ...baseVariants.exit,
+      ...exitVariant,
       transition: {
-        ...(hasTransition(baseVariants.exit)
-          ? baseVariants.exit.transition
+        ...(hasTransition(exitVariant)
+          ? exitVariant.transition
           : {}),
         ...(exitTransition || mainTransition),
         staggerDirection: -1,
