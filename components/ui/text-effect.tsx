@@ -57,15 +57,15 @@ const defaultContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { 
+    transition: {
       staggerChildren: 0.05,
     },
   },
   exit: {
     opacity: 0,
-    transition: { 
-      staggerChildren: 0.05, 
-      staggerDirection: -1 
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
     },
   },
 };
@@ -187,11 +187,18 @@ const hasTransition = (variant: any): boolean => {
   );
 };
 
-interface TransitionWithExit extends FramerTransition {
+/**
+ * Use a type that intersects with FramerTransition 
+ * to allow an optional "exit" field. 
+ */
+type TransitionWithExit = FramerTransition & {
   exit?: FramerTransition;
-}
+};
 
-const createVariantsWithTransition = (baseVariants: Variants, transition?: TransitionWithExit): Variants => {
+const createVariantsWithTransition = (
+  baseVariants: Variants,
+  transition?: TransitionWithExit
+): Variants => {
   if (!transition) return baseVariants;
 
   const { exit: exitTransition, ...mainTransition } = transition;
@@ -199,7 +206,7 @@ const createVariantsWithTransition = (baseVariants: Variants, transition?: Trans
     ...baseVariants,
     visible: {
       ...baseVariants.visible,
-      transition: { 
+      transition: {
         ...(hasTransition(baseVariants.visible)
           ? baseVariants.visible.transition
           : {}),
@@ -208,7 +215,7 @@ const createVariantsWithTransition = (baseVariants: Variants, transition?: Trans
     },
     exit: {
       ...baseVariants.exit,
-      transition: { 
+      transition: {
         ...(hasTransition(baseVariants.exit)
           ? baseVariants.exit.transition
           : {}),
@@ -310,6 +317,7 @@ export function TextEffect({
           onAnimationStart={onAnimationStart}
           style={style}
         >
+          {/* If we're animating by word or char, insert a visually hidden copy for screen readers. */}
           {per !== "line" ? <span className="sr-only">{textContent}</span> : null}
 
           {segments.map((segment, index) => (
