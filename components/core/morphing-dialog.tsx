@@ -65,7 +65,6 @@ export function MorphingDialogTrigger({
 export function MorphingDialogContainer({ children }: { children: React.ReactNode }) {
   const { open, setOpen } = useMorphingDialogContext();
 
-  // Better implementation for backdrop click to close
   const closeDialog = () => {
     setOpen(false);
   };
@@ -74,15 +73,12 @@ export function MorphingDialogContainer({ children }: { children: React.ReactNod
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
-          {/* Backdrop - clicking this will close the dialog */}
           <div 
             className="fixed inset-0 bg-black/50 backdrop-blur-sm" 
             onClick={closeDialog}
             aria-hidden="true"
           />
-          
-          {/* Dialog content wrapper - preventing the click from propagating to backdrop */}
-          <div 
+          <div
             className="relative z-50 mx-auto"
             onClick={(e) => e.stopPropagation()}
           >
@@ -112,7 +108,6 @@ export function MorphingDialogContent({
         setOpen(false);
       }
     }
-
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [setOpen]);
@@ -141,7 +136,6 @@ export function MorphingDialogTitle({
 }) {
   return (
     <motion.h3
-      layoutId="title"
       className={cn("text-lg font-medium", className)}
     >
       {children}
@@ -158,7 +152,6 @@ export function MorphingDialogSubtitle({
 }) {
   return (
     <motion.p
-      layoutId="subtitle"
       className={cn("text-sm", className)}
     >
       {children}
@@ -179,7 +172,6 @@ export function MorphingDialogImage({
 }) {
   return (
     <motion.img
-      layoutId="image"
       src={src}
       alt={alt}
       className={className}

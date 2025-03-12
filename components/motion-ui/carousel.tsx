@@ -4,13 +4,9 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import {
   motion,
-  AnimatePresence,
   useAnimationFrame,
   useMotionValue,
   useTransform,
-  useSpring,
-  type MotionValue,
-  PanInfo,
   HTMLMotionProps,
 } from "framer-motion";
 
@@ -93,17 +89,14 @@ const Carousel = React.forwardRef<
       [maxIndex, loop, onIndexChange]
     );
 
-    // Update current index when controlled index changes
     React.useEffect(() => {
       if (index !== currentIndex) {
         setCurrentIndex(index);
       }
     }, [index]);
 
-    // Auto play functionality
     React.useEffect(() => {
       if (!autoPlay) return;
-
       const timer = setInterval(() => {
         const nextIndex = currentIndex + 1;
         handleIndexChange(nextIndex);
@@ -112,7 +105,6 @@ const Carousel = React.forwardRef<
       return () => clearInterval(timer);
     }, [autoPlay, currentIndex, handleIndexChange, interval]);
 
-    // Calculate max index once children are rendered
     React.useEffect(() => {
       if (carouselItems !== undefined) {
         setMaxIndex(carouselItems - 1);
@@ -160,169 +152,155 @@ const Carousel = React.forwardRef<
 );
 Carousel.displayName = "Carousel";
 
-interface CarouselContentProps extends Omit<HTMLMotionProps<"div">, "onDrag" | "ref"> {
+interface CarouselContentProps
+  extends Omit<HTMLMotionProps<"div">, "onDrag" | "ref"> {
   className?: string;
   transition?: any;
 }
 
-const CarouselContent = React.forwardRef<
-  HTMLDivElement,
-  CarouselContentProps
->(({ className, transition, ...props }, ref) => {
-  const { carouselRef, currentIndex, disableDrag } = useCarousel();
-  const x = useMotionValue(0);
-  const containerWidth = useMotionValue(0);
-  const contentWidth = useMotionValue(0);
+const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
+  ({ className, transition, ...props }, ref) => {
+    const { carouselRef, currentIndex, disableDrag } = useCarousel();
+    const x = useMotionValue(0);
+    const containerWidth = useMotionValue(0);
+    const contentWidth = useMotionValue(0);
 
-  // Create a single derived motion value that combines all three values
-  const combinedValues = useMotionValue<[number, number, number]>([0, 0, 0]);
+    // We'll combine x, containerWidth, and contentWidth to compute dragProgress
+    const combinedValues = useMotionValue<[number, number, number]>([0, 0, 0]);
 
-  // Update the combined value whenever any of the individual values change
-  React.useEffect(() => {
-    const updateCombinedValues = () => {
-      combinedValues.set([x.get(), containerWidth.get(), contentWidth.get()]);
+    React.useEffect(() => {
+      const updateCombinedValues = () => {
+        combinedValues.set([x.get(), containerWidth.get(), contentWidth.get()]);
+      };
+
+      const unsubscribeX = x.on("change", updateCombinedValues);
+      const unsubscribeContainer = containerWidth.on("change", updateCombinedValues);
+      const unsubscribeContent = contentWidth.on("change", updateCombinedValues);
+
+      return () => {
+        unsubscribeX();
+        unsubscribeContainer();
+        unsubscribeContent();
+      };
+    }, [x, containerWidth, contentWidth, combinedValues]);
+
+    useAnimationFrame(() => {
+      if (!carouselRef.current) return;
+      const container = carouselRef.current;
+      const content = container.querySelector('[data-carousel-content=""]');
+      if (!content) return;
+
+      containerWidth.set(container.clientWidth);
+      contentWidth.set((content as HTMLElement).scrollWidth);
+    });
+
+    const baseTransition = {
+      type: "spring",
+      damping: 20,
+      stiffness: 150,
     };
+    const appliedTransition = transition || baseTransition;
 
-    const unsubscribeX = x.on("change", updateCombinedValues);
-    const unsubscribeContainer = containerWidth.on("change", updateCombinedValues);
-    const unsubscribeContent = contentWidth.on("change", updateCombinedValues);
+    const itemWidth = React.useRef(0);
 
-    return () => {
-      unsubscribeX();
-      unsubscribeContainer();
-      unsubscribeContent();
-    };
-  }, [x, containerWidth, contentWidth, combinedValues]);
+    React.useEffect(() => {
+      if (!carouselRef.current) return;
+      const firstItem = carouselRef.current.querySelector(
+        '[role="group"][data-carousel-item]'
+      );
+      if (!firstItem) return;
 
-  const dragProgress = useTransform(
-    combinedValues,
-    ([xVal, containerWidthVal, contentWidthVal]) => {
-      const maxDistance = contentWidthVal - containerWidthVal;
-      return maxDistance === 0 ? 0 : xVal / -maxDistance;
-    }
-  );
+      const computedStyle = window.getComputedStyle(firstItem as Element);
+      const width =
+        (firstItem as Element).clientWidth +
+        parseInt(computedStyle.marginLeft || "0") +
+        parseInt(computedStyle.marginRight || "0");
 
-  const baseTransition = {
-    type: "spring",
-    damping: 20,
-    stiffness: 150,
-  };
+      itemWidth.current = width;
+    }, [carouselRef]);
 
-  const appliedTransition = transition || baseTransition;
+    React.useEffect(() => {
+      if (itemWidth.current === 0) return;
+      x.set(-currentIndex * itemWidth.current);
+    }, [currentIndex, x]);
 
-  useAnimationFrame(() => {
-    if (!carouselRef.current) return;
-    const container = carouselRef.current;
-    const content = container.querySelector('[data-carousel-content=""]');
-    if (!content) return;
-
-    containerWidth.set(container.clientWidth);
-    contentWidth.set(content.scrollWidth);
-  });
-
-  const itemWidth = React.useRef(0);
-
-  React.useEffect(() => {
-    if (!carouselRef.current) return;
-    const firstItem = carouselRef.current.querySelector(
-      '[role="group"][data-carousel-item]'
+    return (
+      <div className="overflow-hidden">
+        <motion.div
+          ref={ref}
+          data-carousel-content=""
+          drag={disableDrag ? false : "x"}
+          dragConstraints={{
+            left: -(contentWidth.get() - containerWidth.get()),
+            right: 0,
+          }}
+          dragElastic={0.1}
+          dragMomentum={false}
+          style={{ x }}
+          className={cn("flex", className)}
+          transition={appliedTransition}
+          {...props}
+        />
+      </div>
     );
-    if (!firstItem) return;
-
-    const computedStyle = window.getComputedStyle(firstItem as Element);
-    const width =
-      (firstItem as Element).clientWidth +
-      parseInt(computedStyle.marginLeft || "0") +
-      parseInt(computedStyle.marginRight || "0");
-
-    itemWidth.current = width;
-  }, [carouselRef]);
-
-  React.useEffect(() => {
-    if (itemWidth.current === 0) return;
-    x.set(-currentIndex * itemWidth.current);
-  }, [currentIndex, x]);
-
-  return (
-    <div className="overflow-hidden">
-      <motion.div
-        ref={ref}
-        data-carousel-content=""
-        drag={disableDrag ? false : "x"}
-        dragConstraints={{
-          left: -(contentWidth.get() - containerWidth.get()),
-          right: 0,
-        }}
-        dragElastic={0.1}
-        dragMomentum={false}
-        style={{ x }}
-        className={cn("flex", className)}
-        transition={appliedTransition}
-        // @ts-ignore - Ignoring type mismatch between React and Framer Motion event handlers
-        {...props}
-      />
-    </div>
-  );
-});
+  }
+);
 CarouselContent.displayName = "CarouselContent";
 
-const CarouselItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      role="group"
-      aria-roledescription="slide"
-      data-carousel-item=""
-      className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
-      {...props}
-    />
-  );
-});
+const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        role="group"
+        aria-roledescription="slide"
+        data-carousel-item=""
+        className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
+        {...props}
+      />
+    );
+  }
+);
 CarouselItem.displayName = "CarouselItem";
 
-const CarouselPrevious = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<"button">
->(({ className, ...props }, ref) => {
-  const { api } = useCarousel();
+const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ComponentProps<"button">>(
+  ({ className, ...props }, ref) => {
+    const { api } = useCarousel();
 
-  return (
-    <button
-      ref={ref}
-      className={cn(
-        "absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-md",
-        className
-      )}
-      disabled={!api?.canScrollPrev}
-      onClick={() => api?.scrollPrev()}
-      {...props}
-    />
-  );
-});
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-md",
+          className
+        )}
+        disabled={!api?.canScrollPrev}
+        onClick={() => api?.scrollPrev()}
+        {...props}
+      />
+    );
+  }
+);
 CarouselPrevious.displayName = "CarouselPrevious";
 
-const CarouselNext = React.forwardRef<
-  HTMLButtonElement,
-  React.ComponentProps<"button">
->(({ className, ...props }, ref) => {
-  const { api } = useCarousel();
+const CarouselNext = React.forwardRef<HTMLButtonElement, React.ComponentProps<"button">>(
+  ({ className, ...props }, ref) => {
+    const { api } = useCarousel();
 
-  return (
-    <button
-      ref={ref}
-      className={cn(
-        "absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-md",
-        className
-      )}
-      disabled={!api?.canScrollNext}
-      onClick={() => api?.scrollNext()}
-      {...props}
-    />
-  );
-});
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-md",
+          className
+        )}
+        disabled={!api?.canScrollNext}
+        onClick={() => api?.scrollNext()}
+        {...props}
+      />
+    );
+  }
+);
 CarouselNext.displayName = "CarouselNext";
 
 export {

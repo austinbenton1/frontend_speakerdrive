@@ -26,20 +26,28 @@ export default function LandingPage() {
         ]}
       />
 
-      <main className="pt-24">
+      {/* Return to a slightly tighter top spacing */}
+      <main className="pt-16">
+        {/* Hero Section */}
         <section id="hero">
           <Hero />
         </section>
-        
-        <section id="features">
-          <FeatureAccordion />
+
+        {/* How It Works + short intro */}
+        <section className="mt-6 mb-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-extrabold mb-4">How It Works</h2>
+          <p className="max-w-3xl mx-auto text-lg text-gray-600 font-medium">
+            SpeakerDrive helps speakers, coaches and experts escape the referral trap 
+            and predictably control their own client acquisition.
+          </p>
         </section>
 
-        <section id="find-leads">
+        {/* STEP 1: Find Qualified Leads */}
+        <section id="find-leads" className="mt-4">
           <FeatureTwoItem
-            title="Find Qualified Leads"
             stepNumber={1}
-            description=""
+            title="Find Qualified Leads"
+            description="Find Your Ideal Opportunities"
             features={[
               {
                 title: "Search Events and Contacts",
@@ -59,11 +67,12 @@ export default function LandingPage() {
           />
         </section>
 
-        <section id="unlock-info" className="bg-neutral-50">
+        {/* STEP 2: Unlock Contact Info */}
+        <section id="unlock-info" className="mt-8">
           <FeatureTwoItem
-            title="Unlock Contact Info"
             stepNumber={2}
-            description="Get verified email addresses and direct application links to reach decision-makers without the gatekeepers."
+            title="Unlock Contact Info"
+            description="Find Your Ideal Opportunities"
             features={[
               {
                 title: "Email Verification",
@@ -83,11 +92,12 @@ export default function LandingPage() {
           />
         </section>
 
-        <section id="craft-outreach">
+        {/* STEP 3: Craft Outreach */}
+        <section id="craft-outreach" className="mt-8">
           <FeatureTwoItem
-            title="Craft Outreach"
             stepNumber={3}
-            description="Our message composer creates personalized messages designed to start meaningful conversations."
+            title="Craft Outreach"
+            description="Find Your Ideal Opportunities"
             features={[
               {
                 title: "AI-Powered Templates",
@@ -107,33 +117,38 @@ export default function LandingPage() {
           />
         </section>
 
+        {/* Prospecting Section */}
         <section id="prospecting">
           <ProspectingSection />
         </section>
 
+        {/* The Prospecting Effect */}
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
 
+        {/* BOTTOM CTA */}
         <section id="cta" className="bg-white">
           <div className="container mx-auto max-w-4xl px-4 py-16 text-center">
+            {/* Updated heading */}
             <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to grow your speaking business?
+              Find and Book Your Next Engagement
             </h2>
+            {/* Updated sub-text */}
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Join thousands of speakers who use SpeakerDrive to find more
-              opportunities and grow their business.
+              Escape the referral trap and predictably control your OWN client acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="#pricing" 
                 className="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-800 px-6 py-3 text-base font-medium hover:bg-gray-50 transition-colors"
               >
-                View pricing
+                View Pricing
               </a>
+              {/* Make the "Start free trial" button a bit bigger + new gradient color */}
               <a
                 href="/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-brand-blue text-white px-6 py-3 text-base font-medium shadow-md hover:bg-blue-600 transition-colors"
+                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 text-lg font-semibold shadow-md hover:opacity-90 transition-colors"
               >
                 Start free trial
               </a>

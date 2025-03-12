@@ -1,4 +1,5 @@
 "use client";
+
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,10 @@ interface TransitionPanelProps {
   custom?: any;
 }
 
+/**
+ * Renders only the active child with a simple crossfade or slide transition,
+ * using AnimatePresence from framer-motion.
+ */
 export function TransitionPanel({
   children,
   activeIndex,
@@ -22,7 +27,7 @@ export function TransitionPanel({
 }: TransitionPanelProps) {
   return (
     <div className={cn("relative", className)}>
-      <AnimatePresence custom={custom} mode="wait" initial={false}>
+      <AnimatePresence custom={custom}>
         <motion.div
           key={activeIndex}
           custom={custom}

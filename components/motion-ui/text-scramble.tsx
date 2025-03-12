@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -52,22 +53,17 @@ export function TextScramble({
       }
       
       const progress = iterations / maxIterations;
-      const newText = finalText.split('').map((char, idx) => {
+      const newText = finalText.split('').map((char) => {
         if (char === ' ') return ' ';
-        
-        // Increase probability of showing final character as iterations increase
         if (Math.random() < progress) {
           return char;
         }
-        
-        // Get a random character from the chars string
         return chars[Math.floor(Math.random() * chars.length)];
       }).join('');
       
       setText(newText);
       iterations += 1;
       
-      // Schedule next update
       timeoutRef.current = setTimeout(updateText, 50);
     };
     

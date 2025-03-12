@@ -1,12 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
+    // This allows production builds to complete even if ESLint errors exist
     ignoreDuringBuilds: true,
   },
-  
-  // Add proper MIME type configuration for videos
+  // Turn off image optimization to avoid base64 placeholders:
+  images: {
+    unoptimized: true,
+  },
+  // Example: custom headers for .mp4 or .webm:
   async headers() {
     return [
       {

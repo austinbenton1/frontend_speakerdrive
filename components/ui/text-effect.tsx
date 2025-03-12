@@ -3,9 +3,7 @@ import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   motion,
-  TargetAndTransition,
   Transition,
-  Variant,
   Variants,
 } from "framer-motion";
 import React from "react";
@@ -54,7 +52,6 @@ const defaultStaggerTimes: Record<PerType, number> = {
   line: 0.1,
 };
 
-/** Basic container animation: fade in while staggering child items. */
 const defaultContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -69,14 +66,12 @@ const defaultContainerVariants: Variants = {
   },
 };
 
-/** Basic item animation: fade in/out. */
 const defaultItemVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
   exit: { opacity: 0 },
 };
 
-/** Animation presets for container + items. */
 const presetVariants: Record<
   PresetType,
   { container: Variants; item: Variants }
@@ -123,14 +118,12 @@ const presetVariants: Record<
   },
 };
 
-/** Single segment animation component. */
 const AnimationComponent: React.FC<{
   segment: string;
   variants: Variants;
   per: PerType;
   segmentWrapperClassName?: string;
 }> = React.memo(({ segment, variants, per, segmentWrapperClassName }) => {
-  // If splitting by char, we nest each char in a motion.span
   if (per === "char") {
     return (
       <motion.span className="inline-block whitespace-pre">
@@ -147,7 +140,6 @@ const AnimationComponent: React.FC<{
     );
   }
 
-  // Otherwise, entire segment is one motion.span
   const content = (
     <motion.span
       variants={variants}
@@ -172,33 +164,23 @@ const AnimationComponent: React.FC<{
 });
 AnimationComponent.displayName = "AnimationComponent";
 
-/** Check if the text contains HTML tags */
 const containsHtml = (text: string): boolean => {
   return /<[^>]*>/i.test(text);
 };
 
-/** Splits text by line, word, or preserves whitespace for char. */
 const splitText = (text: string, per: PerType) => {
-  // Make sure we're working with a string
-  if (typeof text !== 'string') {
-    return [''];
-  }
-  
-  // If text contains HTML, treat it as a single segment to avoid breaking HTML
+  if (typeof text !== "string") return [""];
   if (containsHtml(text)) {
     return [text];
   }
-  
   if (per === "line") return text.split("\n");
-  // "word" or "char": we keep whitespace with this approach
   return text.split(/(\s+)/);
 };
 
-/** Helper to add transitions to container/item variants. */
-const hasTransition = (
-  variant: Variant
-): variant is TargetAndTransition & { transition?: Transition } => {
-  return typeof variant === "object" && variant !== null && "transition" in variant;
+const hasTransition = (variant: any): boolean => {
+  return (
+    typeof variant === "object" && variant !== null && "transition" in variant
+  );
 };
 
 const createVariantsWithTransition = (
@@ -208,20 +190,23 @@ const createVariantsWithTransition = (
   if (!transition) return baseVariants;
 
   const { exit: exitTransition, ...mainTransition } = transition;
-
   return {
     ...baseVariants,
     visible: {
       ...baseVariants.visible,
       transition: {
-        ...(hasTransition(baseVariants.visible) ? baseVariants.visible.transition : {}),
+        ...(hasTransition(baseVariants.visible)
+          ? baseVariants.visible.transition
+          : {}),
         ...mainTransition,
       },
     },
     exit: {
       ...baseVariants.exit,
       transition: {
-        ...(hasTransition(baseVariants.exit) ? baseVariants.exit.transition : {}),
+        ...(hasTransition(baseVariants.exit)
+          ? baseVariants.exit.transition
+          : {}),
         ...(exitTransition || mainTransition),
         staggerDirection: -1,
       },
@@ -229,17 +214,13 @@ const createVariantsWithTransition = (
   };
 };
 
-/**
- * The main TextEffect component that animates text by splitting
- * into line, word, or char segments and applying framer-motion transitions.
- */
 export function TextEffect({
   children,
   per = "word",
   as = "p",
   variants,
   className,
-  preset = "fade-in-blur", // changed default to "fade-in-blur"
+  preset = "fade-in-blur",
   delay = 0,
   speedReveal = 1,
   speedSegment = 1,
@@ -251,27 +232,25 @@ export function TextEffect({
   segmentTransition,
   style,
 }: TextEffectProps) {
-  // Convert children to string safely
-  const textContent = typeof children === 'string' ? children : React.isValidElement(children) 
-    ? React.Children.toArray(children).map(child => 
-        typeof child === 'string' ? child : ''
-      ).join('')
-    : '';
-  
+  const textContent =
+    typeof children === "string"
+      ? children
+      : React.isValidElement(children)
+      ? React.Children.toArray(children)
+          .map((child) => (typeof child === "string" ? child : ""))
+          .join("")
+      : "";
+
   const segments = splitText(textContent, per);
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
 
-  // Use the user's variants, or fall back to the chosen preset
   const baseVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };
 
-  // The stagger is shortened or lengthened based on "speedReveal"
   const stagger = (defaultStaggerTimes[per] ?? 0.05) / speedReveal;
-  // The segment transition duration is adjusted by "speedSegment"
   const baseDuration = 0.3 / speedSegment;
 
-  // Merge user-provided container transitions
   const computedVariants = {
     container: createVariantsWithTransition(
       variants?.container || baseVariants.container,
@@ -291,11 +270,10 @@ export function TextEffect({
     }),
   };
 
-  // If children contains React elements (like spans with gradient styling),
-  // use a simpler animation approach that won't try to split the content
+  // If children is itself a React element with styling, wrap in AnimatePresence:
   if (React.isValidElement(children)) {
     return (
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {trigger && (
           <MotionTag
             initial="hidden"
@@ -307,10 +285,7 @@ export function TextEffect({
             onAnimationStart={onAnimationStart}
             style={style}
           >
-            {/* Simply wrap the children in a motion element */}
-            <motion.span variants={computedVariants.item}>
-              {children}
-            </motion.span>
+            <motion.span variants={computedVariants.item}>{children}</motion.span>
           </MotionTag>
         )}
       </AnimatePresence>
@@ -318,7 +293,7 @@ export function TextEffect({
   }
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       {trigger && (
         <MotionTag
           initial="hidden"
@@ -330,7 +305,6 @@ export function TextEffect({
           onAnimationStart={onAnimationStart}
           style={style}
         >
-          {/* For screen readers, show entire text once, hidden visually if per!==line */}
           {per !== "line" ? <span className="sr-only">{textContent}</span> : null}
 
           {segments.map((segment, index) => (

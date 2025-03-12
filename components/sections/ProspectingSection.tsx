@@ -1,7 +1,16 @@
 "use client";
 
-import { ArrowRight, ChevronLeftIcon, ChevronRightIcon, ArrowDownIcon, ExternalLinkIcon, MaximizeIcon, ArrowUpRightIcon, Mail, Link, AtSign } from 'lucide-react';
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { 
+  ArrowRight,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ArrowDownIcon,
+  Mail,
+  Link,
+  AtSign,
+  Check as CheckCircleIcon
+} from 'lucide-react';
+import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { TextEffect } from "@/components/ui/text-effect";
 import {
@@ -17,8 +26,11 @@ import {
 import { ScrollArea } from '@/components/website/scroll-area';
 import { TransitionPanel } from '@/components/motion-ui/transition-panel';
 import { cn } from '@/lib/utils';
-import { VideoCard } from '@/components/ui/VideoCard';
+import Image from 'next/image';
 
+/** 
+ * Speaker Types
+ */
 const SPEAKER_TYPES = [
   {
     title: 'Keynote Speakers',
@@ -47,71 +59,74 @@ const SPEAKER_TYPES = [
   },
 ];
 
-// Sample morphing dialog items 
+/** 
+ * Sample morphing dialog items
+ * (Pop-up content controlled here)
+ */
 const SAMPLE_ITEMS = [
   {
     title: "BCCC Corporate Citizenship Conference",
     subtitle: "Boston College",
-    image: "/BCCC.png?v=2", 
-    previewImage: "/1_BCCC.png?v=2",
+    image: "/1_BCCC.png", 
+    previewImage: "/1_BCCC.png",
     description: "**At A Glance**\nThe BCCC International Corporate Citizenship Conference addresses corporate social responsibility and sustainability strategies for impactful business practices.\n\n**Target Audience**\nCorporate Social Responsibility Executives, Sustainability Practitioners, Corporate Citizenship Professionals\n\n**Best For**\nSpeakers and consultants specializing in corporate social responsibility. Best for industry leaders seeking practical insights – driving community engagement through responsible business.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4c1f4667ee1496ac6413.mp4"
   },
   {
     title: "2025 BOMA Winter Issues Forum",
     subtitle: "BOMA International",
-    image: "/2025 BOMA Winter Issues Forum-mh.png?v=2",
-    previewImage: "/2_BOMA.png?v=2",
+    image: "/2_BOMA.png",
+    previewImage: "/2_BOMA.png",
     description: "**At A Glance**\nThe BOMA Winter Issues Forum brings together building owners, managers, and facility professionals to discuss pressing industry challenges and innovative solutions.\n\n**Target Audience**\nCommercial Real Estate Executives, Building Owners, Property Managers, Facility Management Professionals\n\n**Best For**\nIndustry experts specializing in commercial real estate, sustainability, smart buildings, and property management trends. Ideal for those focused on practical applications that generate ROI.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4b93b8ead34edd309e56.mp4"
   },
   {
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
-    image: "/FactRight.png?v=2",
-    previewImage: "/3_FactRight.png?v=2",
+    image: "/3_FactRight.png",
+    previewImage: "/3_FactRight.png",
     description: "**At A Glance**\nThe FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.\n\n**Target Audience**\nWealth Managers, Registered Investment Advisors, Investment Advisors\n\n**Best For**\nWealth managers and investment advisors specializing in alternative investments. Best for those seeking to deepen due diligence skills within investment management.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb5698b96946edd23833cb.mp4"
   },
   {
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
-    image: "/Forth Roadmap Conference-mh.png?v=2",
-    previewImage: "/4_Forth.png?v=2",
+    image: "/4_Forth.png",
+    previewImage: "/4_Forth.png",
     description: "**At A Glance**\nThe Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.\n\n**Target Audience**\nElectric Vehicle Industry Leaders, Policymakers in Transportation, Charging Infrastructure Providers\n\n**Best For**\nSpeakers and facilitators specializing in electric vehicle technology and public policy. Best for those passionate about equity and sustainable mobility solutions.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb59ce54acb49abdd5369a.mp4"
   },
   {
     title: "Identiverse 2025",
     subtitle: "CyberRisk Alliance",
-    image: "/Identiverse 2025-mh.png?v=2",
-    previewImage: "/5_Identiverse.png?v=2",
+    image: "/5_Identiverse.png",
+    previewImage: "/5_Identiverse.png",
     description: "**At A Glance**\nIdentiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.\n\n**Target Audience**\nCompliance and Risk Management Professionals, Development and Engineering Experts, Privacy and Data Protection Professionals, Security Operations and Analysts, Identity and Security Architects\n\n**Best For**\nExperts and consultants specializing in identity security and data protection. Best for professionals focused on practical solutions - enhancing compliance and risk management practices.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb52d7def776eaa4befddc.mp4"
   },
   {
     title: "REimagine! 2025",
     subtitle: "California Association of REALTORS",
-    image: "/REimagine! 2025-mh.png?v=2",
-    previewImage: "/6_REimagine.png?v=2",
+    image: "/6_REimagine.png",
+    previewImage: "/6_REimagine.png",
     description: "**At A Glance**\nThe REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.\n\n**Target Audience**\nReal Estate Professionals, Tech-Driven Nonprofit Leaders, Social Impact Professionals\n\n**Best For**\nSpeakers and consultants specializing in real estate and social impact. Best for those focused on integrating technology and social responsibility into practice.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4fd9fef41b1e5cfda728.mp4"
   }
 ];
 
-// Helper function to format description with bold categories
+/**
+ * Helper to format bold headings in a string
+ */
 const formatDescription = (description: string) => {
   if (!description.includes('**')) {
     return <p className="text-left">{description}</p>;
   }
   
-  // Split by line breaks to process each paragraph
   const paragraphs = description.split('\n\n');
   
   return (
     <>
       {paragraphs.map((paragraph, index) => {
-        // Check if paragraph contains a bold section (marked with **)
         if (paragraph.includes('**')) {
           const parts = paragraph.split('**');
           if (parts.length >= 3) {
@@ -123,15 +138,15 @@ const formatDescription = (description: string) => {
             );
           }
         }
-        
-        // Regular paragraph
         return <p key={index} className="mb-3 text-left">{paragraph}</p>;
       })}
     </>
   );
 };
 
-// Contact Info Feature panel data
+/** 
+ * Contact Info panel data
+ */
 const CONTACT_FEATURES = [
   {
     title: 'Contact Emails',
@@ -156,7 +171,9 @@ const CONTACT_FEATURES = [
   },
 ];
 
-// Contact Feature Panel Component
+/**
+ * ContactFeaturePanel with bigger logo + smaller modern-styled buttons
+ */
 function ContactFeaturePanel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -164,43 +181,52 @@ function ContactFeaturePanel() {
   return (
     <div className='overflow-auto py-16 sm:overflow-hidden'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <h2 className='mb-8 text-center text-3xl text-zinc-900 sm:text-4xl font-bold'>
-          The SpeakerDrive Message Composer
-        </h2>
+        {/* Slightly bigger SpeakerDrive logo */}
+        <div className="mb-8 flex flex-col items-center justify-center">
+          <div className="flex items-center gap-2">
+            <img
+              src="/SpeakerDrive Logo - Long.png"
+              alt="SpeakerDrive Logo"
+              className="h-9 sm:h-10 object-contain"
+            />
+            <h2 className='text-2xl sm:text-3xl text-zinc-900 font-bold'>
+              Message Composer
+            </h2>
+          </div>
+        </div>
+
         <div className='mb-10 overflow-x-auto [scrollbar-width:none]'>
           <div className='flex min-w-max items-center justify-center space-x-5'>
             {CONTACT_FEATURES.map((feature, index) => {
+              const isActive = index === activeIndex;
               return (
                 <button
                   key={index}
                   type='button'
                   onClick={() => {
-                    setActiveIndex(index);
                     setDirection(index > activeIndex ? 1 : -1);
+                    setActiveIndex(index);
                   }}
                   className={cn(
-                    'relative rounded-lg px-5 py-3 text-base font-medium transition-all duration-200',
-                    'transform hover:-translate-y-1 active:translate-y-0',
-                    'cursor-pointer flex items-center justify-center gap-1.5',
-                    'ring-offset-2 focus:outline-none focus:ring-2 focus:ring-brand-blue',
-                    'my-2',
-                    index === activeIndex
-                      ? `bg-gradient-to-r ${feature.gradient} text-white shadow-md shadow-${feature.gradient.split(" ")[0].replace("from-", "")}/20`
-                      : 'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md'
+                    // Smaller + modern style: px-4 py-2 text-sm
+                    'relative rounded-md px-4 py-2 text-sm font-medium transition-all duration-200 cursor-pointer flex items-center justify-center gap-1.5 ring-offset-2 focus:outline-none focus:ring-2 focus:ring-brand-blue my-2',
+                    isActive
+                      ? `bg-gradient-to-r ${feature.gradient} text-white`
+                      : // More defined border & pointer style in unselected state:
+                        'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md border border-gray-300'
                   )}
                 >
                   {feature.icon}
                   {feature.title}
-                  {index === activeIndex ? (
+                  {isActive ? (
                     <CheckCircleIcon className="ml-2 h-4 w-4" />
                   ) : (
                     <ArrowRight className="ml-2 h-4 w-4 opacity-70" />
                   )}
                   
-                  {index === activeIndex && (
+                  {isActive && (
                     <motion.span 
-                      className={`absolute inset-0 rounded-lg bg-gradient-to-r ${feature.gradient} opacity-20 -z-10`}
-                      layoutId="highlight"
+                      className={`absolute inset-0 rounded-md bg-gradient-to-r ${feature.gradient} opacity-20 -z-10`}
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -210,9 +236,10 @@ function ContactFeaturePanel() {
           </div>
         </div>
       </div>
+
       <div className='flex justify-center'>
         <TransitionPanel
-          className='aspect-video w-[800px] max-w-full overflow-hidden rounded-xl border border-brand-blue/30 shadow-lg'
+          className='aspect-video w-[800px] max-w-full overflow-hidden rounded-xl'
           activeIndex={activeIndex}
           custom={direction}
           transition={{
@@ -220,31 +247,34 @@ function ContactFeaturePanel() {
             duration: 0.3,
           }}
           variants={{
-            enter: (direction: number) => ({
-              x: direction > 0 ? 32 : -32,
+            enter: (dir: number) => ({
+              x: dir > 0 ? 32 : -32,
               opacity: 0.8,
             }),
             center: {
               x: 0,
               opacity: 1,
             },
-            exit: (direction: number) => ({
-              x: direction < 0 ? 32 : -32,
+            exit: (dir: number) => ({
+              x: dir < 0 ? 32 : -32,
               opacity: 0.8,
             }),
           }}
         >
-          {CONTACT_FEATURES.map((feature, index) => (
+          {CONTACT_FEATURES.map((feature) => (
             <div
               className='relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl'
               key={feature.title}
             >
               {feature.video ? (
                 <div className="w-full h-full overflow-hidden relative">
-                  {/* Decorative gradient overlay to provide a subtle effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-t ${index === 0 ? 'from-brand-blue/5' : 'from-green-500/5'} to-transparent z-10 pointer-events-none`}></div>
-                  
-                  {/* Video element with object-cover to fill the space */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t ${
+                      feature.title === 'Contact Emails'
+                        ? 'from-brand-blue/5'
+                        : 'from-green-500/5'
+                    } to-transparent z-10 pointer-events-none`}
+                  />
                   <video
                     className="w-full h-full object-cover"
                     autoPlay
@@ -276,27 +306,19 @@ function ContactFeaturePanel() {
 export function ProspectingSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { 
-    once: true,
-    amount: 0.3
-  });
-  
-  // Set triggerAnimation to true by default instead of depending on isInView
-  const [triggerAnimation, setTriggerAnimation] = useState(true);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+
+  // For text animations
+  const [triggerAnimation] = useState(true);
+
+  // For the speaker types carousel
   const [activeIndex, setActiveIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
-  
-  // State for managing the VideoCard dialog
-  const [isVideoCardDialogOpen, setIsVideoCardDialogOpen] = useState(false);
-  
-  // How many cards to show at once based on screen width
   const [cardsToShow, setCardsToShow] = useState(3);
-  
-  // Update cards to show based on window width
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
-      
       if (window.innerWidth < 640) {
         setCardsToShow(1);
       } else if (window.innerWidth < 1024) {
@@ -305,61 +327,42 @@ export function ProspectingSection() {
         setCardsToShow(3);
       }
     };
-    
-    // Set initial value
     handleResize();
-    
-    // Add resize listener
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Calculate the maximum index based on number of cards and how many to show
-  // Now using SPEAKER_TYPES.length - 1 to allow navigating to see the very last item
   const maxIndex = SPEAKER_TYPES.length - 1;
+  const goToPrev = () => setActiveIndex((prev) => Math.max(0, prev - 1));
+  const goToNext = () => setActiveIndex((prev) => Math.min(maxIndex, prev + 1));
 
-  // Navigation functions
-  const goToPrev = () => setActiveIndex(prev => Math.max(0, prev - 1));
-  const goToNext = () => setActiveIndex(prev => Math.min(maxIndex, prev + 1));
-
-  // Fixed card width instead of distributing across viewport
   const getCardWidth = () => {
-    // Increased sizes for all breakpoints by ~10%
     if (windowWidth < 640) {
       return windowWidth * 0.95;
     } else if (windowWidth < 1024) {
-      return 270; // Increased from 250
+      return 270; 
     } else {
-      return 330; // Increased from 300
+      return 330;
     }
   };
 
-  // Calculate the transform for carousel with right margin limited to container
   const getTransform = () => {
     if (!carouselRef.current) return '0px';
-    
     const cardWidth = getCardWidth();
-    const cardGap = 15; // Reduced from 20 to bring items closer together
-    
-    // Maximum content width (same as container max-width)
-    const maxContentWidth = 1200;
-    const actualContentWidth = Math.min(maxContentWidth, windowWidth - 40);
-    
-    // Calculate starting position to place first card at 1/5 from the left edge (moved left)
+    const cardGap = 15;
     const startPosition = windowWidth / 5;
-    
-    // Adjust position based on index
     const indexOffset = activeIndex * (cardWidth + cardGap);
-    
     return `${startPosition - indexOffset}px`;
   };
 
   return (
-    <div className="bg-white pt-10 pb-0 sm:pt-12 sm:pb-0" ref={sectionRef}>
-      {/* Centered container for headings */}
-      <div className="container mx-auto max-w-4xl text-center px-4 mb-8">
-        {/* Animated Headline - First Line */}
-        <div className="relative mb-4">
+    <div 
+      className="bg-white pt-10 pb-0 sm:pt-12 sm:pb-0"
+      ref={sectionRef}
+    >
+      <div className="container mx-auto max-w-5xl px-6 mb-8">
+        {/* Heading Section */}
+        <div className="relative mb-4 text-center">
           <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
           <div className="text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
             <TextEffect
@@ -373,9 +376,10 @@ export function ProspectingSection() {
             >
               We Dig For
             </TextEffect>{" "}
+            {/* Gold in #FFD700 */}
             <TextEffect
               as="span"
-              className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-amber-300 via-yellow-500 to-amber-600"
+              className="inline-block text-[#FFD700]"
               speedReveal={1.2}
               speedSegment={0.6}
               delay={0.4}
@@ -387,11 +391,10 @@ export function ProspectingSection() {
           </div>
         </div>
 
-        {/* Animated Headline - Second Line */}
-        <div className="relative mb-6">
+        <div className="relative mb-6 text-center">
           <TextEffect
             as="h2"
-            className="text-balance text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto"
+            className="text-balance text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto"
             speedReveal={1.2}
             speedSegment={0.6}
             delay={0.5}
@@ -402,46 +405,50 @@ export function ProspectingSection() {
           </TextEffect>
         </div>
 
-        {/* Subheading - Reduced width with max-w-lg instead of max-w-2xl */}
+        {/* First paragraph (centered), extra spacing below */}
         <motion.p 
-          className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto mb-16"
+          className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto mb-10 text-center"
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
         >
           SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
-        
-        {/* Conference Grid with Images - Three rows of two */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto p-6">
+
+        {/* Second line: left-justified, italic, smaller */}
+        <motion.p
+          className="text-sm italic text-neutral-600 mb-16 max-w-lg"
+          initial={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          Click below to see real examples of events in SpeakerDrive...
+        </motion.p>
+
+        {/* Grid of 6 sample items */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-14 mx-auto overflow-visible">
           {SAMPLE_ITEMS.map((item, index) => (
             <MorphingDialog
               key={index}
-              transition={{
-                type: 'spring',
-                stiffness: 200,
-                damping: 24,
-              }}
+              transition={{ type: 'spring', stiffness: 200, damping: 24 }}
             >
               <MorphingDialogTrigger
-                className='group relative cursor-pointer overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-300 bg-white'
+                className="group relative cursor-pointer rounded-lg bg-white transition-all duration-300"
               >
-                {/* Container with moderate padding */}
-                <div className="w-full aspect-[4/3] overflow-hidden p-0">
-                  <img 
+                <div className="relative">
+                  <Image
+                    unoptimized
+                    width={640}
+                    height={480}
                     src={item.previewImage} 
                     alt={item.title}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
-                
-                {/* Hover overlay with subtle gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-4 text-white">
-                    <h3 className="font-medium text-sm">{item.title}</h3>
-                    <p className="text-xs text-white/90">{item.subtitle}</p>
-                  </div>
+
+                <div className="text-sm font-medium text-gray-600 mt-2 text-center">
+                  Example {index + 1}
                 </div>
               </MorphingDialogTrigger>
+
               <MorphingDialogContainer>
                 <MorphingDialogContent
                   style={{
@@ -449,13 +456,12 @@ export function ProspectingSection() {
                     overflow: 'hidden',
                     maxHeight: '85vh',
                   }}
-                  className='relative w-[500px] bg-white my-8'
+                  className="relative w-[500px] bg-white my-8"
                 >
                   <MorphingDialogClose className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm rounded-full p-1.5 shadow-md" />
                   
                   {item.video ? (
                     <div className="flex flex-col max-h-[85vh]">
-                      {/* Video with no padding/margin for edge-to-edge appearance */}
                       <div className="w-full">
                         <video
                           className="w-full h-auto"
@@ -468,8 +474,6 @@ export function ProspectingSection() {
                           <p>Your browser doesn't support HTML5 video.</p>
                         </video>
                       </div>
-                      
-                      {/* Content below the video with padding */}
                       <ScrollArea className='max-h-[40vh] overflow-y-auto' type='scroll'>
                         <div className='p-6'>
                           <div className='mb-4 text-left'>
@@ -515,13 +519,13 @@ export function ProspectingSection() {
             </MorphingDialog>
           ))}
         </div>
-        
-        {/* Insert the Contact Feature Panel here */}
+
+        {/* Contact Feature Panel (logo + "Message Composer" + smaller buttons) */}
         <div className="mt-24">
           <ContactFeaturePanel />
         </div>
         
-        {/* Visual separator between sections */}
+        {/* Visual separator */}
         <div className="mt-24 mb-12 relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
           <div className="flex justify-center">
@@ -531,11 +535,10 @@ export function ProspectingSection() {
           </div>
         </div>
         
-        {/* "SpeakerDrive is Perfect For" headline - moved after the paragraph */}
-        <div className="relative mb-2">
+        <div className="relative mb-2 text-center">
           <TextEffect
             as="h2"
-            className="text-balance text-center text-3xl sm:text-4xl font-extrabold text-black max-w-3xl mx-auto"
+            className="text-balance text-3xl sm:text-4xl font-extrabold text-black max-w-3xl mx-auto"
             speedReveal={1.2}
             speedSegment={0.6}
             delay={1.2}
@@ -545,8 +548,6 @@ export function ProspectingSection() {
             SpeakerDrive is Perfect For...
           </TextEffect>
         </div>
-        
-        {/* New subheadline text - Updated to match "SpeakerDrive is the go-to..." styling */}
         <motion.p 
           className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-8"
           initial={{ opacity: 1, y: 0 }}
@@ -556,13 +557,12 @@ export function ProspectingSection() {
         </motion.p>
       </div>
 
-      {/* Speaker Types Controls Section - removed the heading */}
+      {/* Carousel Section */}
       <div className="text-center">
         <div className="flex justify-center space-x-4 relative">
-          {/* Left arrow without animation */}
           <button
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors shadow-md disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30"
             onClick={goToPrev}
             disabled={activeIndex === 0}
             aria-label="Previous slide"
@@ -570,19 +570,19 @@ export function ProspectingSection() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
           
-          {/* Right arrow with animation when there's more content */}
           <div className="relative">
             <button
               type="button"
-              className={`flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors shadow-md ${activeIndex < maxIndex ? 'animate-bob arrow-hint-right' : ''} disabled:opacity-30`}
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30",
+                activeIndex < maxIndex ? "animate-bob arrow-hint-right" : ""
+              )}
               onClick={goToNext}
               disabled={activeIndex >= maxIndex}
               aria-label="Next slide"
             >
               <ChevronRightIcon className="h-6 w-6" />
             </button>
-            
-            {/* Only show scroll indicator when there's more to see - positioned much farther right */}
             {activeIndex < maxIndex && (
               <div className="absolute left-full ml-16 top-1/2 transform -translate-y-1/2 text-sm font-medium text-gray-500 whitespace-nowrap animate-pulse flex items-center">
                 <span className="mr-1">More</span>
@@ -593,15 +593,12 @@ export function ProspectingSection() {
         </div>
       </div>
       
-      {/* Carousel container with max-width matching the main container */}
       <div className="w-full overflow-hidden mt-6">
         <div className="relative mx-auto max-w-screen-lg">
           <motion.div 
             ref={carouselRef}
             className="flex"
-            animate={{ 
-              x: getTransform() 
-            }}
+            animate={{ x: getTransform() }}
             transition={{
               type: "spring",
               stiffness: 300,
@@ -614,55 +611,22 @@ export function ProspectingSection() {
                 className="flex-shrink-0 pb-4"
                 style={{ 
                   width: `${getCardWidth()}px`,
-                  marginRight: '15px' // Reduced from 20px to bring items closer
+                  marginRight: '15px'
                 }}
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
               >
                 <div className="px-2 flex flex-col h-full">
-                  {/* Shorter container height with fixed aspect ratio for the image */}
                   <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center p-6 bg-white">
-                    {/* Different styling based on image type with smaller scale */}
-                    {type.title === 'Coaches' && (
-                      <img
-                        src={type.image}
-                        alt={type.title}
-                        className="max-h-full w-auto object-contain object-top"
-                        style={{ transform: 'scale(0.85)' }} 
-                      />
-                    )}
-                    {type.title === 'Consultants' && (
-                      <img
-                        src={type.image}
-                        alt={type.title}
-                        className="max-h-full w-auto object-contain object-top"
-                        style={{ transform: 'scale(0.85)' }}
-                      />
-                    )}
-                    {type.title === 'Thought Leaders' && (
-                      <img
-                        src={type.image}
-                        alt={type.title}
-                        className="max-h-full w-auto object-contain object-top"
-                        style={{ transform: 'scale(0.85)' }}
-                      />
-                    )}
-                    {type.title === 'Keynote Speakers' && (
-                      <img
-                        src={type.image}
-                        alt={type.title}
-                        className="max-h-full w-auto object-contain"
-                        style={{ transform: 'scale(0.85)' }}
-                      />
-                    )}
-                    {type.title === 'Trainer / Facilitators' && (
-                      <img
-                        src={type.image}
-                        alt={type.title}
-                        className="max-h-full w-auto object-contain"
-                        style={{ transform: 'scale(0.85)' }}
-                      />
-                    )}
+                    <Image
+                      unoptimized
+                      width={320}
+                      height={240}
+                      src={type.image}
+                      alt={type.title}
+                      className="max-h-full w-auto object-contain"
+                      style={{ transform: 'scale(0.9)' }}
+                    />
                   </div>
                 </div>
               </motion.div>
@@ -671,8 +635,36 @@ export function ProspectingSection() {
         </div>
       </div>
 
-      {/* Add CSS animation styles */}
-      <style jsx global>{`
+      {/* Visual transition connector */}
+      <div className="bg-white pt-8 pb-10"> 
+        <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
+          <div className="text-center mb-6 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
+            <motion.div 
+              initial={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="p-6"
+            >
+              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
+                These opportunities are out there waiting for you.
+              </h3>
+              <p className="text-lg text-gray-700">
+                So why are so many talented experts still struggling to fill their calendars?
+              </p>
+            </motion.div>
+          </div>
+          
+          <div className="flex flex-col items-center">
+            <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
+            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
+              <ArrowDownIcon className="h-5 w-5 text-red-600" />
+            </div>
+            <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
         @keyframes bob {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-4px); }
@@ -693,42 +685,6 @@ export function ProspectingSection() {
           background-color: #f3f4f6;
         }
       `}</style>
-      
-      {/* Visual transition connector to Referral Trap section - now with positive gradient and copy */}
-      <div className="bg-white pt-8 pb-10"> 
-        <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
-          {/* New positive message with custom styling and glow */}
-          <div className="text-center mb-6 relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
-            <motion.div 
-              initial={{ opacity: 1, y: 0 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="p-6"
-            >
-              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
-                These opportunities are out there waiting for you.
-              </h3>
-              <p className="text-lg text-gray-700">
-                So why are so many talented experts still struggling to fill their calendars?
-              </p>
-            </motion.div>
-          </div>
-          
-          {/* Visual transition elements - gradient from blue to red */}
-          <div className="flex flex-col items-center">
-            <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
-            
-            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
-              <ArrowDownIcon className="h-5 w-5 text-red-600" />
-            </div>
-            
-            <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }
-
-// Import for the CheckCircleIcon component
-import { Check as CheckCircleIcon } from "lucide-react";
