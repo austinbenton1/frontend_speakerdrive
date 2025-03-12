@@ -85,12 +85,12 @@ export function FeatureTwoItem({
   const isStep3 = title === "Craft Outreach" || (stepNumber === 3);
   
   return (
-    <div className="bg-stone-50 px-4 py-12 sm:py-16">
+    <div className="bg-stone-50 px-4 py-8 sm:py-10 -mt-8">
       <div className="container mx-auto max-w-5xl">
         {/* Heading & Description - Full width up top */}
-        <div className="mb-6">
+        <div className="mb-4">
           {/* Enhanced Step Pill */}
-          <div className="inline-flex items-center rounded-full overflow-hidden shadow-md bg-green-600 py-2 px-4 mb-3 transform hover:scale-105 transition-transform">
+          <div className="inline-flex items-center rounded-full overflow-hidden shadow-md bg-green-600 py-2 px-4 mb-8 transform hover:scale-105 transition-transform -mt-16">
             <div className="mr-2 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
               <span className="text-white text-sm font-bold">{stepNumber}</span>
             </div>
@@ -99,21 +99,12 @@ export function FeatureTwoItem({
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#292929] mb-3 leading-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#292929] mb-2 leading-tight">
             {isStep1 ? "Find Your Ideal Opportunities" :
              isStep2 ? "Get Direct Access" : 
              isStep3 ? "Start Meaningful Conversations" : 
              "Connect With Decision-Makers"}
           </h2>
-          <p className="text-lg sm:text-xl text-[#555] max-w-2xl">
-            {isStep1 
-              ? "All the right gigs in one place, searchable and filterable to match your expertise."
-              : isStep2 
-              ? "Get your foot in the door and bypass gatekeepers." 
-              : isStep3
-              ? "Create effortless outreach in one click."
-              : description}
-          </p>
         </div>
 
         {/* Main row: bullets on the left, image/video on the right */}

@@ -1,5 +1,4 @@
 "use client";
-
 import { Hero } from "@/components/sections/Hero";
 import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
 import { FAQ } from "@/components/sections/FAQ";
@@ -34,20 +33,58 @@ export default function LandingPage() {
         </section>
 
         {/*
-          SECTION 1 (Colored background):
-          - "How It Works" heading (FeatureAccordion)
-          - Steps 1, 2, 3
+          "How It Works" and Steps 1-3 combined into a single
+          section to eliminate gaps & unify design.
         */}
-        <section className="bg-stone-50">
-          {/* "How It Works" main heading */}
-          <FeatureAccordion />
+        <section id="how-it-works" className="bg-stone-50 pt-16 pb-12">
+          <div className="relative">
+            {/* Content */}
+            <div className="relative px-4 mb-20">
+              <div className="max-w-2xl mx-auto">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="/SpeakerDrive Logo - Short.png"
+                    alt="SpeakerDrive"
+                    className="w-9 h-9 object-contain flex-shrink-0 mt-1"
+                  />
+                  
+                  <div className="flex-1 text-left relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
+                    <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 text-gray-900 tracking-tight">
+                      What is SpeakerDrive?
+                    </h2>
+                    
+                    <div className="space-y-8">
+                      <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
+                        SpeakerDrive is the only prospecting database built exclusively for speakers, coaches, and experts. Access contact data for events, speaker opportunities, and decision-makers who book professionals, like you.
+                      </p>
+                      
+                      <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
+                        With SpeakerDrive, you predictably control your <span className="font-bold text-blue-500 relative">OWN<span className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-blue-100 rounded-full"></span></span> client acquisition pipeline.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Visual separator */}
+                <div className="mt-24 mb-12 relative">
+                  <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                  <div className="flex justify-center">
+                    <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
+                      <span className="text-gray-500 text-sm font-medium">How It Works</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* STEP 1: Find Qualified Leads */}
-          <div className="pt-0 pb-0">
+          <div className="mt-4">
             <FeatureTwoItem
               stepNumber={1}
               title="Find Qualified Leads"
-              description="Find Your Ideal Opportunities"
+              description=""
               features={[
                 {
                   title: "Search Events and Contacts",
@@ -68,11 +105,11 @@ export default function LandingPage() {
           </div>
 
           {/* STEP 2: Unlock Contact Info */}
-          <div className="pt-4 pb-0">
+          <div className="mt-10">
             <FeatureTwoItem
               stepNumber={2}
               title="Unlock Contact Info"
-              description="Find Your Ideal Opportunities"
+              description=""
               features={[
                 {
                   title: "Email Verification",
@@ -94,11 +131,11 @@ export default function LandingPage() {
           </div>
 
           {/* STEP 3: Craft Outreach */}
-          <div className="pt-4 pb-6">
+          <div className="mt-10">
             <FeatureTwoItem
               stepNumber={3}
               title="Craft Outreach"
-              description="Find Your Ideal Opportunities"
+              description=""
               features={[
                 {
                   title: "AI-Powered Templates",
@@ -120,17 +157,13 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/*
-          SECTION 2 (White background):
-          - "We dig for gold..." (ProspectingSection)
-          - extends downward
-        */}
-        <section className="bg-white">
+        {/* Prospecting Section (includes the Message Composer) */}
+        <section id="prospecting">
           <ProspectingSection />
         </section>
 
-        {/* The Prospecting Effect (including “Relying on word-of-mouth…” text) */}
-        <section id="referral-trap" className="bg-white">
+        {/* The Prospecting Effect */}
+        <section id="referral-trap">
           <TheProspectingEffect />
         </section>
 
@@ -158,7 +191,9 @@ export default function LandingPage() {
                 Start free trial
               </a>
             </div>
-            <p className="mt-4 text-sm text-gray-500">No credit card required</p>
+            <p className="mt-4 text-sm text-gray-500">
+              No credit card required
+            </p>
           </div>
         </section>
       </main>
