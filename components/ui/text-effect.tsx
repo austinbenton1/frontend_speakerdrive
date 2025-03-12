@@ -3,8 +3,7 @@ import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   motion, 
-  type Transition,
-  Transition,
+  type Transition as FramerTransition,
   Variants,
   type Variant,
   type Target,
@@ -45,8 +44,8 @@ export type TextEffectProps = {
   /** Extra class for each segment's wrapper. */
   segmentWrapperClassName?: string;
   /** Additional transitions for the container and segments. */
-  containerTransition?: Transition;
-  segmentTransition?: Transition;
+  containerTransition?: FramerTransition;
+  segmentTransition?: FramerTransition;
   style?: React.CSSProperties;
 };
 
@@ -190,7 +189,7 @@ const hasTransition = (variant: any): boolean => {
   );
 };
 
-type TransitionWithExit = Transition & { exit?: Transition };
+type TransitionWithExit = FramerTransition & { exit?: FramerTransition };
 
 const createVariantsWithTransition = (baseVariants: Variants, transition?: TransitionWithExit): Variants => {
   if (!transition) return baseVariants;
