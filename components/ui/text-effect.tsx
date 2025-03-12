@@ -3,12 +3,17 @@ import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
   motion,
-  Transition,
+  Transition as FramerTransition,
   Variants,
   Target,
   TargetAndTransition
 } from "framer-motion";
 import React from "react";
+
+// Define a proper interface for our extended transition type
+type TransitionWithExit = FramerTransition & {
+  exit?: FramerTransition;
+};
 
 export type PresetType = "blur" | "fade-in-blur" | "scale" | "fade" | "slide";
 export type PerType = "word" | "char" | "line";
@@ -43,8 +48,8 @@ export type TextEffectProps = {
   /** Extra class for each segment's wrapper. */
   segmentWrapperClassName?: string;
   /** Additional transitions for the container and segments. */
-  containerTransition?: Transition;
-  segmentTransition?: Transition;
+  containerTransition?: TransitionWithExit;
+  segmentTransition?: TransitionWithExit;
   style?: React.CSSProperties;
 };
 
@@ -186,18 +191,9 @@ const hasTransition = (variant: any): boolean => {
   return (
     typeof variant === "object" && 
     variant !== null && 
-    "transition" in variant &&
-    typeof (variant as TargetAndTransition).transition === "object"
+    "transition" in variant
   );
 };
-
-/**
- * Use a type that intersects with FramerTransition 
- * to allow an optional "exit" field. 
- */
-interface TransitionWithExit extends Transition {
-  exit?: Transition; 
-}
 
 const createVariantsWithTransition = (
   baseVariants: Variants,
