@@ -4,13 +4,22 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import { cn } from "@/lib/utils";
 
+interface AnimationProps {
+  animate?: any;
+  transition?: any;
+  variants?: any;
+  custom?: any;
+}
+
 interface TransitionPanelProps {
   children: React.ReactNode[];
   activeIndex: number;
   className?: string;
-  variants?: any;
-  transition?: any;
-  custom?: any;
+  // Add animation props
+  animate?: AnimationProps["animate"];
+  transition?: AnimationProps["transition"];
+  variants?: AnimationProps["variants"];
+  custom?: AnimationProps["custom"];
 }
 
 /**
@@ -24,16 +33,18 @@ export function TransitionPanel({
   variants,
   transition,
   custom,
+  animate,
 }: TransitionPanelProps) {
   return (
     <div className={cn("relative", className)}>
       <AnimatePresence custom={custom}>
         <motion.div
           key={activeIndex}
+          animate={animate}
           custom={custom}
           variants={variants}
           initial="enter"
-          animate="center"
+          animate={animate || "center"}
           exit="exit"
           transition={transition}
           className="absolute inset-0"
