@@ -28,9 +28,10 @@ import { TransitionPanel } from "@/components/motion-ui/transition-panel";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-// ToolsSection (immediately after the Composer)
+// Imports ToolsSection (shown right after the Composer)
 import { ToolsSection } from "@/components/sections/ToolsSection";
 
+/** Speaker types for the carousel near the bottom */
 const SPEAKER_TYPES = [
   {
     title: "Keynote Speakers",
@@ -59,6 +60,7 @@ const SPEAKER_TYPES = [
   },
 ];
 
+/** 6 sample items that open morphing dialogs */
 const SAMPLE_ITEMS = [
   {
     title: "BCCC Corporate Citizenship Conference",
@@ -122,10 +124,12 @@ const SAMPLE_ITEMS = [
   }
 ];
 
+/** Utility to format any **bold** text placeholders in descriptions */
 function formatDescription(description: string) {
   if (!description.includes("**")) {
     return <p className="text-left">{description}</p>;
   }
+
   const paragraphs = description.split("\n\n");
   return (
     <>
@@ -153,6 +157,7 @@ function formatDescription(description: string) {
   );
 }
 
+/** CONTACT FEATURE panel data used in <ContactFeaturePanel /> */
 const CONTACT_FEATURES = [
   {
     title: "Contact Emails",
@@ -183,6 +188,7 @@ const CONTACT_FEATURES = [
   }
 ];
 
+/** Displays 3 "ContactFeature" tabs and a video panel for each. */
 function ContactFeaturePanel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -190,6 +196,7 @@ function ContactFeaturePanel() {
   return (
     <div className="overflow-auto py-16 sm:overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Slightly bigger SpeakerDrive logo + heading */}
         <div className="mb-8 flex flex-col items-center justify-center">
           <div className="flex items-center gap-2">
             <img
@@ -203,6 +210,7 @@ function ContactFeaturePanel() {
           </div>
         </div>
 
+        {/* 3 feature buttons as "tabs" */}
         <div className="mb-10 overflow-x-auto [scrollbar-width:none]">
           <div className="flex min-w-max items-center justify-center space-x-5">
             {CONTACT_FEATURES.map((feature, index) => {
@@ -212,6 +220,7 @@ function ContactFeaturePanel() {
                   key={index}
                   type="button"
                   onClick={() => {
+                    // direction is 1 if going to next, -1 if going to prev
                     setDirection(index > activeIndex ? 1 : -1);
                     setActiveIndex(index);
                   }}
@@ -229,7 +238,7 @@ function ContactFeaturePanel() {
                   ) : (
                     <ArrowRight className="ml-2 h-4 w-4 opacity-70" />
                   )}
-
+                  {/* Subtle highlight effect if active */}
                   {isActive && (
                     <motion.span
                       className={`absolute inset-0 rounded-md bg-gradient-to-r ${feature.gradient} opacity-20 -z-10`}
@@ -243,6 +252,7 @@ function ContactFeaturePanel() {
         </div>
       </div>
 
+      {/* The main video panel, using <TransitionPanel> to animate slides */}
       <div className="flex justify-center">
         <TransitionPanel
           className="aspect-video w-[800px] max-w-full overflow-hidden rounded-xl"
@@ -250,29 +260,30 @@ function ContactFeaturePanel() {
           custom={direction}
           transition={{
             ease: "easeOut",
-            duration: 0.3
+            duration: 0.3,
           }}
           variants={{
             enter: (dir: number) => ({
               x: dir > 0 ? 32 : -32,
-              opacity: 0.8
+              opacity: 0.8,
             }),
             center: {
               x: 0,
-              opacity: 1
+              opacity: 1,
             },
             exit: (dir: number) => ({
               x: dir < 0 ? 32 : -32,
-              opacity: 0.8
-            })
+              opacity: 0.8,
+            }),
           }}
         >
-          {CONTACT_FEATURES.map(feature => (
+          {CONTACT_FEATURES.map((feature) => (
             <div
-              className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl"
               key={feature.title}
+              className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl"
             >
               {feature.video ? (
+                // If there's a video link, show the looping video
                 <div className="w-full h-full overflow-hidden relative">
                   <div
                     className={`absolute inset-0 bg-gradient-to-t ${
@@ -293,6 +304,7 @@ function ContactFeaturePanel() {
                   </video>
                 </div>
               ) : (
+                // If no video, fallback to a static BG
                 <>
                   <div className="absolute inset-0 bg-gradient-to-tr from-blue-50 to-blue-100 z-0"></div>
                   <div className="relative z-10 p-8 max-w-xl">
@@ -313,28 +325,42 @@ function ContactFeaturePanel() {
   );
 }
 
+/**
+ * Main exported section: ProspectingSection
+ * Contains:
+ * - "We Dig For Gold" headline
+ * - 6 sample item grid
+ * - The "Message Composer" panel
+ * - ToolsSection
+ * - "Who We Serve" heading
+ * - Speaker Types carousel
+ * - Final "These opportunities..." + arrow-down
+ */
 export function ProspectingSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  // For intersection observer if you use it
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+
+  // For text animation triggers
   const [triggerAnimation] = useState(true);
 
-  // For the speaker types carousel
+  // For the "SpeakerDrive is Perfect For..." carousel
   const [activeIndex, setActiveIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
+  const [windowWidth, setWindowWidth] = useState<number>(1200);
 
+  // On mount, measure window width
   useEffect(() => {
     function handleResize() {
       setWindowWidth(window.innerWidth);
     }
-    handleResize();
+    handleResize(); // run once
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const maxIndex = SPEAKER_TYPES.length - 1;
-  const goToPrev = () => setActiveIndex(prev => Math.max(0, prev - 1));
-  const goToNext = () => setActiveIndex(prev => Math.min(maxIndex, prev + 1));
+  const goToPrev = () => setActiveIndex((prev) => Math.max(0, prev - 1));
+  const goToNext = () => setActiveIndex((prev) => Math.min(maxIndex, prev + 1));
 
   function getCardWidth() {
     if (windowWidth < 640) {
@@ -346,22 +372,24 @@ export function ProspectingSection() {
     }
   }
 
+  // We'll compute the transform purely with activeIndex
   function getTransform() {
-    if (!carouselRef.current) return "0px";
     const cardWidth = getCardWidth();
     const cardGap = 15;
     const startPosition = windowWidth / 5;
     const indexOffset = activeIndex * (cardWidth + cardGap);
+
+    // Return a string for `x` transform
     return `${startPosition - indexOffset}px`;
   }
 
   return (
     <div className="bg-white py-12" ref={sectionRef}>
       <div className="container mx-auto max-w-5xl px-6 mb-0">
-        {/* "We Dig For Gold" heading */}
+        {/* HEADING: "We Dig For Gold" */}
         <div className="relative mb-4 text-center">
           <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
-          <div className="text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
+          <div className="text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
             <TextEffect
               as="span"
               className="inline"
@@ -401,17 +429,16 @@ export function ProspectingSection() {
           </TextEffect>
         </div>
 
-        {/* Short sub-headline */}
+        {/* Sub-headline text */}
         <motion.p
           className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto mb-10 text-center"
           initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          SpeakerDrive is the go-to prospecting database, built exclusively for
-          experts like you.
+          SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
 
-        {/* "Click below to see real examples..." */}
+        {/* "Click below..." single line with gradient text */}
         <motion.p
           className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold text-center my-14"
           initial={{ opacity: 1, y: 0 }}
@@ -420,7 +447,7 @@ export function ProspectingSection() {
           Click below to see real examples of events in SpeakerDrive...
         </motion.p>
 
-        {/* 6 sample items */}
+        {/* 6 sample items - Morphing Dialogs */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-14 mx-auto overflow-visible">
           {SAMPLE_ITEMS.map((item, index) => (
             <MorphingDialog
@@ -445,11 +472,12 @@ export function ProspectingSection() {
                   style={{
                     borderRadius: "12px",
                     overflow: "hidden",
-                    maxHeight: "85vh"
+                    maxHeight: "85vh",
                   }}
                   className="relative w-[500px] bg-white my-8"
                 >
                   <MorphingDialogClose className="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm rounded-full p-1.5 shadow-md" />
+
                   {item.video ? (
                     <div className="flex flex-col max-h-[85vh]">
                       <div className="w-full">
@@ -516,17 +544,17 @@ export function ProspectingSection() {
           ))}
         </div>
 
-        {/* Composer */}
+        {/* The Message Composer panel */}
         <div className="mt-24">
           <ContactFeaturePanel />
         </div>
 
-        {/* ToolsSection right after Composer */}
+        {/* The ToolsSection */}
         <div className="mt-12">
           <ToolsSection />
         </div>
 
-        {/* Visual separator */}
+        {/* Separator line before "Who We Serve" */}
         <div className="mt-24 mb-12 relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
           <div className="flex justify-center">
@@ -563,9 +591,10 @@ export function ProspectingSection() {
         </motion.p>
       </div>
 
-      {/* Carousel Section */}
+      {/* Carousel Section for "SpeakerDrive is Perfect For..." */}
       <div className="text-center">
         <div className="flex justify-center space-x-4 relative">
+          {/* Prev Button */}
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30"
@@ -576,6 +605,7 @@ export function ProspectingSection() {
             <ChevronLeftIcon className="h-6 w-6" />
           </button>
 
+          {/* Next Button */}
           <div className="relative">
             <button
               type="button"
@@ -589,6 +619,7 @@ export function ProspectingSection() {
             >
               <ChevronRightIcon className="h-6 w-6" />
             </button>
+            {/* "More >" pulsing text when not at the last slide */}
             {activeIndex < maxIndex && (
               <div className="absolute left-full ml-16 top-1/2 transform -translate-y-1/2 text-sm font-medium text-gray-500 whitespace-nowrap animate-pulse flex items-center">
                 <span className="mr-1">More</span>
@@ -599,17 +630,21 @@ export function ProspectingSection() {
         </div>
       </div>
 
+      {/* The carousel row of speaker types, inside a TransitionPanel crossfade */}
       <div className="w-full overflow-hidden mt-6">
         <div className="relative mx-auto max-w-screen-lg">
           <TransitionPanel
-            ref={carouselRef}
             className="flex"
+            activeIndex={activeIndex}
+            // We'll animate x to shift horizontally
             animate={{ x: getTransform() }}
             transition={{
               type: "spring",
               stiffness: 300,
-              damping: 30
+              damping: 30,
             }}
+            variants={undefined}
+            custom={undefined}
           >
             {SPEAKER_TYPES.map((type, idx) => (
               <motion.div
@@ -617,7 +652,7 @@ export function ProspectingSection() {
                 className="flex-shrink-0 pb-4"
                 style={{
                   width: `${getCardWidth()}px`,
-                  marginRight: "15px"
+                  marginRight: "15px",
                 }}
                 initial={{ opacity: 1, y: 0 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -644,7 +679,7 @@ export function ProspectingSection() {
         </div>
       </div>
 
-      {/* Visual transition connector */}
+      {/* Bottom "These opportunities" + arrow-down connector */}
       <div className="pt-8 pb-10">
         <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
           <div className="text-center mb-6 relative">
@@ -657,7 +692,6 @@ export function ProspectingSection() {
               <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
                 These opportunities are out there waiting for you.
               </h3>
-              {/* Center + sub-headline styling for “So why are so many talented experts…?” */}
               <p className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-lg mx-auto mt-2">
                 So why are so many talented experts still struggling to fill
                 their calendars?
@@ -665,6 +699,7 @@ export function ProspectingSection() {
             </motion.div>
           </div>
 
+          {/* Red arrow-down connector */}
           <div className="flex flex-col items-center">
             <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
             <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
@@ -675,6 +710,7 @@ export function ProspectingSection() {
         </div>
       </div>
 
+      {/* Animate bob/hint for the next slide button */}
       <style jsx>{`
         @keyframes bob {
           0%,
@@ -688,6 +724,7 @@ export function ProspectingSection() {
         .animate-bob {
           animation: bob 2s ease-in-out infinite;
         }
+
         @keyframes hint-right {
           0%,
           100% {
