@@ -89,9 +89,12 @@ export function FeatureTwoItem({
       <div className="container mx-auto max-w-5xl">
         {/* Heading & Description - Full width up top */}
         <div className="mb-6">
-          {/* Pill Label - Now inverted with green background and white text */}
-          <div className="inline-block rounded-full overflow-hidden shadow-sm bg-green-600 py-1 px-3 mb-3">
-            <span className="font-medium text-white text-sm">
+          {/* Enhanced Step Pill */}
+          <div className="inline-flex items-center rounded-full overflow-hidden shadow-md bg-green-600 py-2 px-4 mb-3 transform hover:scale-105 transition-transform">
+            <div className="mr-2 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+              <span className="text-white text-sm font-bold">{stepNumber}</span>
+            </div>
+            <span className="font-semibold text-white text-base">
               {stepNumber ? `Step ${stepNumber}. ${title}` : title}
             </span>
           </div>

@@ -6,6 +6,7 @@ import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
 import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
+import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
 import { ProspectingSection } from "@/components/sections/ProspectingSection";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { ArrowRight } from 'lucide-react';
@@ -28,6 +29,10 @@ export default function LandingPage() {
       <main className="pt-24">
         <section id="hero">
           <Hero />
+        </section>
+        
+        <section id="features">
+          <FeatureAccordion />
         </section>
 
         <section id="find-leads">

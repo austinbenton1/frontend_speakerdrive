@@ -52,48 +52,48 @@ const SAMPLE_ITEMS = [
   {
     title: "BCCC Corporate Citizenship Conference",
     subtitle: "Boston College",
-    image: "/BCCC.png",
-    previewImage: "/1_BCCC.png",
+    image: "/BCCC.png?v=2", 
+    previewImage: "/1_BCCC.png?v=2",
     description: "**At A Glance**\nThe BCCC International Corporate Citizenship Conference addresses corporate social responsibility and sustainability strategies for impactful business practices.\n\n**Target Audience**\nCorporate Social Responsibility Executives, Sustainability Practitioners, Corporate Citizenship Professionals\n\n**Best For**\nSpeakers and consultants specializing in corporate social responsibility. Best for industry leaders seeking practical insights – driving community engagement through responsible business.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4c1f4667ee1496ac6413.mp4"
   },
   {
     title: "2025 BOMA Winter Issues Forum",
     subtitle: "BOMA International",
-    image: "/2025 BOMA Winter Issues Forum-mh.png",
-    previewImage: "/2_BOMA.png",
+    image: "/2025 BOMA Winter Issues Forum-mh.png?v=2",
+    previewImage: "/2_BOMA.png?v=2",
     description: "**At A Glance**\nThe BOMA Winter Issues Forum brings together building owners, managers, and facility professionals to discuss pressing industry challenges and innovative solutions.\n\n**Target Audience**\nCommercial Real Estate Executives, Building Owners, Property Managers, Facility Management Professionals\n\n**Best For**\nIndustry experts specializing in commercial real estate, sustainability, smart buildings, and property management trends. Ideal for those focused on practical applications that generate ROI.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4b93b8ead34edd309e56.mp4"
   },
   {
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
-    image: "/FactRight.png",
-    previewImage: "/3_FactRight.png",
+    image: "/FactRight.png?v=2",
+    previewImage: "/3_FactRight.png?v=2",
     description: "**At A Glance**\nThe FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.\n\n**Target Audience**\nWealth Managers, Registered Investment Advisors, Investment Advisors\n\n**Best For**\nWealth managers and investment advisors specializing in alternative investments. Best for those seeking to deepen due diligence skills within investment management.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb5698b96946edd23833cb.mp4"
   },
   {
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
-    image: "/Forth Roadmap Conference-mh.png",
-    previewImage: "/4_Forth.png",
+    image: "/Forth Roadmap Conference-mh.png?v=2",
+    previewImage: "/4_Forth.png?v=2",
     description: "**At A Glance**\nThe Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.\n\n**Target Audience**\nElectric Vehicle Industry Leaders, Policymakers in Transportation, Charging Infrastructure Providers\n\n**Best For**\nSpeakers and facilitators specializing in electric vehicle technology and public policy. Best for those passionate about equity and sustainable mobility solutions.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb59ce54acb49abdd5369a.mp4"
   },
   {
     title: "Identiverse 2025",
     subtitle: "CyberRisk Alliance",
-    image: "/Identiverse 2025-mh.png",
-    previewImage: "/5_Identiverse.png",
+    image: "/Identiverse 2025-mh.png?v=2",
+    previewImage: "/5_Identiverse.png?v=2",
     description: "**At A Glance**\nIdentiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.\n\n**Target Audience**\nCompliance and Risk Management Professionals, Development and Engineering Experts, Privacy and Data Protection Professionals, Security Operations and Analysts, Identity and Security Architects\n\n**Best For**\nExperts and consultants specializing in identity security and data protection. Best for professionals focused on practical solutions - enhancing compliance and risk management practices.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb52d7def776eaa4befddc.mp4"
   },
   {
     title: "REimagine! 2025",
     subtitle: "California Association of REALTORS",
-    image: "/REimagine! 2025-mh.png",
-    previewImage: "/6_REimagine.png",
+    image: "/REimagine! 2025-mh.png?v=2",
+    previewImage: "/6_REimagine.png?v=2",
     description: "**At A Glance**\nThe REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.\n\n**Target Audience**\nReal Estate Professionals, Tech-Driven Nonprofit Leaders, Social Impact Professionals\n\n**Best For**\nSpeakers and consultants specializing in real estate and social impact. Best for those focused on integrating technology and social responsibility into practice.",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cb4fd9fef41b1e5cfda728.mp4"
   }
