@@ -2,9 +2,13 @@
 import { cn } from "@/lib/utils";
 import {
   AnimatePresence,
-  motion,
+  motion, 
+  type Transition,
   Transition,
   Variants,
+  type Variant,
+  type Target,
+  type TargetAndTransition
 } from "framer-motion";
 import React from "react";
 
@@ -56,13 +60,16 @@ const defaultContainerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
+    transition: { 
       staggerChildren: 0.05,
     },
   },
   exit: {
     opacity: 0,
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    transition: { 
+      staggerChildren: 0.05, 
+      staggerDirection: -1 
+    },
   },
 };
 
@@ -183,10 +190,9 @@ const hasTransition = (variant: any): boolean => {
   );
 };
 
-const createVariantsWithTransition = (
-  baseVariants: Variants,
-  transition?: Transition & { exit?: Transition }
-): Variants => {
+type TransitionWithExit = Transition & { exit?: Transition };
+
+const createVariantsWithTransition = (baseVariants: Variants, transition?: TransitionWithExit): Variants => {
   if (!transition) return baseVariants;
 
   const { exit: exitTransition, ...mainTransition } = transition;
@@ -194,7 +200,7 @@ const createVariantsWithTransition = (
     ...baseVariants,
     visible: {
       ...baseVariants.visible,
-      transition: {
+      transition: { 
         ...(hasTransition(baseVariants.visible)
           ? baseVariants.visible.transition
           : {}),
@@ -203,7 +209,7 @@ const createVariantsWithTransition = (
     },
     exit: {
       ...baseVariants.exit,
-      transition: {
+      transition: { 
         ...(hasTransition(baseVariants.exit)
           ? baseVariants.exit.transition
           : {}),
