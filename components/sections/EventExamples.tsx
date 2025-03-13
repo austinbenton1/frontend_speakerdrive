@@ -12,15 +12,7 @@ interface EventDetails {
   description: string;
   feeRange: string;
   feeDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  registrationDescription: string;
-  feeDescription: string;
+  registrationDescription?: string;
 }
 
 const EVENTS: EventDetails[] = [
