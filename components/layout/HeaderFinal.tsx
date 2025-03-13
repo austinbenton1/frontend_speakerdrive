@@ -47,7 +47,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
             {links.map((link) => (
               <Link
                 key={link.label}
-                href={link.href}
+                href={link.href || "#"}
                 className="text-base font-medium tracking-wide text-neutral-700 hover:text-brand-blue transition-colors relative group"
               >
                 {link.label}

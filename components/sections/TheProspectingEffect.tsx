@@ -36,16 +36,22 @@ export function TheProspectingEffect() {
             
             {/* Updated subheadline copy - made left-aligned */}
             <motion.p 
-              className="text-lg text-gray-600 max-w-2xl mx-auto text-left"
+              className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto text-center"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
               Relying on word-of-mouth alone puts your business growth at the mercy of others.
-              
-              <br /><br />
-              
+            </motion.p>
+            
+            <motion.p
+              className="text-gray-600 text-lg mt-4"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
               Over time, this passive approach creates a cascade of consequences.
             </motion.p>
           </div>
@@ -127,15 +133,12 @@ export function TheProspectingEffect() {
             >
               <div className="p-6 border-0">
                 <div className="flex items-center mb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
-                    <CheckCircleIcon className="h-6 w-6 text-brand-blue mr-2 inline-block" />
-                    Here's How
-                  </h3>
+                  <p className="text-lg text-gray-600 mb-4">
+                    SpeakerDrive helps you break free from this cycle with a consistent, effective prospecting system.
+                  </p>
                 </div>
                 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
-                  <p>SpeakerDrive helps you break free from this cycle with a consistent, effective prospecting system.</p>
-                  
                   <p>Incorporating a small part of your day - consistently - to prospecting will change your business.</p>
                   
                   {/* Updated styling for the blue text to look more modern */}

@@ -5,7 +5,8 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
-import { ProspectingSection } from "@/components/sections/ProspectingSection";
+import { ArrowDownIcon } from 'lucide-react';
+import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 
 export default function LandingPage() {
@@ -21,6 +22,7 @@ export default function LandingPage() {
           />
         }
         links={[
+          { label: "Features", href: "/features" },
           { label: "Pricing", href: "/pricing" },
           { label: "Contact", href: "#contact" },
         ]}
@@ -39,7 +41,7 @@ export default function LandingPage() {
         <section id="how-it-works" className="bg-stone-50 pt-16 pb-12">
           <div className="relative">
             {/* Content */}
-            <div className="relative px-4 mb-20">
+            <div className="relative px-4 mb-12">
               <div className="max-w-2xl mx-auto">
                 <div className="flex items-start gap-4">
                   <img
@@ -157,10 +159,82 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Prospecting Section (includes the Message Composer) */}
-        <section id="prospecting">
-          <ProspectingSection />
+        {/* Event Examples Section */}
+        <EventExamples />
+
+        {/* Who We Serve */}
+        <section className="bg-white py-16 overflow-hidden">
+          <div className="container mx-auto max-w-7xl px-4">
+            <div className="relative mb-2 text-center">
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
+                SpeakerDrive is Perfect For...
+              </h2>
+            </div>
+
+            <p className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-12">
+              Professionals who speak, train, and consult who want to take control of their business development.
+            </p>
+
+            {/* Expert Types Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 -mx-8 px-8">
+              <div className="text-center transform hover:scale-105 transition-transform duration-300">
+                <div className="relative aspect-[3/4] mb-4">
+                  <img src="/Coach.png" alt="Coaches" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Coaches</h3>
+              </div>
+              <div className="text-center transform hover:scale-105 transition-transform duration-300">
+                <div className="relative aspect-[3/4] mb-4">
+                  <img src="/Trainer Facilitator.png" alt="Trainers" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Trainers</h3>
+              </div>
+              <div className="text-center transform hover:scale-105 transition-transform duration-300">
+                <div className="relative aspect-[3/4] mb-4">
+                  <img src="/Keynote Speaker.png" alt="Keynote Speakers" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Keynote Speakers</h3>
+              </div>
+              <div className="text-center transform hover:scale-105 transition-transform duration-300">
+                <div className="relative aspect-[3/4] mb-4">
+                  <img src="/Consultant.png" alt="Consultants" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Consultants</h3>
+              </div>
+              <div className="text-center transform hover:scale-105 transition-transform duration-300">
+                <div className="relative aspect-[3/4] mb-4">
+                  <img src="/Expert Thought Leader.png" alt="Thought Leaders" className="w-full h-full object-contain" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Thought Leaders</h3>
+              </div>
+            </div>
+          </div>
         </section>
+
+        {/* Visual transition connector */}
+        <div className="bg-white pt-8 pb-10"> 
+          <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
+            <div className="text-center mb-6 relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
+              <div className="p-6">
+                <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
+                  These opportunities are out there waiting for you.
+                </h3>
+                <p className="text-lg text-gray-700">
+                  So why are so many talented experts still struggling to fill their calendars?
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
+                <ArrowDownIcon className="h-5 w-5 text-red-600" />
+              </div>
+              <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
+            </div>
+          </div>
+        </div>
 
         {/* The Prospecting Effect */}
         <section id="referral-trap">

@@ -351,42 +351,28 @@ export function ProspectingSection() {
       ref={sectionRef}
     >
       <div className="container mx-auto max-w-5xl px-6 mb-8">
-        {/* Heading Section */}
-        <div className="relative mb-4 text-center">
-          <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
-          <div className="text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
-            <TextEffect
-              as="span"
-              className="inline"
-              speedReveal={1.2}
-              speedSegment={0.6}
-              delay={0.2}
-              per="word"
-              trigger={triggerAnimation}
-            >
-              We Dig For
-            </TextEffect>{" "}
-            <TextEffect
-              as="span"
-              className="inline-block text-[#FFD700]"
-              speedReveal={1.2}
-              speedSegment={0.6}
-              delay={0.4}
-              per="char"
-              trigger={triggerAnimation}
-            >
-              Gold
-            </TextEffect>
-          </div>
+        {/* Heading Section - "We Dig For Gold" */}
+        <div className="relative mb-2 text-center">
+          <TextEffect
+            as="h2"
+            className="text-balance text-3xl sm:text-4xl font-extrabold text-black max-w-3xl mx-auto"
+            speedReveal={1.2}
+            speedSegment={0.6}
+            delay={0.2}
+            per="word"
+            trigger={triggerAnimation}
+          >
+            We Dig For <span className="text-[#FFD700]">Gold</span>
+          </TextEffect>
         </div>
-
+        
         <div className="relative mb-6 text-center">
           <TextEffect
             as="h2"
-            className="text-balance text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto"
+            className="text-balance text-3xl sm:text-4xl font-extrabold text-black max-w-3xl mx-auto"
             speedReveal={1.2}
             speedSegment={0.6}
-            delay={0.5}
+            delay={0.4}
             per="word"
             trigger={triggerAnimation}
           >
@@ -403,11 +389,7 @@ export function ProspectingSection() {
           SpeakerDrive is the go-to prospecting database, built exclusively for experts like you.
         </motion.p>
 
-        {/* Updated: "Click below..." 
-            - single line
-            - same font/styling as “These opportunities are out there waiting for you.”
-            - bigger margin top/bottom
-        */}
+        {/* "Click below..." text */}
         <motion.p
           className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold text-center my-14"
           initial={{ opacity: 1, y: 0 }}
@@ -436,8 +418,6 @@ export function ProspectingSection() {
                     className="w-full h-auto object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
-
-                {/* Removed "Example 1, Example 2..." text below the thumbnail */}
               </MorphingDialogTrigger>
 
               <MorphingDialogContainer>
@@ -511,12 +491,12 @@ export function ProspectingSection() {
           ))}
         </div>
 
-        {/* Contact Feature Panel (logo + "Message Composer" + smaller buttons) */}
+        {/* Contact Feature Panel */}
         <div className="mt-24">
           <ContactFeaturePanel />
         </div>
-        
-        {/* Visual separator */}
+
+        {/* Visual separator before "SpeakerDrive is Perfect For..." */}
         <div className="mt-24 mb-12 relative">
           <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
           <div className="flex justify-center">
@@ -525,7 +505,8 @@ export function ProspectingSection() {
             </div>
           </div>
         </div>
-        
+
+        {/* "SpeakerDrive is Perfect For..." Section */}
         <div className="relative mb-2 text-center">
           <TextEffect
             as="h2"
@@ -540,7 +521,6 @@ export function ProspectingSection() {
           </TextEffect>
         </div>
 
-        {/* Updated text and centered */}
         <motion.p 
           className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-8"
           initial={{ opacity: 1, y: 0 }}
@@ -548,87 +528,86 @@ export function ProspectingSection() {
         >
           Professionals who speak, train, and consult who want to take control of their business development.
         </motion.p>
-      </div>
 
-      {/* Carousel Section */}
-      <div className="text-center">
-        <div className="flex justify-center space-x-4 relative">
-          <button
-            type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30"
-            onClick={goToPrev}
-            disabled={activeIndex === 0}
-            aria-label="Previous slide"
-          >
-            <ChevronLeftIcon className="h-6 w-6" />
-          </button>
-          
-          <div className="relative">
+        {/* Carousel Section */}
+        <div className="text-center mt-8">
+          <div className="flex justify-center space-x-4 relative">
             <button
               type="button"
-              className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30",
-                activeIndex < maxIndex ? "animate-bob arrow-hint-right" : ""
-              )}
-              onClick={goToNext}
-              disabled={activeIndex >= maxIndex}
-              aria-label="Next slide"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30"
+              onClick={goToPrev}
+              disabled={activeIndex === 0}
+              aria-label="Previous slide"
             >
-              <ChevronRightIcon className="h-6 w-6" />
+              <ChevronLeftIcon className="h-6 w-6" />
             </button>
-            {activeIndex < maxIndex && (
-              <div className="absolute left-full ml-16 top-1/2 transform -translate-y-1/2 text-sm font-medium text-gray-500 whitespace-nowrap animate-pulse flex items-center">
-                <span className="mr-1">More</span>
-                <ChevronRightIcon className="h-4 w-4" />
-              </div>
-            )}
+            
+            <div className="relative">
+              <button
+                type="button"
+                className={cn(
+                  "flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors disabled:opacity-30",
+                  activeIndex < maxIndex ? "animate-bob arrow-hint-right" : ""
+                )}
+                onClick={goToNext}
+                disabled={activeIndex >= maxIndex}
+                aria-label="Next slide"
+              >
+                <ChevronRightIcon className="h-6 w-6" />
+              </button>
+              {activeIndex < maxIndex && (
+                <div className="absolute left-full ml-16 top-1/2 transform -translate-y-1/2 text-sm font-medium text-gray-500 whitespace-nowrap animate-pulse flex items-center">
+                  <span className="mr-1">More</span>
+                  <ChevronRightIcon className="h-4 w-4" />
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div className="w-full overflow-hidden mt-6">
-        <div className="relative mx-auto max-w-screen-lg">
-          <motion.div 
-            ref={carouselRef}
-            className="flex"
-            animate={{ x: getTransform() }}
-            transition={{
-              type: "spring",
-              stiffness: 300,
-              damping: 30
-            }}
-          >
-            {SPEAKER_TYPES.map((type, idx) => (
-              <motion.div
-                key={idx}
-                className="flex-shrink-0 pb-4"
-                style={{ 
-                  width: `${getCardWidth()}px`,
-                  marginRight: '15px'
-                }}
-                initial={{ opacity: 1, y: 0 }}
-                animate={{ opacity: 1, y: 0 }}
-              >
-                <div className="px-2 flex flex-col h-full">
-                  <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center p-6 bg-white">
-                    <Image
-                      unoptimized
-                      width={320}
-                      height={240}
-                      src={type.image}
-                      alt={type.title}
-                      className="max-h-full w-auto object-contain"
-                      style={{ transform: 'scale(0.9)' }}
-                    />
+        
+        <div className="w-full overflow-hidden mt-6">
+          <div className="relative mx-auto max-w-screen-lg">
+            <motion.div 
+              ref={carouselRef}
+              className="flex"
+              animate={{ x: getTransform() }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }}
+            >
+              {SPEAKER_TYPES.map((type, idx) => (
+                <motion.div
+                  key={idx}
+                  className="flex-shrink-0 pb-4"
+                  style={{ 
+                    width: `${getCardWidth()}px`,
+                    marginRight: '15px'
+                  }}
+                  initial={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <div className="px-2 flex flex-col h-full">
+                    <div className="h-56 sm:h-[18rem] md:h-[20rem] flex items-center justify-center p-6 bg-white">
+                      <Image
+                        unoptimized
+                        width={320}
+                        height={240}
+                        src={type.image}
+                        alt={type.title}
+                        className="max-h-full w-auto object-contain"
+                        style={{ transform: 'scale(0.9)' }}
+                      />
+                    </div>
+                    <div className="mt-2 text-center font-medium text-neutral-700">
+                      {type.title}
+                    </div>
                   </div>
-                  {/* Title under each expert image */}
-                  <div className="mt-2 text-center font-medium text-neutral-700">
-                    {type.title}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
 
