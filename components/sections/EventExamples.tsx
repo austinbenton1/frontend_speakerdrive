@@ -30,7 +30,7 @@ const EVENTS: EventDetails[] = [
     title: "2025 BOMA Winter Issues Forum",
     subtitle: "BOMA International",
     logo: "/2025 BOMA Winter Issues Forum-mh.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0573d10882a1be1713b.mp4",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0573d10882a1be1713b.mp4", 
     description: "The BOMA Winter Issues Forum brings together building owners, managers, and facility professionals to discuss pressing industry challenges and innovative solutions.",
     feeRange: "$3,000-$8,000",
     feeDescription: "Registration fee suggests strong interest in content focused on legislative issues. Historical attendance patterns reveal significant participation rates from industry leaders."
@@ -40,7 +40,7 @@ const EVENTS: EventDetails[] = [
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
     logo: "/FactRight.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2e1063b246.mp4",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2e1063b246.mp4", 
     description: "The FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.",
     feeRange: "$7,500-$12,500",
     feeDescription: "Registration indicates significant investment in expert content. Premium venue suggests higher budget capacity. Historical patterns show previous speakers command similar compensation."
@@ -50,7 +50,7 @@ const EVENTS: EventDetails[] = [
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
     logo: "/Forth Roadmap Conference-mh.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4", 
     description: "The Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.",
     feeRange: "$5,000-$10,000",
     feeDescription: "Registration fees reflect commitment to expert-led sessions. Past speaker compensation aligns with industry standards for sustainability and transportation technology events."
@@ -60,7 +60,7 @@ const EVENTS: EventDetails[] = [
     title: "Identiverse 2025",
     subtitle: "CyberRisk Alliance",
     logo: "/Identiverse 2025-mh.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4", 
     feeRange: "$8,000-$15,000",
     description: "Identiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.",
     feeDescription: "Premium registration fees indicate high-value technical content. Venue and historical compensation data suggest strong investment in expert speakers."
@@ -70,7 +70,7 @@ const EVENTS: EventDetails[] = [
     title: "REimagine! 2025",
     subtitle: "California Association of REALTORS",
     logo: "/REimagine! 2025-mh.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0576028548dffbd5a3a.mp4",
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0576028548dffbd5a3a.mp4", 
     description: "The REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.",
     feeRange: "$6,000-$12,000",
     feeDescription: "Registration fees reflect focus on high-impact content delivery. Previous speaker compensation shows strong value placed on industry expertise and thought leadership."
@@ -190,9 +190,9 @@ export function EventExamples() {
                 <div className="flex-1 overflow-auto">
                   {/* Video */}
                   {selectedEvent.video && (
-                    <div className="aspect-video w-full bg-black">
+                    <div className="w-full bg-black">
                       <video
-                        className="w-full h-full object-contain"
+                        className="w-full h-auto"
                         autoPlay
                         loop
                         muted
@@ -200,6 +200,11 @@ export function EventExamples() {
                       >
                         <source src={selectedEvent.video} type="video/mp4" />
                       </video>
+                      <div className="bg-gray-50 py-3 px-4 border-t border-gray-100">
+                        <p className="text-gray-600 text-sm text-center">
+                          👀 Just a Peek: Each lead in SpeakerDrive includes this level of detail to help you evaluate fit.
+                        </p>
+                      </div>
                     </div>
                   )}
 
@@ -234,6 +239,9 @@ export function EventExamples() {
                     <div className="space-y-4 text-gray-700">
                       <p>{selectedEvent.description}</p>
                       <p>{selectedEvent.feeDescription}</p>
+                      <p className="text-sm text-gray-500 italic mt-4">
+                        *Fee estimate is a high level, directional estimate only; actual fee potential may vary considerably.
+                      </p>
                     </div>
                   </div>
                 </div>

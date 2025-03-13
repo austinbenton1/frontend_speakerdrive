@@ -172,31 +172,61 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Coach.png" alt="Coaches" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Coaches</h3>
+                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Coaches</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Reach organizations seeking leadership, development and transformation.
+                  </p>
+                </div>
               </div>
               <div className="text-center transform hover:scale-105 transition-transform duration-300">
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Trainer Facilitator.png" alt="Trainers" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Trainers</h3>
+                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Trainers</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Find companies looking for skill-building and educational workshops.
+                  </p>
+                </div>
               </div>
               <div className="text-center transform hover:scale-105 transition-transform duration-300">
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Keynote Speaker.png" alt="Keynote Speakers" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Keynote Speakers</h3>
+                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Keynote Speakers</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Discover events searching for impactful mainstage presentations.
+                  </p>
+                </div>
               </div>
               <div className="text-center transform hover:scale-105 transition-transform duration-300">
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Consultant.png" alt="Consultants" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Consultants</h3>
+                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Consultants</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Access decision-makers who need specialized expertise and solutions.
+                  </p>
+                </div>
               </div>
               <div className="text-center transform hover:scale-105 transition-transform duration-300">
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Expert Thought Leader.png" alt="Thought Leaders" className="w-full h-full object-contain" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900">Thought Leaders</h3>
+                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Thought Leaders</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    Identify platforms eager to showcase innovative ideas and insights.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
