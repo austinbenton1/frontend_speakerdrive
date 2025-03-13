@@ -233,26 +233,43 @@ export default function LandingPage() {
         </section>
 
         {/* Visual transition connector */}
-        <div className="bg-white pt-8 pb-10"> 
-          <div className="container mx-auto max-w-4xl px-4 flex flex-col items-center">
-            <div className="text-center mb-6 relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-blue-50/20 to-transparent rounded-xl -z-10"></div>
-              <div className="p-6">
-                <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-xl md:text-2xl font-bold mb-3">
-                  These opportunities are out there waiting for you.
-                </h3>
-                <p className="text-lg text-gray-700">
-                  So why are so many talented experts still struggling to fill their calendars?
+        <div className="bg-white py-12">
+          <div className="container mx-auto max-w-4xl px-4">
+            {/* Top statement with enhanced gradient */}
+            <div className="text-center mb-6">
+              <h3 className="text-4xl md:text-5xl font-extrabold mb-3 bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 bg-clip-text text-transparent leading-tight">
+                Opportunities for experts are everywhere in the market.
+              </h3>
+            </div>
+            
+            {/* Visual funnel */}
+            <div className="relative flex flex-col items-center">
+              {/* Second statement - narrower with enhanced styling */}
+              <div className="w-full max-w-2xl mb-2 text-center relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50/20 to-transparent rounded-xl blur-lg"></div>
+                <p className="relative text-xl font-semibold bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent">
+                  Yet talented professionals still struggle to fill their calendars
+                </p>
+              </div>
+              
+              {/* Question - most narrow */}
+              <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-3 border border-gray-200/50 mt-2 mb-12">
+                <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
+                  <span className="text-gray-500 font-bold text-lg">?</span>
+                </div>
+                <p className="text-lg font-medium text-gray-900">
+                  What's the disconnect?
                 </p>
               </div>
             </div>
             
+            {/* Decorative connector */}
             <div className="flex flex-col items-center">
-              <div className="h-24 w-1 bg-gradient-to-b from-brand-blue/50 to-red-300/70"></div>
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-red-100 my-3">
+              <div className="h-24 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 my-3">
                 <ArrowDownIcon className="h-5 w-5 text-red-600" />
               </div>
-              <div className="h-8 w-px bg-gradient-to-b from-red-300 to-transparent"></div>
+              <div className="h-12 w-[3px] bg-gradient-to-b from-red-300/50 to-transparent"></div>
             </div>
           </div>
         </div>

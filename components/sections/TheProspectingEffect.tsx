@@ -18,57 +18,55 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
               className="flex items-center justify-center"
             >
-              <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-red-100 border-4 border-white shadow-md">
-                <ExclamationTriangleIcon className="h-7 w-7 text-red-600" />
+              <div className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-red-50 border-4 border-white shadow-md relative">
+                <ExclamationTriangleIcon className="h-7 w-7 text-red-600 opacity-90" />
+                <span className="absolute text-red-600 font-bold text-lg" style={{ marginTop: '-1px' }}>!</span>
               </div>
             </motion.div>
             
             {/* Added more space (mt-8) between icon and heading */}
             <motion.h2 
-              className="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-4 mt-8"
+              className="text-3xl sm:text-[2.5rem] font-extrabold text-gray-900 mb-3 mt-8"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              Stuck Waiting for Referrals?
+              The Referral Trap
             </motion.h2>
             
             {/* Updated subheadline copy - made left-aligned */}
             <motion.p 
-              className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto text-center"
+              className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto text-center mb-2"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              Relying on word-of-mouth alone puts your business growth at the mercy of others.
+              Referrals are great, but unpredictable.
             </motion.p>
             
             <motion.p
-              className="text-gray-600 text-lg mt-4"
+              className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              Over time, this passive approach creates a cascade of consequences.
+              Relying on word-of-mouth alone leaves your business growth vulnerable to uncertainty.
             </motion.p>
           </div>
           
-          {/* Inconsistent Prospecting box - still in the colored section */}
+          {/* Image container without banner */}
           <div className="mx-auto max-w-2xl mb-6">
             <motion.div 
-              className="flex flex-col rounded-xl overflow-hidden shadow-lg"
+              className="flex flex-col overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className="bg-red-600 py-3 px-4">
-                <h3 className="font-bold text-white text-center text-xl">The Cost Of Inconsistent Prospecting</h3>
-              </div>
-              <div className="bg-white p-4">
+              <div>
                 {/* Image container with landscape aspect ratio */}
                 <div className="aspect-[16/9] w-full overflow-hidden flex items-center justify-center">
                   <img
