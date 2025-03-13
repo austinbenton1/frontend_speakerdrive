@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { TriangleIcon as ExclamationTriangleIcon, CheckCircleIcon, ArrowDownIcon } from 'lucide-react';
+import { TriangleIcon as ExclamationTriangleIcon, CheckCircleIcon, ArrowDownIcon, ArrowRight } from 'lucide-react';
 
 export function TheProspectingEffect() {
   return (
@@ -43,22 +43,13 @@ export function TheProspectingEffect() {
               transition={{ duration: 0.5, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              Referrals are great, but unpredictable.
-            </motion.p>
-            
-            <motion.p
-              className="text-gray-600 text-lg mt-4 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
               Relying on word-of-mouth alone leaves your business growth vulnerable to uncertainty.
             </motion.p>
+            
           </div>
           
           {/* Image container without banner */}
-          <div className="mx-auto max-w-2xl mb-6">
+          <div className="mx-auto max-w-3xl mt-4 mb-8">
             <motion.div 
               className="flex flex-col overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
@@ -68,7 +59,7 @@ export function TheProspectingEffect() {
             >
               <div>
                 {/* Image container with landscape aspect ratio */}
-                <div className="aspect-[16/9] w-full overflow-hidden flex items-center justify-center">
+                <div className="aspect-[16/9] w-full overflow-hidden flex items-center justify-center px-4">
                   <img
                     src="/Bad.png"
                     alt="Inconsistent prospecting - inefficient and time-consuming"
@@ -110,7 +101,7 @@ export function TheProspectingEffect() {
                 Prospecting Is The Key
               </h2>
               <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto pb-1">
-                You need to be actively prospecting for NEW business.
+                Consistent Prospecting -> Predictable Growth.
               </p>
             </motion.div>
           </div>
@@ -139,12 +130,12 @@ export function TheProspectingEffect() {
                 
                 <div className="mb-4">
                   <p className="text-lg text-gray-600">
-                    SpeakerDrive helps you break free from this cycle with a consistent, effective prospecting system.
+                    SpeakerDrive helps you break free from the feast/famine cycle with a proven, systematic approach to prospecting.
                   </p>
                 </div>
                 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
-                  <p>Incorporating a small part of your day - consistently - to prospecting will change your business.</p>
+                  <p>Just 15-20 minutes of focused prospecting each day can transform your business stability.</p>
                   
                   {/* Updated styling for the blue text to look more modern */}
                   <p>
@@ -159,7 +150,20 @@ export function TheProspectingEffect() {
                   
                   <p>And amplify your influence.</p>
                   
-                  <p className="font-medium text-gray-800">Start your SpeakerDrive free trial today.</p>
+                  <p className="font-medium text-gray-800">Start your free trial and control your pipeline.</p>
+                  
+                  {/* Added CTA button and text */}
+                  <div className="flex flex-col items-center mt-16 mb-24">
+                    <a
+                      href="/signup"
+                     className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
+                    >
+                      Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
+                    </a>
+                    <p className="mt-4 text-sm text-gray-500">
+                      Start Free Trial. No credit card needed.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

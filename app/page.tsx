@@ -278,53 +278,6 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
-
-        {/* BOTTOM CTA */}
-        <section id="cta" className="relative bg-gradient-to-b from-white to-blue-50/50 overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-blue/5 via-transparent to-transparent"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-brand-blue/5 via-transparent to-transparent"></div>
-          
-          <div className="container relative mx-auto max-w-4xl px-4 py-24 text-center">
-            {/* Content */}
-            <div className="relative inline-block mb-2">
-              <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue/10 via-blue-400/10 to-transparent blur-xl"></div>
-              <h2 className="relative text-3xl md:text-4xl font-extrabold text-gray-900">
-              Find and Book Your Next Engagement
-              </h2>
-            </div>
-            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
-              Escape the referral trap and predictably control your OWN client acquisition.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#pricing"
-                className="group inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-800 px-8 py-3.5 text-lg font-medium hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
-              >
-                View Pricing
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 text-gray-400 group-hover:text-gray-500 transition-colors" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </a>
-              <a
-                href="/signup"
-                className="group relative inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 text-white px-10 py-3.5 text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-[400ms] ease-out"></div>
-                Start Free Trial
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </a>
-            </div>
-            <p className="mt-6 text-sm text-gray-500 flex items-center justify-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              No credit card required
-            </p>
-          </div>
-        </section>
       </main>
 
       <Footer5 />
