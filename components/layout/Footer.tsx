@@ -37,7 +37,7 @@ export function Footer5() {
             {/* Column 2: Product */}
             <div className="w-1/2 md:w-auto flex flex-col gap-3 mb-8 md:mb-0">
               <h3 className="text-base font-bold text-zinc-300">Product</h3>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">About</a>
+              <Link href="/about" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">About</Link>
               <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Features</a>
               <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Pricing</a>
             </div>

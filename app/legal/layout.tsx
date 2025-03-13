@@ -13,9 +13,6 @@ export default function LegalLayout({
       <HeaderFinal 
         companyName="SpeakerDrive"
         logo={<img src="/SpeakerDrive Logo - Long.png" alt="SpeakerDrive" className="h-8" />}
-        links={[
-          { label: "Home", href: "/" },
-        ]}
       />
       
       {children}

@@ -22,11 +22,6 @@ export default function LandingPage() {
             className="h-8"
           />
         }
-        links={[
-          { label: "Features", href: "/features" },
-          { label: "Pricing", href: "/pricing" },
-          { label: "Contact", href: "#contact" },
-        ]}
       />
 
       <main className="pt-16">

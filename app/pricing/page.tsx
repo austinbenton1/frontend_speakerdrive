@@ -203,10 +203,6 @@ export default function PricingPage() {
       <HeaderFinal 
         companyName="SpeakerDrive"
         logo={<img src="/SpeakerDrive Logo - Long.png" alt="SpeakerDrive" className="h-8" />}
-        links={[
-          { label: "Pricing", href: "/pricing" },
-          { label: "Contact", href: "#contact" },
-        ]}
       />
       
       <main className="pt-24">

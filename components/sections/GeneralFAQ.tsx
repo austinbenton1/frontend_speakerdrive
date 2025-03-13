@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const FAQ_ITEMS = [
@@ -43,7 +44,7 @@ const FAQ_ITEMS = [
 // Add Austin Benton question at the end
 FAQ_ITEMS.push({
   question: "Who is behind SpeakerDrive?",
-  answer: "SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, click here."
+  answer: "SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our About page."
 });
 
 export function GeneralFAQ() {
@@ -146,7 +147,19 @@ export function GeneralFAQ() {
                 <AccordionContent className="px-6 pb-5">
                   <div className="relative">
                     <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                    <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">{item.answer}</p>
+                    <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">
+                      {item.question === "Who is behind SpeakerDrive?" ? (
+                        <>
+                          SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our{' '}
+                          <Link href="/about" className="text-brand-blue hover:text-blue-700 underline">
+                            About page
+                          </Link>
+                          .
+                        </>
+                      ) : (
+                        item.answer
+                      )}
+                    </p>
                   </div>
                 </AccordionContent>
               </AccordionItem>

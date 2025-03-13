@@ -4,13 +4,23 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
+// Shared navigation configuration
+export const DEFAULT_NAV_LINKS = [
+  { label: "Features", href: "/features" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact" },
+];
+
 interface HeaderFinalProps {
   companyName: string;
   logo: React.ReactNode;
-  links: { label: string; href: string }[];
+  links?: { label: string; href: string }[];
 }
 
 export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
+  // Use default links if none provided
+  const navigationLinks = links || DEFAULT_NAV_LINKS;
+
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -44,7 +54,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
         <div className="hidden md:flex items-center">
           {/* Navigation Links */}
           <nav className="flex items-center space-x-8">
-            {links.map((link) => (
+            {navigationLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href || "#"}
@@ -132,7 +142,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
       >
         <div className="px-4 py-5 space-y-4">
           <nav className="flex flex-col space-y-4">
-            {links.map((link) => (
+            {navigationLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
