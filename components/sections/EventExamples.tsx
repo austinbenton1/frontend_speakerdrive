@@ -7,12 +7,11 @@ interface EventDetails {
   id: string;
   title: string;
   subtitle: string;
-  image: string;
+  logo: string;
   video?: string;
   description: string;
   feeRange: string;
   feeDescription: string;
-  registrationDescription?: string;
 }
 
 const EVENTS: EventDetails[] = [
@@ -20,7 +19,6 @@ const EVENTS: EventDetails[] = [
     id: "bccc",
     title: "BCCC Corporate Citizenship Conference",
     subtitle: "Boston College",
-    image: "/1_BCCC.png",
     logo: "/BCCC.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d057a50ee1ce3b7474ee.mp4",
     description: "The BCCC International Corporate Citizenship Conference addresses corporate social responsibility and sustainability strategies for impactful business practices.",
@@ -64,7 +62,7 @@ const EVENTS: EventDetails[] = [
     logo: "/5_Identiverse.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4",
     feeRange: "$8,000-$15,000",
-    description: "Premium registration fees indicate high-value technical content. Venue and historical compensation data suggest strong investment in expert speakers.",
+    description: "Identiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.",
     feeDescription: "Premium registration fees indicate high-value technical content. Venue and historical compensation data suggest strong investment in expert speakers."
   },
   {

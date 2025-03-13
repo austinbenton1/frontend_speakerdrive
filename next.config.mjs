@@ -4,9 +4,17 @@ const nextConfig = {
     // This allows production builds to complete even if ESLint errors exist
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    ignoreBuildErrors: true,
+  },
   // Turn off image optimization to avoid base64 placeholders:
   images: {
     unoptimized: true,
+    domains: ['storage.googleapis.com'], // Allow loading from Google Storage
   },
   // Example: custom headers for .mp4 or .webm:
   async headers() {

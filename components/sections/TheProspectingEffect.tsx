@@ -108,9 +108,9 @@ export function TheProspectingEffect() {
               viewport={{ once: true }}
               className="text-center"
             >
-              <h3 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-3xl sm:text-4xl mb-3">
+              <h2 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-3xl sm:text-4xl mb-3">
                 Prospecting Is The Key
-              </h3>
+              </h2>
               <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto pb-1">
                 You need to be actively prospecting for NEW business.
               </p>
@@ -133,7 +133,14 @@ export function TheProspectingEffect() {
             >
               <div className="p-6 border-0">
                 <div className="flex items-center mb-4">
-                  <p className="text-lg text-gray-600 mb-4">
+                  <h3 className="text-xl font-bold text-gray-800">
+                    <CheckCircleIcon className="h-6 w-6 text-brand-blue mr-2 inline-block" />
+                    Here's How
+                  </h3>
+                </div>
+                
+                <div className="mb-4">
+                  <p className="text-lg text-gray-600">
                     SpeakerDrive helps you break free from this cycle with a consistent, effective prospecting system.
                   </p>
                 </div>
