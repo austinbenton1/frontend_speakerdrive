@@ -46,6 +46,33 @@
 }
 
 /* Animations for GlowEffect */
+/* Gold text gradient animation */
+@keyframes shimmer {
+  0% {
+    background-position: -100% center;
+  }
+  100% {
+    background-position: 100% center;
+  }
+}
+
+.gold-gradient {
+  background: linear-gradient(
+    to right,
+    #B8860B 0%,
+    #FFD700 25%,
+    #DAA520 50%,
+    #FFD700 75%,
+    #B8860B 100%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 10s ease-in-out infinite;
+  text-shadow: 0 0 1px rgba(218, 165, 32, 0.1);
+}
+
 @keyframes breathe {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);

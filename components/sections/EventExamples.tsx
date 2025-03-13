@@ -29,7 +29,7 @@ const EVENTS: EventDetails[] = [
     id: "boma",
     title: "2025 BOMA Winter Issues Forum",
     subtitle: "BOMA International",
-    logo: "/2_BOMA.png",
+    logo: "/2025 BOMA Winter Issues Forum-mh.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0573d10882a1be1713b.mp4",
     description: "The BOMA Winter Issues Forum brings together building owners, managers, and facility professionals to discuss pressing industry challenges and innovative solutions.",
     feeRange: "$3,000-$8,000",
@@ -39,7 +39,7 @@ const EVENTS: EventDetails[] = [
     id: "factright",
     title: "FactRight Due Diligence Conference",
     subtitle: "FactRight",
-    logo: "/3_FactRight.png",
+    logo: "/FactRight.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2e1063b246.mp4",
     description: "The FactRight Due Diligence Conference focuses on enhancing due diligence practices in alternative investments for investment management professionals.",
     feeRange: "$7,500-$12,500",
@@ -49,7 +49,7 @@ const EVENTS: EventDetails[] = [
     id: "forth",
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
-    logo: "/4_Forth.png",
+    logo: "/Forth Roadmap Conference-mh.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4",
     description: "The Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.",
     feeRange: "$5,000-$10,000",
@@ -59,7 +59,7 @@ const EVENTS: EventDetails[] = [
     id: "identiverse",
     title: "Identiverse 2025",
     subtitle: "CyberRisk Alliance",
-    logo: "/5_Identiverse.png",
+    logo: "/Identiverse 2025-mh.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4",
     feeRange: "$8,000-$15,000",
     description: "Identiverse 2025 is a premier conference dedicated to advancing identity security and fostering discussions among industry professionals on critical identity management themes.",
@@ -69,7 +69,7 @@ const EVENTS: EventDetails[] = [
     id: "reimagine",
     title: "REimagine! 2025",
     subtitle: "California Association of REALTORS",
-    logo: "/6_REimagine.png",
+    logo: "/REimagine! 2025-mh.png",
     video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0576028548dffbd5a3a.mp4",
     description: "The REimagine! 2025 Conference & Expo explores innovative solutions and educational strategies for real estate professionals and tech-driven social impact leaders.",
     feeRange: "$6,000-$12,000",
@@ -85,7 +85,7 @@ export function EventExamples() {
       <div className="container mx-auto max-w-5xl px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-4">
-            We Dig For <span className="text-[#FFD700]">Gold</span>
+            We Dig For <span className="gold-gradient">Gold</span>
           </h2>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-6">
             So You Don't Have To
@@ -135,7 +135,7 @@ export function EventExamples() {
               {/* Event Details */}
               <div className="p-4">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-lg p-2">
+                  <div className="w-12 h-12 flex items-center justify-center bg-gray-50 rounded-full p-2 overflow-hidden">
                     <img 
                       src={event.logo} 
                       alt={event.title} 
@@ -216,7 +216,7 @@ export function EventExamples() {
                     </div>
                     
                     <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 flex items-center justify-center bg-gray-50 rounded-lg p-3">
+                      <div className="w-16 h-16 flex items-center justify-center bg-gray-50 rounded-full p-3 overflow-hidden">
                         <img 
                           src={selectedEvent.logo} 
                           alt={selectedEvent.title} 

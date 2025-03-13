@@ -97,7 +97,7 @@ export default function LandingPage() {
                   description: "Fresh engagements and decision-makers added to our system daily.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d6591f37395f36.mp4"
+              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21aa6244f61209f98b0.mp4"
               captionText="Search by events or contacts"
             />
           </div>
@@ -123,7 +123,7 @@ export default function LandingPage() {
                   description: "Connect with decision-makers on LinkedIn.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee03d10887974dc27c8.mp4"
+              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21a5f250c02e2dc236c.mp4"
               captionText="Find detailed info. Then, unlock the contact channel."
             />
           </div>
@@ -144,7 +144,7 @@ export default function LandingPage() {
                   description: "Connect via email, LinkedIn, or application forms—optimized for each opportunity.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d659631e395f35.mp4"
+              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d25922c810b65b2239ae.mp4"
               captionText="Generate outreach in 1 click"
             />
           </div>
