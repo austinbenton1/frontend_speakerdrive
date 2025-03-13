@@ -53,16 +53,16 @@ export default function LandingPage() {
                   
                   <div className="flex-1 text-left relative">
                     <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
-                    <h2 className="text-2xl sm:text-4xl font-extrabold mb-6 text-gray-900 tracking-tight">
+                    <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
                       What is SpeakerDrive?
                     </h2>
                     
                     <div className="space-y-8">
-                      <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
+                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
                         SpeakerDrive is a prospecting database built exclusively for speakers, coaches, and experts. Access contact data for events, speaker opportunities, and decision-makers who book professionals, like you.
                       </p>
                       
-                      <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
+                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
                         SpeakerDrive lets you build a predictable booking pipeline—on your terms.
                       </p>
                     </div>
@@ -173,10 +173,10 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Coach.png" alt="Coaches" className="w-full h-full object-contain" />
                 </div>
-                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Coaches</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Reach organizations seeking leadership, development and transformation.
                   </p>
                 </div>
@@ -185,10 +185,10 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Trainer Facilitator.png" alt="Trainers" className="w-full h-full object-contain" />
                 </div>
-                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Trainers</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Find companies looking for skill-building and educational workshops.
                   </p>
                 </div>
@@ -197,10 +197,10 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Keynote Speaker.png" alt="Keynote Speakers" className="w-full h-full object-contain" />
                 </div>
-                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Keynote Speakers</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Discover events searching for impactful mainstage presentations.
                   </p>
                 </div>
@@ -209,10 +209,10 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Consultant.png" alt="Consultants" className="w-full h-full object-contain" />
                 </div>
-                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Consultants</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Access decision-makers who need specialized expertise and solutions.
                   </p>
                 </div>
@@ -221,10 +221,10 @@ export default function LandingPage() {
                 <div className="relative aspect-[3/4] mb-4">
                   <img src="/Expert Thought Leader.png" alt="Thought Leaders" className="w-full h-full object-contain" />
                 </div>
-                <div className="relative p-4 rounded-lg bg-gradient-to-b from-white to-gray-50 shadow-sm">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-brand-blue/10 via-transparent to-brand-blue/10 opacity-50"></div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Thought Leaders</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Identify platforms eager to showcase innovative ideas and insights.
                   </p>
                 </div>
@@ -236,8 +236,8 @@ export default function LandingPage() {
         {/* Visual transition connector */}
         <div className="bg-white py-12">
           <div className="container mx-auto max-w-4xl px-4">
-            {/* Top statement with enhanced gradient */}
-            <div className="text-center mb-6">
+            {/* Top statement */}
+            <div className="text-center mb-4">
               <h3 className="text-4xl md:text-5xl font-extrabold mb-3 bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 bg-clip-text text-transparent leading-tight">
                 Opportunities for experts are everywhere in the market.
               </h3>
@@ -246,15 +246,14 @@ export default function LandingPage() {
             {/* Visual funnel */}
             <div className="relative flex flex-col items-center">
               {/* Second statement - narrower with enhanced styling */}
-              <div className="w-full max-w-2xl mb-2 text-center relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50/20 to-transparent rounded-xl blur-lg"></div>
+              <div className="w-full max-w-2xl mb-3 text-center">
                 <p className="relative text-xl font-semibold bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent">
                   Yet talented professionals still struggle to fill their calendars
                 </p>
               </div>
               
               {/* Question - most narrow */}
-              <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-3 border border-gray-200/50 mt-2 mb-12">
+              <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-2.5 border border-gray-200/50 mb-8">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <span className="text-gray-500 font-bold text-lg">?</span>
                 </div>
@@ -266,11 +265,11 @@ export default function LandingPage() {
             
             {/* Decorative connector */}
             <div className="flex flex-col items-center">
-              <div className="h-24 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
+              <div className="h-16 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-100 my-3">
                 <ArrowDownIcon className="h-5 w-5 text-red-600" />
               </div>
-              <div className="h-12 w-[3px] bg-gradient-to-b from-red-300/50 to-transparent"></div>
+              <div className="h-8 w-[3px] bg-gradient-to-b from-red-300/50 to-transparent"></div>
             </div>
           </div>
         </div>

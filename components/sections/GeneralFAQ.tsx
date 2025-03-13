@@ -35,7 +35,7 @@ const FAQ_ITEMS = [
     answer: "We recommend 20-30 minutes daily. Consistency is the key factor in seeing results, regardless of the exact time spent."
   },
   {
-    question: "Isn't this too sales-y for my industry?",
+    question: "Will outreach work for my industry?",
     answer: "Our message composer is designed to start conversations, not close deals. More conversations equal more opportunities. In fact, going right for the \"hard sell\" isn't a good strategy for professional services. We focus on building relationships."
   }
 ];
@@ -49,22 +49,25 @@ FAQ_ITEMS.push({
 export function GeneralFAQ() {
   return (
     <section className="bg-white pt-12 pb-24 overflow-hidden">
-      <div className="container mx-auto max-w-6xl px-4">
+      <div className="container mx-auto max-w-5xl px-4">
         {/* Section Header */}
         <div className="text-center mb-16 relative">
           <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-blue-100/30 to-blue-50/20 blur-3xl -z-10 opacity-70"></div>
           <div className="relative">
-            <h2 className="text-3xl sm:text-[2.75rem] font-extrabold text-gray-900 mb-4 tracking-tight">
-              Common questions about SpeakerDrive
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-2 tracking-tight">
+              Frequently Asked Questions
             </h2>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Everything you need to know about using SpeakerDrive
+            </p>
           </div>
         </div>
 
         {/* FAQ Accordion */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column */}
           <Accordion
-            className="space-y-4"
+            className="space-y-3"
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {FAQ_ITEMS.slice(0, Math.ceil(FAQ_ITEMS.length / 2)).map((item, index) => (
@@ -75,9 +78,9 @@ export function GeneralFAQ() {
               >
               <AccordionTrigger className="w-full">
                 <div className="flex items-center justify-between w-full text-left">
-                  <div className="flex items-center gap-4 px-6 py-5 w-full hover:bg-gray-50/80 transition-colors">
+                  <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
                     <div className="flex-1">
-                      <span className="text-[1.1rem] font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-8">
+                      <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
                         {item.question}
                       </span>
                     </div>
@@ -108,7 +111,7 @@ export function GeneralFAQ() {
           
           {/* Right Column */}
           <Accordion
-            className="space-y-4"
+            className="space-y-3"
             transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             {FAQ_ITEMS.slice(Math.ceil(FAQ_ITEMS.length / 2)).map((item, index) => (
@@ -119,9 +122,9 @@ export function GeneralFAQ() {
               >
                 <AccordionTrigger className="w-full">
                   <div className="flex items-center justify-between w-full text-left">
-                    <div className="flex items-center gap-4 px-6 py-5 w-full hover:bg-gray-50/80 transition-colors">
+                    <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
                       <div className="flex-1">
-                        <span className="text-[1.1rem] font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-8">
+                        <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
                           {item.question}
                         </span>
                       </div>
@@ -152,7 +155,7 @@ export function GeneralFAQ() {
         </div>
         
         {/* Bottom CTA */}
-        <div className="mt-20 text-center">
+        <div className="mt-16 text-center">
           <p className="text-lg text-gray-700 mb-8">
             Still have questions? We're here to help.
           </p>

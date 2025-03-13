@@ -82,11 +82,6 @@ export function TheProspectingEffect() {
           </div>
           
           {/* Triangle icon in a circle - NOW BLUE instead of red */}
-          <div className="flex justify-center mb-6">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 border border-blue-100">
-              <ExclamationTriangleIcon className="h-8 w-8 text-brand-blue" />
-            </div>
-          </div>
           
           {/* Moved "Are you actively prospecting..." BELOW the gradient line */}
           <div className="max-w-3xl mx-auto mt-6 mb-2">
