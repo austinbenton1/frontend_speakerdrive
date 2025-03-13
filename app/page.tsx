@@ -8,6 +8,7 @@ import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
 import { ArrowDownIcon } from 'lucide-react';
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
+import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 
 export default function LandingPage() {
   return (
@@ -278,6 +279,8 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
+
+        <GeneralFAQ />
       </main>
 
       <Footer5 />

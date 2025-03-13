@@ -133,7 +133,7 @@ export function FeatureTwoItem({
         </div>
 
         {/* Main row: bullets on the left, image/video on the right */}
-        <div className="flex flex-col-reverse lg:flex-row items-start gap-8">
+        <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center gap-8">
           {/* LEFT COL: Feature bullets + CTA */}
           <div className="w-full lg:w-2/5">
             {isStep2 ? (
@@ -201,14 +201,14 @@ export function FeatureTwoItem({
           </div>
 
           {/* RIGHT COL: Video or Image - Now larger (3/5 instead of 1/2) */}
-          <div className="w-full lg:w-3/5 lg:mt-0" ref={videoContainerRef}>
+          <div className="w-full lg:w-[51%] lg:mt-0" ref={videoContainerRef}>
             {isExternalVideo && externalVideoSrc ? (
               captionText ? (
                 <VideoCaption
                   src={externalVideoSrc}
                   title={title}
                   caption={captionText || ""}
-                  className="w-full rounded-xl"
+                  className="w-full rounded-xl shadow-lg"
                 />
               ) : (
                 <div className="rounded-xl border border-neutral-200 shadow-lg overflow-hidden">

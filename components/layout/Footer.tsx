@@ -14,7 +14,7 @@ export function Footer5() {
   };
 
   return (
-    <footer className="bg-zinc-800 text-white mt-20">
+    <footer className="bg-[#0F172A] text-white mt-20">
       <div className="mx-auto w-full max-w-screen-lg px-4 py-12">
         {/* Main content grid with columns */}
         <div className="flex flex-col md:flex-row justify-between mb-12">
@@ -28,7 +28,7 @@ export function Footer5() {
               />
             </div>
             <p className="text-sm text-zinc-300">
-              SpeakerDrive helps speakers, coaches, and experts find speaking opportunities and build their careers.
+              SpeakerDrive helps speakers and experts find relevant opportunities and build their careers. Our platform connects professionals with decision-makers, creating predictable business growth.
             </p>
           </div>
           
@@ -94,7 +94,7 @@ export function Footer5() {
           {/* Text scramble - fixed to ensure visibility */}
           <div className="h-6 flex items-center">
             <TextScramble
-              className="text-sm text-zinc-400"
+              className="text-sm text-blue-200/70"
               as="p"
               trigger={trigger}
               onScrambleComplete={handleScrambleComplete}
