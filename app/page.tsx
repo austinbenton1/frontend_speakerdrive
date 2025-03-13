@@ -58,11 +58,11 @@ export default function LandingPage() {
                     
                     <div className="space-y-8">
                       <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive is the only prospecting database built exclusively for speakers, coaches, and experts. Access contact data for events, speaker opportunities, and decision-makers who book professionals, like you.
+                        SpeakerDrive is a prospecting database built exclusively for speakers, coaches, and experts. Access contact data for events, speaker opportunities, and decision-makers who book professionals, like you.
                       </p>
                       
                       <p className="text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
-                        With SpeakerDrive, you predictably control your <span className="font-bold text-blue-500 relative">OWN<span className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-blue-100 rounded-full"></span></span> client acquisition pipeline.
+                        SpeakerDrive lets you build a predictable booking pipeline—on your terms.
                       </p>
                     </div>
                   </div>
@@ -89,16 +89,12 @@ export default function LandingPage() {
               description=""
               features={[
                 {
-                  title: "Search Events and Contacts",
-                  description: "All opportunities in one place.",
+                  title: "Find Events And Contacts",
+                  description: "Search opportunities all in one place with 11 advanced filters.",
                 },
                 {
-                  title: "Smart Discovery",
-                  description: "Customize your search with 11 advanced filters.",
-                },
-                {
-                  title: "Fresh Opportunities",
-                  description: "New leads added daily.",
+                  title: "Always Current Data",
+                  description: "Fresh engagements and decision-makers added to our system daily.",
                 },
               ]}
               externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d6591f37395f36.mp4"
@@ -128,7 +124,7 @@ export default function LandingPage() {
                 },
               ]}
               externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee03d10887974dc27c8.mp4"
-              captionText="Unlock contact info"
+              captionText="Find detailed info. Then, unlock the contact channel."
             />
           </div>
 
@@ -136,21 +132,16 @@ export default function LandingPage() {
           <div className="mt-10">
             <FeatureTwoItem
               stepNumber={3}
-              title="Craft Outreach"
+              title="Start Prospecting"
               description=""
               features={[
                 {
-                  title: "AI-Powered Templates",
-                  description: "Start with proven templates that convert.",
+                  title: "Smart Message Composer",
+                  description: "Hyper personalized outreach based on the event, contact, and your specific expertise.",
                 },
                 {
-                  title: "Personalization Engine",
-                  description:
-                    "Automatically personalize messages to each recipient.",
-                },
-                {
-                  title: "Performance Tracking",
-                  description: "See what messages perform best.",
+                  title: "Multi-Channel Options",
+                  description: "Connect via email, LinkedIn, or application forms—optimized for each opportunity.",
                 },
               ]}
               externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cffee004d659631e395f35.mp4"
@@ -242,30 +233,47 @@ export default function LandingPage() {
         </section>
 
         {/* BOTTOM CTA */}
-        <section id="cta" className="bg-white">
-          <div className="container mx-auto max-w-4xl px-4 py-16 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+        <section id="cta" className="relative bg-gradient-to-b from-white to-blue-50/50 overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-blue/5 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-brand-blue/5 via-transparent to-transparent"></div>
+          
+          <div className="container relative mx-auto max-w-4xl px-4 py-24 text-center">
+            {/* Content */}
+            <div className="relative inline-block mb-2">
+              <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue/10 via-blue-400/10 to-transparent blur-xl"></div>
+              <h2 className="relative text-3xl md:text-4xl font-extrabold text-gray-900">
               Find and Book Your Next Engagement
-            </h2>
-            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-              Escape the referral trap and predictably control your OWN client
-              acquisition.
+              </h2>
+            </div>
+            <p className="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
+              Escape the referral trap and predictably control your OWN client acquisition.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="#pricing"
-                className="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-800 px-6 py-3 text-base font-medium hover:bg-gray-50 transition-colors"
+                className="group inline-flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-800 px-8 py-3.5 text-lg font-medium hover:border-gray-300 hover:bg-gray-50 transition-all duration-200"
               >
                 View Pricing
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 text-gray-400 group-hover:text-gray-500 transition-colors" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </a>
               <a
                 href="/signup"
-                className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 text-lg font-semibold shadow-md hover:opacity-90 transition-colors"
+                className="group relative inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-blue to-blue-500 text-white px-10 py-3.5 text-lg font-bold shadow-lg hover:shadow-xl transition-all duration-200 overflow-hidden"
               >
-                Start free trial
+                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-[400ms] ease-out"></div>
+                Start Free Trial
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
               </a>
             </div>
-            <p className="mt-4 text-sm text-gray-500">
+            <p className="mt-6 text-sm text-gray-500 flex items-center justify-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
               No credit card required
             </p>
           </div>

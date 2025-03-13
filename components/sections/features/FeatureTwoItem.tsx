@@ -90,79 +90,90 @@ export function FeatureTwoItem({
         {/* Heading & Description - Full width up top */}
         <div className="mb-4">
           {/* Enhanced Step Pill */}
-          <div className="inline-flex items-center rounded-full overflow-hidden shadow-md bg-green-600 py-2 px-4 mb-8 transform hover:scale-105 transition-transform -mt-16">
-            <div className="mr-2 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+          <div className="inline-flex items-center rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-green-600 to-green-500 py-2 px-4 mb-8 transform hover:scale-102 transition-all duration-300 -mt-16 hover:shadow-lg">            
+            <span className="font-medium text-white/90 text-base">
+              Step
+            </span>
+            <div className="mx-2 w-5 h-5 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/10">
               <span className="text-white text-sm font-bold">{stepNumber}</span>
             </div>
-            <span className="font-semibold text-white text-base">
-              {stepNumber ? `Step ${stepNumber}. ${title}` : title}
+            <span className="font-medium text-white text-sm tracking-wide">
+              {isStep1 ? "Get Qualified Leads" : isStep2 ? "Get Contact Details" : title}
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#292929] mb-2 leading-tight">
-            {isStep1 ? "Find Your Ideal Opportunities" :
-             isStep2 ? "Get Direct Access" : 
-             isStep3 ? "Start Meaningful Conversations" : 
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 leading-tight">
+            {isStep1 ? (
+              <div className="relative inline-block">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/50 to-transparent blur-xl"></div>
+                <span className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+                  Find Your Ideal Opportunities
+                </span>
+              </div>
+            ) :
+             isStep2 ? "Unlock Contact Info" : 
+             isStep3 ? "Send Winning Outreach" : 
              "Connect With Decision-Makers"}
           </h2>
+         {isStep3 && (
+           <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
+             Generate messages that actually get responses.
+           </p>
+         )}
+          {isStep1 && (
+            <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
+              All your prospecting opportunities in one platform.
+            </p>
+          )}
+          {isStep2 && (
+            <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
+              All the ways to connect with those who hire professional expertise.
+            </p>
+          )}
         </div>
 
         {/* Main row: bullets on the left, image/video on the right */}
-        <div className="flex flex-col-reverse lg:flex-row items-start lg:items-center gap-8">
+        <div className="flex flex-col-reverse lg:flex-row items-start gap-8">
           {/* LEFT COL: Feature bullets + CTA */}
           <div className="w-full lg:w-2/5">
             {isStep2 ? (
               <div className="space-y-6">
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Contact Emails</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    For roles like Director Of Events, Chief People Officer, HR Directors, and Conference Organizers.
+                <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Decision Makers</h4>
+                  <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
+                    Like Event Directors, HR leaders, Chief People Officers, and more.
                   </p>
                 </div>
                 
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Event Emails</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    Validated addresses for event@, conference@, and speakers@ type emails that reach planning teams.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Event URLs</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    Direct links to application forms like Calls For Speakers, Session Submissions, and Speaker Registration Portals.
+                <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Event Channels</h4>
+                  <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
+                    Event specific emails, Call For Speakers submissions, registration sessions & portals.
                   </p>
                 </div>
               </div>
             ) : isStep3 ? (
               <div className="space-y-6">
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Perfect Personalization</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    SpeakerDrive adapts each message to match the specific event, organization, contact and more.
+                <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Smart Message Composer</h4>
+                  <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
+                    Hyper personalized outreach based on the event, contact, and your specific expertise.
                   </p>
                 </div>
                 
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Multi-Channel Options</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    Choose between email, LinkedIn, or application submissions based on your unlock type.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="text-base font-semibold text-[#292929]">Tailored to Your Services</h4>
-                  <p className="text-sm text-[#555] mt-1">
-                    Easily customize your focus —from keynotes to workshops, coaching to consulting—with each outreach.
+                <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Multi-Channel Options</h4>
+                  <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
+                    Connect via email, LinkedIn, or application forms—optimized for each opportunity.
                   </p>
                 </div>
               </div>
             ) : (
               <div className="space-y-6">
                 {features?.map((feature, index) => (
-                  <div key={index}>
-                    <h4 className="text-base font-semibold text-[#292929]">{feature.title}</h4>
-                    <p className="text-sm text-[#555] mt-1">{feature.description}</p>
+                  <div key={index} className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
+                    <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{feature.title}</h4>
+                    <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">{feature.description}</p>
                   </div>
                 ))}
               </div>
@@ -170,27 +181,27 @@ export function FeatureTwoItem({
 
             {/* CTA Link with animated underline */}
             <motion.div
-              className="inline-block relative mt-4"
+              className="inline-block relative mt-8"
               initial="rest"
               whileHover="hover"
               animate="rest"
             >
               <Link 
                 href="/" 
-                className="inline-flex items-center text-[#2D2D87] font-bold text-lg"
+                className="inline-flex items-center text-[#2D7FE0] font-bold text-xl mt-1"
               >
                 <span>Start Free Trial</span>
                 <ArrowRight className="ml-1.5 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
               <motion.div
-                className="absolute bottom-0 left-0 h-[2px] bg-[#2D2D87] rounded-full"
+                className="absolute bottom-0 left-0 h-[2px] bg-[#2D7FE0] rounded-full"
                 variants={underlineVariants}
               />
             </motion.div>
           </div>
 
           {/* RIGHT COL: Video or Image - Now larger (3/5 instead of 1/2) */}
-          <div className="w-full lg:w-3/5" ref={videoContainerRef}>
+          <div className="w-full lg:w-3/5 lg:mt-0" ref={videoContainerRef}>
             {isExternalVideo && externalVideoSrc ? (
               captionText ? (
                 <VideoCaption
