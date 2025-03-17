@@ -1,5 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    // Improve RSC payload handling
+    serverActions: {
+      bodySizeLimit: '2mb'
+    },
+    // Ensure proper payload fetching
+    serverComponentsExternalPackages: []
+  },
+  experimental: {
+    // Improve RSC payload handling
+    serverActions: {
+      bodySizeLimit: '2mb'
+    },
+    // Ensure proper payload fetching
+    serverComponentsExternalPackages: []
+  },
   eslint: {
     // This allows production builds to complete even if ESLint errors exist
     ignoreDuringBuilds: true,

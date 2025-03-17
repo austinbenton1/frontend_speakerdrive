@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import { useState } from 'react';
 import { motion } from "framer-motion";
@@ -35,7 +35,7 @@ export function MessageComposer() {
   const [direction, setDirection] = useState(1);
 
   return (
-    <div className='overflow-auto py-0 pb-24 sm:overflow-hidden bg-stone-50'>
+    <div className="overflow-auto py-0 pb-24 sm:overflow-hidden bg-stone-50">
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         {/* Channel Selection */}
         <div className="relative max-w-[800px] mx-auto">
@@ -44,21 +44,19 @@ export function MessageComposer() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center mb-4">
                 <MessageCircle className="h-7 w-7 mr-3 text-brand-blue" />
-                <h3 className="text-2xl font-bold text-gray-800">Ultra Personalized Messaging</h3>
+                <h3 className="text-2xl font-bold text-gray-800">Conversations That Convert</h3>
               </div>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto px-8">
-                The SpeakerDrive Composer cross-references your expertise, event specifics, and decision-maker priorities.
-                
-                You get conversation starting messages that get responses.
+                The SpeakerDrive Composer creates messages that start conversations and get responses.
               </p>
             </div>
           <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">
             <div className="flex items-start gap-3">
               <MessageCircle className="h-6 w-6 text-gray-500 mt-0.5" />
               <div>
-                <h3 className="text-[15px] font-semibold text-gray-800">Message Composer Demo</h3>
+                <h3 className="text-[15px] font-semibold text-gray-800">See It In Action</h3>
                 <div className="flex items-center gap-1.5">
-                  <p className="text-[14px] text-gray-600">View By Message Type</p>
+                  <p className="text-[14px] text-gray-600">View by message types -></p>
                   <ArrowRight className="h-3.5 w-3.5 text-gray-400" />
                 </div>
               </div>
