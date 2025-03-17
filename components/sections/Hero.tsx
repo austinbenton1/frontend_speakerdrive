@@ -130,10 +130,7 @@ export function Hero() {
               animate={["visible", "float"]}
               whileHover="hover"
               transition={{ delay: 0.1 }}
-              style={{ 
-                zIndex: 5,
-                filter: "drop-shadow(0 3px 6px rgba(0, 0, 0, 0.04))" // More subtle shadow
-              }}
+              style={{ zIndex: 5 }}
             >
               {/* Add subtle shimmer effect */}
               <motion.div 
