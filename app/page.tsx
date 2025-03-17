@@ -9,6 +9,8 @@ import { ArrowDownIcon } from 'lucide-react';
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
+import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
+import { MessageComposer } from "@/components/sections/MessageComposer";
 
 export default function LandingPage() {
   return (
@@ -148,6 +150,12 @@ export default function LandingPage() {
 
         {/* Event Examples Section */}
         <EventExamples />
+
+        {/* Message Composer Formula and Component Combined */}
+        <section className="bg-blue-50/50">
+          <MessageComposerFormula />
+          <MessageComposer />
+        </section>
 
         {/* Who We Serve */}
         <section className="bg-white py-16 overflow-hidden">

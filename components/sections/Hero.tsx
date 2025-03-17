@@ -14,13 +14,14 @@ const fadeUp = {
 
 // Left image float in
 const floatLeft = {
-  hidden: { opacity: 0, x: -60 },
+  hidden: { opacity: 0, x: -60, y: 20 }, // Start from below but not too far
   visible: {
     opacity: 1,
-    x: 0,
+    x: 0, 
+    y: 0,
     transition: {
-      opacity: { duration: 0.7 },
-      x: { duration: 0.8, ease: "easeOut" },
+      duration: 0.8,
+      ease: "easeOut",
     },
   },
   float: {
@@ -28,7 +29,7 @@ const floatLeft = {
     transition: {
       duration: 3,
       repeat: Infinity,
-      repeatType: "reverse" as const,
+      repeatType: "mirror",
       ease: "easeInOut",
     },
   },
@@ -36,13 +37,14 @@ const floatLeft = {
 
 // Right image float in
 const floatRight = {
-  hidden: { opacity: 0, x: 60 },
+  hidden: { opacity: 0, x: 60, y: 20 }, // Start from below but not too far
   visible: {
     opacity: 1,
     x: 0,
+    y: 0,
     transition: {
-      opacity: { duration: 0.7 },
-      x: { duration: 0.8, ease: "easeOut" },
+      duration: 0.8,
+      ease: "easeOut",
     },
   },
   float: {
@@ -50,10 +52,37 @@ const floatRight = {
     transition: {
       duration: 3.5,
       repeat: Infinity,
-      repeatType: "reverse" as const,
+      repeatType: "mirror",
       ease: "easeInOut",
     },
   },
+};
+
+// Export cards animation - reduced size and opacity
+const exportCardsAnimation = {
+  hidden: { 
+    opacity: 0.6, 
+    y: 15, 
+    scale: 0.94, // Made smaller
+  },
+  visible: { 
+    opacity: 0.8, // More transparent
+    y: 0, 
+    scale: 0.94, // Kept small in visible state
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    }
+  },
+  float: {
+    y: [0, -3, 0], // Reduced motion range further
+    transition: {
+      duration: 3, 
+      repeat: Infinity,
+      repeatType: "mirror",
+      ease: "easeInOut",
+    }
+  }
 };
 
 export function Hero() {
@@ -69,7 +98,7 @@ export function Hero() {
     <div className="px-4 pb-6 pt-16 sm:pb-12 sm:pt-20" ref={containerRef}>
       <div className="container mx-auto max-w-6xl">
         {/* Grid with left image / center text / right image */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
           {/* LEFT FLOATING IMAGE - hidden below lg */}
           <div className="hidden lg:flex lg:justify-center lg:items-start">
             <motion.div
@@ -77,6 +106,7 @@ export function Hero() {
               variants={floatLeft}
               initial="hidden"
               animate="visible"
+              style={{ zIndex: 10 }}
             >
               {/* Once visible, do the float animation. */}
               <motion.div variants={floatLeft} animate="float">
@@ -91,20 +121,55 @@ export function Hero() {
           </div>
 
           {/* CENTER CONTENT */}
-          <div className="flex flex-col items-center justify-start">
-            {/* Small label/pill - Updated to match the reference image */}
+          <div className="flex flex-col items-center justify-start relative">
+            {/* Export Cards SVG - Made smaller */}
+            <motion.div
+              className="mx-auto -mb-1 w-44 max-w-full relative" // Reduced from w-56 to w-44
+              variants={exportCardsAnimation}
+              initial="hidden"
+              animate={["visible", "float"]}
+              whileHover="hover"
+              transition={{ delay: 0.1 }}
+              style={{ 
+                zIndex: 5,
+                filter: "drop-shadow(0 3px 6px rgba(0, 0, 0, 0.04))" // More subtle shadow
+              }}
+            >
+              {/* Add subtle shimmer effect */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/20 to-transparent"
+                animate={{
+                  x: ["0%", "100%", "0%"],
+                }}
+                transition={{
+                  duration: 3,
+                  ease: "linear",
+                  repeat: Infinity,
+                }}
+              />
+              <img 
+                src="/export_cards.svg" 
+                alt="Export Cards" 
+                className="w-full h-auto"
+              />
+              
+              {/* No overlay - removed the white box outline */}
+            </motion.div>
+
+            {/* Small label/pill - Now with ENHANCED borders and shadow */}
             <motion.a
               href="#"
-              className="group flex items-center overflow-hidden rounded-full border border-gray-200 shadow-sm mx-auto mb-6 w-auto"
+              className="group flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-6 w-auto bg-white"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               transition={{ duration: 0.5, delay: 0.3 }}
+              style={{ zIndex: 20 }}
             >
-              <span className="flex h-full items-center font-medium text-green-600 px-3 py-1.5 text-sm border-r border-gray-200">
+              <span className="flex h-full items-center font-medium text-green-600 px-3 py-1.5 text-sm border-r-2 border-gray-300 bg-white">
                 New!
               </span>
-              <span className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700">
+              <span className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white">
                 For Speakers, Coaches &amp; Experts
                 <span className="text-xs ml-1">🎉</span>
                 <ChevronRight className="h-4 w-4 ml-1 text-gray-400" />
@@ -157,6 +222,7 @@ export function Hero() {
               variants={floatRight}
               initial="hidden"
               animate="visible"
+              style={{ zIndex: 10 }}
             >
               <motion.div variants={floatRight} animate="float">
                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-bl from-brand-blue/20 to-transparent rounded-full blur-xl" />
