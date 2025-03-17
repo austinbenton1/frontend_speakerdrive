@@ -124,7 +124,7 @@ export function Hero() {
           <div className="flex flex-col items-center justify-start relative">
             {/* Export Cards SVG - Made smaller */}
             <motion.div
-              className="mx-auto -mb-1 w-44 max-w-full relative" // Reduced from w-56 to w-44
+              className="mx-auto -mb-1 w-64 max-w-full relative" // Increased from w-44 to w-64
               variants={exportCardsAnimation}
               initial="hidden"
               animate={["visible", "float"]}

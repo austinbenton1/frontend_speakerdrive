@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 
 // Shared navigation configuration
 export const DEFAULT_NAV_LINKS = [
-  { label: "Features", href: "/features" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];

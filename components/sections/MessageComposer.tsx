@@ -35,74 +35,73 @@ export function MessageComposer() {
   const [direction, setDirection] = useState(1);
 
   return (
-    <div className='overflow-auto py-0 sm:overflow-hidden bg-stone-50'>
+    <div className='overflow-auto py-0 pb-24 sm:overflow-hidden bg-stone-50'>
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        {/* Section Header */}
-        <div className="mb-12 text-center">
-          <div className="inline-flex items-center mb-4">
-            <MessageCircle className="h-7 w-7 mr-3 text-brand-blue" />
-            <h3 className="text-2xl font-bold text-gray-800">Ditch The Hard Sales Pitch</h3>
-          </div>
-          <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
-            Generate personalized outreach messages that engage decision-makers and start conversations.
-          </p>
-        </div>
-
         {/* Channel Selection */}
-        <div className="mb-12 max-w-3xl mx-auto">
-          <p className="text-base font-medium text-gray-700 mb-3.5">
-            Choose your outreach channel:
-          </p>
-          <div className='flex flex-col sm:flex-row sm:space-x-5 space-y-4 sm:space-y-0 justify-center'>
-            {CONTACT_FEATURES.map((feature, index) => {
-                const isActive = index === activeIndex;
-                return (
-                  <button
-                    key={index}
-                    type='button'
-                    onClick={() => {
-                      setDirection(index > activeIndex ? 1 : -1);
-                      setActiveIndex(index);
-                    }}
-                    className={cn(
-                      'relative rounded-md px-5 py-3 text-base font-medium transition-all duration-200 cursor-pointer flex items-center justify-center gap-3 ring-offset-2 focus:outline-none focus:ring-2 focus:ring-brand-blue w-full sm:w-auto',
-                      isActive
-                        ? `bg-gradient-to-r ${feature.gradient} text-white shadow-md`
-                        : 'bg-white text-gray-800 hover:bg-gray-50 shadow-sm hover:shadow-md border border-gray-200 hover:border-gray-300'
-                    )}
-                  >
-                    {feature.icon}
-                    {feature.title}
-                    {isActive ? (
-                      <CheckCircleIcon className="ml-2 h-4 w-4" />
-                    ) : (
-                      <ArrowRight className="ml-2 h-5 w-5 opacity-70" />
-                    )}
-                    
-                    {isActive && (
-                      <motion.span 
-                        className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 h-[calc(100%-8px)] rounded-full bg-gradient-to-r ${feature.gradient} opacity-90 -ml-0.5`}
-                        layoutId="active-indicator"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                  </button>
-                );
-            })}
+        <div className="relative max-w-[800px] mx-auto">
+          <div className="absolute inset-0 -m-8 bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-gray-100"></div>
+          <div className="relative px-4 pt-8">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center mb-4">
+                <MessageCircle className="h-7 w-7 mr-3 text-brand-blue" />
+                <h3 className="text-2xl font-bold text-gray-800">Ditch The Hard Sales Pitch</h3>
+              </div>
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto px-8">
+                We meticulously cross-reference your expertise, event specifics, and decision-maker priorities to craft conversation-starting messages that get responses.
+              </p>
+            </div>
+          <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <div className="flex items-start gap-3">
+              <MessageCircle className="h-6 w-6 text-gray-500 mt-0.5" />
+              <div>
+                <h3 className="text-[15px] font-semibold text-gray-800">Message Composer Demo</h3>
+                <div className="flex items-center gap-1.5">
+                  <p className="text-[14px] text-gray-600">View By Message Type</p>
+                  <ArrowRight className="h-3.5 w-3.5 text-gray-400" />
+                </div>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {CONTACT_FEATURES.map((feature, index) => {
+                  const isActive = index === activeIndex;
+                  return (
+                    <button
+                      key={index}
+                      type='button'
+                      onClick={() => {
+                        setDirection(index > activeIndex ? 1 : -1);
+                        setActiveIndex(index);
+                      }}
+                      className={cn(
+                        'relative rounded-md px-3 py-1.5 text-sm font-medium transition-all duration-200 cursor-pointer flex items-center gap-2',
+                        isActive
+                          ? 'bg-white text-gray-900 shadow-sm border border-gray-200'
+                          : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                      )}
+                    >
+                      <div className={cn(
+                        "flex items-center justify-center w-4 h-4",
+                        isActive ? "text-gray-700" : "text-gray-500"
+                      )}>
+                        <div className="w-5 h-5">{feature.icon}</div>
+                      </div>
+                      <span>{feature.title}</span>
+                    </button>
+                  );
+              })}
+            </div>
           </div>
-        </div>
-
-        {/* Video Display Panel */}
-        <div className='flex justify-center max-w-4xl mx-auto px-4'>
-          <TransitionPanel
-            className='aspect-video w-[800px] max-w-full overflow-hidden rounded-xl'
-            activeIndex={activeIndex}
-            custom={direction}
-            transition={{
+          {/* Video Display Panel */}
+          <div className='mt-8 mb-8'>
+            <TransitionPanel
+              className='aspect-video w-full overflow-hidden rounded-xl'
+              activeIndex={activeIndex}
+              custom={direction}
+              transition={{
               ease: 'easeOut',
               duration: 0.3,
             }}
-            variants={{
+              variants={{
               enter: (dir: number) => ({
                 x: dir > 0 ? 32 : -32,
                 opacity: 0.8,
@@ -123,16 +122,9 @@ export function MessageComposer() {
                 key={feature.title}
               >
                 {feature.video ? (
-                  <div className="w-full h-full overflow-hidden relative">
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-t ${
-                        feature.title === 'Email Outreach'
-                          ? 'from-brand-blue/5'
-                          : 'from-green-500/5'
-                      } to-transparent z-10 pointer-events-none`}
-                    />
+                  <div className="w-full h-full overflow-hidden relative border-2 border-gray-200 rounded-xl">
                     <video
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover rounded-xl shadow-md"
                       autoPlay
                       muted
                       loop
@@ -153,7 +145,9 @@ export function MessageComposer() {
                 )}
               </div>
             ))}
-          </TransitionPanel>
+            </TransitionPanel>
+          </div>
+          </div>
         </div>
       </div>
     </div>
