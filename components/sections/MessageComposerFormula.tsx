@@ -82,7 +82,7 @@ export function MessageComposerFormula() {
                     </h3>
                   </div>
                   <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                    We meticulously analyze your expertise, event specifics, and decision-maker priorities to find the perfect connection.
+                    <span className="max-w-lg mx-auto block">We meticulously analyze your expertise, event specifics, and decision-maker priorities to find the perfect connection.</span>
                   </p>
                 </div>
                 <video

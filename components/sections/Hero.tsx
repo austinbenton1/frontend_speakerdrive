@@ -102,7 +102,7 @@ export function Hero() {
           {/* LEFT FLOATING IMAGE - hidden below lg */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
-              className="relative"
+              className="relative -mt-8"
               variants={floatLeft}
               initial="hidden"
               animate="visible"
@@ -156,7 +156,7 @@ export function Hero() {
             {/* Small label/pill - Now with ENHANCED borders and shadow */}
             <motion.a
               href="#"
-              className="group flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-6 w-auto bg-white"
+              className="group flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-8 w-auto bg-white"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
@@ -215,7 +215,7 @@ export function Hero() {
           {/* RIGHT FLOATING IMAGE - hidden below lg */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
-              className="relative"
+              className="relative -mt-8"
               variants={floatRight}
               initial="hidden"
               animate="visible"

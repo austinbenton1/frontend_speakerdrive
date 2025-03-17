@@ -43,21 +43,23 @@ export function MessageComposer() {
           <div className="relative px-4 pt-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center mb-4">
-                <MessageCircle className="h-7 w-7 mr-3 text-brand-blue" />
                 <h3 className="text-2xl font-bold text-gray-800">Conversations That Convert</h3>
               </div>
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto px-8">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl mx-auto">
                 The SpeakerDrive Composer creates messages that start conversations and get responses.
               </p>
             </div>
           <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">
             <div className="flex items-start gap-3">
-              <MessageCircle className="h-6 w-6 text-gray-500 mt-0.5" />
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6 text-gray-500 mt-0.5">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
               <div>
                 <h3 className="text-[15px] font-semibold text-gray-800">See It In Action</h3>
                 <div className="flex items-center gap-1.5">
-                  <p className="text-[14px] text-gray-600">View by message types -></p>
-                  <ArrowRight className="h-3.5 w-3.5 text-gray-400" />
+                  <p className="text-[14px] text-gray-600">View by message types</p>
+                  <ArrowRight className="h-3.5 w-3.5 text-gray-400 ml-1" />
                 </div>
               </div>
             </div>
