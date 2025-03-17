@@ -44,10 +44,12 @@ export function MessageComposer() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center mb-4">
                 <MessageCircle className="h-7 w-7 mr-3 text-brand-blue" />
-                <h3 className="text-2xl font-bold text-gray-800">Ditch The Hard Sales Pitch</h3>
+                <h3 className="text-2xl font-bold text-gray-800">Ultra Personalized Messaging</h3>
               </div>
               <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto px-8">
-                We meticulously cross-reference your expertise, event specifics, and decision-maker priorities to craft conversation-starting messages that get responses.
+                The SpeakerDrive Composer cross-references your expertise, event specifics, and decision-maker priorities.
+                
+                You get conversation starting messages that get responses.
               </p>
             </div>
           <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4 border border-gray-200">

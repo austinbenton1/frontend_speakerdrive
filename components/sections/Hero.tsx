@@ -100,7 +100,7 @@ export function Hero() {
         {/* Grid with left image / center text / right image */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
           {/* LEFT FLOATING IMAGE - hidden below lg */}
-          <div className="hidden lg:flex lg:justify-center lg:items-start">
+          <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
               className="relative"
               variants={floatLeft}
@@ -124,7 +124,7 @@ export function Hero() {
           <div className="flex flex-col items-center justify-start relative">
             {/* Export Cards SVG - Made smaller */}
             <motion.div
-              className="mx-auto -mb-1 w-64 max-w-full relative" // Increased from w-44 to w-64
+              className="mx-auto mb-6 w-64 max-w-full relative"
               variants={exportCardsAnimation}
               initial="hidden"
               animate={["visible", "float"]}
@@ -216,7 +216,7 @@ export function Hero() {
           </div>
 
           {/* RIGHT FLOATING IMAGE - hidden below lg */}
-          <div className="hidden lg:flex lg:justify-center lg:items-start">
+          <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
               className="relative"
               variants={floatRight}
