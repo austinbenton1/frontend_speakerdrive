@@ -1,11 +1,12 @@
 "use client";
+import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
 import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
 import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
-import { ArrowDownIcon } from 'lucide-react';
+import { ArrowDownIcon, ArrowRight } from 'lucide-react';
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
@@ -56,11 +57,11 @@ export default function LandingPage() {
                     
                     <div className="space-y-8">
                       <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive is a prospecting database built exclusively for speakers, coaches, and experts. Access contact data for events, speaker opportunities, and decision-makers who book professionals, like you.
+                        SpeakerDrive is a specialized prospecting platform that gives speakers, coaches, and experts direct access to verified decision-maker contact information. Our database combines event-based engagements like conferences, corporate training opportunities, workshops, consulting engagements and more.
                       </p>
                       
                       <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive lets you build a predictable booking pipeline—on your terms.
+                        As your one-stop shop for finding and booking opportunities, transform unpredictable referrals into a reliable revenue stream and take control of your pipeline.
                       </p>
                     </div>
                   </div>
@@ -105,7 +106,7 @@ export default function LandingPage() {
             <FeatureTwoItem
               stepNumber={2}
               title="Unlock Contact Info"
-              description=""
+              description="Skip the research and go straight to connecting"
               features={[
                 {
                   title: "Email Verification",
@@ -281,6 +282,31 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
+            
+            {/* Founder Quote Section */}
+            <div className="max-w-3xl mx-auto mt-24 mb-20 px-6">
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-50/30 via-blue-100/20 to-transparent rounded-xl blur-xl opacity-70 -z-10"></div>
+                <blockquote className="text-center">
+                  <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-relaxed mb-8">
+                    "SpeakerDrive combines what I know works: methodical outreach that built my previous business to 7 figures, and marketing messaging that have generated millions in speaker bookings. I've simplified everything I know into one platform."
+                  </p>
+                  <footer className="mt-4">
+                    <div className="flex items-center justify-center gap-4">
+                      <img 
+                        src="/austin_benton_headshot.png"
+                        alt="Austin Benton"
+                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 object-center"
+                      />
+                      <div className="text-left">
+                        <div className="font-semibold text-gray-900">Austin Benton</div>
+                        <div className="text-gray-600">Founder</div>
+                      </div>
+                    </div>
+                  </footer>
+                </blockquote>
+              </div>
+            </div>
 
         <GeneralFAQ />
       </main>

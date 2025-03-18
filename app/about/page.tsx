@@ -83,9 +83,7 @@ export default function AboutPage() {
               </h1>
 
               <p className="text-lg md:text-xl leading-relaxed text-[#555] mb-12 max-w-2xl mx-auto">
-                SpeakerDrive puts experts in control of their professional
-                opportunities, helping them find and book more speaking
-                engagements without relying on referrals.
+                SpeakerDrive is a specialized prospecting platform that gives speakers, coaches, and experts direct access to verified decision-maker contact information. Our database combines event-based engagements like conferences, corporate training opportunities, workshops, consulting engagements and more.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-5 justify-center mb-8">
@@ -279,7 +277,7 @@ export default function AboutPage() {
         >
           <div className="container mx-auto max-w-4xl px-6">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 bg-gradient-to-br from-[#29A9FF]/20 to-[#00C853]/20 transform transition-transform hover:scale-110 duration-300">
+              <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 bg-gradient-to-br from-[#29A9FF]/10 to-[#00C853]/10 hover:from-[#29A9FF]/20 hover:to-[#00C853]/20 transition-all duration-300 transform hover:scale-110">
                 <Award className="w-8 h-8 text-[#29A9FF]" />
               </div>
               <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-12 text-[#333333]">

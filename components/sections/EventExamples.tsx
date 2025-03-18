@@ -50,7 +50,7 @@ const EVENTS: EventDetails[] = [
     title: "Forth Roadmap Conference",
     subtitle: "Forth",
     logo: "/Forth Roadmap Conference-mh.png",
-    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0575e098b2d1e63b247.mp4", 
+    video: "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d1d0573d10882513e1713a.mp4",
     description: "The Forth Roadmap Conference 2025 focuses on advancing electric transportation by fostering collaborative dialogue among industry leaders, policymakers, and community advocates.",
     feeRange: "$5,000-$10,000",
     feeDescription: "Registration fees reflect commitment to expert-led sessions. Past speaker compensation aligns with industry standards for sustainability and transportation technology events."

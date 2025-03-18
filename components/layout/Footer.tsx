@@ -28,7 +28,7 @@ export function Footer5() {
               />
             </div>
             <p className="text-sm text-zinc-300">
-              SpeakerDrive helps speakers and experts find relevant opportunities and build their careers. Our platform connects professionals with decision-makers, creating predictable business growth.
+              SpeakerDrive is a specialized prospecting platform that gives speakers, coaches, and experts direct access to verified decision-maker contact information. Our database combines event-based engagements like conferences, corporate training opportunities, workshops, consulting engagements and more.
             </p>
           </div>
           
