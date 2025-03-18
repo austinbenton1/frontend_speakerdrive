@@ -124,13 +124,13 @@ export function Hero() {
           <div className="flex flex-col items-center justify-start relative">
             {/* Export Cards SVG - Made smaller */}
             <motion.div
-              className="mx-auto mb-6 w-64 max-w-full relative"
+              className="mx-auto mb-6 w-64 max-w-full relative transform-gpu"
               variants={exportCardsAnimation}
               initial="hidden"
               animate={["visible", "float"]}
               whileHover="hover"
               transition={{ delay: 0.1 }}
-              style={{ zIndex: 5 }}
+              style={{ zIndex: 5, willChange: 'transform' }}
             >
               {/* Add subtle shimmer effect */}
               <motion.div 
@@ -156,20 +156,22 @@ export function Hero() {
             {/* Small label/pill - Now with ENHANCED borders and shadow */}
             <motion.a
               href="#"
-              className="group flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-8 w-auto bg-white"
+              className="group inline-flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-8 bg-white whitespace-nowrap"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               transition={{ duration: 0.5, delay: 0.3 }}
               style={{ zIndex: 20 }}
             >
-              <span className="flex h-full items-center font-medium text-green-600 px-3 py-1.5 text-sm border-r-2 border-gray-300 bg-white">
+              <span className="flex-none flex h-full items-center font-medium text-green-600 px-1.5 sm:px-3 py-1 sm:py-1.5 text-[12px] sm:text-sm border-r-2 border-gray-300 bg-white">
                 New!
               </span>
-              <span className="flex items-center gap-1 px-3 py-1.5 text-sm font-medium text-gray-700 bg-white">
+              <span className="flex items-center gap-1 px-1.5 sm:px-3 py-1 sm:py-1.5 text-[12px] sm:text-sm font-medium text-gray-700 bg-white">
                 For Speakers, Coaches &amp; Experts
-                <span className="text-xs ml-1">🎉</span>
-                <ChevronRight className="h-4 w-4 ml-1 text-gray-400" />
+                <div className="flex-none flex items-center">
+                  <span className="text-[11px] sm:text-xs ml-1">🎉</span>
+                  <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-0.5 sm:ml-1 text-gray-400" />
+                </div>
               </span>
             </motion.a>
 
@@ -196,7 +198,7 @@ export function Hero() {
 
             {/* Enhanced CTA Button with more "clickable" feel */}
             <MotionLink
-              href="/"
+              href="https://app.speakerdrive.com/signup"
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
               variants={fadeUp}
               initial="hidden"
@@ -235,19 +237,22 @@ export function Hero() {
 
         {/* NEW HERO IMAGE BELOW */}
         <div className="mt-10 sm:mt-16">
-          <div className="relative mx-auto max-w-screen-lg [perspective:1000px]">
+          <div className="relative mx-auto max-w-screen-lg [perspective:1000px] -mx-4 sm:mx-auto">
             <motion.div
-              className="relative aspect-video w-full rounded-xl lg:rounded-2xl overflow-hidden"
-              style={{ rotateX }}
+              className="relative aspect-[4/3] sm:aspect-video w-full sm:rounded-xl lg:rounded-2xl overflow-hidden"
+              style={{ 
+                rotateX,
+                willChange: 'transform',
+              }}
             >
               <img
                 src="/new_hero_image.png"
                 alt="SpeakerDrive dashboard overview"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transform-gpu"
               />
             </motion.div>
             <div
-              className="absolute inset-x-0 -bottom-0 -mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
+              className="absolute inset-x-0 -bottom-0 -mx-4 sm:-mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
               aria-hidden="true"
             />
           </div>

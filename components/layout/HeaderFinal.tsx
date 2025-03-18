@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 // Shared navigation configuration
 export const DEFAULT_NAV_LINKS = [
+  { label: "Home", href: "/" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];
@@ -87,8 +88,8 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
         <div className="md:hidden">
           <button
             type="button"
-            className="inline-flex items-center justify-center p-2 text-neutral-500 
-                       hover:text-brand-blue hover:bg-neutral-100 rounded-md focus:outline-none relative z-20"
+            className="inline-flex items-center justify-center p-2 text-neutral-500 bg-white/90
+                       hover:text-brand-blue hover:bg-white rounded-md focus:outline-none relative z-20 shadow-sm"
             aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -140,12 +141,12 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
         transition={{ duration: 0.3 }}
       >
         <div className="px-4 py-5 space-y-4">
-          <nav className="flex flex-col space-y-4">
+          <nav className="flex flex-col space-y-3">
             {navigationLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-base font-medium py-2 text-neutral-700 hover:text-brand-blue"
+                className="text-[15px] font-medium px-3 py-2.5 text-gray-700 hover:text-brand-blue rounded-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
@@ -153,17 +154,17 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
             ))}
           </nav>
 
-          <div className="flex flex-col space-y-3 pt-2 border-t border-gray-100">
+          <div className="flex flex-col space-y-2.5 pt-3 mt-2 border-t border-gray-100">
             <Link
               href="/login"
-              className="text-base font-medium py-2 text-neutral-800 hover:text-brand-blue"
+              className="text-[15px] font-medium px-3 py-2.5 text-gray-700 hover:text-brand-blue rounded-lg hover:bg-gray-50 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Sign in
             </Link>
             <Link
               href="/signup"
-              className="cta-button flex justify-center text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
+              className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Try for free
