@@ -4,7 +4,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 // Basic fade/slide for single elements
 const fadeUp = {
@@ -88,12 +88,28 @@ const exportCardsAnimation = {
 export function Hero() {
   const MotionLink = motion(Link);
   const containerRef = useRef(null);
+  const imageRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end end'],
+    offset: ['start 80%', 'end 20%'],
   });
-  const rotateX = useTransform(scrollYProgress, [0.75, 1], [15, 0]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [25, 0]);
 
+  // Preload critical images
+  useEffect(() => {
+    const preloadImages = () => {
+      const imageUrls = [
+        '/Left Hero-mh.png',
+        '/Right Hero-mh.png',
+        '/new_hero_image.png'
+      ];
+      imageUrls.forEach(url => {
+        const img = new Image();
+        img.src = url;
+      });
+    };
+    preloadImages();
+  }, []);
   return (
     <div className="px-4 pb-6 pt-16 sm:pb-12 sm:pt-20" ref={containerRef}>
       <div className="container mx-auto max-w-6xl">
@@ -157,10 +173,13 @@ export function Hero() {
             <motion.a
               href="#"
               className="group inline-flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-8 bg-white whitespace-nowrap"
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              transition={{ duration: 0.5, delay: 0.3 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.4,
+                ease: "easeOut",
+                delay: 0.2
+              }}
               style={{ zIndex: 20 }}
             >
               <span className="flex-none flex h-full items-center font-medium text-green-600 px-1.5 sm:px-3 py-1 sm:py-1.5 text-[12px] sm:text-sm border-r-2 border-gray-300 bg-white">
@@ -236,23 +255,40 @@ export function Hero() {
         </div>
 
         {/* NEW HERO IMAGE BELOW */}
-        <div className="mt-10 sm:mt-16">
-          <div className="relative mx-auto max-w-screen-lg [perspective:1000px] -mx-4 sm:mx-auto">
+        <div className="mt-10 sm:mt-16 px-0 overflow-visible">
+          <div className="relative mx-auto max-w-screen-lg [perspective:1000px] mx-0 sm:mx-auto">
             <motion.div
-              className="relative aspect-[4/3] sm:aspect-video w-full sm:rounded-xl lg:rounded-2xl overflow-hidden"
+              className="relative aspect-[4/3] sm:aspect-video w-[110%] -ml-[5%] sm:w-full sm:ml-0 sm:rounded-xl lg:rounded-2xl overflow-hidden"
               style={{ 
                 rotateX,
+                transformOrigin: "center bottom",
                 willChange: 'transform',
+                backfaceVisibility: 'hidden',
+                contain: 'paint layout'
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ 
+                duration: 0.5,
+                ease: [0.645, 0.045, 0.355, 1.000]
               }}
             >
               <img
+                ref={imageRef}
                 src="/new_hero_image.png"
                 alt="SpeakerDrive dashboard overview"
-                className="w-full h-full object-cover transform-gpu"
+                className="w-full h-full object-cover transform-gpu scale-[1.02]"
+                width={1200}
+                height={675}
+                loading="eager"
+                decoding="sync"
+                style={{
+                  contentVisibility: 'auto',
+                }}
               />
             </motion.div>
             <div
-              className="absolute inset-x-0 -bottom-0 -mx-4 sm:-mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
+              className="absolute inset-x-0 -bottom-0 mx-0 sm:-mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
               aria-hidden="true"
             />
           </div>
