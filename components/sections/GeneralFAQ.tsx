@@ -9,43 +9,33 @@ const FAQ_ITEMS = [
   },
   {
     question: "How do you find events and opportunities?",
-    answer: "Our team and automation researches the internet continuously for speaking opportunities, conferences, and events as they're announced. This ensures you have access to the freshest opportunities."
-  },
-  {
-    question: "How do you ensure contact information is up-to-date?",
-    answer: "We use automated verification, manual spot-checks, and regular database cleaning to maintain accuracy. Invalid emails are promptly removed."
-  },
-  {
-    question: "What types of events and opportunities are available?",
-    answer: "We cover conferences, corporate training, association meetings, workshops, and educational seminars across technology, business, healthcare, education, and more."
+    answer: "Our team, AI and automation join forces to research the internet continuously for speaking opportunities, conferences, and events as they're announced. Our database continues to grow with both current and historical events."
   },
   {
     question: "What about past events? Aren't they outdated?",
     answer: "Past events are valuable prospecting opportunities. Organizations that have invested in speakers before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future opportunities with the same organization."
   },
   {
-    question: "How customizable is the message composer?",
-    answer: "Our smart system builds your profile when you sign up, then cross-references event details, contact information, and your expertise to create highly personalized outreach. This matching technology is our secret weapon for high response rates."
+    question: "How much time should I spend prospecting per day?",
+    answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting is the key factor in seeing results, regardless of the exact time spent."
   },
   {
-    question: "Is there an integration with my CRM or email platform?",
-    answer: "Export to any CRM via CSV. Direct Gmail integration available, with Instant.ly connection coming soon."
+    question: "I've tried outreach before without success. Why would SpeakerDrive be different?",
+    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on starting conversations and building relationships first, not closing deals—a strategy proven more effective for professional services."
   },
   {
-    question: "How much time should I spend on prospecting each day?",
-    answer: "We recommend 20-30 minutes daily. Consistency is the key factor in seeing results, regardless of the exact time spent."
+    question: "What types of outreach messages actually get responses?",
+    answer: "Counterintuitively, shorter messages get more replies. Our system creates brief, targeted messages that spark interest without overwhelming. Remember: trying to close a deal in your first message is like proposing marriage on a first date."
   },
   {
-    question: "Will outreach work for my industry?",
-    answer: "Our message composer is designed to start conversations, not close deals. More conversations equal more opportunities. In fact, going right for the \"hard sell\" isn't a good strategy for professional services. We focus on building relationships."
+    question: "How does the message generation process work?",
+    answer: "Our system presents you with three different messages, each with a unique angle, for each opportunity. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates. You can choose the message that best fits your style, edit it if needed, and send it directly from our platform. This gives you the right balance between automated efficiency and personal control over your outreach."
+  },
+  {
+    question: "Who is behind SpeakerDrive?",
+    answer: "SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our About page."
   }
 ];
-
-// Add Austin Benton question at the end
-FAQ_ITEMS.push({
-  question: "Who is behind SpeakerDrive?",
-  answer: "SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our About page."
-});
 
 export function GeneralFAQ() {
   return (
@@ -59,7 +49,7 @@ export function GeneralFAQ() {
               Frequently Asked Questions
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-              Everything you need to know about using SpeakerDrive
+              Common questions about using SpeakerDrive
             </p>
           </div>
         </div>
@@ -77,35 +67,35 @@ export function GeneralFAQ() {
                 value={`item-${index}`}
                 className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
               >
-              <AccordionTrigger className="w-full">
-                <div className="flex items-center justify-between w-full text-left">
-                  <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
-                    <div className="flex-1">
-                      <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
-                        {item.question}
-                      </span>
-                    </div>
-                    <div className="flex-shrink-0">
-                      <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
-                        <svg
-                          className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                <AccordionTrigger className="w-full">
+                  <div className="flex items-center justify-between w-full text-left">
+                    <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
+                      <div className="flex-1">
+                        <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
+                          {item.question}
+                        </span>
+                      </div>
+                      <div className="flex-shrink-0">
+                        <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
+                          <svg
+                            className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </AccordionTrigger>
-              <AccordionContent className="px-6 pb-5">
-                <div className="relative">
-                  <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                  <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">{item.answer}</p>
-                </div>
-              </AccordionContent>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-5">
+                  <div className="relative">
+                    <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
+                    <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">{item.answer}</p>
+                  </div>
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -151,7 +141,7 @@ export function GeneralFAQ() {
                       {item.question === "Who is behind SpeakerDrive?" ? (
                         <>
                           SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our{' '}
-                          <Link href="/about" className="text-brand-blue hover:text-blue-700 underline">
+                          <Link href="https://speakerdrive.com/about" className="text-brand-blue hover:text-blue-700 underline">
                             About page
                           </Link>
                           .
@@ -173,7 +163,7 @@ export function GeneralFAQ() {
             Still have questions? We're here to help.
           </p>
           <a
-            href="mailto:support@speakerdrive.com"
+            href="https://speakerdrive.com/contact"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-gray-200 bg-white text-gray-800 hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 text-base font-medium gap-2 shadow-sm hover:shadow"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

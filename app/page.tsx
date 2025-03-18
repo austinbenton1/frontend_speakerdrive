@@ -6,7 +6,7 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
-import { ArrowDownIcon, ArrowRight } from 'lucide-react';
+import { ArrowDownIcon } from "lucide-react";
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
@@ -33,54 +33,48 @@ export default function LandingPage() {
           <Hero />
         </section>
 
-        {/*
-          "How It Works" and Steps 1-3 combined into a single
-          section to eliminate gaps & unify design.
-        */}
+        {/* "How It Works" and Steps 1-3 */}
         <section id="how-it-works" className="bg-stone-50 pt-16 pb-12">
-          <div className="relative">
-            {/* Content */}
-            <div className="relative px-4 mb-12">
-              <div className="max-w-2xl mx-auto">
-                <div className="flex items-start gap-4">
-                  <img
-                    src="/SpeakerDrive Logo - Short.png"
-                    alt="SpeakerDrive"
-                    className="w-9 h-9 object-contain flex-shrink-0 mt-1"
-                  />
+          <div className="relative px-4 mb-12">
+            <div className="max-w-2xl mx-auto">
+              <div className="flex items-start gap-4">
+                <img
+                  src="/SpeakerDrive Logo - Short.png"
+                  alt="SpeakerDrive"
+                  className="w-9 h-9 object-contain flex-shrink-0 mt-1"
+                />
+                
+                <div className="flex-1 text-left relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
+                  <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
+                    What is SpeakerDrive?
+                  </h2>
                   
-                  <div className="flex-1 text-left relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
-                    <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
-                      What is SpeakerDrive?
-                    </h2>
+                  <div className="space-y-8">
+                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                      SpeakerDrive is a specialized prospecting platform for experts that includes direct access to verified decision-maker contact information, as well as event-based engagements like conferences, corporate training, workshops, consulting opportunities and more.
+                    </p>
                     
-                    <div className="space-y-8">
-                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive is a specialized prospecting platform for experts that includes direct access to verified decision-maker contact information, as well as event-based engagements like conferences, corporate training, workshops, consulting opportunities and more.
-                      </p>
-                      
-                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive is your one-stop shop to escape the unpredictable referral cycle and take control of your sales pipeline—on your terms.
-                      </p>
-                    </div>
+                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                      SpeakerDrive is your one-stop shop to escape the unpredictable referral cycle and take control of your sales pipeline—on your terms.
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                {/* Visual separator */}
-                <div className="mt-24 mb-12 relative">
-                  <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-                  <div className="flex justify-center">
-                    <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
-                      <span className="text-gray-500 text-sm font-medium">How It Works</span>
-                    </div>
+              {/* Visual separator */}
+              <div className="mt-24 mb-12 relative">
+                <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+                <div className="flex justify-center">
+                  <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
+                    <span className="text-gray-500 text-sm font-medium">How It Works</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* STEP 1: Find Qualified Leads */}
+          {/* Step 1: Find Qualified Leads */}
           <div className="mt-4">
             <FeatureTwoItem
               stepNumber={1}
@@ -101,7 +95,7 @@ export default function LandingPage() {
             />
           </div>
 
-          {/* STEP 2: Unlock Contact Info */}
+          {/* Step 2: Unlock Contact Info */}
           <div className="mt-10">
             <FeatureTwoItem
               stepNumber={2}
@@ -127,7 +121,7 @@ export default function LandingPage() {
             />
           </div>
 
-          {/* STEP 3: Craft Outreach */}
+          {/* Step 3: Craft Outreach */}
           <div className="mt-10">
             <FeatureTwoItem
               stepNumber={3}
@@ -149,21 +143,21 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Event Examples Section */}
+        {/* Event Examples */}
         <EventExamples />
 
-        {/* Message Composer Formula and Component Combined */}
-        <section className="bg-blue-50/50">
+        {/* Message Composer sections */}
+        <section className="bg-blue-50/50 pt-16 pb-16 px-4">
           <MessageComposerFormula />
           <MessageComposer />
         </section>
 
-        {/* Who We Serve */}
+        {/* Perfect For */}
         <section className="bg-white py-16 overflow-hidden">
           <div className="container mx-auto max-w-7xl px-4">
-            <div className="relative mb-2 text-center">
-              <h2 className="text-3xl sm:text-5xl font-extrabold text-black max-w-3xl mx-auto">
-                SpeakerDrive is Perfect For...
+            <div className="relative mb-2">
+              <h2 className="text-3xl sm:text-5xl font-extrabold leading-tight text-black text-center max-w-3xl mx-auto">
+                SpeakerDrive is Perfect&nbsp;For...
               </h2>
             </div>
 
@@ -172,62 +166,97 @@ export default function LandingPage() {
             </p>
 
             {/* Expert Types Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 -mx-8 px-8">
-              <div className="text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="relative aspect-[3/4] mb-4">
-                  <img src="/Coach.png" alt="Coaches" className="w-full h-full object-contain" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 px-4 sm:px-8">
+              
+              {/* Keynote Speakers */}
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-1 md:order-3">
+                <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
+                  <img
+                    src="/Keynote Speaker.png"
+                    alt="Keynote Speakers"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Coaches</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Reach organizations seeking leadership, development and transformation.
-                  </p>
-                </div>
-              </div>
-              <div className="text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="relative aspect-[3/4] mb-4">
-                  <img src="/Trainer Facilitator.png" alt="Trainers" className="w-full h-full object-contain" />
-                </div>
-                <div className="relative p-4 rounded-lg shadow-sm bg-white">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Trainers</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Find companies looking for skill-building and educational workshops.
-                  </p>
-                </div>
-              </div>
-              <div className="text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="relative aspect-[3/4] mb-4">
-                  <img src="/Keynote Speaker.png" alt="Keynote Speakers" className="w-full h-full object-contain" />
-                </div>
-                <div className="relative p-4 rounded-lg shadow-sm bg-white">
-                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Keynote Speakers</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Keynote Speakers</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Discover events searching for impactful mainstage presentations.
                   </p>
                 </div>
               </div>
-              <div className="text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="relative aspect-[3/4] mb-4">
-                  <img src="/Consultant.png" alt="Consultants" className="w-full h-full object-contain" />
+
+              {/* Coaches */}
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-2 md:order-1">
+                <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
+                  <img
+                    src="/Coach.png"
+                    alt="Coaches"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Consultants</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Coaches</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
+                    Reach organizations seeking leadership, development and transformation.
+                  </p>
+                </div>
+              </div>
+
+              {/* Trainers */}
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-3 md:order-2">
+                <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
+                  <img
+                    src="/Trainer Facilitator.png"
+                    alt="Trainers"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                </div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Trainers</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
+                    Find companies looking for skill-building and educational workshops.
+                  </p>
+                </div>
+              </div>
+
+              {/* Consultants */}
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-4 md:order-4">
+                <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
+                  <img
+                    src="/Consultant.png"
+                    alt="Consultants"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                </div>
+                <div className="relative p-4 rounded-lg shadow-sm bg-white">
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Consultants</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Access decision-makers who need specialized expertise and solutions.
                   </p>
                 </div>
               </div>
-              <div className="text-center transform hover:scale-105 transition-transform duration-300">
-                <div className="relative aspect-[3/4] mb-4">
-                  <img src="/Expert Thought Leader.png" alt="Thought Leaders" className="w-full h-full object-contain" />
+
+              {/* Thought Leaders */}
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-5 md:order-5">
+                <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
+                  <img
+                    src="/Expert Thought Leader.png"
+                    alt="Thought Leaders"
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Thought Leaders</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Thought Leaders</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
                     Identify platforms eager to showcase innovative ideas and insights.
                   </p>
@@ -242,21 +271,19 @@ export default function LandingPage() {
           <div className="container mx-auto max-w-4xl px-4">
             {/* Top statement */}
             <div className="text-center mb-4">
-              <h3 className="text-4xl md:text-5xl font-extrabold mb-3 bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 bg-clip-text text-transparent leading-tight">
-                Opportunities for experts are everywhere in the market.
+              <h3 className="text-3xl sm:text-5xl font-extrabold leading-tight bg-gradient-to-r from-blue-500 via-blue-400 to-blue-500 bg-clip-text text-transparent text-center max-w-3xl mx-auto">
+                Opportunities for experts are everywhere in the&nbsp;market.
               </h3>
             </div>
             
             {/* Visual funnel */}
             <div className="relative flex flex-col items-center">
-              {/* Second statement - narrower with enhanced styling */}
               <div className="w-full max-w-2xl mb-3 text-center">
                 <p className="relative text-xl font-semibold bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent">
                   Yet talented professionals still struggle to fill their calendars
                 </p>
               </div>
               
-              {/* Question - most narrow */}
               <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-2.5 border border-gray-200/50 mb-8">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <span className="text-gray-500 font-bold text-lg">?</span>
@@ -284,27 +311,60 @@ export default function LandingPage() {
         </section>
             
         {/* Founder Quote Section */}
-        <div className="max-w-3xl mx-auto mt-24 mb-20 px-6">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-50/30 via-blue-100/20 to-transparent rounded-xl blur-xl opacity-70 -z-10"></div>
-            <blockquote className="text-center">
-              <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-relaxed mb-8">
-                "SpeakerDrive combines what I know works: methodical outreach that built my previous business to 7 figures, and marketing messaging that have generated millions in speaker bookings. I've simplified everything I know into one platform."
-              </p>
-              <footer className="mt-4">
-                <div className="flex items-center justify-center gap-4">
-                  <img 
-                    src="/austin_benton_headshot.png"
-                    alt="Austin Benton"
-                    className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 object-center"
-                  />
-                  <div className="text-left">
-                    <div className="font-semibold text-gray-900">Austin Benton</div>
-                    <div className="text-gray-600">Founder</div>
-                  </div>
+        <div className="max-w-2xl mx-auto px-4 mb-20 mt-12">
+          <div className="flex flex-col gap-6">
+            {/* Clearer quote icon */}
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-[#0A66C2]"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z"/>
+            </svg>
+
+            {/* Smaller on mobile */}
+            <p className="text-base sm:text-xl font-normal text-gray-900 leading-relaxed">
+              SpeakerDrive combines what I know works: systematic outreach that built my previous
+              businesses, and proven messaging that have directly led to millions in speaker bookings.
+              I’ve simplified everything I know into one platform.
+            </p>
+
+            <div className="flex items-center mt-2">
+              <img
+                src="/austin_benton_head.png"
+                alt="Austin Benton"
+                className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 mr-4"
+              />
+              <div className="flex flex-col">
+                <p className="text-base font-semibold text-gray-900">Austin Benton</p>
+                <p className="text-sm text-gray-600">Founder, SpeakerDrive</p>
+                {/* Keep LinkedIn link from before */}
+                <div className="flex items-center gap-2 mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="text-[#0A66C2]"
+                  >
+                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                  </svg>
+                  <a
+                    href="https://www.linkedin.com/in/austin-benton/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-medium text-[#0A66C2] hover:text-blue-800 transition-colors"
+                  >
+                    Connect on LinkedIn
+                  </a>
                 </div>
-              </footer>
-            </blockquote>
+              </div>
+            </div>
           </div>
         </div>
 

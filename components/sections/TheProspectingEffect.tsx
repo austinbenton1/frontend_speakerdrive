@@ -35,7 +35,7 @@ export function TheProspectingEffect() {
               The Referral Trap
             </motion.h2>
             
-            {/* Updated subheadline copy - made left-aligned */}
+            {/* Updated subheadline copy */}
             <motion.p 
               className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto text-center mb-2"
               initial={{ opacity: 0 }}
@@ -70,7 +70,7 @@ export function TheProspectingEffect() {
             </motion.div>
           </div>
           
-          {/* Visual transition from red to blue section - MOVED above blue text */}
+          {/* Visual transition from red to blue section */}
           <div className="flex flex-col items-center py-6">
             <div className="h-24 w-1 bg-gradient-to-b from-red-300/70 to-brand-blue/50"></div>
             
@@ -80,8 +80,6 @@ export function TheProspectingEffect() {
             
             <div className="h-8 w-px bg-gradient-to-b from-brand-blue/50 to-transparent"></div>
           </div>
-          
-          {/* Triangle icon in a circle - NOW BLUE instead of red */}
           
           {/* Moved "Are you actively prospecting..." BELOW the gradient line */}
           <div className="max-w-3xl mx-auto mt-6 mb-2">
@@ -95,8 +93,9 @@ export function TheProspectingEffect() {
               <h2 className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold text-3xl sm:text-4xl mb-3">
                 Prospecting Is The Key
               </h2>
-              <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-xl mx-auto pb-1">
-                Consistent Prospecting -> Predictable Growth.
+              {/* Make "Consistent Prospecting -> Predictable Growth." match style of “Yet talented professionals” line */}
+              <p className="relative text-xl font-semibold bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent mb-2">
+                Consistent Prospecting -&gt; Predictable Growth.
               </p>
             </motion.div>
           </div>
@@ -106,7 +105,7 @@ export function TheProspectingEffect() {
       {/* COMPLETELY NEW SECTION with pure white background */}
       <div className="bg-white py-4">
         <div className="container mx-auto max-w-5xl px-4">
-          {/* Solution Section - Removed the quote entirely */}
+          {/* Solution Section */}
           <div className="max-w-xl mx-auto mb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -132,7 +131,6 @@ export function TheProspectingEffect() {
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
                   <p>Just 15-20 minutes of focused prospecting each day can transform your business stability.</p>
                   
-                  {/* Updated styling for the blue text to look more modern */}
                   <p>
                     <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold">
                       SpeakerDrive makes this easy.
@@ -143,15 +141,16 @@ export function TheProspectingEffect() {
                   
                   <p>Watch as your pipeline builds and develops. You'll command higher fees and be able to choose the clients YOU want to work with.</p>
                   
-                  <p>And amplify your influence.</p>
+                  {/* Combine lines into a single replaced line */}
+                  <p className="font-medium text-gray-800">
+                    Start your free trial and amplify your influence.
+                  </p>
                   
-                  <p className="font-medium text-gray-800">Start your free trial and control your pipeline.</p>
-                  
-                  {/* Added CTA button and text */}
+                  {/* CTA button */}
                   <div className="flex flex-col items-center mt-16 mb-24">
                     <a
                       href="/signup"
-                     className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
+                      className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
                     >
                       Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
                     </a>

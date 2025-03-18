@@ -4,11 +4,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
-// Shared navigation configuration
+// Full nav includes "Home" for mobile
 export const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
+  { label: "Pricing", href: "http://speakerdrive.com/pricing" },
+  { label: "Contact", href: "http://speakerdrive.com/contact" },
 ];
 
 interface HeaderFinalProps {
@@ -20,6 +20,9 @@ interface HeaderFinalProps {
 export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
   // Use default links if none provided
   const navigationLinks = links || DEFAULT_NAV_LINKS;
+
+  // Remove "Home" from desktop
+  const desktopLinks = navigationLinks.filter((link) => link.label !== "Home");
 
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -50,19 +53,18 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
           {logo}
         </Link>
         
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation (no "Home") */}
         <div className="hidden md:flex items-center">
-          {/* Navigation Links */}
           <nav className="flex items-center space-x-8">
-            {navigationLinks.map((link) => (
-              <Link
+            {desktopLinks.map((link) => (
+              <a
                 key={link.label}
                 href={link.href || "#"}
                 className="text-base font-medium tracking-wide text-neutral-700 hover:text-brand-blue transition-colors relative group"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-blue transition-all duration-300 group-hover:w-full"></span>
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -75,12 +77,12 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
               Sign in
               <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-blue transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <Link
-              href="/signup"
+            <a
+              href="https://app.speakerdrive.com/signup"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
-              Try for free
-            </Link>
+              Try For Free
+            </a>
           </div>
         </div>
 
@@ -130,7 +132,8 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
 
       {/* Mobile menu dropdown */}
       <motion.div
-        className={cn("absolute top-full left-0 right-0 bg-white z-10 shadow-lg md:hidden overflow-hidden",
+        className={cn(
+          "absolute top-full left-0 right-0 bg-white z-10 shadow-lg md:hidden overflow-hidden",
           isMobileMenuOpen ? "block" : "hidden"
         )}
         initial={{ height: 0, opacity: 0 }}
@@ -141,16 +144,17 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
         transition={{ duration: 0.3 }}
       >
         <div className="px-4 py-5 space-y-4">
+          {/* Full nav (including Home) on mobile */}
           <nav className="flex flex-col space-y-3">
             {navigationLinks.map((link) => (
-              <Link
+              <a
                 key={link.label}
                 href={link.href}
                 className="text-[15px] font-medium px-3 py-2.5 text-gray-700 hover:text-brand-blue rounded-lg hover:bg-gray-50 transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -162,13 +166,13 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
             >
               Sign in
             </Link>
-            <Link
-              href="/signup"
+            <a
+              href="https://app.speakerdrive.com/signup"
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Try for free
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>

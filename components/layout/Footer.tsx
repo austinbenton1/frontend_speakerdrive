@@ -28,7 +28,7 @@ export function Footer5() {
               />
             </div>
             <p className="text-sm text-zinc-300">
-              SpeakerDrive is a specialized prospecting platform that gives speakers, coaches, and experts direct access to verified decision-maker contact information. Our database combines event-based engagements like conferences, corporate training opportunities, workshops, consulting engagements and more.
+              SpeakerDrive is a specialized prospecting platform for experts that includes direct access to verified decision-maker contact information and event-based engagements. It’s your one-stop shop to escape the unpredictable referral cycle and take control of your sales pipeline.
             </p>
           </div>
           
@@ -37,36 +37,82 @@ export function Footer5() {
             {/* Column 2: Product */}
             <div className="w-1/2 md:w-auto flex flex-col gap-3 mb-8 md:mb-0">
               <h3 className="text-base font-bold text-zinc-300">Product</h3>
-              <Link href="/about" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">About</Link>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Features</a>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Pricing</a>
+              <a
+                href="http://speakerdrive.com/about"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                About
+              </a>
+              <a
+                href="http://speakerdrive.com/pricing"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                Pricing
+              </a>
+              <a
+                href="http://speakerdrive.com/contact"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                Contact
+              </a>
             </div>
             
             {/* Column 3: Support */}
             <div className="w-1/2 md:w-auto flex flex-col gap-3 mb-8 md:mb-0">
               <h3 className="text-base font-bold text-zinc-300">Support</h3>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Help Center</a>
-              <a href="mailto:support@speakerdrive.com" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors flex items-center gap-1.5">
+              <a
+                href="https://learn.speakerdrive.com"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Help Center
+              </a>
+              <a
+                href="mailto:support@speakerdrive.com"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors flex items-center gap-1.5"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail">
                   <rect width="20" height="16" x="2" y="4" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
                 support@speakerdrive.com
               </a>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Book A Demo</a>
+              <a
+                href="http://speakerdrive.com/demo"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                Book A Demo
+              </a>
             </div>
             
             {/* Column 4: More */}
             <div className="w-1/2 md:w-auto flex flex-col gap-3">
               <h3 className="text-base font-bold text-zinc-300">More</h3>
-              <a href="http://linkedin.com/in/austin-benton" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="fill-zinc-300">
+              <a
+                href="http://linkedin.com/in/austin-benton"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors flex items-center gap-1.5"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="fill-zinc-300"
+                >
                   <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
                 </svg>
                 LinkedIn
               </a>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Contact</a>
-              <a href="#" className="text-sm text-zinc-100 hover:text-brand-blue transition-colors">Affiliates</a>
+              <a
+                href="http://speakerdrive.com/affiliates"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                Affiliates
+              </a>
             </div>
           </div>
         </div>
@@ -74,22 +120,22 @@ export function Footer5() {
         {/* Border */}
         <div className="border-t border-zinc-700 mb-8"></div>
         
-        {/* Bottom section with copyright and links */}
+        {/* Bottom row */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Legal links */}
           <div className="flex gap-x-6">
-              <Link href="/legal/privacy" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/legal/terms" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
-                Disclaimer
-              </Link>
-            </div>
+            <Link href="/legal/privacy" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/legal/terms" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+              Disclaimer
+            </Link>
+          </div>
           
-          {/* Text scramble - fixed to ensure visibility */}
+          {/* Copyright scramble */}
           <div className="h-6 flex items-center">
             <TextScramble
               className="text-sm text-blue-200/70"
