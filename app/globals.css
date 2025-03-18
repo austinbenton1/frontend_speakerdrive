@@ -45,8 +45,7 @@
   }
 }
 
-/* Animations for GlowEffect */
-/* Gold text gradient animation */
+/* Gold text gradient animation for "Gold" word */
 @keyframes shimmer {
   0% {
     background-position: -100% center;
@@ -73,6 +72,7 @@
   text-shadow: 0 0 1px rgba(218, 165, 32, 0.1);
 }
 
+/* Additional custom animations */
 @keyframes breathe {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
@@ -213,9 +213,7 @@
   background-color: rgba(59, 130, 246, 0.01);
 }
 
-/* ------------------------------------- */
-/*  NO-RAISE OVERRIDE: remove hover-lift */
-/* ------------------------------------- */
+/* No-lift override */
 .no-raise-card:hover {
   transform: none !important;
   box-shadow: none !important;

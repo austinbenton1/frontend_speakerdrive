@@ -56,7 +56,6 @@ export default function LandingPage() {
                     </h2>
                     
                     <div className="space-y-8">
-                      {/* UPDATED TEXT */}
                       <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
                         SpeakerDrive is a specialized prospecting platform for experts that includes direct access to verified decision-maker contact information, as well as event-based engagements like conferences, corporate training, workshops, consulting opportunities and more.
                       </p>
@@ -90,7 +89,6 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Find Events And Contacts",
-                  // UPDATED BOX 1 TEXT
                   description: "11 advanced search filters for granular targeting.",
                 },
                 {
@@ -108,7 +106,6 @@ export default function LandingPage() {
             <FeatureTwoItem
               stepNumber={2}
               title="Unlock Contact Info"
-              // UPDATED STEP 2 MAIN SUB HEADER
               description="Skip the research and go straight to connecting"
               features={[
                 {
@@ -139,7 +136,6 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Smart Message Composer",
-                  // UPDATED STEP 3 BOX 1 SUB TEXT
                   description: "Personalized outreach based on the event, contact, and your specific expertise.",
                 },
                 {

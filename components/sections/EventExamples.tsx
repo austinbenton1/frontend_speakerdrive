@@ -84,10 +84,11 @@ export function EventExamples() {
     <section className="bg-stone-50 py-16">
       <div className="container mx-auto max-w-5xl px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-4">
+          {/* Reduced spacing between lines & applied tighter line-height on mobile */}
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-1 sm:mb-3 leading-tight">
             We Dig For <span className="gold-gradient">Gold</span>
           </h2>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-6">
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-black mb-6 leading-tight sm:leading-tight">
             So You Don't Have To
           </h2>
           
