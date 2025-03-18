@@ -56,12 +56,13 @@ export default function LandingPage() {
                     </h2>
                     
                     <div className="space-y-8">
+                      {/* UPDATED TEXT */}
                       <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive is a specialized prospecting platform that gives speakers, coaches, and experts direct access to verified decision-maker contact information. Our database combines event-based engagements like conferences, corporate training opportunities, workshops, consulting engagements and more.
+                        SpeakerDrive is a specialized prospecting platform for experts that includes direct access to verified decision-maker contact information, as well as event-based engagements like conferences, corporate training, workshops, consulting opportunities and more.
                       </p>
                       
                       <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        As your one-stop shop for finding and booking opportunities, transform unpredictable referrals into a reliable revenue stream and take control of your pipeline.
+                        SpeakerDrive is your one-stop shop to escape the unpredictable referral cycle and take control of your sales pipeline—on your terms.
                       </p>
                     </div>
                   </div>
@@ -89,7 +90,8 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Find Events And Contacts",
-                  description: "Search opportunities all in one place with 11 advanced filters.",
+                  // UPDATED BOX 1 TEXT
+                  description: "11 advanced search filters for granular targeting.",
                 },
                 {
                   title: "Always Current Data",
@@ -106,6 +108,7 @@ export default function LandingPage() {
             <FeatureTwoItem
               stepNumber={2}
               title="Unlock Contact Info"
+              // UPDATED STEP 2 MAIN SUB HEADER
               description="Skip the research and go straight to connecting"
               features={[
                 {
@@ -136,7 +139,8 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Smart Message Composer",
-                  description: "Hyper personalized outreach based on the event, contact, and your specific expertise.",
+                  // UPDATED STEP 3 BOX 1 SUB TEXT
+                  description: "Personalized outreach based on the event, contact, and your specific expertise.",
                 },
                 {
                   title: "Multi-Channel Options",
@@ -283,30 +287,30 @@ export default function LandingPage() {
           <TheProspectingEffect />
         </section>
             
-            {/* Founder Quote Section */}
-            <div className="max-w-3xl mx-auto mt-24 mb-20 px-6">
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-50/30 via-blue-100/20 to-transparent rounded-xl blur-xl opacity-70 -z-10"></div>
-                <blockquote className="text-center">
-                  <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-relaxed mb-8">
-                    "SpeakerDrive combines what I know works: methodical outreach that built my previous business to 7 figures, and marketing messaging that have generated millions in speaker bookings. I've simplified everything I know into one platform."
-                  </p>
-                  <footer className="mt-4">
-                    <div className="flex items-center justify-center gap-4">
-                      <img 
-                        src="/austin_benton_headshot.png"
-                        alt="Austin Benton"
-                        className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 object-center"
-                      />
-                      <div className="text-left">
-                        <div className="font-semibold text-gray-900">Austin Benton</div>
-                        <div className="text-gray-600">Founder</div>
-                      </div>
-                    </div>
-                  </footer>
-                </blockquote>
-              </div>
-            </div>
+        {/* Founder Quote Section */}
+        <div className="max-w-3xl mx-auto mt-24 mb-20 px-6">
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-50/30 via-blue-100/20 to-transparent rounded-xl blur-xl opacity-70 -z-10"></div>
+            <blockquote className="text-center">
+              <p className="text-xl sm:text-2xl font-medium text-gray-900 leading-relaxed mb-8">
+                "SpeakerDrive combines what I know works: methodical outreach that built my previous business to 7 figures, and marketing messaging that have generated millions in speaker bookings. I've simplified everything I know into one platform."
+              </p>
+              <footer className="mt-4">
+                <div className="flex items-center justify-center gap-4">
+                  <img 
+                    src="/austin_benton_headshot.png"
+                    alt="Austin Benton"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 object-center"
+                  />
+                  <div className="text-left">
+                    <div className="font-semibold text-gray-900">Austin Benton</div>
+                    <div className="text-gray-600">Founder</div>
+                  </div>
+                </div>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
 
         <GeneralFAQ />
       </main>

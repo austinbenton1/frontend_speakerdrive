@@ -80,9 +80,9 @@ export function FeatureTwoItem({
   };
   
   // Check if this is Step 1, Step 2, or Step 3 and use custom content
-  const isStep1 = title === "Find Qualified Leads" || (stepNumber === 1);
-  const isStep2 = title === "Unlock Contact Info" || (stepNumber === 2);
-  const isStep3 = title === "Craft Outreach" || (stepNumber === 3);
+  const isStep1 = stepNumber === 1;
+  const isStep2 = stepNumber === 2;
+  const isStep3 = stepNumber === 3;
   
   return (
     <div className="bg-stone-50 px-4 py-8 sm:py-10 -mt-8">
@@ -115,19 +115,26 @@ export function FeatureTwoItem({
              isStep3 ? "Send Winning Outreach" : 
              "Connect With Decision-Makers"}
           </h2>
-         {isStep3 && (
-           <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-             Generate messages that actually get responses.
-           </p>
-         )}
-          {isStep1 && (
+
+          {/* Subheader logic */}
+          {isStep3 && (
+            // UPDATED STEP 3 MAIN SUB HEADER
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              All your prospecting opportunities in one platform.
+              Generate ultra personalized messages, in 1 click
             </p>
           )}
-          {isStep2 && (
+
+          {isStep1 && (
+            // UPDATED STEP 1 SUB HEADER
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              All the ways to connect with those who hire professional expertise.
+              All your prospecting opportunities, in one place.
+            </p>
+          )}
+
+          {isStep2 && (
+            // UPDATED STEP 2 MAIN SUB HEADER
+            <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
+              {description}
             </p>
           )}
         </div>
@@ -156,8 +163,9 @@ export function FeatureTwoItem({
               <div className="space-y-6">
                 <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
                   <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Smart Message Composer</h4>
+                  {/* UPDATED STEP 3 BOX 1 SUB TEXT */}
                   <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
-                    Hyper personalized outreach based on the event, contact, and your specific expertise.
+                    Personalized outreach based on the event, contact, and your specific expertise.
                   </p>
                 </div>
                 
@@ -171,9 +179,16 @@ export function FeatureTwoItem({
             ) : (
               <div className="space-y-6">
                 {features?.map((feature, index) => (
-                  <div key={index} className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
-                    <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">{feature.title}</h4>
-                    <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">{feature.description}</p>
+                  <div
+                    key={index}
+                    className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100"
+                  >
+                    <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                      {feature.title}
+                    </h4>
+                    <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
+                      {feature.description}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -186,8 +201,9 @@ export function FeatureTwoItem({
               whileHover="hover"
               animate="rest"
             >
+              {/* UPDATED LINK TO POINT TO SPEAKERDRIVE SIGNUP */}
               <Link 
-                href="/" 
+                href="https://app.speakerdrive.com/signup" 
                 className="inline-flex items-center text-[#2D7FE0] font-bold text-xl mt-1"
               >
                 <span>Start Free Trial</span>
@@ -200,7 +216,7 @@ export function FeatureTwoItem({
             </motion.div>
           </div>
 
-          {/* RIGHT COL: Video or Image - Now larger (3/5 instead of 1/2) */}
+          {/* RIGHT COL: Video or Image */}
           <div className="w-full lg:w-[51%] lg:mt-0" ref={videoContainerRef}>
             {isExternalVideo && externalVideoSrc ? (
               captionText ? (
@@ -221,7 +237,10 @@ export function FeatureTwoItem({
                     autoPlay
                   >
                     <source src={externalVideoSrc} type="video/mp4" />
-                    <p>Your browser doesn't support HTML5 video. Here is a <a href={externalVideoSrc}>link to the video</a> instead.</p>
+                    <p>
+                      Your browser doesn't support HTML5 video. Here is a{" "}
+                      <a href={externalVideoSrc}>link to the video</a> instead.
+                    </p>
                   </video>
                 </div>
               )
@@ -244,7 +263,10 @@ export function FeatureTwoItem({
                     autoPlay
                   >
                     <source src={videoSrc} type={isWebm ? "video/webm" : "video/mp4"} />
-                    <p>Your browser doesn't support HTML5 video. Here is a <a href={videoSrc}>link to the video</a> instead.</p>
+                    <p>
+                      Your browser doesn't support HTML5 video. Here is a{" "}
+                      <a href={videoSrc}>link to the video</a> instead.
+                    </p>
                   </video>
                 </div>
               )

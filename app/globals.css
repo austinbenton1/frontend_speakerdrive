@@ -217,24 +217,16 @@
 /*  NO-RAISE OVERRIDE: remove hover-lift */
 /* ------------------------------------- */
 .no-raise-card:hover {
-  /* Force no transform, no shadow on hover */
   transform: none !important;
   box-shadow: none !important;
 }
 
-/* ----------------------------------------------------- */
-/* SLIGHTLY ENLARGE THE IMAGES INSIDE A CARD ON RENDER   */
-/* (Adjust selector to your real image container class)  */
-/* ----------------------------------------------------- */
-
+/* Slightly enlarge images inside a "card" by default */
 .some-card-image img {
-  /* make images about 5% larger than before */
   width: 105%;
   height: auto; 
   transition: transform 0.3s ease;
 }
-
-/* If you want them to scale a bit on hover, do: */
 .some-card-image:hover img {
   transform: scale(1.02);
 }

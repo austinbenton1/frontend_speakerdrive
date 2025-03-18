@@ -24,7 +24,7 @@ export function VideoCaption({ src, title = "Video", caption, className = "" }: 
         </video>
       </div>
       
-      {/* Caption bar below video - more subtle styling */}
+      {/* Caption bar below video */}
       <div className="py-2 px-4 text-center text-base font-semibold text-gray-900">
         {caption}
       </div>
