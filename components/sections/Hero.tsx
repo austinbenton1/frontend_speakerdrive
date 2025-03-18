@@ -6,22 +6,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
 import { useRef, useEffect } from "react";
 
-// Basic fade/slide for single elements
-const fadeUp = {
-  hidden: { opacity: 0, y: 10, filter: "blur(10px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
-};
-
-// Left image float in
+// 1) More dramatic, smoother "fly in" for left/right images
 const floatLeft = {
-  hidden: { opacity: 0, x: -60, y: 20 }, // Start from below but not too far
+  hidden: { opacity: 0, x: -100, y: 50 },
   visible: {
     opacity: 1,
-    x: 0, 
+    x: 0,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: "easeOut",
+      duration: 1.2,
+      ease: "easeInOut",
     },
   },
   float: {
@@ -35,16 +29,15 @@ const floatLeft = {
   },
 };
 
-// Right image float in
 const floatRight = {
-  hidden: { opacity: 0, x: 60, y: 20 }, // Start from below but not too far
+  hidden: { opacity: 0, x: 100, y: 50 },
   visible: {
     opacity: 1,
     x: 0,
     y: 0,
     transition: {
-      duration: 0.8,
-      ease: "easeOut",
+      duration: 1.2,
+      ease: "easeInOut",
     },
   },
   float: {
@@ -58,64 +51,74 @@ const floatRight = {
   },
 };
 
-// Export cards animation - reduced size and opacity
+// Basic fade/slide for single elements
+const fadeUp = {
+  hidden: { opacity: 0, y: 10, filter: "blur(10px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
+// Reduced size and opacity for the export cards
 const exportCardsAnimation = {
-  hidden: { 
-    opacity: 0.6, 
-    y: 15, 
-    scale: 0.94, // Made smaller
+  hidden: {
+    opacity: 0.6,
+    y: 15,
+    scale: 0.94,
   },
-  visible: { 
-    opacity: 0.8, // More transparent
-    y: 0, 
-    scale: 0.94, // Kept small in visible state
+  visible: {
+    opacity: 0.8,
+    y: 0,
+    scale: 0.94,
     transition: {
       duration: 0.5,
       ease: "easeOut",
-    }
+    },
   },
   float: {
-    y: [0, -3, 0], // Reduced motion range further
+    y: [0, -3, 0],
     transition: {
-      duration: 3, 
+      duration: 3,
       repeat: Infinity,
       repeatType: "mirror",
       ease: "easeInOut",
-    }
-  }
+    },
+  },
 };
 
 export function Hero() {
   const MotionLink = motion(Link);
-  const containerRef = useRef(null);
-  const imageRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  // 2) Adjusted scroll/rotate so it definitely ends fully upright
+  //    Also starts at 35 degrees for a more pronounced "lean back."
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 80%', 'end 20%'],
+    offset: ["start start", "end end"],
   });
-  const rotateX = useTransform(scrollYProgress, [0, 1], [25, 0]);
+  const rotateX = useTransform(scrollYProgress, [0, 1], [35, 0]);
 
   // Preload critical images
   useEffect(() => {
     const preloadImages = () => {
       const imageUrls = [
-        '/Left Hero-mh.png',
-        '/Right Hero-mh.png',
-        '/new_hero_image.png'
+        "/Left Hero-mh.png",
+        "/Right Hero-mh.png",
+        "/new_hero_image.png",
       ];
-      imageUrls.forEach(url => {
+      imageUrls.forEach((url) => {
         const img = new Image();
         img.src = url;
       });
     };
     preloadImages();
   }, []);
+
   return (
     <div className="px-4 pb-6 pt-16 sm:pb-12 sm:pt-20" ref={containerRef}>
       <div className="container mx-auto max-w-6xl">
         {/* Grid with left image / center text / right image */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
-          {/* LEFT FLOATING IMAGE - hidden below lg */}
+          {/* LEFT FLOATING IMAGE (hidden below lg) */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
               className="relative -mt-8"
@@ -124,7 +127,6 @@ export function Hero() {
               animate="visible"
               style={{ zIndex: 10 }}
             >
-              {/* Once visible, do the float animation. */}
               <motion.div variants={floatLeft} animate="float">
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-brand-blue/20 to-transparent rounded-full blur-xl" />
                 <img
@@ -138,18 +140,18 @@ export function Hero() {
 
           {/* CENTER CONTENT */}
           <div className="flex flex-col items-center justify-start relative">
-            {/* Export Cards SVG - Made smaller */}
+            {/* Export Cards SVG 
+                3) KEEP on mobile, REMOVE on desktop => block on mobile, hidden on lg+ */}
             <motion.div
-              className="mx-auto mb-6 w-64 max-w-full relative transform-gpu"
+              className="block lg:hidden mx-auto mb-6 w-64 max-w-full relative transform-gpu"
               variants={exportCardsAnimation}
               initial="hidden"
               animate={["visible", "float"]}
               whileHover="hover"
               transition={{ delay: 0.1 }}
-              style={{ zIndex: 5, willChange: 'transform' }}
+              style={{ zIndex: 5, willChange: "transform" }}
             >
-              {/* Add subtle shimmer effect */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-100/20 to-transparent"
                 animate={{
                   x: ["0%", "100%", "0%"],
@@ -160,25 +162,23 @@ export function Hero() {
                   repeat: Infinity,
                 }}
               />
-              <img 
-                src="/export_cards.svg" 
-                alt="Export Cards" 
+              <img
+                src="/export_cards.svg"
+                alt="Export Cards"
                 className="w-full h-auto"
               />
-              
-              {/* No overlay - removed the white box outline */}
             </motion.div>
 
-            {/* Small label/pill - Now with ENHANCED borders and shadow */}
+            {/* Small label/pill */}
             <motion.a
               href="#"
               className="group inline-flex items-center overflow-hidden rounded-full border-2 border-gray-300 shadow-md mx-auto mb-8 bg-white whitespace-nowrap"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ 
+              transition={{
                 duration: 0.4,
                 ease: "easeOut",
-                delay: 0.2
+                delay: 0.2,
               }}
               style={{ zIndex: 20 }}
             >
@@ -199,7 +199,6 @@ export function Hero() {
               <div className="absolute -z-10 inset-0 bg-gradient-to-r from-transparent via-brand-blue/5 to-transparent blur-lg" />
               <TextEffect
                 as="h1"
-                // Now uses default preset="fade-in-blur" unless you override
                 className="text-balance text-center text-3xl sm:text-5xl font-extrabold text-black max-w-3xl"
                 speedReveal={1.2}
                 speedSegment={0.6}
@@ -210,12 +209,16 @@ export function Hero() {
               </TextEffect>
             </div>
 
-            {/* Subheading with custom handwritten underline */}
+            {/* Subheading with custom underline */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              Discover the <span className="relative inline-block handwritten-underline">fastest</span> way to book your next engagement
+              Discover the{" "}
+              <span className="relative inline-block handwritten-underline">
+                fastest
+              </span>{" "}
+              way to book your next engagement
             </p>
 
-            {/* Enhanced CTA Button with more "clickable" feel */}
+            {/* Enhanced CTA Button */}
             <MotionLink
               href="https://app.speakerdrive.com/signup"
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
@@ -226,14 +229,14 @@ export function Hero() {
             >
               Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
             </MotionLink>
-            
+
             {/* No credit card text */}
             <p className="mt-3 text-neutral-600 text-sm">
               Start Free Trial. No credit card needed.
             </p>
           </div>
 
-          {/* RIGHT FLOATING IMAGE - hidden below lg */}
+          {/* RIGHT FLOATING IMAGE (hidden below lg) */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
             <motion.div
               className="relative -mt-8"
@@ -254,23 +257,39 @@ export function Hero() {
           </div>
         </div>
 
-        {/* NEW HERO IMAGE BELOW */}
+        {/* MAIN HERO IMAGE BELOW */}
         <div className="mt-10 sm:mt-16 px-0 overflow-visible">
-          <div className="relative mx-auto max-w-screen-lg [perspective:1000px] mx-0 sm:mx-auto">
+          {/* 
+            4) On mobile, ensure it’s w-full with no negative margin
+               On sm+ screens, do w-[110%] and -ml-[5%].
+               This prevents mobile cut-off.
+          */}
+          <div className="relative mx-auto max-w-screen-lg [perspective:1000px]">
             <motion.div
-              className="relative aspect-[4/3] sm:aspect-video w-[110%] -ml-[5%] sm:w-full sm:ml-0 sm:rounded-xl lg:rounded-2xl overflow-hidden"
-              style={{ 
+              className="
+                relative 
+                aspect-[4/3] 
+                sm:aspect-video 
+                w-full 
+                ml-0 
+                sm:w-[110%] 
+                sm:-ml-[5%] 
+                sm:rounded-xl 
+                lg:rounded-2xl 
+                overflow-hidden
+              "
+              style={{
                 rotateX,
                 transformOrigin: "center bottom",
-                willChange: 'transform',
-                backfaceVisibility: 'hidden',
-                contain: 'paint layout'
+                willChange: "transform",
+                backfaceVisibility: "hidden",
+                contain: "paint layout",
               }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ 
+              transition={{
                 duration: 0.5,
-                ease: [0.645, 0.045, 0.355, 1.000]
+                ease: [0.645, 0.045, 0.355, 1.0],
               }}
             >
               <img
@@ -283,12 +302,12 @@ export function Hero() {
                 loading="eager"
                 decoding="sync"
                 style={{
-                  contentVisibility: 'auto',
+                  contentVisibility: "auto",
                 }}
               />
             </motion.div>
             <div
-              className="absolute inset-x-0 -bottom-0 mx-0 sm:-mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
+              className="absolute inset-x-0 -bottom-0 sm:-mx-10 h-2/4 bg-gradient-to-t from-white to-transparent"
               aria-hidden="true"
             />
           </div>
@@ -303,7 +322,6 @@ export function Hero() {
           font-weight: 600;
           color: #3a3a3a;
         }
-
         .handwritten-underline::after {
           content: "";
           position: absolute;
@@ -315,13 +333,12 @@ export function Hero() {
           border-radius: 1px;
           transform: rotate(0deg);
           opacity: 0.75;
-          /* Add pencil-like texture with a light, subtle pattern */
           background-image: repeating-linear-gradient(
             90deg,
             #696969,
             #696969 2px,
-            #7A7A7A 2px,
-            #7A7A7A 4px
+            #7a7a7a 2px,
+            #7a7a7a 4px
           );
         }
       `}</style>
