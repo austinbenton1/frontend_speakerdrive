@@ -71,7 +71,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
           {/* Auth Buttons */}
           <div className="flex items-center space-x-5 ml-10">
             <Link
-              href="/login"
+              href="https://app.speakerdrive.com/login"
               className="text-base font-medium text-neutral-800 hover:text-brand-blue transition-colors relative group"
             >
               Sign in
@@ -160,7 +160,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
 
           <div className="flex flex-col space-y-2.5 pt-3 mt-2 border-t border-gray-100">
             <Link
-              href="/login"
+              href="https://app.speakerdrive.com/login"
               className="text-[15px] font-medium px-3 py-2.5 text-gray-700 hover:text-brand-blue rounded-lg hover:bg-gray-50 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >

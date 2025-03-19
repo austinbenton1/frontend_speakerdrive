@@ -15,9 +15,9 @@ const inter = InterFont({
 });
 
 export const metadata: Metadata = {
-  title: "SpeakerDrive",
+  title: "SpeakerDrive | Find & Book Speaking Opportunities",
   description:
-    "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
+    "Find speaking opportunities, connect with decision-makers, and book more gigs. The all-in-one platform for speakers, coaches, and experts to grow their business.",
   icons: {
     icon: [
       {
@@ -51,15 +51,16 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   appleWebApp: {
     title: "SpeakerDrive",
+    capable: true,
     statusBarStyle: "default",
   },
   applicationName: "SpeakerDrive",
-  keywords: ["speaker", "events", "outreach", "speaking", "coaching", "expert"],
+  keywords: ["speaker", "events", "outreach", "speaking", "coaching", "expert", "business development", "lead generation"],
   creator: "SpeakerDrive",
   openGraph: {
-    title: "SpeakerDrive",
+    title: "SpeakerDrive | Find & Book Speaking Opportunities",
     description:
-      "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
+      "Find speaking opportunities, connect with decision-makers, and book more gigs. The all-in-one platform for speakers, coaches, and experts to grow their business.",
     url: "https://speakerdrive.com",
     siteName: "SpeakerDrive",
     locale: "en_US",
@@ -69,16 +70,41 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
+        type: "image/png",
         alt: "SpeakerDrive",
+        secureUrl: "https://speakerdrive.com/og-image.png"
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SpeakerDrive",
+    title: "SpeakerDrive | Find & Book Speaking Opportunities",
     description:
-      "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
-    images: ["/og-image.png"],
+      "Find speaking opportunities, connect with decision-makers, and book more gigs. The all-in-one platform for speakers, coaches, and experts to grow their business.",
+    images: [
+      {
+        url: "/og-image.png",
+        alt: "SpeakerDrive - Find & Book Speaking Opportunities",
+        width: 1200,
+        height: 630,
+      }
+    ],
+    site: "@speakerdrive",
+    creator: "@austinbenton"
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "verification_token",
   },
 };
 

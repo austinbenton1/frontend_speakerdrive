@@ -1,0 +1,15 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific paths
+Disallow: /api/
+Disallow: /embedtest/
+Disallow: /filetest/
+Disallow: /videotest/
+
+# Sitemap location
+Sitemap: https://speakerdrive.com/sitemap.xml
+
+# Crawl-delay to prevent server overload
+Crawl-delay: 10

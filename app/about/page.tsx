@@ -55,11 +55,6 @@ export default function AboutPage() {
             height="32"
           />
         }
-        links={[
-          { label: "Features", href: "/" },
-          { label: "Pricing", href: "/pricing" },
-          { label: "Contact", href: "https://www.speakerdrive.com/contact" },
-        ]}
       />
 
       <main className="overflow-hidden">

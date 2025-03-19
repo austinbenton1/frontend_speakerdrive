@@ -1,23 +1,22 @@
-// Mark as client component
 "use client"
 
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import { useEffect } from "react";
 
-export default function ContactPage() {
-  // Initialize AidaForm script
+export default function DemoPage() {
+  // Initialize TidyCal script
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const script = document.createElement("script");
-      script.id = "aidaform-app";
-      script.src = "https://widget.aidaform.com/embed.js";
+      script.src = "https://asset-tidycal.b-cdn.net/js/embed.js";
+      script.async = true;
       document.head.appendChild(script);
     }
 
     return () => {
       if (typeof window !== 'undefined') {
-        const script = document.getElementById("aidaform-app");
+        const script = document.querySelector('script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]');
         if (script) {
           script.remove();
         }
@@ -39,27 +38,20 @@ export default function ContactPage() {
       />
 
       <main className="pt-24">
-        {/* Contact Form Section */}
+        {/* Demo Scheduling Section */}
         <section className="relative bg-white py-16 sm:py-20">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-4">
-                Contact Us
+                Schedule a Demo
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Fill out the form below and we'll get back to you as soon as possible.
+                Book a time to see how SpeakerDrive can help you find and book more speaking opportunities.
               </p>
             </div>
 
-            {/* AidaForm Embed */}
-            <div 
-              className="relative"
-              data-aidaform-app="form202405" 
-              data-url="https://speakerdrive.aidaform.com/speakerdrive-main-website" 
-              data-width="100%" 
-              data-height="500px" 
-              data-do-resize>
-            </div>
+            {/* TidyCal Embed */}
+            <div className="tidycal-embed" data-path="austinbenton/speakerdrive"></div>
           </div>
         </section>
       </main>
