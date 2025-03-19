@@ -34,7 +34,11 @@ export default function LandingPage() {
         </section>
 
         {/* "How It Works" and Steps 1-3 */}
-        <section id="how-it-works" className="bg-stone-50 pt-0 pb-12">
+        {/*
+          UPDATED BELOW:
+          Changed pt-0 to pt-12 so there's more padding at the top of the cream section
+        */}
+        <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
           <div className="relative px-4 mb-12">
             <div className="max-w-2xl mx-auto">
               <div className="flex items-start gap-4">

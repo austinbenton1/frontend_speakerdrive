@@ -70,7 +70,7 @@ export function MessageComposerFormula() {
               playsInline
             >
               <source
-                src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d9fc934ea66c1dab973fb6.mp4"
+                src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67da1398e4d4f5758831a24d.mp4"
                 type="video/mp4"
               />
               <p>Your browser doesn’t support HTML5 video.</p>

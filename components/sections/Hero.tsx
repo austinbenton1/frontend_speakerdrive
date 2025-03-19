@@ -90,10 +90,20 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
           {/* LEFT FLOATING IMAGE (hidden below lg) */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
-            <motion.div className="relative -mt-8" variants={floatLeft} initial="hidden" animate="visible" style={{ zIndex: 10 }}>
+            <motion.div
+              className="relative -mt-8"
+              variants={floatLeft}
+              initial="hidden"
+              animate="visible"
+              style={{ zIndex: 10 }}
+            >
               <motion.div variants={floatLeft} animate="float">
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-brand-blue/20 to-transparent rounded-full blur-xl" />
-                <img src="/Left Hero-mh.png" alt="Speaker contact cards" className="max-w-full h-auto w-10/12 mx-auto" />
+                <img
+                  src="/Left Hero-mh.png"
+                  alt="Speaker contact cards"
+                  className="max-w-full h-auto w-10/12 mx-auto"
+                />
               </motion.div>
             </motion.div>
           </div>
@@ -172,17 +182,31 @@ export function Hero() {
 
           {/* RIGHT FLOATING IMAGE (hidden below lg) */}
           <div className="hidden lg:flex lg:justify-center lg:items-center pt-6">
-            <motion.div className="relative -mt-8" variants={floatRight} initial="hidden" animate="visible" style={{ zIndex: 10 }}>
+            <motion.div
+              className="relative -mt-8"
+              variants={floatRight}
+              initial="hidden"
+              animate="visible"
+              style={{ zIndex: 10 }}
+            >
               <motion.div variants={floatRight} animate="float">
                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-bl from-brand-blue/20 to-transparent rounded-full blur-xl" />
-                <img src="/Right Hero-mh.png" alt="Speaker contact cards" className="max-w-full h-auto w-10/12 mx-auto" />
+                <img
+                  src="/Right Hero-mh.png"
+                  alt="Speaker contact cards"
+                  className="max-w-full h-auto w-10/12 mx-auto"
+                />
               </motion.div>
             </motion.div>
           </div>
         </div>
 
         {/* MAIN HERO IMAGE */}
-        <div className="mt-10 sm:mt-16 px-0 overflow-visible">
+        {/*
+          UPDATED BELOW:
+          Changed mt-10 sm:mt-16 to mt-4 sm:mt-8 so the hero image is closer to the cream
+        */}
+        <div className="mt-4 sm:mt-8 px-0 overflow-visible">
           <div className="relative mx-auto max-w-screen-lg [perspective:1000px]">
             <motion.div
               className="relative aspect-[4/3] sm:aspect-video w-full ml-0 sm:w-[120%] sm:-ml-[10%] lg:w-[110%] lg:-ml-[5%] sm:rounded-xl lg:rounded-2xl overflow-hidden"
