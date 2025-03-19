@@ -15,26 +15,25 @@ import {
   GlobeIcon,
   MapPinIcon,
   InfinityIcon,
+  RocketIcon,
 } from "lucide-react";
 
-/**
- * Each card includes:
- * - topSubtext (small label above the title)
- * - title
- * - description
- * - brandColor (#29A9FF or #00C853)
- * - icon
- * - image (mapped to /home/project/public/bot_one|_two|_three)
- */
+// Layout constants
+const CARD_WIDTH = 250;
+const CARD_SPACING = 16;
+const TOTAL_CARD_SPACE = CARD_WIDTH + CARD_SPACING;
+const VISIBLE_CARDS = 3;
+
+// Referencing images in the public folder with a leading slash (Next.js convention):
 const CARDS = [
   {
     topSubtext: "Growth Strategy",
-    title: "Business Growth Assistant",
+    title: "Business Assistant",
     description:
       "Get strategic advice to win more engagements and prepare for upcoming opportunities.",
-    brandColor: "#29A9FF", // bar color
+    brandColor: "#29A9FF",
     icon: <BriefcaseIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_one",
+    image: "/bot_one.png",
   },
   {
     topSubtext: "Smart Memory",
@@ -43,7 +42,7 @@ const CARDS = [
       "The SpeakerDrive assistant remembers all your past interactions, becoming more helpful over time.",
     brandColor: "#00C853",
     icon: <BrainIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_one",
+    image: "/bot_two.png",
   },
   {
     topSubtext: "Event Analysis",
@@ -52,7 +51,7 @@ const CARDS = [
       "Receive feedback on whether specific events align with your expertise and value.",
     brandColor: "#29A9FF",
     icon: <SearchIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_one",
+    image: "/bot_three.png",
   },
   {
     topSubtext: "Fee Strategy",
@@ -61,7 +60,7 @@ const CARDS = [
       "Get practical guidance about realistic fee ranges across different event types.",
     brandColor: "#00C853",
     icon: <DollarSignIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_two",
+    image: "/bot_four.png",
   },
   {
     topSubtext: "Client Prep",
@@ -70,7 +69,7 @@ const CARDS = [
       "Prepare for client conversations with tailored talking points and objection-handling strategies.",
     brandColor: "#29A9FF",
     icon: <PhoneCallIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_two",
+    image: "/bot_five.png",
   },
   {
     topSubtext: "Platform Tips",
@@ -79,7 +78,7 @@ const CARDS = [
       "Ask your assistant how to maximize SpeakerDrive features. You can even request specialized leads for your expertise.",
     brandColor: "#00C853",
     icon: <LayersIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_two",
+    image: "/bot_six.png",
   },
   {
     topSubtext: "Market Insights",
@@ -88,16 +87,16 @@ const CARDS = [
       "Learn about booking timelines, decision-maker priorities, and trends in your industry.",
     brandColor: "#29A9FF",
     icon: <GlobeIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_three",
+    image: "/bot_seven.png",
   },
   {
     topSubtext: "Positioning",
-    title: "Market Positioning Advisor",
+    title: "Positioning Advisor",
     description:
       "Get advice on standing out in competitive situations with your unique value proposition.",
     brandColor: "#00C853",
     icon: <MapPinIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_three",
+    image: "/bot_eight.png",
   },
   {
     topSubtext: "And Beyond",
@@ -106,15 +105,10 @@ const CARDS = [
       "Discover new ways to use your assistant as your business evolves. Just ask and explore.",
     brandColor: "#29A9FF",
     icon: <InfinityIcon className="w-5 h-5" />,
-    image: "/home/project/public/bot_three",
+    image: "/bot_nine.png",
   },
 ];
 
-// Layout
-const CARD_WIDTH = 250;
-const CARD_SPACING = 16;
-const TOTAL_CARD_SPACE = CARD_WIDTH + CARD_SPACING;
-const VISIBLE_CARDS = 3;
 const MAX_INDEX = Math.max(0, CARDS.length - VISIBLE_CARDS);
 
 export function ToolsSection() {
@@ -129,7 +123,7 @@ export function ToolsSection() {
   const openModal = (card: any) => setSelectedCard(card);
   const closeModal = () => setSelectedCard(null);
 
-  // Nav handlers
+  // Navigation handlers
   const handlePrev = () => {
     setIndex(Math.max(0, index - 1));
     setArrowClicked(true);
@@ -141,42 +135,77 @@ export function ToolsSection() {
 
   return (
     <section className="pt-0 pb-10">
+      {/* Single headline & subheadline */}
+      <div className="container mx-auto px-4 max-w-6xl text-center mb-8">
+        <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight leading-tight">
+          Meet The SpeakerDrive Assistant
+        </h2>
+        <p className="text-left md:text-center text-lg sm:text-xl font-medium text-gray-700 leading-relaxed max-w-2xl md:mx-auto md:mb-6">
+          {/* Increased max width for bigger margin on desktop */}
+          Beyond lead generation - just “Ask SpeakerDrive” for a complete
+          business resource, purpose-built for your professional success.
+        </p>
+      </div>
+
+      {/* Supporting image */}
+      <div className="flex justify-center mb-8">
+        <img
+          src="/bot_main.png"
+          alt="SpeakerDrive Support"
+          className="w-full max-w-md h-auto"
+        />
+      </div>
+
       {/* Minimal top: left & right arrows centered */}
-      <div className="flex items-center justify-center gap-6">
-        {/* Left Arrow */}
+      <div className="flex items-center justify-center gap-8"> 
+        {/* Increased gap for more spacing */}
+        {/* Left Arrow (more prominent styling) */}
         <button
           type="button"
           aria-label="Previous"
           disabled={index === 0}
           onClick={handlePrev}
           className="
-            text-gray-500 hover:text-black transition-colors
-            disabled:opacity-30 disabled:cursor-not-allowed
+            text-gray-700
+            hover:text-gray-900
+            transition-colors
+            disabled:opacity-30
+            disabled:cursor-not-allowed
+            text-3xl
           "
         >
-          <ChevronLeft className="w-8 h-8" />
+          <ChevronLeft className="w-10 h-10" />
         </button>
 
-        {/* Right Arrow (no "More ->" text, simpler look) */}
+        {/* Right Arrow (more prominent styling) */}
         <button
           type="button"
           aria-label="Next"
           disabled={index === MAX_INDEX}
           onClick={handleNext}
           className={`
-            text-gray-500 hover:text-black transition-colors
-            disabled:opacity-30 disabled:cursor-not-allowed
-            ${(!arrowClicked && index < MAX_INDEX) ? "animate-bounce-horizontal" : ""}
+            text-gray-700
+            hover:text-gray-900
+            transition-colors
+            disabled:opacity-30
+            disabled:cursor-not-allowed
+            text-3xl
+            ${
+              !arrowClicked && index < MAX_INDEX
+                ? "animate-bounce-horizontal"
+                : ""
+            }
           `}
         >
-          <ChevronRight className="w-8 h-8" />
+          <ChevronRight className="w-10 h-10" />
         </button>
       </div>
 
-      {/* Carousel container: smaller offset on the left (10%) */}
+      {/* Carousel container */}
       <div className="relative mx-auto max-w-[900px] overflow-hidden mt-10 md:pl-[10%]">
         {/* Right fade-out */}
-        <div className="
+        <div
+          className="
           pointer-events-none
           absolute
           top-0
@@ -186,7 +215,8 @@ export function ToolsSection() {
           bg-gradient-to-l
           from-white
           to-transparent
-        " />
+        "
+        />
 
         {/* Cards flex */}
         <div
@@ -234,7 +264,7 @@ export function ToolsSection() {
                     {card.description}
                   </p>
 
-                  {/* Button: gradient to match your screenshot's style */}
+                  {/* Button */}
                   <button
                     onClick={() => openModal(card)}
                     className="
@@ -265,10 +295,16 @@ export function ToolsSection() {
         </div>
       </div>
 
-      {/* Modal overlay */}
+      {/* Modal overlay; also closes on outside click */}
       {selectedCard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-md w-full relative">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50"
+          onClick={closeModal}
+        >
+          <div
+            className="bg-white rounded-lg shadow-lg max-w-md w-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={closeModal}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
@@ -276,19 +312,44 @@ export function ToolsSection() {
               <XCircleIcon className="w-6 h-6" />
             </button>
 
-            <img
-              src={selectedCard.image}
-              alt={`Example for ${selectedCard.title}`}
-              className="w-full h-auto rounded-t-lg"
-            />
-
             <div className="p-4">
+              {/* Only header text above the image */}
               <h4 className="text-lg font-semibold text-gray-900">
                 {selectedCard.title}
               </h4>
-              <p className="text-gray-600 text-sm mt-1">
-                {selectedCard.description}
-              </p>
+            </div>
+
+            {/* Main image */}
+            <img
+              src={selectedCard.image}
+              alt={`Example for ${selectedCard.title}`}
+              className="w-full h-auto"
+            />
+
+            {/* CTA button replacing the subtext */}
+            <div className="p-4 flex justify-center">
+              <a
+                href="https://app.speakerdrive.com/signup"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  bg-gradient-to-r from-blue-600 to-blue-400
+                  text-white
+                  font-semibold
+                  leading-tight
+                  text-sm
+                  py-2
+                  px-4
+                  rounded-md
+                  hover:opacity-90
+                "
+              >
+                Ready To Try It? Start For Free
+                <RocketIcon className="ml-2 w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
