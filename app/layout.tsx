@@ -83,6 +83,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+function init_tracer() { 
+   var tracer = new Tracer({  
+   websiteId : "39d90972-4818-4a00-bd05-64f15964c5cf",  
+   async : true, 
+   debug : false }); 
+ } 
+            `,
+          }}
+        />
+      </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
         {children}
       </body>
