@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter as InterFont } from "next/font/google";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"; // If this alias doesn't work, adjust the import path accordingly.
 import "./globals.css";
+import TracerLoader from "../components/TracerLoader"; // Ensure TracerLoader.tsx is in the components folder
 
 const inter = InterFont({
   subsets: ["latin"],
@@ -86,28 +87,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* 1. Load the tracer script */}
-        <script defer src="https://app.visitortracking.com/assets/js/tracer.js"></script>
-
-        {/* 2. Call the tracer after the DOM and script are ready */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-document.addEventListener('DOMContentLoaded', function() {
-  // Make sure Tracer is defined before using it
-  if (typeof Tracer === 'function') {
-    new Tracer({
-      websiteId: "39d90972-4818-4a00-bd05-64f15964c5cf",
-      async: true,
-      debug: false
-    });
-  } else {
-    console.error("Tracer script not loaded or Tracer is not defined.");
-  }
-});
-            `,
-          }}
-        />
+        {/* 
+          The TracerLoader component loads the external visitor tracking script
+          and initializes it once the script is loaded.
+        */}
+        <TracerLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
         {children}
