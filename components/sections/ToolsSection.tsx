@@ -1,181 +1,298 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { 
-  ChevronLeftIcon, 
-  ChevronRightIcon,
-  MessageSquareIcon,
-  LineChartIcon,
-  BuildingIcon,
-  MailIcon,
-  PhoneIcon
-} from 'lucide-react';
+import { useState } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  EyeIcon,
+  XCircleIcon,
+  BriefcaseIcon,
+  BrainIcon,
+  SearchIcon,
+  DollarSignIcon,
+  PhoneCallIcon,
+  LayersIcon,
+  GlobeIcon,
+  MapPinIcon,
+  InfinityIcon,
+} from "lucide-react";
 
-// Tool data (update image paths as needed)
-const TOOLS = [
+/**
+ * Each card includes:
+ * - topSubtext (small label above the title)
+ * - title
+ * - description
+ * - brandColor (#29A9FF or #00C853)
+ * - icon
+ * - image (mapped to /home/project/public/bot_one|_two|_three)
+ */
+const CARDS = [
   {
-    title: 'Ask SpeakerDrive',
-    description: 'Ask for strategies to win more business, prepare for your next speech, or refine your outreach approach.',
-    icon: <MessageSquareIcon className="w-5 h-5 text-blue-600" />,
-    image: '/Ask SpeakerDrive.png',
-    color: 'bg-blue-500'
+    topSubtext: "Growth Strategy",
+    title: "Business Growth Assistant",
+    description:
+      "Get strategic advice to win more engagements and prepare for upcoming opportunities.",
+    brandColor: "#29A9FF", // bar color
+    icon: <BriefcaseIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_one",
   },
   {
-    title: 'Instant Intel',
-    description: 'Get answers to insightful questions you might never have thought to ask.',
-    icon: <LineChartIcon className="w-5 h-5 text-indigo-600" />,
-    image: '/Instant Intel.png',
-    color: 'bg-indigo-500'
+    topSubtext: "Smart Memory",
+    title: "Adaptive Intelligence",
+    description:
+      "The SpeakerDrive assistant remembers all your past interactions, becoming more helpful over time.",
+    brandColor: "#00C853",
+    icon: <BrainIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_one",
   },
   {
-    title: 'Company Finder',
-    description: 'Discover essential company information - perfect for your next discovery call.',
-    icon: <BuildingIcon className="w-5 h-5 text-emerald-600" />,
-    image: '/Company Finder.png',
-    color: 'bg-emerald-500'
+    topSubtext: "Event Analysis",
+    title: "Opportunity Evaluator",
+    description:
+      "Receive feedback on whether specific events align with your expertise and value.",
+    brandColor: "#29A9FF",
+    icon: <SearchIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_one",
   },
   {
-    title: 'Email Finder',
-    description: 'Find (almost) anyone\'s verified work email address instantly.',
-    icon: <MailIcon className="w-5 h-5 text-blue-600" />,
-    image: '/Email Finder.png',
-    color: 'bg-blue-500'
+    topSubtext: "Fee Strategy",
+    title: "Fee Consultant",
+    description:
+      "Get practical guidance about realistic fee ranges across different event types.",
+    brandColor: "#00C853",
+    icon: <DollarSignIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_two",
   },
   {
-    title: 'Mobile Finder',
-    description: 'Find (almost) anyone\'s verified mobile number directly.',
-    icon: <PhoneIcon className="w-5 h-5 text-emerald-600" />,
-    image: '/Mobile Finder.png',
-    color: 'bg-emerald-500'
+    topSubtext: "Client Prep",
+    title: "Discovery Call Coach",
+    description:
+      "Prepare for client conversations with tailored talking points and objection-handling strategies.",
+    brandColor: "#29A9FF",
+    icon: <PhoneCallIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_two",
+  },
+  {
+    topSubtext: "Platform Tips",
+    title: "Platform Maximizer",
+    description:
+      "Ask your assistant how to maximize SpeakerDrive features. You can even request specialized leads for your expertise.",
+    brandColor: "#00C853",
+    icon: <LayersIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_two",
+  },
+  {
+    topSubtext: "Market Insights",
+    title: "Industry Insider",
+    description:
+      "Learn about booking timelines, decision-maker priorities, and trends in your industry.",
+    brandColor: "#29A9FF",
+    icon: <GlobeIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_three",
+  },
+  {
+    topSubtext: "Positioning",
+    title: "Market Positioning Advisor",
+    description:
+      "Get advice on standing out in competitive situations with your unique value proposition.",
+    brandColor: "#00C853",
+    icon: <MapPinIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_three",
+  },
+  {
+    topSubtext: "And Beyond",
+    title: "Endless Possibilities",
+    description:
+      "Discover new ways to use your assistant as your business evolves. Just ask and explore.",
+    brandColor: "#29A9FF",
+    icon: <InfinityIcon className="w-5 h-5" />,
+    image: "/home/project/public/bot_three",
   },
 ];
 
+// Layout
+const CARD_WIDTH = 250;
+const CARD_SPACING = 16;
+const TOTAL_CARD_SPACE = CARD_WIDTH + CARD_SPACING;
+const VISIBLE_CARDS = 3;
+const MAX_INDEX = Math.max(0, CARDS.length - VISIBLE_CARDS);
+
 export function ToolsSection() {
-  // index represents which "group" of cards we're currently viewing.
-  // We display 4 items at once on large screens, so max index is TOOLS.length - 4.
+  // Carousel position
   const [index, setIndex] = useState(0);
 
-  // Number of items per view changes with breakpoints (tailwind classes).
-  // For simplicity, we base transform on 4 items per view at the largest breakpoint.
-  const itemsToShow = 4;
-  const maxIndex = Math.max(0, TOOLS.length - itemsToShow); // so we don't go negative
+  // Stop arrow bounce once clicked
+  const [arrowClicked, setArrowClicked] = useState(false);
+
+  // Modal
+  const [selectedCard, setSelectedCard] = useState<any>(null);
+  const openModal = (card: any) => setSelectedCard(card);
+  const closeModal = () => setSelectedCard(null);
+
+  // Nav handlers
+  const handlePrev = () => {
+    setIndex(Math.max(0, index - 1));
+    setArrowClicked(true);
+  };
+  const handleNext = () => {
+    setIndex(Math.min(MAX_INDEX, index + 1));
+    setArrowClicked(true);
+  };
 
   return (
-    <section className="py-16 sm:py-24">
-      <div className="container mx-auto max-w-6xl px-4">
-        {/* Header + Nav */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Tools You'll <span className="text-blue-600">Actually Use</span>
-          </h2>
-          <div className="flex space-x-2">
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm hover:bg-gray-50 disabled:opacity-30 transition-colors"
-              aria-label="Previous"
-              disabled={index === 0}
-              onClick={() => setIndex(Math.max(0, index - 1))}
-            >
-              <ChevronLeftIcon className="h-5 w-5 text-gray-700" />
-            </button>
-            <button
-              type="button"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm hover:bg-gray-50 disabled:opacity-30 transition-colors"
-              aria-label="Next"
-              disabled={index === maxIndex}
-              onClick={() => setIndex(Math.min(maxIndex, index + 1))}
-            >
-              <ChevronRightIcon className="h-5 w-5 text-gray-700" />
-            </button>
-          </div>
-        </div>
+    <section className="pt-0 pb-10">
+      {/* Minimal top: left & right arrows centered */}
+      <div className="flex items-center justify-center gap-6">
+        {/* Left Arrow */}
+        <button
+          type="button"
+          aria-label="Previous"
+          disabled={index === 0}
+          onClick={handlePrev}
+          className="
+            text-gray-500 hover:text-black transition-colors
+            disabled:opacity-30 disabled:cursor-not-allowed
+          "
+        >
+          <ChevronLeft className="w-8 h-8" />
+        </button>
 
-        {/* Subtitle/Description */}
-        <p className="text-gray-600 max-w-2xl mb-10">
-          SpeakerDrive goes beyond event discovery with tools that support your entire outreach process.
-        </p>
+        {/* Right Arrow (no "More ->" text, simpler look) */}
+        <button
+          type="button"
+          aria-label="Next"
+          disabled={index === MAX_INDEX}
+          onClick={handleNext}
+          className={`
+            text-gray-500 hover:text-black transition-colors
+            disabled:opacity-30 disabled:cursor-not-allowed
+            ${(!arrowClicked && index < MAX_INDEX) ? "animate-bounce-horizontal" : ""}
+          `}
+        >
+          <ChevronRight className="w-8 h-8" />
+        </button>
+      </div>
 
-        {/* Carousel Container */}
-        <div className="relative overflow-hidden">
-          {/* Inner flex that we translate based on 'index' */}
-          <div
-            className="flex transition-transform duration-300 ease-out"
-            // For large screens, each "step" is 100% / itemsToShow = 25%.
-            // Multiply by index to shift left by that many "steps."
-            style={{ transform: `translateX(-${index * 25}%)` }}
-          >
-            {/* Each Card */}
-            {TOOLS.map((tool, idx) => (
+      {/* Carousel container: smaller offset on the left (10%) */}
+      <div className="relative mx-auto max-w-[900px] overflow-hidden mt-10 md:pl-[10%]">
+        {/* Right fade-out */}
+        <div className="
+          pointer-events-none
+          absolute
+          top-0
+          right-0
+          h-full
+          w-16
+          bg-gradient-to-l
+          from-white
+          to-transparent
+        " />
+
+        {/* Cards flex */}
+        <div
+          className="flex transition-transform duration-300 ease-out"
+          style={{ transform: `translateX(-${index * TOTAL_CARD_SPACE}px)` }}
+        >
+          {CARDS.map((card, idx) => (
+            <div
+              key={idx}
+              className="flex-shrink-0 mr-4"
+              style={{ width: `${CARD_WIDTH}px` }}
+            >
               <div
-                key={idx}
-                // Responsive widths: on mobile, 100%; sm: 50%; md: 33.333%; lg: 25%; 
-                // so the grid naturally reflows on smaller breakpoints.
                 className="
-                  w-full 
-                  sm:w-1/2 
-                  md:w-1/3 
-                  lg:w-1/4 
-                  flex-shrink-0 
-                  px-2
-                  mb-4
+                  border border-gray-200 rounded-lg shadow-sm
+                  hover:shadow-md transition-shadow
+                  h-full flex flex-col overflow-hidden
+                  bg-white
                 "
               >
-                <div className="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                  {/* Top colored bar */}
-                  <div className={`h-1 ${tool.color}`} />
+                {/* Top bar in brand color */}
+                <div
+                  className="h-1"
+                  style={{ backgroundColor: card.brandColor }}
+                />
 
-                  <div className="p-4 flex flex-col h-full">
-                    {/* Icon + Title */}
-                    <div className="flex items-center mb-3">
-                      <div className="mr-2">{tool.icon}</div>
-                      <h3 className="text-base font-semibold text-gray-900">
-                        {tool.title}
-                      </h3>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-sm text-gray-600 mb-4">
-                      {tool.description}
-                    </p>
-
-                    {/* Image (larger, better ratio) */}
-                    <div className="relative w-full h-40 bg-gray-50 rounded-lg overflow-hidden mb-6">
-                      <img
-                        src={tool.image}
-                        alt={`${tool.title} interface`}
-                        className="object-cover w-full h-full"
-                      />
-                    </div>
-
-                    {/* Bottom link */}
-                    <div className="mt-auto">
-                      <a
-                        href="#"
-                        className="inline-flex items-center text-blue-600 text-sm font-medium group"
-                      >
-                        Try it
-                        <svg
-                          className="ml-1 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
-                        </svg>
-                      </a>
-                    </div>
+                <div className="p-4 flex flex-col flex-grow">
+                  {/* Top subtext */}
+                  <div className="text-xs text-gray-500 mb-1">
+                    {card.topSubtext}
                   </div>
+
+                  {/* Icon + Title */}
+                  <div className="flex items-center mb-2">
+                    <div className="mr-2" style={{ color: card.brandColor }}>
+                      {card.icon}
+                    </div>
+                    <h3 className="text-base font-semibold text-gray-900">
+                      {card.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-gray-600 mb-4">
+                    {card.description}
+                  </p>
+
+                  {/* Button: gradient to match your screenshot's style */}
+                  <button
+                    onClick={() => openModal(card)}
+                    className="
+                      mt-auto
+                      inline-flex
+                      items-center
+                      justify-center
+                      text-white
+                      font-medium
+                      px-4
+                      py-2
+                      rounded-md
+                      transition
+                      focus:outline-none
+                      focus:ring-2
+                      focus:ring-offset-2
+                      bg-gradient-to-r from-[#3b82f6] to-[#2563eb]
+                      hover:opacity-90
+                    "
+                  >
+                    View Example
+                    <EyeIcon className="w-4 h-4 ml-2" />
+                  </button>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
+
+      {/* Modal overlay */}
+      {selectedCard && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg max-w-md w-full relative">
+            <button
+              onClick={closeModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+            >
+              <XCircleIcon className="w-6 h-6" />
+            </button>
+
+            <img
+              src={selectedCard.image}
+              alt={`Example for ${selectedCard.title}`}
+              className="w-full h-auto rounded-t-lg"
+            />
+
+            <div className="p-4">
+              <h4 className="text-lg font-semibold text-gray-900">
+                {selectedCard.title}
+              </h4>
+              <p className="text-gray-600 text-sm mt-1">
+                {selectedCard.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

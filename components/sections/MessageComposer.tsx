@@ -30,7 +30,7 @@ const CONTACT_FEATURES = [
     description:
       "Connect directly with decision-makers via their professional email.",
     video:
-      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf43363da759182090e12d.mp4",
+      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67da937f26b5010165a46ae5.mp4",
     icon: <Mail className="mr-2.5 h-5 w-5" />,
     // Heading removed => heading: "",
     bullets: [

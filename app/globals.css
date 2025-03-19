@@ -228,3 +228,17 @@
 .some-card-image:hover img {
   transform: scale(1.02);
 }
+
+/* ====== NEW: Horizontal bounce keyframe & class for the arrow ====== */
+@keyframes bounceHorizontal {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+.animate-bounce-horizontal {
+  animation: bounceHorizontal 1s infinite;
+}
