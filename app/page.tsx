@@ -29,12 +29,12 @@ export default function LandingPage() {
 
       <main className="pt-16">
         {/* Hero Section */}
-        <section id="hero">
+        <section id="hero" className="pb-0">
           <Hero />
         </section>
 
         {/* "How It Works" and Steps 1-3 */}
-        <section id="how-it-works" className="bg-stone-50 pt-16 pb-12">
+        <section id="how-it-works" className="bg-stone-50 pt-0 pb-12">
           <div className="relative px-4 mb-12">
             <div className="max-w-2xl mx-auto">
               <div className="flex items-start gap-4">
@@ -147,7 +147,7 @@ export default function LandingPage() {
         <EventExamples />
 
         {/* Message Composer sections */}
-        <section className="bg-blue-50/50 pt-16 pb-16 px-4">
+        <section className="bg-white pt-16 pb-16 px-4">
           <MessageComposerFormula />
           <MessageComposer />
         </section>
@@ -311,7 +311,7 @@ export default function LandingPage() {
         </section>
             
         {/* Founder Quote Section */}
-        <div className="max-w-2xl mx-auto px-4 mb-20 mt-12">
+        <div className="max-w-2xl mx-auto px-6 sm:px-8 mb-20 mt-12">
           <div className="flex flex-col gap-6">
             {/* Clearer quote icon */}
             <svg

@@ -84,7 +84,7 @@ export function Hero() {
   }, []);
 
   return (
-    <div className="px-4 pb-6 pt-16 sm:pb-12 sm:pt-20" ref={containerRef}>
+    <div className="px-4 pt-16 sm:pt-20 pb-0" ref={containerRef}>
       <div className="container mx-auto max-w-6xl">
         {/* Grid with left image / center text / right image */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
@@ -155,7 +155,7 @@ export function Hero() {
             </p>
 
             {/* Enhanced CTA Button */}
-            <MotionLink
+            <motion.a
               href="https://app.speakerdrive.com/signup"
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
               variants={fadeUp}
@@ -164,7 +164,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.6 }}
             >
               Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
-            </MotionLink>
+            </motion.a>
 
             {/* No credit card text */}
             <p className="mt-3 text-neutral-600 text-sm">Start Free Trial. No credit card needed.</p>
@@ -244,7 +244,13 @@ export function Hero() {
           border-radius: 1px;
           transform: rotate(0deg);
           opacity: 0.75;
-          background-image: repeating-linear-gradient(90deg, #696969, #696969 2px, #7a7a7a 2px, #7a7a7a 4px);
+          background-image: repeating-linear-gradient(
+            90deg,
+            #696969,
+            #696969 2px,
+            #7a7a7a 2px,
+            #7a7a7a 4px
+          );
         }
       `}</style>
     </div>

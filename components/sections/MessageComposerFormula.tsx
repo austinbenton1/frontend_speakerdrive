@@ -27,7 +27,7 @@ const downArrowAnimation = {
 
 export function MessageComposerFormula() {
   return (
-    <section className="py-20 pb-0 bg-stone-50">
+    <section className="py-20 pb-0 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Main heading */}
         <motion.div
@@ -40,19 +40,19 @@ export function MessageComposerFormula() {
           <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight leading-tight">
             Ultra Personalized Messaging
           </h2>
-          {/* Updated text here */}
           <p className="text-left md:text-center text-lg sm:text-xl font-medium text-gray-700 leading-relaxed max-w-lg md:mx-auto">
             Craft conversation-starting messages
           </p>
         </motion.div>
 
         {/* White box for “Smart, Real-Time Matching” */}
-        <div className="max-w-[900px] mx-auto mb-8 bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-8">
+        <div className="mx-auto w-full lg:max-w-[900px] mb-8 bg-white px-4 sm:px-6 py-8">
           <div className="flex items-center text-left md:justify-center md:text-center mb-4">
             <div className="w-7 h-7 mr-3 flex items-center justify-center">
               <Zap className="w-5 h-5 text-brand-blue" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
+            {/* Increased desktop font */}
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
               Smart, Real‑Time Matching
             </h3>
           </div>

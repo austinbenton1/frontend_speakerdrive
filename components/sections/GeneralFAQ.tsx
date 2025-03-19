@@ -16,19 +16,19 @@ const FAQ_ITEMS = [
     answer: "Past events are valuable prospecting opportunities. Organizations that have invested in speakers before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future opportunities with the same organization."
   },
   {
-    question: "How much time should I spend prospecting per day?",
+    question: "How much time should I spend prospecting?",
     answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting is the key factor in seeing results, regardless of the exact time spent."
   },
   {
-    question: "I've tried outreach before without success. Why would SpeakerDrive be different?",
-    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on starting conversations and building relationships first, not closing deals—a strategy proven more effective for professional services."
+    question: "I've tried outreach before. What makes SpeakerDrive different?",
+    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on building relationships first, not making a hard sales pitch—more conversations lead to more business."
   },
   {
-    question: "What types of outreach messages actually get responses?",
+    question: "What message style works for outreach?",
     answer: "Counterintuitively, shorter messages get more replies. Our system creates brief, targeted messages that spark interest without overwhelming. Remember: trying to close a deal in your first message is like proposing marriage on a first date."
   },
   {
-    question: "How does the message generation process work?",
+    question: "How are outreach messages generated?",
     answer: "Our system presents you with three different messages, each with a unique angle, for each opportunity. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates. You can choose the message that best fits your style, edit it if needed, and send it directly from our platform. This gives you the right balance between automated efficiency and personal control over your outreach."
   },
   {

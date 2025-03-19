@@ -24,7 +24,6 @@ function getFeatureColor(index: number) {
   return "#05a648";
 }
 
-// Updated all features to include a 4th bullet (no checkmark, bold) with the new text
 const CONTACT_FEATURES = [
   {
     title: "Contact Emails",
@@ -33,13 +32,22 @@ const CONTACT_FEATURES = [
     video:
       "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf43363da759182090e12d.mp4",
     icon: <Mail className="mr-2.5 h-5 w-5" />,
-    heading: "Decision-makers who can book you.",
+    // Heading removed => heading: "",
     bullets: [
-      { text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering" },
-      { text: "Send from yourself or “send as” your assistant / business manager" },
-      { text: "Create personalized LinkedIn connections with one click" },
-      // 4th bullet: bold, no check, colon at end
-      { text: "Contact Email Composer Demo. Direct outreach to decision-makers:", noCheck: true, bold: true },
+      {
+        text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering",
+      },
+      {
+        text: "Send from yourself or “send as” your assistant / business manager",
+      },
+      {
+        text: "Create personalized LinkedIn connections with one click",
+      },
+      {
+        text: "Composer Quick Look -> Contact Email:",
+        noCheck: true,
+        bold: true,
+      },
     ],
   },
   {
@@ -48,12 +56,21 @@ const CONTACT_FEATURES = [
     video:
       "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf408504d6597dbd3827ef.mp4",
     icon: <AtSign className="mr-2.5 h-5 w-5" />,
-    heading: "Connect with event organizing teams email addresses",
     bullets: [
-      { text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering" },
-      { text: "Send from yourself or appear to be from an assistant" },
-      { text: "Event already past? No problem! We’ll pivot to adjacent / alternative positioning." },
-      { text: "Event Email Composer Demo. Connecting with event organizers:", noCheck: true, bold: true },
+      {
+        text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering",
+      },
+      {
+        text: "Send from yourself or “send as” your assistant / business manager",
+      },
+      {
+        text: "Event already past? No problem! We’ll pivot to adjacent / alternative positioning.",
+      },
+      {
+        text: "Composer Quick Look -> Event Email:",
+        noCheck: true,
+        bold: true,
+      },
     ],
   },
   {
@@ -62,12 +79,21 @@ const CONTACT_FEATURES = [
     video:
       "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf4b3d7be80c24c3f0aa65.mp4",
     icon: <LinkIcon className="mr-2.5 h-5 w-5" />,
-    heading: "Apply directly to opportunities seeking your expertise.",
     bullets: [
-      { text: "Get complete speaker submissions with titles, abstracts, and outlines" },
-      { text: "Choose Smart Match or customize for specific topics" },
-      { text: "Stand out with professionally crafted applications in seconds" },
-      { text: "Application Composer Demo. Creating speaker submissions:", noCheck: true, bold: true },
+      {
+        text: "Get complete speaker submissions with titles, abstracts, and outlines",
+      },
+      {
+        text: "Choose Smart Match or customize for specific topics",
+      },
+      {
+        text: "Stand out with professionally crafted applications in seconds",
+      },
+      {
+        text: "Composer Quick Look -> Event URL:",
+        noCheck: true,
+        bold: true,
+      },
     ],
   },
 ];
@@ -80,16 +106,17 @@ export function MessageComposer() {
   const activeColor = getFeatureColor(activeIndex);
 
   return (
-    <div className="overflow-auto py-0 pb-24 sm:overflow-hidden bg-stone-50">
+    <div className="overflow-auto py-0 pb-24 sm:overflow-hidden bg-white">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* White box for “Conversations That Convert” */}
-        <div className="max-w-[900px] mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 px-6 py-8">
+        <div className="mx-auto w-full lg:max-w-[900px] bg-white px-4 sm:px-6 py-8">
           {/* Heading row */}
           <div className="flex items-center text-left md:justify-center md:text-center mb-4">
             <div className="w-7 h-7 mr-3 flex items-center justify-center">
               <MessageCircle className="w-5 h-5 text-brand-blue" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
+            {/* Increased desktop font */}
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
               Conversations That Convert
             </h3>
           </div>
@@ -167,7 +194,7 @@ export function MessageComposer() {
             </div>
           </div>
 
-          {/* Dynamic heading & bullets */}
+          {/* Dynamic bullets (heading removed) */}
           <div className="mt-8">
             {/* Title tag (colored label) */}
             <div className="mb-2">
@@ -178,15 +205,11 @@ export function MessageComposer() {
                 {activeFeature.title}
               </span>
             </div>
-            <h4 className="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-4">
-              {activeFeature.heading}
-            </h4>
 
-            {/* Bullet list (including that 4th bullet) */}
+            {/* Bullet list */}
             <ul className="space-y-3 ml-2 mb-2">
               {activeFeature.bullets.map((point, i) => (
                 <li key={i} className="flex items-start gap-2">
-                  {/* Only show the check if `noCheck` is not true */}
                   {!point.noCheck && (
                     <Check
                       className="mt-1 flex-shrink-0"
@@ -207,7 +230,6 @@ export function MessageComposer() {
           </div>
 
           {/* Video Display Panel */}
-          {/* Reduced top margin to bring the video closer to the last bullet */}
           <div className="mt-4 mb-8">
             <TransitionPanel
               className="aspect-video w-full overflow-hidden rounded-xl"
@@ -252,7 +274,7 @@ export function MessageComposer() {
                         </video>
                       </div>
 
-                      {/* Keep a color strip at the bottom, no text */}
+                      {/* Bottom color strip */}
                       <div className="bg-white border-t border-gray-100 p-4 w-full rounded-b-xl text-sm sm:text-base text-gray-700 text-left">
                         <span
                           className="block w-full h-2 rounded-md"
