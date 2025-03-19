@@ -15,7 +15,7 @@ interface PricingToggleProps {
 // Pricing toggle component
 function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
   return (
-    <div className="flex items-center justify-center gap-4 mb-10">
+    <div className="flex items-center justify-center gap-4 mb-8">
       <span className={`text-sm font-medium ${!isAnnual ? "text-black" : "text-gray-500"}`}>
         Monthly
       </span>
@@ -212,27 +212,27 @@ export default function PricingPage() {
         logo={<img src="/SpeakerDrive Logo - Long.png" alt="SpeakerDrive" className="h-8" />}
       />
 
-      <main className="pt-24">
+      <main className="pt-16">
         {/* Pricing Hero */}
-        <section className="py-12 md:py-20">
+        <section className="py-8 md:py-12">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
-              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
                 Ready To Start? We Make It Easy
               </h1>
-              <p className="text-lg text-gray-600 mb-10">
+              <p className="text-md md:text-lg text-gray-600 mb-8">
                 You don&apos;t even need a credit card
               </p>
 
               <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 <PricingCard plan={plans[0]} isAnnual={isAnnual} />
                 <PricingCard plan={plans[1]} isPopular={true} isAnnual={isAnnual} />
                 <PricingCard plan={plans[2]} isAnnual={isAnnual} />
               </div>
 
-              <div className="mt-10 text-center">
+              <div className="mt-6 text-center">
                 <p className="text-gray-500 text-sm">
                   Need a custom plan for your team or agency?{" "}
                   <a
@@ -247,22 +247,22 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Feature comparison table */}
-        <section className="py-16 bg-gray-50">
+        {/* Feature comparison table (tightened spacing) */}
+        <section className="py-8 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-2xl font-bold text-center mb-6">
               All SpeakerDrive plans come with...
             </h2>
-            <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+            <p className="text-gray-600 text-center mb-6 max-w-2xl mx-auto">
               Every plan includes these powerful features to help you find and book
               more speaking opportunities
             </p>
 
             <div className="overflow-x-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Unlocks */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200">
-                  <h3 className="text-lg font-semibold mb-4 text-gray-900">
+                <div className="bg-white p-5 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-3 text-gray-900">
                     Unlock Contact Info
                   </h3>
                   <ul className="space-y-3">
@@ -282,8 +282,8 @@ export default function PricingPage() {
                 </div>
 
                 {/* Messaging */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200">
-                  <h3 className="text-lg font-semibold mb-4 text-gray-900">Smart Messaging</h3>
+                <div className="bg-white p-5 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-3 text-gray-900">Smart Messaging</h3>
                   <ul className="space-y-3">
                     <li className="flex items-center gap-2">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
@@ -301,8 +301,8 @@ export default function PricingPage() {
                 </div>
 
                 {/* Tools */}
-                <div className="bg-white p-6 rounded-lg border border-gray-200">
-                  <h3 className="text-lg font-semibold mb-4 text-gray-900">Useful Tools</h3>
+                <div className="bg-white p-5 rounded-lg border border-gray-200">
+                  <h3 className="text-lg font-semibold mb-3 text-gray-900">Useful Tools</h3>
                   <ul className="space-y-3">
                     <li className="flex items-center gap-2">
                       <Check className="h-5 w-5 text-green-500 flex-shrink-0" />
@@ -320,11 +320,21 @@ export default function PricingPage() {
                 </div>
               </div>
             </div>
+
+            {/* Add a CTA button under the feature table */}
+            <div className="mt-8 flex justify-center">
+              <Link
+                href="https://app.speakerdrive.com/signup"
+                className="inline-flex items-center justify-center rounded-lg bg-[#29A9FF] hover:bg-[#29A9FF]/90 text-white px-6 py-3 text-lg font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300"
+              >
+                Start Free Trial
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section id="faq" className="bg-white">
+        {/* FAQ Section (less padding) */}
+        <section id="faq" className="bg-white py-8">
           <div className="max-w-4xl mx-auto px-4">
             <FAQ
               title="FAQs"
@@ -367,6 +377,16 @@ export default function PricingPage() {
                 },
               ]}
             />
+          </div>
+
+          {/* Another CTA button below FAQ */}
+          <div className="mt-6 flex justify-center">
+            <Link
+              href="https://app.speakerdrive.com/signup"
+              className="inline-flex items-center justify-center rounded-lg bg-[#29A9FF] hover:bg-[#29A9FF]/90 text-white px-6 py-3 text-lg font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300"
+            >
+              Start Free Trial
+            </Link>
           </div>
         </section>
       </main>
