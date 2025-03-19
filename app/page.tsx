@@ -12,6 +12,7 @@ import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect
 import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import { MessageComposer } from "@/components/sections/MessageComposer";
+import { ToolsSection } from "@/components/sections/ToolsSection";
 
 export default function LandingPage() {
   return (
@@ -155,6 +156,9 @@ export default function LandingPage() {
           <MessageComposerFormula />
           <MessageComposer />
         </section>
+
+        {/* Tools Section */}
+        <ToolsSection />
 
         {/* Perfect For */}
         <section className="bg-white py-16 overflow-hidden">
