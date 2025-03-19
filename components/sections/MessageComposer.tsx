@@ -30,7 +30,7 @@ const CONTACT_FEATURES = [
     description:
       "Connect directly with decision-makers via their professional email.",
     video:
-      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67da937f26b5010165a46ae5.mp4",
+      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67db17eb26b50180ada64b7b.mp4",
     icon: <Mail className="mr-2.5 h-5 w-5" />,
     // Heading removed => heading: "",
     bullets: [
@@ -54,7 +54,7 @@ const CONTACT_FEATURES = [
     title: "Event Emails",
     description: "Reach event organizers through professional social platforms.",
     video:
-      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf408504d6597dbd3827ef.mp4",
+      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67db17ebe81b935c739b4a72.mp4",
     icon: <AtSign className="mr-2.5 h-5 w-5" />,
     bullets: [
       {
@@ -77,7 +77,7 @@ const CONTACT_FEATURES = [
     title: "Event URLs",
     description: "Submit your information through call-for-speakers portals.",
     video:
-      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67cf4b3d7be80c24c3f0aa65.mp4",
+      "https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67db17ebe81b9320879b4a73.mp4",
     icon: <LinkIcon className="mr-2.5 h-5 w-5" />,
     bullets: [
       {

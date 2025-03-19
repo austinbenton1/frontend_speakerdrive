@@ -18,6 +18,9 @@ export default function TracerLoader() {
           console.error("Tracer is not defined after script load.");
         }
       }}
+      onError={(e) => {
+        console.error("Error loading Tracer script", e);
+      }}
     />
   );
 }

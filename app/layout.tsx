@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter as InterFont } from "next/font/google";
-import { cn } from "@/lib/utils"; // If this alias doesn't work, adjust the import path accordingly.
+import { cn } from "@/lib/utils"; // Adjust if your util path differs
 import "./globals.css";
-import TracerLoader from "../components/TracerLoader"; // Ensure TracerLoader.tsx is in the components folder
+
+// 1) Import both loader components
+import LuckyOrangeLoader from "../components/LuckyOrangeLoader";
+import TracerLoader from "../components/TracerLoader";
 
 const inter = InterFont({
   subsets: ["latin"],
@@ -87,10 +90,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* 
-          The TracerLoader component loads the external visitor tracking script
-          and initializes it once the script is loaded.
-        */}
+        {/* 2) Load Lucky Orange and Tracer scripts in the head */}
+        <LuckyOrangeLoader />
         <TracerLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
