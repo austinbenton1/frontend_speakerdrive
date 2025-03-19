@@ -76,32 +76,19 @@ export default function AboutPage() {
                 </span>
               </div>
 
-              {/* Updated Hero Heading and Subheader */}
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 text-[#333333]">
                 Welcome To SpeakerDrive
               </h1>
+              {/* Updated subheader per request */}
               <h2 className="text-lg md:text-xl leading-relaxed text-[#555] mb-8 max-w-2xl mx-auto">
-                Empower every expert to predictably control their{" "}
+                Our mission: to empower every expert to predictably control their{" "}
                 <span className="font-bold">OWN</span> client acquisition.
               </h2>
 
-              {/* (Paragraph removed as requested) */}
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-                <Link
-                  href="https://app.speakerdrive.com/signup"
-                  className="inline-flex items-center justify-center rounded-lg bg-[#29A9FF] hover:bg-[#29A9FF]/90 text-white px-6 py-3 text-lg font-bold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300"
-                >
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-                {/* Removed the 'See Features' button */}
-              </div>
-
-              <p className="text-sm text-[#555]">No credit card needed. Cancel anytime.</p>
+              {/* Removed Free Trial button and 'No credit card needed...' text */}
             </div>
 
-            {/* Scroll Down Indicator (less space) */}
+            {/* Scroll Down Indicator (optional) */}
             <div className="flex justify-center mt-8">
               <div className="group animate-bounce p-3 w-12 h-12 rounded-full border border-[#ddd] flex items-center justify-center cursor-pointer hover:border-[#29A9FF] transition-all duration-300">
                 <ChevronDown className="h-6 w-6 text-[#999] group-hover:text-[#29A9FF] transition-colors duration-300" />
@@ -119,7 +106,8 @@ export default function AboutPage() {
             <div className="flex flex-col-reverse md:flex-row items-start md:items-center gap-8 md:gap-12">
               {/* Left side: image + quote */}
               <div className="md:w-1/2">
-                <div className="relative rounded-xl overflow-hidden transform transition-transform hover:scale-[1.02] duration-500 mb-6 md:mb-8">
+                {/* Remove default bottom margin and use negative margin for the quote */}
+                <div className="relative rounded-xl overflow-hidden transform transition-transform hover:scale-[1.02] duration-500 mb-0 md:mb-0">
                   <img
                     src="/austin_benton_headshot.png"
                     alt="Austin Benton, Founder of SpeakerDrive"
@@ -130,8 +118,7 @@ export default function AboutPage() {
                   />
                 </div>
 
-                {/* Move the "I believe..." quote block under the image */}
-                <div className="relative bg-white p-6 rounded-xl shadow-md border-l-2 border-[#29A9FF] transform hover:scale-[1.02] transition-all duration-300">
+                <div className="relative bg-white p-6 rounded-xl shadow-md border-l-2 border-[#29A9FF] transform hover:scale-[1.02] transition-all duration-300 -mt-4">
                   <div className="absolute -top-3 -left-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md">
                     <Award className="w-5 h-5 text-[#29A9FF]" />
                   </div>
@@ -166,7 +153,6 @@ export default function AboutPage() {
                   finding consistent opportunities.
                 </p>
 
-                {/* Darker blue link, below text (not under the quote) */}
                 <div className="mt-4">
                   <a
                     href="https://austinbenton.com"
@@ -226,9 +212,9 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* Right Card */}
+              {/* Right Card (Solution) - now darker blue & no button */}
               <div className="p-6 rounded-xl shadow-md text-white transition-all duration-300 transform hover:scale-[1.02] relative overflow-hidden group">
-                <div className="absolute inset-0 bg-[#29A9FF] z-0"></div>
+                <div className="absolute inset-0 bg-[#0058B2] z-0"></div>
                 <div className="relative z-20">
                   <h3 className="text-2xl font-bold mb-4 flex items-center">
                     <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center mr-3">
@@ -256,24 +242,12 @@ export default function AboutPage() {
                       </div>
                     ))}
                   </div>
-                  <Link
-                    href="/"
-                    className="inline-flex items-center bg-white/10 hover:bg-white/20 py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 group"
-                  >
-                    See how it works
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Link>
+                  {/* Button at the bottom removed */}
                 </div>
               </div>
             </div>
           </div>
         </section>
-
-        {/*
-          ===========================
-          REMOVED the "Our Mission" section entirely
-          ===========================
-        */}
 
         {/* Values Section */}
         <section
@@ -295,7 +269,8 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 md:gap-10">
+            {/* Core values boxes made tighter/narrower */}
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {[
                 {
                   title: "Obsessed With Success",
@@ -328,7 +303,7 @@ export default function AboutPage() {
               ].map((value, index) => (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-xl shadow-lg border border-[#e5e5e5] hover:shadow-xl transition-all duration-500 group transform hover:scale-[1.02]"
+                  className="bg-white p-4 rounded-xl shadow-lg border border-[#e5e5e5] hover:shadow-xl transition-all duration-500 group transform hover:scale-[1.02]"
                   style={{ borderTop: `3px solid ${value.color}` }}
                 >
                   <div className="flex items-start gap-4">
@@ -355,7 +330,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
+        {/* CTA Section (keep heading & contact link, remove free trial & subtext) */}
         <section
           ref={(el) => registerSection("cta", el)}
           className="py-16 text-[#333333] bg-[#fafafa]"
@@ -366,16 +341,8 @@ export default function AboutPage() {
               business development?
             </h2>
 
-            {/* Removed "Join hundreds of speakers..." line as requested */}
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link
-                href="https://app.speakerdrive.com/signup"
-                className="inline-flex items-center justify-center rounded-xl bg-[#29A9FF] text-white hover:bg-[#29A9FF]/90 px-6 py-3 text-lg font-bold transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
-              >
-                Start Free Trial
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
+              {/* Removed the 'Start Free Trial' button */}
               <a
                 href="https://www.speakerdrive.com/contact"
                 className="inline-flex items-center font-medium transition-all duration-300 text-[#333333] hover:text-[#29A9FF] group"
@@ -384,9 +351,7 @@ export default function AboutPage() {
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
               </a>
             </div>
-            <p className="text-sm text-[#666] mt-4 text-center">
-              No credit card needed. Cancel anytime.
-            </p>
+            {/* Removed 'No credit card needed. Cancel anytime.' */}
           </div>
         </section>
       </main>

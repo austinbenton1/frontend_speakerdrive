@@ -7,7 +7,7 @@ const inter = InterFont({
   subsets: ["latin"],
   display: "swap",
   preload: true,
-  adjustFontFallback: true
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {
@@ -54,7 +54,8 @@ export const metadata: Metadata = {
   creator: "SpeakerDrive",
   openGraph: {
     title: "SpeakerDrive",
-    description: "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
+    description:
+      "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
     url: "https://speakerdrive.com",
     siteName: "SpeakerDrive",
     locale: "en_US",
@@ -71,29 +72,39 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "SpeakerDrive",
-    description: "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
+    description:
+      "Discover events, contact decision-makers, and craft perfect outreach—all in one place.",
     images: ["/og-image.png"],
   },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
-        <script async defer src='https://app.visitortracking.com/assets/js/tracer.js'></script>
+        {/* 1. Load the tracer script */}
+        <script defer src="https://app.visitortracking.com/assets/js/tracer.js"></script>
+
+        {/* 2. Call the tracer after the DOM and script are ready */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-function init_tracer() { 
-   var tracer = new Tracer({  
-   websiteId : "39d90972-4818-4a00-bd05-64f15964c5cf",  
-   async : true, 
-   debug : false }); 
- } 
+document.addEventListener('DOMContentLoaded', function() {
+  // Make sure Tracer is defined before using it
+  if (typeof Tracer === 'function') {
+    new Tracer({
+      websiteId: "39d90972-4818-4a00-bd05-64f15964c5cf",
+      async: true,
+      debug: false
+    });
+  } else {
+    console.error("Tracer script not loaded or Tracer is not defined.");
+  }
+});
             `,
           }}
         />
