@@ -28,13 +28,11 @@ interface PricingPlan {
     monthly: number;
     annually?: number;
   };
-  oldMonthly?: number; // optional "regular" price to show crossed out
   icon: React.ReactNode;
   ctaLink?: string;
   features: PricingFeature[];
-  priceSubtitle?: string; // e.g., "Beta Pricing"
-  // ADDED: Use this to override numeric pricing display
-  priceLabel?: string; // e.g., "Early Access Program"
+  priceLabel?: string;      // e.g. "Early Access"
+  priceSubtitle?: string;   // e.g. "Lock In Beta Pricing"
 }
 
 // Props for a single PricingCard
@@ -73,7 +71,7 @@ function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
 // Single pricing card
 function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
   const { monthly, annually } = plan.price;
-  // default annual price if not provided
+  // Fallback for annual price if not provided
   const finalAnnual = annually ?? monthly * 10;
   const currentPrice = isAnnual ? finalAnnual : monthly;
 
@@ -111,72 +109,44 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
         <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
         <p className="text-gray-600 text-sm text-center mb-6">{plan.description}</p>
 
-        {/* Pricing */}
+        {/* Pricing / Label */}
         <div className="mb-6 text-center">
-          {/* old price on a small line above */}
-          {plan.oldMonthly && !isAnnual && (
-            <div className="text-base text-gray-600 line-through font-medium mb-1">
-              ${plan.oldMonthly}
-            </div>
-          )}
-
-          {/* 
-            CHANGED: If plan.priceLabel is defined (e.g. "Early Access Program"),
-            show that instead of a numeric price. This keeps the strikethrough if present.
-          */}
           {plan.priceLabel ? (
+            // If we have a custom label, show that instead of a numeric price
             <>
               <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
                 <span className="text-2xl font-bold leading-none">{plan.priceLabel}</span>
               </div>
-
-              {/* Beta Pricing text (unchanged logic: only shows if oldMonthly exists & !isAnnual) */}
-              {plan.oldMonthly && !isAnnual && (
-                <p className="text-xs text-gray-500 mt-1">Beta Pricing</p>
+              {plan.priceSubtitle && (
+                <p className="text-xs text-gray-500 mt-1">{plan.priceSubtitle}</p>
               )}
             </>
           ) : (
+            // Otherwise, show numeric price
             <>
               <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
                 <span className="text-5xl font-bold leading-none">${currentPrice}</span>
                 <span className="text-2xl font-normal leading-none">/m</span>
               </div>
-
-              {/* Beta Pricing note if there's an oldMonthly value */}
-              {plan.oldMonthly && !isAnnual && (
-                <p className="text-xs text-gray-500 mt-1">Beta Pricing</p>
-              )}
-              {plan.priceSubtitle && (
-                <p className="text-xs text-gray-500 mt-1">{plan.priceSubtitle}</p>
-              )}
             </>
           )}
         </div>
 
         {/* CTA Button */}
-        {plan.price.monthly === 0 ? (
-          // Free trial
-          <Link
-            href={plan.ctaLink || "#"}
-            className="
-              block w-full py-3 px-4 rounded font-bold text-center
-              border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 mb-6
-            "
-          >
-            Get Free Trial
-          </Link>
-        ) : (
-          // Paid plan
-          <Link
-            href={plan.ctaLink || "#"}
-            className="
-              block w-full py-3 px-4 rounded font-bold text-center
-              bg-green-500 text-white hover:bg-green-600 mb-6
-            "
-          >
-            {`Get ${plan.name}`}
-          </Link>
-        )}
+        {/* 
+          Free Trial plan has a white border style.
+          Growth/Premium keep the green background but say "Get Free Trial" 
+        */}
+        <Link
+          href={plan.ctaLink || "#"}
+          className={
+            plan.name === "Free Trial"
+              ? "block w-full py-3 px-4 rounded font-bold text-center border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 mb-6"
+              : "block w-full py-3 px-4 rounded font-bold text-center bg-green-500 text-white hover:bg-green-600 mb-6"
+          }
+        >
+          Get Free Trial
+        </Link>
 
         {/* Features */}
         <div className="space-y-3">
@@ -225,14 +195,9 @@ export default function PricingPage() {
     {
       name: "Growth",
       description: "Just getting started",
-      oldMonthly: 89, // keep the strikethrough price
-      // keep numeric price for reference but we'll display label instead
-      price: {
-        monthly: 49,
-        annually: 490,
-      },
-      // NEW: override display
-      priceLabel: "Early Access Program",
+      price: { monthly: 0, annually: 0 }, // No numeric display
+      priceLabel: "Early Access",
+      priceSubtitle: "Lock In Beta Pricing",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -247,14 +212,9 @@ export default function PricingPage() {
     {
       name: "Premium",
       description: "For power users",
-      oldMonthly: 249, // keep the strikethrough price
-      // keep numeric price for reference but we'll display label instead
-      price: {
-        monthly: 139,
-        annually: 1390,
-      },
-      // NEW: override display
-      priceLabel: "Early Access Program",
+      price: { monthly: 0, annually: 0 }, // No numeric display
+      priceLabel: "Early Access",
+      priceSubtitle: "Lock In Beta Pricing",
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -281,13 +241,13 @@ export default function PricingPage() {
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
-              {/* Headline (UPDATED) */}
+              {/* Headline */}
               <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                SpeakerDrive Beta is Now Live: Be Among the First to Join
+                SpeakerDrive Beta is Live
               </h1>
-              {/* Subheadline (unchanged) */}
+              {/* Subheadline */}
               <p className="text-md md:text-lg text-gray-600 mb-8">
-                You don&apos;t even need a credit card
+                Join now to lock in early adopter benefits help shape the future. You don&apos;t even need a credit card.
               </p>
 
               <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
@@ -298,7 +258,7 @@ export default function PricingPage() {
                 <PricingCard plan={plans[2]} isAnnual={isAnnual} />
               </div>
 
-              {/* Beta pricing note (UPDATED) */}
+              {/* Beta pricing note */}
               <p className="text-sm text-gray-700 mt-6">
                 Join our early access program now. Beta members will receive priority access
                 to special pricing when announced.
