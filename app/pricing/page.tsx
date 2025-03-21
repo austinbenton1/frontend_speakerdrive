@@ -33,6 +33,8 @@ interface PricingPlan {
   ctaLink?: string;
   features: PricingFeature[];
   priceSubtitle?: string; // e.g., "Beta Pricing"
+  // ADDED: Use this to override numeric pricing display
+  priceLabel?: string; // e.g., "Early Access Program"
 }
 
 // Props for a single PricingCard
@@ -118,19 +120,36 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
             </div>
           )}
 
-          {/* main price row with /m on same line */}
-          <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
-            <span className="text-5xl font-bold leading-none">${currentPrice}</span>
-            <span className="text-2xl font-normal leading-none">/m</span>
-          </div>
+          {/* 
+            CHANGED: If plan.priceLabel is defined (e.g. "Early Access Program"),
+            show that instead of a numeric price. This keeps the strikethrough if present.
+          */}
+          {plan.priceLabel ? (
+            <>
+              <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
+                <span className="text-2xl font-bold leading-none">{plan.priceLabel}</span>
+              </div>
 
-          {/* Beta Pricing note */}
-          {plan.oldMonthly && !isAnnual && (
-            <p className="text-xs text-gray-500 mt-1">Beta Pricing</p>
-          )}
+              {/* Beta Pricing text (unchanged logic: only shows if oldMonthly exists & !isAnnual) */}
+              {plan.oldMonthly && !isAnnual && (
+                <p className="text-xs text-gray-500 mt-1">Beta Pricing</p>
+              )}
+            </>
+          ) : (
+            <>
+              <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
+                <span className="text-5xl font-bold leading-none">${currentPrice}</span>
+                <span className="text-2xl font-normal leading-none">/m</span>
+              </div>
 
-          {plan.priceSubtitle && (
-            <p className="text-xs text-gray-500 mt-1">{plan.priceSubtitle}</p>
+              {/* Beta Pricing note if there's an oldMonthly value */}
+              {plan.oldMonthly && !isAnnual && (
+                <p className="text-xs text-gray-500 mt-1">Beta Pricing</p>
+              )}
+              {plan.priceSubtitle && (
+                <p className="text-xs text-gray-500 mt-1">{plan.priceSubtitle}</p>
+              )}
+            </>
           )}
         </div>
 
@@ -206,11 +225,14 @@ export default function PricingPage() {
     {
       name: "Growth",
       description: "Just getting started",
-      oldMonthly: 89,
+      oldMonthly: 89, // keep the strikethrough price
+      // keep numeric price for reference but we'll display label instead
       price: {
         monthly: 49,
         annually: 490,
       },
+      // NEW: override display
+      priceLabel: "Early Access Program",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -225,11 +247,14 @@ export default function PricingPage() {
     {
       name: "Premium",
       description: "For power users",
-      oldMonthly: 249,
+      oldMonthly: 249, // keep the strikethrough price
+      // keep numeric price for reference but we'll display label instead
       price: {
         monthly: 139,
         annually: 1390,
       },
+      // NEW: override display
+      priceLabel: "Early Access Program",
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -256,12 +281,11 @@ export default function PricingPage() {
         <section className="py-8 md:py-12">
           <div className="container mx-auto px-4 text-center">
             <div className="mx-auto max-w-3xl">
-              {/* Headline */}
+              {/* Headline (UPDATED) */}
               <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                Ready To Start?
-                <br />
-                We Make It Easy
+                SpeakerDrive Beta is Now Live: Be Among the First to Join
               </h1>
+              {/* Subheadline (unchanged) */}
               <p className="text-md md:text-lg text-gray-600 mb-8">
                 You don&apos;t even need a credit card
               </p>
@@ -274,9 +298,10 @@ export default function PricingPage() {
                 <PricingCard plan={plans[2]} isAnnual={isAnnual} />
               </div>
 
-              {/* Beta pricing note */}
+              {/* Beta pricing note (UPDATED) */}
               <p className="text-sm text-gray-700 mt-6">
-                Join now to lock in special beta pricing. These rates won&apos;t be offered again.
+                Join our early access program now. Beta members will receive priority access
+                to special pricing when announced.
               </p>
 
               <div className="mt-6 text-center">
