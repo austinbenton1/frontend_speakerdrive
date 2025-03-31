@@ -6,4 +6,11 @@ declare global {
       NEXT_PUBLIC_GA_ID?: string;
     }
   }
+
+  interface Window {
+    AidaForm?: {
+      embed: () => void;
+      reset: () => void;
+    };
+  }
 }

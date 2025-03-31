@@ -40,7 +40,7 @@ export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void })
               New!
             </span>
             <span className="flex items-center gap-1 px-1.5 sm:px-3 py-1 sm:py-1.5 text-[12px] sm:text-sm font-medium text-gray-700 bg-white">
-              For Speakers, Coaches &amp; Experts
+              SpeakerDrive Is Coming Soon
               <div className="flex-none flex items-center">
                 <span className="text-[11px] sm:text-xs ml-1">🎉</span>
               </div>
@@ -58,14 +58,13 @@ export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void })
               delay={0.2}
               per="char"
             >
-              Find Premium Events And Book More Gigs
+              Secure Your Early Access And Get Exclusive Perks
             </TextEffect>
           </div>
 
           {/* Subheading */}
           <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-            Discover the{" "}
-            <span className="relative inline-block handwritten-underline">fastest</span> way to book your next engagement
+            Get 30% off forever when we go live + early access to the BEST opportunities. Limited to first 50 early adopters.
           </p>
 
           {/* Enhanced CTA Button */}
@@ -78,11 +77,76 @@ export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void })
             animate="visible"
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            Join The Waitlist <ArrowRight className="ml-2 h-5 w-5" />
+            Secure Your Spot <ArrowRight className="ml-2 h-5 w-5" />
           </motion.a>
 
           {/* No credit card text */}
-          <p className="mt-3 text-neutral-600 text-sm">Be the first to know when we launch.</p>
+          <p className="mt-3 text-neutral-600 text-sm">And be the first to know when we launch.</p>
+
+          {/* Founder's Message Section */}
+          <div className="mt-20 max-w-2xl mx-auto px-6 sm:px-8">
+            <div className="flex flex-col gap-6">
+              {/* Clearer quote icon */}
+              <svg
+                aria-hidden="true"
+                className="w-8 h-8 text-[#0A66C2]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z"/>
+              </svg>
+
+              <h3 className="text-2xl font-bold text-gray-900">Why I Created SpeakerDrive</h3>
+
+              <div className="space-y-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+                <p>
+                  I built SpeakerDrive to help experts book high-paying stages consistently and with confidence.
+                </p>
+                <p>
+                  The speaking landscape has become increasingly challenging - a saturated market, fierce competition for limited opportunities, and the constant struggle to find quality, well-paying engagements.
+                </p>
+                <p>
+                  Join our early access group to get a systematic approach to finding decision-makers and premium opportunities - without relying on random referrals, social media algorithms, or writing another book.
+                </p>
+              </div>
+
+              <div className="flex items-center mt-2">
+                <img
+                  src="/austin_benton_head.png"
+                  alt="Austin Benton"
+                  className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 mr-4"
+                />
+                <div className="flex flex-col">
+                  <p className="text-base font-semibold text-gray-900">Austin Benton</p>
+                  <p className="text-sm text-gray-600">Founder, SpeakerDrive</p>
+                  {/* LinkedIn link */}
+                  <div className="flex items-center gap-2 mt-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="text-[#0A66C2]"
+                    >
+                      <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                    </svg>
+                    <a
+                      href="https://www.linkedin.com/in/austin-benton/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-[#0A66C2] hover:text-blue-800 transition-colors"
+                    >
+                      Connect on LinkedIn
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
