@@ -15,9 +15,10 @@ interface HeaderFinalProps {
   companyName: string;
   logo: React.ReactNode;
   links?: { label: string; href: string }[];
+  hideNavigation?: boolean;
 }
 
-export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
+export function HeaderFinal({ companyName, logo, links, hideNavigation }: HeaderFinalProps) {
   // Use default links if none provided
   const navigationLinks = links || DEFAULT_NAV_LINKS;
 
@@ -54,7 +55,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
         </Link>
         
         {/* Desktop Navigation (no "Home") */}
-        <div className="hidden md:flex items-center">
+        {!hideNavigation && <div className="hidden md:flex items-center">
           <nav className="flex items-center space-x-8">
             {desktopLinks.map((link) => (
               <a
@@ -84,7 +85,7 @@ export function HeaderFinal({ companyName, logo, links }: HeaderFinalProps) {
               Try For Free
             </a>
           </div>
-        </div>
+        </div>}
 
         {/* Mobile menu button */}
         <div className="md:hidden">
