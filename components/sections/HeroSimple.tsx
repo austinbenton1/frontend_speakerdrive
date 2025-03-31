@@ -11,7 +11,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
-export function HeroSimple() {
+export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void }) {
   const MotionLink = motion(Link);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -70,61 +70,19 @@ export function HeroSimple() {
 
           {/* Enhanced CTA Button */}
           <motion.a
-            href="https://app.speakerdrive.com/signup"
+            onClick={onWaitlistClick}
             className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
+            style={{ cursor: 'pointer' }}
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
+            Join The Waitlist <ArrowRight className="ml-2 h-5 w-5" />
           </motion.a>
 
           {/* No credit card text */}
-          <p className="mt-3 text-neutral-600 text-sm">Start Free Trial. No credit card needed.</p>
-        </div>
-
-        {/* MAIN HERO IMAGE */}
-        <div className="mt-4 sm:mt-8 px-0 overflow-visible">
-          <div className="relative mx-auto max-w-screen-lg [perspective:1000px]">
-            <motion.div
-              className="relative aspect-[4/3] sm:aspect-video w-full ml-0 sm:w-[120%] sm:-ml-[10%] lg:w-[110%] lg:-ml-[5%] sm:rounded-xl lg:rounded-2xl overflow-hidden"
-              style={{
-                rotateX,
-                transformOrigin: "center bottom",
-                willChange: "transform",
-                backfaceVisibility: "hidden",
-                contain: "paint layout",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, ease: [0.645, 0.045, 0.355, 1.0] }}
-            >
-              <img
-                ref={imageRef}
-                src="/new_hero_image.png"
-                alt="SpeakerDrive dashboard overview"
-                className="w-full h-full object-cover transform-gpu scale-[1.02]"
-                width={1200}
-                height={675}
-                loading="eager"
-                decoding="sync"
-                style={{ contentVisibility: "auto" }}
-              />
-            </motion.div>
-            {/* Extended Gradient Overlay */}
-            <div
-              className="absolute -bottom-0 w-full ml-0 sm:w-[120%] sm:-ml-[10%] lg:w-[110%] lg:-ml-[5%] h-2/4 bg-gradient-to-t from-white to-transparent"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-
-        {/* MOBILE SCROLL INDICATOR */}
-        <div className="lg:hidden flex justify-center mt-6">
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
-            <ChevronDown className="h-6 w-6 text-gray-500" />
-          </motion.div>
+          <p className="mt-3 text-neutral-600 text-sm">Be the first to know when we launch.</p>
         </div>
       </div>
 
