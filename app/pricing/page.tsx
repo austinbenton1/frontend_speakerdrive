@@ -9,12 +9,6 @@ import { Footer5 } from "@/components/layout/Footer";
 
 // ========== TYPES ==========
 
-// Toggle between monthly and annual
-interface PricingToggleProps {
-  isAnnual: boolean;
-  setIsAnnual: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
 // Individual pricing-plan feature
 interface PricingFeature {
   text: string;
@@ -27,61 +21,28 @@ interface PricingPlan {
   description: string;
   price: {
     monthly: number;
-    annually?: number;
   };
   icon: React.ReactNode;
   ctaLink?: string;
   features: PricingFeature[];
-  priceLabel?: string;      // e.g. "Early Access"
-  priceSubtitle?: string;   // e.g. "Lock In Beta Pricing"
 }
 
 // Props for a single PricingCard
 interface PricingCardProps {
   plan: PricingPlan;
   isPopular?: boolean;
-  isAnnual: boolean;
 }
 
 // ========== COMPONENTS ==========
 
-// Monthly vs. Annual toggle
-function PricingToggle({ isAnnual, setIsAnnual }: PricingToggleProps) {
-  return (
-    <div className="flex items-center justify-center gap-4 mb-8">
-      <span className={`text-sm font-medium ${!isAnnual ? "text-black" : "text-gray-500"}`}>
-        Monthly
-      </span>
-      <button
-        onClick={() => setIsAnnual(!isAnnual)}
-        className="relative h-7 w-12 rounded-full bg-gray-200"
-      >
-        <div
-          className={`absolute left-1 top-1 h-5 w-5 transform rounded-full bg-green-500 transition-transform duration-200 ${
-            isAnnual ? "translate-x-5" : ""
-          }`}
-        />
-      </button>
-      <span className={`text-sm font-medium ${isAnnual ? "text-black" : "text-gray-500"}`}>
-        Annually <span className="text-green-600 text-xs font-bold ml-1">Save 20%</span>
-      </span>
-    </div>
-  );
-}
-
 // Single pricing card
-function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
-  const { monthly, annually } = plan.price;
-  // Fallback for annual price if not provided
-  const finalAnnual = annually ?? monthly * 10;
-  const currentPrice = isAnnual ? finalAnnual : monthly;
-
+function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   return (
     <div
       className={`
         relative bg-white rounded-lg overflow-hidden
         ${isPopular
-          ? "border-[3px] border-green-500 shadow-lg -mt-2" // raise the "Popular" plan
+          ? "border-[3px] border-green-500 shadow-lg -mt-2" // raises the "Popular" plan
           : "border border-gray-200"
         }
       `}
@@ -110,34 +71,16 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
         <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
         <p className="text-gray-600 text-sm text-center mb-6">{plan.description}</p>
 
-        {/* Pricing / Label */}
+        {/* Pricing */}
         <div className="mb-6 text-center">
-          {plan.priceLabel ? (
-            // If we have a custom label, show that instead of a numeric price
-            <>
-              <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
-                <span className="text-2xl font-bold leading-none">{plan.priceLabel}</span>
-              </div>
-              {plan.priceSubtitle && (
-                <p className="text-xs text-gray-500 mt-1">{plan.priceSubtitle}</p>
-              )}
-            </>
-          ) : (
-            // Otherwise, show numeric price
-            <>
-              <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
-                <span className="text-5xl font-bold leading-none">${currentPrice}</span>
-                <span className="text-2xl font-normal leading-none">/m</span>
-              </div>
-            </>
-          )}
+          <div className="flex items-baseline justify-center whitespace-nowrap gap-1">
+            <span className="text-5xl font-bold leading-none">${plan.price.monthly}</span>
+            <span className="text-2xl font-normal leading-none">/m</span>
+          </div>
+          <p className="text-xs text-gray-500 mt-1">(Billed quarterly)</p>
         </div>
 
         {/* CTA Button */}
-        {/* 
-          Free Trial plan has a white border style.
-          Growth/Premium keep the green background but say "Get Free Trial" 
-        */}
         <Link
           href={plan.ctaLink || "#"}
           className={
@@ -174,14 +117,12 @@ function PricingCard({ plan, isPopular = false, isAnnual }: PricingCardProps) {
 // ========== PAGE COMPONENT ==========
 
 export default function PricingPage() {
-  const [isAnnual, setIsAnnual] = useState(false);
-
   // Plans
   const plans: PricingPlan[] = [
     {
       name: "Free Trial",
       description: "Try it risk free",
-      price: { monthly: 0, annually: 0 },
+      price: { monthly: 0 },
       icon: <Circle className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -196,9 +137,7 @@ export default function PricingPage() {
     {
       name: "Growth",
       description: "Just getting started",
-      price: { monthly: 0, annually: 0 }, // No numeric display
-      priceLabel: "Early Access",
-      priceSubtitle: "Lock In Beta Pricing",
+      price: { monthly: 49 }, // $49/m, billed quarterly
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -213,9 +152,7 @@ export default function PricingPage() {
     {
       name: "Premium",
       description: "For power users",
-      price: { monthly: 0, annually: 0 }, // No numeric display
-      priceLabel: "Early Access",
-      priceSubtitle: "Lock In Beta Pricing",
+      price: { monthly: 149 }, // $149/m, billed quarterly
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
@@ -246,25 +183,23 @@ export default function PricingPage() {
               <div className="mx-auto max-w-3xl">
                 {/* Headline */}
                 <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                  SpeakerDrive Beta is Live
+                  Get Early Access To SpeakerDrive
                 </h1>
                 {/* Subheadline */}
                 <p className="text-md md:text-lg text-gray-600 mb-8">
-                  Join now to lock in early adopter benefits help shape the future. You don&apos;t even need a credit card.
+                  Join now to lock in early adopter benefits and help shape the future.
+                  You don&apos;t even need a credit card.
                 </p>
 
-                <PricingToggle isAnnual={isAnnual} setIsAnnual={setIsAnnual} />
-
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                  <PricingCard plan={plans[0]} isAnnual={isAnnual} />
-                  <PricingCard plan={plans[1]} isPopular isAnnual={isAnnual} />
-                  <PricingCard plan={plans[2]} isAnnual={isAnnual} />
+                  <PricingCard plan={plans[0]} />
+                  <PricingCard plan={plans[1]} isPopular />
+                  <PricingCard plan={plans[2]} />
                 </div>
 
                 {/* Beta pricing note */}
                 <p className="text-sm text-gray-700 mt-6">
-                  Join our early access program now. Beta members will receive priority access
-                  to special pricing when announced.
+                  Join our early access program and receive lifetime discounted pricing.
                 </p>
 
                 <div className="mt-6 text-center">
@@ -282,98 +217,12 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* Feature comparison */}
-          <section className="bg-gray-50 pt-8 pb-8">
-            <div className="max-w-4xl mx-auto px-4">
-              <h2 className="text-2xl font-bold text-center mb-6">
-                All SpeakerDrive plans come with...
-              </h2>
-              <p className="text-gray-600 text-center mb-6 max-w-2xl mx-auto">
-                Every plan includes these powerful features to help you find and book
-                more speaking opportunities
-              </p>
+          {/* 
+            The "All SpeakerDrive plans come with..." section (feature comparison)
+            is removed per your request.
+          */}
 
-              <div className="overflow-x-auto">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Unlock Contact Info */}
-                  <div className="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900">
-                      Unlock Contact Info
-                    </h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Contact Emails</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Event Emails</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Event URLs</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Smart Messaging */}
-                  <div className="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900">Smart Messaging</h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Email Composer</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">LinkedIn Composer</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Application Composer</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Useful Tools */}
-                  <div className="bg-white p-5 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-semibold mb-3 text-gray-900">Useful Tools</h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Ask SpeakerDrive AI</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Email &amp; Mobile Finder</span>
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <Check className="h-5 w-5 text-green-500" />
-                        <span className="text-gray-700">Company Lookup</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* CTA below feature table */}
-              <div className="mt-8 flex justify-center">
-                <Link
-                  href="https://app.speakerdrive.com/signup"
-                  className="
-                    inline-flex items-center justify-center rounded-lg
-                    bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-lg font-bold
-                    transition-all shadow-md hover:shadow-lg
-                    transform hover:-translate-y-1 duration-300
-                  "
-                >
-                  Get started. It&apos;s FREE! <span className="ml-1">&rarr;</span>
-                </Link>
-              </div>
-            </div>
-          </section>
-
-          {/* FAQ Section - reduced padding to bring it closer */}
+          {/* FAQ Section - now immediately after pricing */}
           <section id="faq" className="bg-white pt-4 pb-8">
             <div className="max-w-4xl mx-auto px-4">
               <FAQ
