@@ -50,7 +50,7 @@ export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void })
         variants={fadeUp}
         transition={{ duration: 0.4, delay: 0.3 }}
       >
-        Shape the future of SpeakerDrive + lock in 30% off forever. Limited spots available.
+        Shape the future of SpeakerDrive + lock in a lifetime discount. Limited spots available.
       </motion.p>
 
       {/* CTA Button */}

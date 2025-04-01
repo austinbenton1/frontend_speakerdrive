@@ -161,7 +161,7 @@ export default function ComingSoonPage() {
             <ul className="list-disc list-inside space-y-1">
               <li>First look at our platform features</li>
               <li>Input on final refinements</li>
-              <li>30% lifetime discount as thanks for your participation</li>
+              <li>Lifetime discount as thanks for your participation</li>
               <li>Strategy session with the founder</li>
             </ul>
           </div>

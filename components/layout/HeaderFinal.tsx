@@ -41,13 +41,13 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
   return (
     <header
       className={cn(
-        "sticky top-0 left-0 right-0 z-50 w-full py-4 transition-all duration-300",
+        "relative w-full transition-all duration-300",
         hasScrolled 
           ? "bg-white/95 backdrop-blur-md shadow-sm" 
           : "bg-transparent"
       )}
     >
-      <div className="max-w-screen-lg mx-auto px-4 flex items-center justify-between">
+      <div className="max-w-screen-lg mx-auto px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0 relative z-20">
           <span className="sr-only">{companyName}</span>
