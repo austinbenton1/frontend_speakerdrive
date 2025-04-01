@@ -5,31 +5,31 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const FAQ_ITEMS = [
   {
     question: "What is SpeakerDrive?",
-    answer: "SpeakerDrive is a prospecting platform built specifically for speakers, trainers, coaches, and consultants to find and connect with relevant decision-makers and events."
+    answer: "SpeakerDrive is a prospecting platform built specifically for speakers, trainers, coaches, and consultants to find and connect with relevant decision-makers and events. We help you find opportunities that turn the traditional \"sales\" process into a natural extension of your expertise."
   },
   {
     question: "How do you find events and opportunities?",
-    answer: "Our team, AI and automation join forces to research the internet continuously for speaking opportunities, conferences, and events as they're announced. Our database continues to grow with both current and historical events."
+    answer: "Our team, AI and automation join forces to research the internet continuously for speaking opportunities, conferences, and events as they're announced. Our database continues to grow with both current and historical events. New opportunities are tagged as such in the system so you can easily identify fresh leads."
   },
   {
     question: "What about past events? Aren't they outdated?",
-    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in speakers before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future opportunities with the same organization."
+    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future opportunities with the same organization."
   },
   {
     question: "How much time should I spend prospecting?",
-    answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting is the key factor in seeing results, regardless of the exact time spent."
+    answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting builds momentum and leads to results. We help you position yourself as a solution provider rather than just another vendor."
   },
   {
     question: "I've tried outreach before. What makes SpeakerDrive different?",
-    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on building relationships first, not making a hard sales pitch—more conversations lead to more business."
+    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on building relationships first, not making a hard sales pitch. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates."
   },
   {
-    question: "What message style works for outreach?",
-    answer: "Counterintuitively, shorter messages get more replies. Our system creates brief, targeted messages that spark interest without overwhelming. Remember: trying to close a deal in your first message is like proposing marriage on a first date."
+    question: "How do outreach messages work in SpeakerDrive?",
+    answer: "Our system presents you with three different messages for each opportunity, each with a unique angle. You can choose the one that best fits your style, edit if needed, and send directly from our platform. We've found that shorter messages get more replies—they spark interest without overwhelming. Remember: trying to close a deal in your first message is like proposing marriage on a first date."
   },
   {
-    question: "How are outreach messages generated?",
-    answer: "Our system presents you with three different messages, each with a unique angle, for each opportunity. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates. You can choose the message that best fits your style, edit it if needed, and send it directly from our platform. This gives you the right balance between automated efficiency and personal control over your outreach."
+    question: "Won't people be annoyed by too many outreach messages?",
+    answer: "We've built ethical outreach into our system. SpeakerDrive automatically places contacts in a cooling-off period after being unlocked twice, preventing them from receiving too many outreach attempts. This protects both the recipients from feeling bombarded and ensures your outreach maintains its effectiveness."
   },
   {
     question: "Who is behind SpeakerDrive?",
@@ -54,7 +54,7 @@ export function GeneralFAQ() {
           </div>
         </div>
 
-        {/* FAQ Accordion */}
+        {/* FAQ Accordion (2 columns) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column */}
           <Accordion
@@ -93,7 +93,9 @@ export function GeneralFAQ() {
                 <AccordionContent className="px-6 pb-5">
                   <div className="relative">
                     <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                    <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">{item.answer}</p>
+                    <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">
+                      {item.answer}
+                    </p>
                   </div>
                 </AccordionContent>
               </AccordionItem>
@@ -140,8 +142,11 @@ export function GeneralFAQ() {
                     <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">
                       {item.question === "Who is behind SpeakerDrive?" ? (
                         <>
-                          SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our{' '}
-                          <Link href="https://speakerdrive.com/about" className="text-brand-blue hover:text-blue-700 underline">
+                          SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our{" "}
+                          <Link
+                            href="https://speakerdrive.com/about"
+                            className="text-brand-blue hover:text-blue-700 underline"
+                          >
                             About page
                           </Link>
                           .

@@ -1,27 +1,33 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-
-const APP_PATHS = ['/signup', '/login'];
-const MAIN_DOMAIN = 'speakerdrive.com';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone()
-  const pathname = url.pathname
-  const host = request.headers.get('host') || ''
-  const referer = request.headers.get('referer') || ''
-  
-  // Check if we're going to app.speakerdrive.com from the main site
-  if (
-    host.startsWith('app.speakerdrive.com') && 
-    APP_PATHS.includes(pathname) &&
-    referer.includes(MAIN_DOMAIN)
-  ) {
-    const bypass = url.searchParams.get('bypass') === 'true'
-    
-    if (!bypass) {
-      return NextResponse.redirect(new URL('https://speakerdrive.com/coming-soon'))
+  // Clone the URL so we can modify it (if needed)
+  const url = request.nextUrl.clone();
+
+  // 1. Check if the request is going to the app subdomain
+  if (url.hostname === 'app.speakerdrive.com') {
+    const path = url.pathname || '';
+
+    // 2. If the user is trying to access /signup or /login
+    if (path === '/signup' || path === '/login') {
+      // 3. Allow bypass if the URL has ?bypass=true
+      const bypassParam = url.searchParams.get('bypass');
+
+      if (bypassParam !== 'true') {
+        // 4. Redirect to main site's coming-soon page
+        return NextResponse.redirect('https://www.speakerdrive.com/coming-soon');
+      }
     }
   }
-  
-  return NextResponse.next()
+
+  // If none of the above conditions match, just continue
+  return NextResponse.next();
 }
+
+// --- IMPORTANT: This "config" ensures the middleware runs on all paths 
+// so it can check the conditions above. You can tailor the matcher
+// if needed, but this is the simplest "catch-all" approach.
+export const config = {
+  matcher: '/:path*',
+};
