@@ -117,13 +117,13 @@ export function MessageComposer() {
             </div>
             {/* Increased desktop font */}
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800">
-              Conversations That Convert
+              Connections That Create Value
             </h3>
           </div>
 
           {/* Sub-paragraph */}
           <p className="text-left md:text-center text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg md:mx-auto mb-6">
-            Ditch the hard sales pitch.
+            With conversations that convert
           </p>
 
           {/* “See It In Action” box */}

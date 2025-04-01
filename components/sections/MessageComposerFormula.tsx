@@ -41,11 +41,11 @@ export function MessageComposerFormula() {
             Ultra Personalized Messaging
           </h2>
           <p className="text-left md:text-center text-lg sm:text-xl font-medium text-gray-700 leading-relaxed max-w-lg md:mx-auto">
-            Craft conversation-starting messages
+            Share your expertise naturally, without the pressure of pitching
           </p>
         </motion.div>
 
-        {/* White box for “Smart, Real-Time Matching” */}
+        {/* White box for "Smart, Real-Time Matching" */}
         <div className="mx-auto w-full lg:max-w-[900px] mb-8 bg-white px-4 sm:px-6 py-8">
           <div className="flex items-center text-left md:justify-center md:text-center mb-4">
             <div className="w-7 h-7 mr-3 flex items-center justify-center">
@@ -73,7 +73,7 @@ export function MessageComposerFormula() {
                 src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67da1398e4d4f5758831a24d.mp4"
                 type="video/mp4"
               />
-              <p>Your browser doesn’t support HTML5 video.</p>
+              <p>Your browser doesn't support HTML5 video.</p>
             </video>
           </div>
         </div>

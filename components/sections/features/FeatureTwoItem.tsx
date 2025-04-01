@@ -118,23 +118,20 @@ export function FeatureTwoItem({
 
           {/* Subheader logic */}
           {isStep3 && (
-            // UPDATED STEP 3 MAIN SUB HEADER
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Generate ultra personalized messages, in 1 click
+              Create value-focused messages that start genuine conversations, in 1 click
             </p>
           )}
 
           {isStep1 && (
-            // UPDATED STEP 1 SUB HEADER
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              All your prospecting opportunities, in one place.
+              Find opportunities that align perfectly with your expertise, all in one place.
             </p>
           )}
 
           {isStep2 && (
-            // UPDATED STEP 2 MAIN SUB HEADER
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              {description}
+              Skip the research and build meaningful relationships with the right people
             </p>
           )}
         </div>

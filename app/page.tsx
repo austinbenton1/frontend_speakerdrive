@@ -174,7 +174,7 @@ export default function LandingPage() {
             </div>
 
             <p className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-12">
-              Professionals who speak, train, and consult who want to take control of their business development.
+              Professionals who speak, train, and consult who want to extend their impact beyond their network.
             </p>
 
             {/* Expert Types Grid */}
@@ -340,9 +340,9 @@ export default function LandingPage() {
 
             {/* Smaller on mobile */}
             <p className="text-base sm:text-xl font-normal text-gray-900 leading-relaxed">
-              SpeakerDrive combines what I know works: systematic outreach that built my previous
-              businesses, and proven messaging that have directly led to millions in speaker bookings.
-              I've simplified everything I know into one platform.
+              SpeakerDrive combines what I know works: relationship-building systems that grew my previous
+              businesses, and authentic connections that have directly led to millions in speaker
+              bookings. I've simplified everything I know into one platform.
             </p>
 
             <div className="flex items-center mt-2">
