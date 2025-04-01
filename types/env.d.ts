@@ -12,5 +12,10 @@ declare global {
       embed: () => void;
       reset: () => void;
     };
+    Tracer?: (config: {
+      websiteId: string;
+      async?: boolean;
+      debug?: boolean;
+    }) => void;
   }
 }

@@ -8,14 +8,6 @@ const nextConfig = {
     // Ensure proper payload fetching
     serverComponentsExternalPackages: []
   },
-  experimental: {
-    // Improve RSC payload handling
-    serverActions: {
-      bodySizeLimit: '2mb'
-    },
-    // Ensure proper payload fetching
-    serverComponentsExternalPackages: []
-  },
   eslint: {
     // This allows production builds to complete even if ESLint errors exist
     ignoreDuringBuilds: true,
@@ -27,6 +19,8 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  // Disable source maps in development to prevent preview script errors
+  productionBrowserSourceMaps: false,
   // Turn off image optimization to avoid base64 placeholders:
   images: {
     unoptimized: true,
