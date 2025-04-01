@@ -63,7 +63,7 @@ export function HeroSimple({ onWaitlistClick }: { onWaitlistClick: () => void })
         animate="visible"
         transition={{ duration: 0.5, delay: 0.4 }}
       >
-        Reserve Your Access
+        Let's Do It!
         <ArrowRight className="ml-2 h-5 w-5" />
       </motion.button>
 

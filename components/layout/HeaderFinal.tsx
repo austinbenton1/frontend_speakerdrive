@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 // Full nav includes "Home" for mobile
-export const DEFAULT_NAV_LINKS = [
+const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Pricing", href: "http://speakerdrive.com/pricing" },
   { label: "Contact", href: "http://speakerdrive.com/contact" },
@@ -41,7 +41,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full py-4 transition-all duration-300",
+        "sticky top-0 left-0 right-0 z-50 w-full py-4 transition-all duration-300",
         hasScrolled 
           ? "bg-white/95 backdrop-blur-md shadow-sm" 
           : "bg-transparent"

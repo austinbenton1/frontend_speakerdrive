@@ -13,20 +13,24 @@ import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import { MessageComposer } from "@/components/sections/MessageComposer";
 import { ToolsSection } from "@/components/sections/ToolsSection";
+import { NotificationBanner } from "@/components/ui/NotificationBanner";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
-      <HeaderFinal
-        companyName="SpeakerDrive"
-        logo={
-          <img
-            src="/SpeakerDrive Logo - Long.png"
-            alt="SpeakerDrive"
-            className="h-8"
-          />
-        }
-      />
+      <div className="flex flex-col">
+        <NotificationBanner />
+        <HeaderFinal
+          companyName="SpeakerDrive"
+          logo={
+            <img
+              src="/SpeakerDrive Logo - Long.png"
+              alt="SpeakerDrive"
+              className="h-8"
+            />
+          }
+        />
+      </div>
 
       <main className="pt-16">
         {/* Hero Section */}
@@ -338,7 +342,7 @@ export default function LandingPage() {
             <p className="text-base sm:text-xl font-normal text-gray-900 leading-relaxed">
               SpeakerDrive combines what I know works: systematic outreach that built my previous
               businesses, and proven messaging that have directly led to millions in speaker bookings.
-              I’ve simplified everything I know into one platform.
+              I've simplified everything I know into one platform.
             </p>
 
             <div className="flex items-center mt-2">

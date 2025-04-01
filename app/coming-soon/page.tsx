@@ -83,10 +83,10 @@ function WaitlistModal({
                 <X className="h-6 w-6" />
               </button>
               <div className="mb-6">
-                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-                  Join The Waitlist
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2"> 
+                  Get Early Access
                 </h2>
-                <p className="text-gray-600">Be the first to know when we launch.</p>
+                <p className="text-gray-600">And help shape the future of SpeakerDrive</p>
               </div>
               <div
                 data-aidaform-app="form202405"
@@ -149,11 +149,10 @@ export default function ComingSoonPage() {
         <section className="container mx-auto max-w-3xl px-4 py-12 space-y-8 text-gray-700">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-              Be Part of Our Launch Journey
+              SpeakerDrive is almost ready for launch!
             </h2>
             <p className="leading-relaxed">
-              SpeakerDrive is almost ready for launch, and we're inviting a select
-              group of speakers and experts to join us in the final stretch.
+              And we're looking for a select group of speakers and experts to join us in the final stretch.
             </p>
           </div>
 
@@ -172,13 +171,13 @@ export default function ComingSoonPage() {
         <section className="container mx-auto max-w-3xl px-4 py-8">
           <div className="space-y-6 text-left text-gray-700 leading-relaxed">
             <p>
-              The speaking landscape has become increasingly challenging — saturated
+              "The speaking landscape has become increasingly challenging — saturated
               markets, fierce competition, and the struggle to find quality, paying
               gigs.
             </p>
             <p>
               I can't wait to show you what we've built and hear how we can make it
-              even better.
+              even better."
             </p>
 
             {/* Founder Profile (left-justified on mobile & desktop) */}

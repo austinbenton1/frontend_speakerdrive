@@ -15,10 +15,10 @@ type TransitionWithExit = FramerTransition & {
   exit?: FramerTransition;
 };
 
-export type PresetType = "blur" | "fade-in-blur" | "scale" | "fade" | "slide";
-export type PerType = "word" | "char" | "line";
+type PresetType = "blur" | "fade-in-blur" | "scale" | "fade" | "slide";
+type PerType = "word" | "char" | "line";
 
-export type TextEffectProps = {
+type TextEffectProps = {
   /** The text to animate. */
   children: string | React.ReactNode;
   /** Split text by word, char, or line. */
