@@ -89,43 +89,42 @@ export function FeatureTwoItem({
       <div className="container mx-auto max-w-5xl">
         {/* Heading & Description - Full width up top */}
         <div className="mb-4">
-          {/* Enhanced Step Pill */}
-          <div className="inline-flex items-center rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-green-600 to-green-500 py-2 px-4 mb-8 transform hover:scale-102 transition-all duration-300 -mt-16 hover:shadow-lg">            
-            <span className="font-medium text-white/90 text-base">
-              Step
-            </span>
-            <div className="mx-2 w-5 h-5 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/10">
-              <span className="text-white text-sm font-bold">{stepNumber}</span>
+          <div className="flex items-center gap-4 mb-2">
+            {/* Enhanced Step Pill */}
+            <div className="inline-flex items-center rounded-lg overflow-hidden shadow-md bg-gradient-to-r from-green-600 to-green-500 py-2 px-4 transform hover:scale-102 transition-all duration-300 hover:shadow-lg">            
+              <span className="font-medium text-white/90 text-base">
+                Step
+              </span>
+              <div className="mx-2 w-5 h-5 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/10">
+                <span className="text-white text-sm font-bold">{stepNumber}</span>
+              </div>
             </div>
-            <span className="font-medium text-white text-sm tracking-wide">
-              {isStep1 ? "Get Qualified Leads" : isStep2 ? "Get Contact Details" : title}
-            </span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 leading-tight">
+            
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight">
             {isStep1 ? (
               <div className="relative inline-block">
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/50 to-transparent blur-xl"></div>
                 <span className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
-                  Find Your Ideal Opportunities
+                  Search For Opportunities
                 </span>
               </div>
             ) :
              isStep2 ? "Unlock Contact Info" : 
              isStep3 ? "Send Winning Outreach" : 
              "Connect With Decision-Makers"}
-          </h2>
+            </h2>
+          </div>
 
           {/* Subheader logic */}
           {isStep3 && (
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Send messages that start genuine conversations. In 1 click.
+              Start genuine conversations. In 1 click.
             </p>
           )}
 
           {isStep1 && (
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Find opportunities that align with your expertise, all in one place.
+              Find engagements that align with your expertise, all in one place.
             </p>
           )}
 
@@ -192,25 +191,6 @@ export function FeatureTwoItem({
             )}
 
             {/* CTA Link with animated underline */}
-            <motion.div
-              className="inline-block relative mt-8"
-              initial="rest"
-              whileHover="hover"
-              animate="rest"
-            >
-              {/* UPDATED LINK TO POINT TO SPEAKERDRIVE SIGNUP */}
-              <Link
-                href="https://www.speakerdrive.com/coming-soon"
-                className="inline-flex items-center text-[#2D7FE0] font-bold text-xl mt-1"
-              >
-                <span>Start Free Trial</span>
-                <ArrowRight className="ml-1.5 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-              <motion.div
-                className="absolute bottom-0 left-0 h-[2px] bg-[#2D7FE0] rounded-full"
-                variants={underlineVariants}
-              />
-            </motion.div>
           </div>
 
           {/* RIGHT COL: Video or Image */}
