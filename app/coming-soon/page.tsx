@@ -163,7 +163,7 @@ export default function ComingSoonPage() {
 
       <main className="pt-24">
         {/* Hero Section (Text first on mobile, 50/50 on desktop) */}
-        <section className="container mx-auto max-w-5xl px-4 py-8 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+        <section className="container mx-auto max-w-4xl px-4 py-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
           {/* Left Column - Headline, Subheadline, CTA */}
           <div className="w-full lg:w-1/2">
             <div className="max-w-lg">

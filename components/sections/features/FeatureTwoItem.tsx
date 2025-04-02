@@ -199,8 +199,8 @@ export function FeatureTwoItem({
               animate="rest"
             >
               {/* UPDATED LINK TO POINT TO SPEAKERDRIVE SIGNUP */}
-              <Link 
-                href="https://app.speakerdrive.com/signup" 
+              <Link
+                href="https://www.speakerdrive.com/coming-soon"
                 className="inline-flex items-center text-[#2D7FE0] font-bold text-xl mt-1"
               >
                 <span>Start Free Trial</span>
