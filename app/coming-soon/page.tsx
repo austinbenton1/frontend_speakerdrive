@@ -5,6 +5,42 @@ import { Footer5 } from "@/components/layout/Footer";
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+
+// Animation variants
+const fadeUp = {
+  hidden: { opacity: 0, y: 10, filter: "blur(10px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)" },
+};
+
+// Import FAQ items
+const PRICING_FAQ_ITEMS = [
+  {
+    question: "What is Pre-Launch Access?",
+    answer:
+      "Your backstage pass to SpeakerDrive before we go live. Join a small group who'll test our platform, provide feedback, and help shape the final product. We're keeping the group limited to ensure everyone gets personal attention during the final development phase."
+  },
+  {
+    question: "When will SpeakerDrive officially launch?",
+    answer:
+      "We're targeting May 2025 for our full launch."
+  },
+  {
+    question: "What's in it for early supporters?",
+    answer:
+      "You'll get early access to all features, a guaranteed lifetime discount, and a one-on-one strategy session with our founder to maximize your results. Plus, you'll have your account fully set up before public launch."
+  },
+  {
+    question: "Is there any cost?",
+    answer:
+      "Nope. It's completely free during the pre-launch phase and you'll get to use the platform to grow your business."
+  },
+  {
+    question: "What's the next step to get started",
+    answer:
+      "Just click the button on this page and submit the form. We'll be in touch right away to discuss next steps and get you set up."
+  }
+];
 
 function WaitlistModal({
   isOpen,
@@ -131,7 +167,75 @@ export default function ComingSoonPage() {
           {/* Left Column - Headline, Subheadline, CTA */}
           <div className="w-full lg:w-1/2">
             <div className="max-w-lg">
-              <HeroSimple onWaitlistClick={() => setIsModalOpen(true)} />
+              <div>
+                {/* Line 1: SpeakerDrive is coming very soon! [no icon] */}
+                <motion.p
+                  className="text-lg text-green-700 font-semibold mb-2"
+                  initial="hidden"
+                  animate="visible"
+                  variants={fadeUp}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                >
+                  SpeakerDrive is coming very soon!
+                </motion.p>
+
+                {/* Line 2: Join Our Pre-Launch Group */}
+                <motion.h1
+                  className="text-3xl sm:text-4xl font-extrabold text-black leading-[1.2] mb-4"
+                  initial="hidden"
+                  animate="visible"
+                  variants={fadeUp}
+                  transition={{ duration: 0.4, delay: 0.2 }}
+                >
+                  Join Our Pre-Launch Group 🚀
+                </motion.h1>
+
+                {/* Line 3: Shape the future... */}
+                <motion.p
+                  className="text-base sm:text-lg font-medium text-neutral-700 mb-6"
+                  initial="hidden"
+                  animate="visible"
+                  variants={fadeUp}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  Shape the future of SpeakerDrive
+                </motion.p>
+
+                {/* CTA Button */}
+                <motion.button
+                  onClick={() => setIsModalOpen(true)}
+                  className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-semibold shadow-md hover:shadow-xl transition-all duration-300"
+                  style={{ cursor: 'pointer' }}
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate="visible"
+                  transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                  <span>Reserve My Spot</span>
+                  <svg
+                    className="ml-2 w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+                  </svg>
+                </motion.button>
+
+                {/* Minor note below the CTA */}
+                <motion.p
+                  className="mt-3 text-sm text-neutral-600"
+                  initial="hidden"
+                  animate="visible"
+                  variants={fadeUp}
+                  transition={{ duration: 0.4, delay: 0.5 }}
+                >
+                  And lock in a lifetime discount
+                </motion.p>
+              </div>
             </div>
           </div>
 
@@ -148,70 +252,108 @@ export default function ComingSoonPage() {
         {/* "Be Part of Our Launch Journey" Section */}
         <section className="container mx-auto max-w-3xl px-4 py-12 space-y-8 text-gray-700">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-              SpeakerDrive is almost ready for launch!
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 tracking-tight">
+              Help Shape Our Future
             </h2>
-            <p className="leading-relaxed">
-              And we're looking for a select group of speakers and experts to join us in the final stretch.
+            <p className="leading-relaxed max-w-2xl">
+              We're looking for a small group of people to join us in the final stretch before our official launch. As a pre-launch member, you'll get early access to all features, a lifetime discount, and a personal strategy session with our founder. Spots are limited!
             </p>
-          </div>
-
-          <div className="space-y-3 leading-relaxed">
-            <p className="font-medium">Your early access includes:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>First look at our platform features</li>
-              <li>Input on final refinements</li>
-              <li>Lifetime discount as thanks for your participation</li>
-              <li>Strategy session with the founder</li>
-            </ul>
           </div>
         </section>
 
-        {/* Quote & Founder Info at the Bottom */}
-        <section className="container mx-auto max-w-3xl px-4 py-8">
-          <div className="space-y-6 text-left text-gray-700 leading-relaxed">
-            <p>
-              "The speaking landscape has become increasingly challenging — saturated
-              markets, fierce competition, and the struggle to find quality, paying
-              gigs.
-            </p>
-            <p>
-              I can't wait to show you what we've built and hear how we can make it
-              even better."
-            </p>
+        {/* FAQ Section */}
+        <section className="bg-white py-16">
+          <div className="max-w-2xl mx-auto px-4">
+            {/* Section Header */}
+            <div className="text-center mb-12 relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-blue-100/30 to-blue-50/20 blur-3xl -z-10 opacity-70"></div>
+              <div className="relative">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 tracking-tight">
+                  Frequently Asked Questions
+                </h2>
+                <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
+                  Common questions we get
+                </p>
+              </div>
+            </div>
 
-            {/* Founder Profile (left-justified on mobile & desktop) */}
-            <div className="mt-6 flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-              <img
-                src="/austin_benton_head.png"
-                alt="Austin Benton"
-                className="w-16 h-16 rounded-full object-cover border-2 border-gray-100"
-              />
-              <div>
-                <p className="text-base font-semibold text-gray-900">Austin Benton</p>
-                <p className="text-sm text-gray-600">Founder, SpeakerDrive</p>
+            {/* FAQ Accordion */}
+            <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
+              {PRICING_FAQ_ITEMS.map((item, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`item-${index}`}
+                  className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
+                >
+                  <AccordionTrigger className="w-full">
+                    <div className="flex items-center justify-between w-full text-left">
+                      <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
+                        <div className="flex-1">
+                          <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
+                            {item.question}
+                          </span>
+                        </div>
+                        <div className="flex-shrink-0">
+                          <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
+                            <svg
+                              className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-5">
+                    <div className="relative">
+                      <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
+                      <p className="relative text-gray-600 leading-relaxed text-sm">
+                        {item.answer}
+                      </p>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
 
-                {/* LinkedIn link */}
-                <div className="flex items-center gap-2 mt-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="text-[#0A66C2]"
-                  >
-                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                  </svg>
-                  <a
-                    href="https://www.linkedin.com/in/austin-benton/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-[#0A66C2] hover:text-blue-800 transition-colors"
-                  >
-                    Connect on LinkedIn
-                  </a>
+          {/* Founder Message */}
+          <div className="max-w-2xl mx-auto mt-16 px-4">
+            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <img
+                    src="/austin_benton_head.png"
+                    alt="Austin Benton"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-md"
+                  />
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900">Austin Benton</h3>
+                    <p className="text-base text-gray-600">Founder, SpeakerDrive</p>
+                  </div>
                 </div>
+                <div className="text-base text-gray-700 leading-relaxed">
+                  I'd love to personally show you what we've built and discuss how it can help you book more premium speaking engagements.
+                </div>
+                <a
+                  href="https://www.linkedin.com/in/austin-benton/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#0A66C2] text-white rounded-lg font-semibold hover:bg-[#004182] transition-colors duration-200"
+                >
+                  <svg
+                    className="w-5 h-5 mr-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
+                  </svg>
+                  Connect with me on LinkedIn
+                </a>
               </div>
             </div>
           </div>

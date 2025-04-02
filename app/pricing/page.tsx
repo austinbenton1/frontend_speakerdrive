@@ -166,35 +166,31 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
 // ================== FAQ CONTENT (UPDATED) ==================
 const PRICING_FAQ_ITEMS = [
   {
-    question: "What's the Early Access Program?",
+    question: "What is Pre-Launch Access?",
     answer:
-      "Your backstage pass to SpeakerDrive before we launch! Join a small group of speakers and experts who'll test our platform, provide feedback, and help shape the final product. We're keeping the group small to ensure everyone gets personal attention as we fine-tune the system specifically for professionals like you."
-  },
-  {
-    question: "What perks do Early Access members get?",
-    answer:
-      "You'll get first dibs on all features, direct input on improvements, a lifetime discount that never expires, and a one-on-one strategy session with our founder. Plus, you'll have a head start on building your speaking pipeline when we launch. It's our thank-you for being an early believer!"
-  },
-  {
-    question: "Is there a cost to join the Early Access Program?",
-    answer:
-      "Nope! It's completely free to join our Early Access Program. We're looking for your insights and feedback, not your credit card."
+      "Your backstage pass to SpeakerDrive before we go live. Join a small group who'll test our platform, provide feedback, and help shape the final product. We're keeping the group limited to ensure everyone gets personal attention during the final development phase."
   },
   {
     question: "When will SpeakerDrive officially launch?",
     answer:
-      "We're targeting a full launch in May 2025. Early Access members will be the first to know the exact date and will have everything set up before everyone else."
+      "We're targeting May 2025 for our full launch. You will be the first to know the exact date."
   },
   {
-    question: "How do I join the Early Access Program?",
+    question: "What's in it for early supporters?",
     answer:
-      "Super simple! Just submit the form at https://www.speakerdrive.com/coming-soon and we'll be in touch right away to discuss next steps."
+      "You'll get early access to all features, a guaranteed lifetime discount, and a one-on-one strategy session with our founder to maximize your results. Plus, you'll have your account fully set up before public launch."
   },
   {
-    question: "What if I have other questions?",
+    question: "Is there any cost to join?",
     answer:
-      "We're happy to chat! Connect directly with our founder on LinkedIn at https://www.linkedin.com/in/austin-benton/ or book a personal meeting at https://www.speakerdrive.com/demo if you'd prefer to talk through any questions you might have."
+      "Nope. It's completely free during the pre-launch phase and you'll get to use the platform to grow your business."
+  },
+  {
+    question: "What's the next step to get started",
+    answer:
+      "Just click any button on this page and submit the form. We'll be in touch right away to discuss next steps and get you set up."
   }
+
 ];
 
 // ================== PAGE COMPONENT ==================
@@ -205,7 +201,7 @@ export default function PricingPage() {
       name: "Free Trial",
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: "https://www.speakerdrive.com/coming-soon",
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
@@ -224,7 +220,7 @@ export default function PricingPage() {
       description: "Just getting started",
       oldPrice: 79,
       icon: <Rocket className="h-9 w-9" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: "https://www.speakerdrive.com/coming-soon",
       features: [
         { text: "300 Unlocks / Month" },
         { text: "Message Composer" },
@@ -267,7 +263,7 @@ export default function PricingPage() {
       description: "For power users",
       oldPrice: 179,
       icon: <Zap className="h-9 w-9" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: "https://www.speakerdrive.com/coming-soon",
       features: [
         { text: "1,500 Unlocks / Month" },
         { text: "Message Composer" },
@@ -354,25 +350,25 @@ export default function PricingPage() {
 
           {/* FAQ Section */}
           <section id="faq" className="bg-white pt-2 pb-8 overflow-hidden">
-            <div className="max-w-5xl mx-auto px-4">
+            <div className="max-w-xl mx-auto px-4">
               {/* Section Header */}
               <div className="text-center mb-16 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-blue-100/30 to-blue-50/20 blur-3xl -z-10 opacity-70"></div>
                 <div className="relative">
-                  <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-2 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 tracking-tight">
                     Frequently Asked Questions
                   </h2>
-                  <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+                  <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
                     Common questions about using SpeakerDrive
                   </p>
                 </div>
               </div>
 
               {/* Two-column Accordion */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="w-full">
                 {/* Left Column */}
                 <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
-                  {PRICING_FAQ_ITEMS.slice(0, Math.ceil(PRICING_FAQ_ITEMS.length / 2)).map(
+                  {PRICING_FAQ_ITEMS.map(
                     (item, index) => (
                       <AccordionItem
                         key={index}
@@ -383,7 +379,7 @@ export default function PricingPage() {
                           <div className="flex items-center justify-between w-full text-left">
                             <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
                               <div className="flex-1">
-                                <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
+                                <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
                                   {item.question}
                                 </span>
                               </div>
@@ -410,7 +406,7 @@ export default function PricingPage() {
                         <AccordionContent className="px-6 pb-5">
                           <div className="relative">
                             <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                            <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">
+                            <p className="relative text-gray-600 leading-relaxed text-sm">
                               {item.answer}
                             </p>
                           </div>
@@ -420,55 +416,6 @@ export default function PricingPage() {
                   )}
                 </Accordion>
 
-                {/* Right Column */}
-                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
-                  {PRICING_FAQ_ITEMS.slice(Math.ceil(PRICING_FAQ_ITEMS.length / 2)).map(
-                    (item, index) => (
-                      <AccordionItem
-                        key={index + Math.ceil(PRICING_FAQ_ITEMS.length / 2)}
-                        value={`item-${index + Math.ceil(PRICING_FAQ_ITEMS.length / 2)}`}
-                        className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
-                      >
-                        <AccordionTrigger className="w-full">
-                          <div className="flex items-center justify-between w-full text-left">
-                            <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
-                              <div className="flex-1">
-                                <span className="text-base font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
-                                  {item.question}
-                                </span>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                  <svg
-                                    className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M19 9l-7 7-7-7"
-                                    />
-                                  </svg>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-5">
-                          <div className="relative">
-                            <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                            <p className="relative text-gray-600 leading-relaxed text-[0.95rem]">
-                              {item.answer}
-                            </p>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    )
-                  )}
-                </Accordion>
               </div>
 
               {/* Bottom CTA */}
