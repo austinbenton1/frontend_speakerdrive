@@ -119,19 +119,19 @@ export function FeatureTwoItem({
           {/* Subheader logic */}
           {isStep3 && (
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Create value-focused messages that start genuine conversations, in 1 click
+              Send messages that start genuine conversations. In 1 click.
             </p>
           )}
 
           {isStep1 && (
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Find opportunities that align perfectly with your expertise, all in one place.
+              Find opportunities that align with your expertise, all in one place.
             </p>
           )}
 
           {isStep2 && (
             <p className="text-lg text-gray-600 mt-3 mb-6 max-w-xl">
-              Skip the research and build meaningful relationships with the right people
+              Skip the research. Find the key players instantly.
             </p>
           )}
         </div>
@@ -150,7 +150,7 @@ export function FeatureTwoItem({
                 </div>
                 
                 <div className="bg-white rounded-lg px-5 py-4 shadow-sm hover:shadow-md transition-all duration-200 border border-gray-100">
-                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Event Channels</h4>
+                  <h4 className="text-[16.5px] font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Events</h4>
                   <p className="text-[14.5px] text-gray-600 leading-relaxed tracking-wide mt-1.5">
                     Event specific emails, Call For Speakers submissions, registration sessions & portals.
                   </p>

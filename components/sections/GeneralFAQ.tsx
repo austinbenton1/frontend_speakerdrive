@@ -20,16 +20,16 @@ const FAQ_ITEMS = [
     answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting builds momentum and leads to results. We help you position yourself as a solution provider rather than just another vendor."
   },
   {
-    question: "I've tried outreach before. What makes SpeakerDrive different?",
-    answer: "Traditional outreach fails because it's generic and sales-focused. Our approach focuses on building relationships first, not making a hard sales pitch. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates."
+    question: "What makes SpeakerDrive different?",
+    answer: "We're laser focused on speakers and experts. When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates."
   },
   {
-    question: "How do outreach messages work in SpeakerDrive?",
-    answer: "Our system presents you with three different messages for each opportunity, each with a unique angle. You can choose the one that best fits your style, edit if needed, and send directly from our platform. We've found that shorter messages get more replies—they spark interest without overwhelming. Remember: trying to close a deal in your first message is like proposing marriage on a first date."
+    question: "How does your message composer work?",
+    answer: "The message composer is greared toward sparking conversations, not selling on the first message. The composer will give you three different messages for each opportunity, each with a unique angle. You can choose the one that best fits your style, edit if needed, and send directly from our platform. We've found that shorter messages get more replies—they spark interest without overwhelming."
   },
   {
-    question: "Won't people be annoyed by too many outreach messages?",
-    answer: "We've built ethical outreach into our system. SpeakerDrive automatically places contacts in a cooling-off period after being unlocked twice, preventing them from receiving too many outreach attempts. This protects both the recipients from feeling bombarded and ensures your outreach maintains its effectiveness."
+    question: "Won't your leads become saturated?",
+    answer: "We've built in an automatic cooling-off period for contacts after being unlocked twice; they are removed from the main list, preventing them from receiving too many outreach attempts. This protects both the recipients from feeling bombarded and ensures your outreach maintains its effectiveness."
   },
   {
     question: "Who is behind SpeakerDrive?",

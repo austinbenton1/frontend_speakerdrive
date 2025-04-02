@@ -35,16 +35,16 @@ const CONTACT_FEATURES = [
     // Heading removed => heading: "",
     bullets: [
       {
-        text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering",
+        text: "Define your message purpose",
       },
       {
         text: "Send from yourself or “send as” your assistant / business manager",
       },
       {
-        text: "Create personalized LinkedIn connections with one click",
+        text: "Create emails or LinkedIn connection messages.",
       },
       {
-        text: "Composer Quick Look -> Contact Email:",
+        text: "Contact Email Quick Look ->",
         noCheck: true,
         bold: true,
       },
@@ -58,7 +58,7 @@ const CONTACT_FEATURES = [
     icon: <AtSign className="mr-2.5 h-5 w-5" />,
     bullets: [
       {
-        text: "Position your message for: speaking, consulting, coaching, facilitation, or custom offering",
+        text: "Define your message purpose",
       },
       {
         text: "Send from yourself or “send as” your assistant / business manager",
@@ -67,7 +67,7 @@ const CONTACT_FEATURES = [
         text: "Event already past? No problem! We’ll pivot to adjacent / alternative positioning.",
       },
       {
-        text: "Composer Quick Look -> Event Email:",
+        text: "Event Email Quick Look ->",
         noCheck: true,
         bold: true,
       },
@@ -90,7 +90,7 @@ const CONTACT_FEATURES = [
         text: "Stand out with professionally crafted applications in seconds",
       },
       {
-        text: "Composer Quick Look -> Event URL:",
+        text: "Event URL Quick Look ->",
         noCheck: true,
         bold: true,
       },
@@ -123,7 +123,7 @@ export function MessageComposer() {
 
           {/* Sub-paragraph */}
           <p className="text-left md:text-center text-base sm:text-lg text-gray-600 leading-relaxed max-w-lg md:mx-auto mb-6">
-            With conversations that convert
+            With genuine messaging
           </p>
 
           {/* “See It In Action” box */}

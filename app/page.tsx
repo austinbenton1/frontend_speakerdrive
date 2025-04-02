@@ -95,8 +95,8 @@ export default function LandingPage() {
                   description: "11 advanced search filters for granular targeting.",
                 },
                 {
-                  title: "Always Current Data",
-                  description: "Fresh engagements and decision-makers added to our system daily.",
+                  title: "Opportunities Added Daily",
+                  description: "Fresh engagements and decision-makers added as they emerge.",
                 },
               ]}
               externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21aa6244f61209f98b0.mp4"
@@ -174,7 +174,7 @@ export default function LandingPage() {
             </div>
 
             <p className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-12">
-              Professionals who speak, train, and consult who want to extend their impact beyond their network.
+              Professionals who speak, train, and consult who want to amplify their impact.
             </p>
 
             {/* Expert Types Grid */}

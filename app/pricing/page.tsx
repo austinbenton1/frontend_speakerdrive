@@ -8,17 +8,16 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 // ================== PRICING TYPES & COMPONENTS ==================
 
-// For plan features
 interface PricingFeature {
   text: string;
   disabled?: boolean;
+  tooltip?: React.ReactNode;
 }
 
-// For plan definitions
 interface PricingPlan {
   name: string;
   description: string;
-  oldPrice?: number; // if defined, we show "Free During Pre-Launch" plus crossed-out price
+  oldPrice?: number;
   icon: React.ReactNode;
   ctaLink?: string;
   features: PricingFeature[];
@@ -29,16 +28,71 @@ interface PricingCardProps {
   isPopular?: boolean;
 }
 
-// Pricing card layout
+// Renders each feature row, with optional tooltip
+function FeatureItem({ feature }: { feature: PricingFeature }) {
+  const { text, disabled, tooltip } = feature;
+
+  return (
+    <div className="flex items-center gap-2">
+      {/* Check or X icon */}
+      {disabled ? (
+        <div className="h-5 w-5 flex-shrink-0 text-red-500">✕</div>
+      ) : (
+        <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
+      )}
+
+      {/* Feature text + optional tooltip */}
+      <div className="relative group inline-flex items-center text-sm whitespace-nowrap">
+        <span className={disabled ? "text-gray-400" : "text-gray-700"}>{text}</span>
+
+        {tooltip && (
+          <div className="relative inline-block ml-1">
+            {/* Small subtle "?" icon */}
+            <span
+              className="
+                text-[10px] text-gray-600 hover:text-gray-800 
+                cursor-help font-medium
+              "
+              tabIndex={0}
+            >
+              ?
+            </span>
+
+            {/* Tooltip container for hover/focus */}
+            <div
+              className="
+                hidden
+                group-hover:block
+                hover:block
+                pointer-events-auto
+                absolute bottom-full left-1/2 transform -translate-x-1/2
+                mb-2 min-w-[18rem] max-w-xl p-3 rounded-md shadow-xl border border-gray-200
+                bg-white text-gray-700 text-xs z-[9999]
+                whitespace-normal break-words text-left leading-snug
+              "
+            >
+              {/* Tooltip arrow */}
+              <div className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-white" />
+              {tooltip}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Pricing card
 function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   return (
     <div
       className={`
-        relative bg-white rounded-lg overflow-hidden
+        relative bg-white rounded-lg
         ${isPopular
           ? "border-[3px] border-green-500 shadow-lg -mt-2"
           : "border border-gray-200"
         }
+        overflow-visible
       `}
     >
       {isPopular && (
@@ -67,14 +121,15 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
 
         {/* Price Display */}
         <div className="mb-6 text-center">
-          {plan.oldPrice !== undefined ? (
-            // Growth & Premium
+          {typeof plan.oldPrice === "number" ? (
+            // Starter & Premium
             <div className="flex flex-col items-center justify-center gap-1">
               <div className="text-3xl font-bold leading-none">
                 Free During Pre-Launch
               </div>
               <div className="text-base text-gray-400 line-through">
-                ${plan.oldPrice} per month <span className="block text-xs">(paid quarterly)</span>
+                ${plan.oldPrice} per month
+                <span className="block text-xs">(paid quarterly)</span>
               </div>
             </div>
           ) : (
@@ -86,7 +141,7 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
           )}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA */}
         <Link
           href={plan.ctaLink || "#"}
           className="block w-full py-3 px-4 rounded font-bold text-center bg-green-500 text-white hover:bg-green-600 mb-6"
@@ -97,18 +152,7 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
         {/* Feature List */}
         <div className="space-y-3">
           {plan.features.map((feature, i) => (
-            <div key={i} className="flex items-center gap-2">
-              {feature.disabled ? (
-                <div className="h-5 w-5 flex-shrink-0 text-red-500">✕</div>
-              ) : (
-                <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
-              )}
-              <span
-                className={`text-sm ${feature.disabled ? "text-gray-400" : "text-gray-700"}`}
-              >
-                {feature.text}
-              </span>
-            </div>
+            <FeatureItem key={i} feature={feature} />
           ))}
         </div>
       </div>
@@ -116,21 +160,14 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   );
 }
 
-// ================== FAQ CONTENT (PRICING) ==================
-// We keep your Pricing FAQ questions exactly the same, but style them
-// using the two-column accordion from your homepage.
+// ================== FAQ CONTENT ==================
+// Removed the following from the original list:
+// 1) "What does 'Beta Pricing' mean?"
+// 2) "What's included in the free trial?"
+// 3) "What happens when I hit my monthly lead limit?"
+// 4) "How can I export and integrate my leads?"
 
 const PRICING_FAQ_ITEMS = [
-  {
-    question: 'What does "Beta Pricing" mean?',
-    answer:
-      "SpeakerDrive is currently in beta, and we're offering special introductory rates to early adopters. These special beta rates are temporary and will increase in the future, but early members who sign up during this period will be grandfathered in at today's prices. Join now to secure the best possible rates."
-  },
-  {
-    question: "What's included in the free trial?",
-    answer:
-      "The free trial includes up to 5 unlocks. You can search for opportunities, unlock contact information, and use our AI-powered outreach tools with no restrictions."
-  },
   {
     question: "Do I need a credit card to start?",
     answer:
@@ -142,11 +179,6 @@ const PRICING_FAQ_ITEMS = [
       "Yes, you can upgrade, downgrade, or cancel your plan at any time."
   },
   {
-    question: "What happens when I hit my monthly lead limit?",
-    answer:
-      "When you reach your monthly unlock limit, you have three options: upgrade to a higher tier plan, purchase additional one-time unlock credits (at a slightly higher rate than your plan), or wait until your next billing cycle when your lead count resets."
-  },
-  {
     question: "Is there a long-term contract?",
     answer:
       "No, all plans are month-to-month with no long-term commitment required. You can cancel anytime and won't be charged for future months."
@@ -155,11 +187,6 @@ const PRICING_FAQ_ITEMS = [
     question: "Do you offer team or agency pricing?",
     answer:
       "Yes, we offer volume-based plans for teams and agencies that need more unlocks. Contact us to discuss your specific requirements."
-  },
-  {
-    question: "How can I export and integrate my leads?",
-    answer:
-      "You can add leads directly to your CRM, download as CSV, or use our integration with Instantly email platform (coming soon). If you need a custom integration with your existing tools, please contact us to discuss your requirements."
   }
 ];
 
@@ -175,46 +202,96 @@ export default function PricingPage() {
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
-        { text: "Gmail Integration" },
+        { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-        { text: "SpeakerDrive Tools" },
+
+        // No tooltips for free trial's disabled items
+        { text: "Recently Added Leads", disabled: true },
         { text: "Bulk Exports", disabled: true },
-        { text: "Advanced Integrations", disabled: true },
-        { text: "Recently Added Leads", disabled: true }
+        { text: "Integrations", disabled: true }
       ]
     },
     {
-      name: "Growth",
+      // Starter plan
+      name: "Starter",
       description: "Just getting started",
-      oldPrice: 79, // Crossed out
+      oldPrice: 79,
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
         { text: "300 Unlocks / Month" },
         { text: "Message Composer" },
-        { text: "Gmail Integration" },
+        { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-        { text: "SpeakerDrive Tools" },
-        { text: "Bulk Exports", disabled: true },
-        { text: "Advanced Integrations", disabled: true },
-        { text: "Recently Added Leads", disabled: true }
+
+        {
+          text: "Recently Added Leads",
+          disabled: true,
+          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
+        },
+        {
+          text: "Bulk Exports",
+          disabled: true,
+          tooltip: "Export your unlocked leads to CSV, one at a time"
+        },
+        {
+          text: "Integrations",
+          disabled: true,
+          tooltip: (
+            <>
+              Send your unlocks to 3rd party platforms. Direct integration with{" "}
+              <a
+                href="https://instantly.ai/?via=austin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-blue-600 hover:text-blue-800"
+              >
+                Instant.ly
+              </a>{" "}
+              coming soon.
+            </>
+          )
+        }
       ]
     },
     {
+      // Premium plan
       name: "Premium",
       description: "For power users",
-      oldPrice: 179, // Crossed out
+      oldPrice: 179,
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       features: [
         { text: "1,500 Unlocks / Month" },
         { text: "Message Composer" },
-        { text: "Gmail Integration" },
+        { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-        { text: "SpeakerDrive Tools" },
-        { text: "Bulk Exports" },
-        { text: "Advanced Integrations" },
-        { text: "Recently Added Leads" }
+
+        {
+          text: "Recently Added Leads",
+          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
+        },
+        {
+          text: "Bulk Exports",
+          tooltip: "Bulk exporting / downloading of your unlocked leads to CSV"
+        },
+        {
+          text: "Integrations",
+          tooltip: (
+            <>
+              Send your unlocks to 3rd party platforms. Direct integration with{" "}
+              <a
+                href="https://instantly.ai/?via=austin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-blue-600 hover:text-blue-800"
+              >
+                Instant.ly
+              </a>{" "}
+              coming soon.
+            </>
+          )
+        }
       ]
     }
   ];
@@ -268,7 +345,7 @@ export default function PricingPage() {
             </div>
           </section>
 
-          {/* FAQ Section, styled like homepage */}
+          {/* FAQ Section */}
           <section id="faq" className="bg-white pt-2 pb-8 overflow-hidden">
             <div className="max-w-5xl mx-auto px-4">
               {/* Section Header */}
@@ -396,7 +473,7 @@ export default function PricingPage() {
               {/* Bottom CTA */}
               <div className="mt-16 text-center">
                 <p className="text-lg text-gray-700 mb-8">
-                  Still have questions? We're here to help.
+                  Still have questions? We&apos;re here to help.
                 </p>
                 <a
                   href="https://speakerdrive.com/contact"
