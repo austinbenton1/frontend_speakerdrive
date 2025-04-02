@@ -79,10 +79,10 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-blue transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <a
-              href="https://app.speakerdrive.com/signup"
+              href="https://www.speakerdrive.com/coming-soon"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
-              Try For Free
+              Join Early Access 🚀
             </a>
           </div>
         </div>}
@@ -168,11 +168,11 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               Sign in
             </Link>
             <a
-              href="https://app.speakerdrive.com/signup"
+              href="https://www.speakerdrive.com/coming-soon"
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Try for free
+              Join Early Access 🚀
             </a>
           </div>
         </div>

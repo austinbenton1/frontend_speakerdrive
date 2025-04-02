@@ -329,7 +329,7 @@ export function ToolsSection() {
             {/* CTA button replacing the subtext */}
             <div className="p-4 flex justify-center">
               <a
-                href="https://app.speakerdrive.com/signup"
+                href="https://www.speakerdrive.com/coming-soon"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
@@ -347,7 +347,7 @@ export function ToolsSection() {
                   hover:opacity-90
                 "
               >
-                Ready To Try It? Start For Free
+                Ready To Join? Get Early Access
                 <RocketIcon className="ml-2 w-4 h-4" />
               </a>
             </div>

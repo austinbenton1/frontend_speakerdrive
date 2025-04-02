@@ -1,10 +1,17 @@
 "use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { Check, Circle, Rocket, Zap } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { NotificationBanner } from "@/components/ui/NotificationBanner";
 import { Footer5 } from "@/components/layout/Footer";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
 
 // ================== PRICING TYPES & COMPONENTS ==================
 
@@ -28,53 +35,49 @@ interface PricingCardProps {
   isPopular?: boolean;
 }
 
-// Renders each feature row, with optional tooltip
+// A small component to display each feature row.
+// If there's a tooltip, we handle open/close with React state
 function FeatureItem({ feature }: { feature: PricingFeature }) {
   const { text, disabled, tooltip } = feature;
 
+  // Manage tooltip open/close with mouse events
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="flex items-center gap-2">
-      {/* Check or X icon */}
+      {/* Checkmark or X */}
       {disabled ? (
         <div className="h-5 w-5 flex-shrink-0 text-red-500">✕</div>
       ) : (
         <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
       )}
 
-      {/* Feature text + optional tooltip */}
-      <div className="relative group inline-flex items-center text-sm whitespace-nowrap">
+      {/* Text + optional "?" tooltip */}
+      <div className="inline-flex items-center text-sm whitespace-nowrap relative">
         <span className={disabled ? "text-gray-400" : "text-gray-700"}>{text}</span>
 
+        {/* Only render the "?" and tooltip if there's actual tooltip content */}
         {tooltip && (
-          <div className="relative inline-block ml-1">
-            {/* Small subtle "?" icon */}
-            <span
-              className="
-                text-[10px] text-gray-600 hover:text-gray-800 
-                cursor-help font-medium
-              "
-              tabIndex={0}
-            >
-              ?
-            </span>
-
-            {/* Tooltip container for hover/focus */}
-            <div
-              className="
-                hidden
-                group-hover:block
-                hover:block
-                pointer-events-auto
-                absolute bottom-full left-1/2 transform -translate-x-1/2
-                mb-2 min-w-[18rem] max-w-xl p-3 rounded-md shadow-xl border border-gray-200
-                bg-white text-gray-700 text-xs z-[9999]
-                whitespace-normal break-words text-left leading-snug
-              "
-            >
-              {/* Tooltip arrow */}
-              <div className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-white" />
-              {tooltip}
-            </div>
+          <div
+            className="ml-1 relative text-[10px] text-gray-600 font-medium cursor-help hover:text-gray-800"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+          >
+            ?
+            {isOpen && (
+              <div
+                className="
+                  absolute bottom-full left-1/2 transform -translate-x-1/2
+                  mb-2 min-w-[18rem] max-w-xl p-3 rounded-md shadow-xl border border-gray-200
+                  bg-white text-gray-700 text-xs z-[9999]
+                  whitespace-normal break-words text-left leading-snug
+                "
+              >
+                {/* Tooltip arrow */}
+                <div className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-white" />
+                {tooltip}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -82,7 +85,7 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
   );
 }
 
-// Pricing card
+// Pricing card layout
 function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   return (
     <div
@@ -141,7 +144,7 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
           )}
         </div>
 
-        {/* CTA */}
+        {/* CTA Button */}
         <Link
           href={plan.ctaLink || "#"}
           className="block w-full py-3 px-4 rounded font-bold text-center bg-green-500 text-white hover:bg-green-600 mb-6"
@@ -160,33 +163,37 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   );
 }
 
-// ================== FAQ CONTENT ==================
-// Removed the following from the original list:
-// 1) "What does 'Beta Pricing' mean?"
-// 2) "What's included in the free trial?"
-// 3) "What happens when I hit my monthly lead limit?"
-// 4) "How can I export and integrate my leads?"
-
+// ================== FAQ CONTENT (UPDATED) ==================
 const PRICING_FAQ_ITEMS = [
   {
-    question: "Do I need a credit card to start?",
+    question: "What's the Early Access Program?",
     answer:
-      "No, you don't need a credit card to start your free trial. You can try SpeakerDrive risk-free and only enter payment information if you decide to continue after the trial."
+      "Your backstage pass to SpeakerDrive before we launch! Join a small group of speakers and experts who'll test our platform, provide feedback, and help shape the final product. We're keeping the group small to ensure everyone gets personal attention as we fine-tune the system specifically for professionals like you."
   },
   {
-    question: "Can I change plans anytime?",
+    question: "What perks do Early Access members get?",
     answer:
-      "Yes, you can upgrade, downgrade, or cancel your plan at any time."
+      "You'll get first dibs on all features, direct input on improvements, a lifetime discount that never expires, and a one-on-one strategy session with our founder. Plus, you'll have a head start on building your speaking pipeline when we launch. It's our thank-you for being an early believer!"
   },
   {
-    question: "Is there a long-term contract?",
+    question: "Is there a cost to join the Early Access Program?",
     answer:
-      "No, all plans are month-to-month with no long-term commitment required. You can cancel anytime and won't be charged for future months."
+      "Nope! It's completely free to join our Early Access Program. We're looking for your insights and feedback, not your credit card."
   },
   {
-    question: "Do you offer team or agency pricing?",
+    question: "When will SpeakerDrive officially launch?",
     answer:
-      "Yes, we offer volume-based plans for teams and agencies that need more unlocks. Contact us to discuss your specific requirements."
+      "We're targeting a full launch in May 2025. Early Access members will be the first to know the exact date and will have everything set up before everyone else."
+  },
+  {
+    question: "How do I join the Early Access Program?",
+    answer:
+      "Super simple! Just submit the form at https://www.speakerdrive.com/coming-soon and we'll be in touch right away to discuss next steps."
+  },
+  {
+    question: "What if I have other questions?",
+    answer:
+      "We're happy to chat! Connect directly with our founder on LinkedIn at https://www.linkedin.com/in/austin-benton/ or book a personal meeting at https://www.speakerdrive.com/demo if you'd prefer to talk through any questions you might have."
   }
 ];
 
@@ -205,7 +212,7 @@ export default function PricingPage() {
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
 
-        // No tooltips for free trial's disabled items
+        // No tooltips for Free Trial's disabled items
         { text: "Recently Added Leads", disabled: true },
         { text: "Bulk Exports", disabled: true },
         { text: "Integrations", disabled: true }
@@ -364,10 +371,7 @@ export default function PricingPage() {
               {/* Two-column Accordion */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Left Column */}
-                <Accordion
-                  className="space-y-3"
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
+                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
                   {PRICING_FAQ_ITEMS.slice(0, Math.ceil(PRICING_FAQ_ITEMS.length / 2)).map(
                     (item, index) => (
                       <AccordionItem
@@ -417,10 +421,7 @@ export default function PricingPage() {
                 </Accordion>
 
                 {/* Right Column */}
-                <Accordion
-                  className="space-y-3"
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
+                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
                   {PRICING_FAQ_ITEMS.slice(Math.ceil(PRICING_FAQ_ITEMS.length / 2)).map(
                     (item, index) => (
                       <AccordionItem

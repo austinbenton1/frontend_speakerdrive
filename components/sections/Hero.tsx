@@ -166,18 +166,18 @@ export function Hero() {
 
             {/* Enhanced CTA Button */}
             <motion.a
-              href="https://app.speakerdrive.com/signup"
+              href="https://www.speakerdrive.com/coming-soon"
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
               variants={fadeUp}
               initial="hidden"
               animate="visible"
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
+              Join Early Access <span className="ml-2">🚀</span>
             </motion.a>
 
             {/* No credit card text */}
-            <p className="mt-3 text-neutral-600 text-sm">Start Free Trial. No credit card needed.</p>
+            <p className="mt-3 text-neutral-600 text-sm">Join Early Access. No credit card needed.</p>
           </div>
 
           {/* RIGHT FLOATING IMAGE (hidden below lg) */}

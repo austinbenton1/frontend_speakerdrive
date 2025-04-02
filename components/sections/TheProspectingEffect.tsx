@@ -149,13 +149,13 @@ export function TheProspectingEffect() {
                   {/* CTA button */}
                   <div className="flex flex-col items-center mt-16 mb-24">
                     <a
-                      href="https://app.speakerdrive.com/signup"
+                      href="https://www.speakerdrive.com/coming-soon"
                       className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
                     >
-                      Get started. It's FREE! <ArrowRight className="ml-2 h-5 w-5" />
+                      Join Early Access <span className="ml-2">🚀</span>
                     </a>
                     <p className="mt-4 text-sm text-gray-500">
-                      Start Free Trial. No credit card needed.
+                      Join Early Access. No credit card needed.
                     </p>
                   </div>
                 </div>
