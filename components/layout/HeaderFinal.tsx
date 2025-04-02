@@ -71,13 +71,6 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
 
           {/* Auth Buttons */}
           <div className="flex items-center space-x-5 ml-10">
-            <Link
-              href="https://app.speakerdrive.com/login"
-              className="text-base font-medium text-neutral-800 hover:text-brand-blue transition-colors relative group"
-            >
-              Sign in
-              <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-brand-blue transition-all duration-300 group-hover:w-full"></span>
-            </Link>
             <a
               href="https://www.speakerdrive.com/coming-soon"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
@@ -160,13 +153,6 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
           </nav>
 
           <div className="flex flex-col space-y-2.5 pt-3 mt-2 border-t border-gray-100">
-            <Link
-              href="https://app.speakerdrive.com/login"
-              className="text-[15px] font-medium px-3 py-2.5 text-gray-700 hover:text-brand-blue rounded-lg hover:bg-gray-50 transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Sign in
-            </Link>
             <a
               href="https://www.speakerdrive.com/coming-soon"
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
