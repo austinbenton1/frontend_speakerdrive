@@ -135,7 +135,7 @@ export function Hero() {
                 New!
               </span>
               <span className="flex items-center gap-1 px-1.5 sm:px-3 py-1 sm:py-1.5 text-[12px] sm:text-sm font-medium text-gray-700 bg-white">
-                For Speakers, Coaches &amp; Experts
+                For Speakers &amp; Experts
                 <div className="flex-none flex items-center">
                   <span className="text-[11px] sm:text-xs ml-1">🎉</span>
                   <ChevronRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 ml-0.5 sm:ml-1 text-gray-400" />

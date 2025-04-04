@@ -174,14 +174,14 @@ export default function LandingPage() {
             </div>
 
             <p className="text-center text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mt-4 mb-12">
-              Professionals who speak, train, and consult who want to amplify their impact.
+              Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
             </p>
 
             {/* Expert Types Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 px-4 sm:px-8">
               
               {/* Keynote Speakers */}
-              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-1 md:order-3">
+              <div className="text-center md:hover:scale-105 transition-transform duration-300 order-1 md:order-3 lg:col-span-1 lg:transform lg:scale-105">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
                     src="/Keynote Speaker.png"
@@ -194,83 +194,83 @@ export default function LandingPage() {
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Keynote Speakers</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Discover events searching for impactful mainstage presentations.
+                    Impactful mainstage presentations
                   </p>
                 </div>
               </div>
 
-              {/* Coaches */}
+              {/* Leadership Development */}
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-2 md:order-1">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
                     src="/Coach.png"
-                    alt="Coaches"
+                    alt="Leadership Development"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Coaches</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Skill Development</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Reach organizations seeking leadership, development and transformation.
+                    Executive growth programs
                   </p>
                 </div>
               </div>
 
-              {/* Trainers */}
+              {/* Interactive Workshops */}
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-3 md:order-2">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
                     src="/Trainer Facilitator.png"
-                    alt="Trainers"
+                    alt="Interactive Workshops"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Trainers</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Workshops</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Find companies looking for skill-building and educational workshops.
+                    Skill-building interactive sessions
                   </p>
                 </div>
               </div>
 
-              {/* Consultants */}
+              {/* Strategic Advisory */}
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-4 md:order-4">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
                     src="/Consultant.png"
-                    alt="Consultants"
+                    alt="Strategic Advisory"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Consultants</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Strategic Advisory</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Access decision-makers who need specialized expertise and solutions.
+                    Specialized expertise solutions
                   </p>
                 </div>
               </div>
 
-              {/* Thought Leaders */}
+              {/* Big Ideas & Insights */}
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-5 md:order-5">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
                     src="/Expert Thought Leader.png"
-                    alt="Thought Leaders"
+                    alt="Big Ideas & Insights"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 </div>
                 <div className="relative p-4 rounded-lg shadow-sm bg-white">
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-brand-blue/5 via-transparent to-transparent opacity-50"></div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Thought Leaders</h3>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Big Ideas & Insights</h3>
                   <p className="text-sm text-gray-600 leading-relaxed tracking-wide px-1">
-                    Identify platforms eager to showcase innovative ideas and insights.
+                    Innovative thinking platforms
                   </p>
                 </div>
               </div>
