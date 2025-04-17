@@ -160,8 +160,8 @@ export function Hero() {
 
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              Discover the{" "}
-              <span className="relative inline-block handwritten-underline">fastest</span> way to book your next engagement
+              With the prospecting platform that crafts{" "}
+              <span className="relative inline-block handwritten-underline">authentic</span> outreach to decision-makers so you can transform conversations into engagements.
             </p>
 
             {/* Enhanced CTA Button */}

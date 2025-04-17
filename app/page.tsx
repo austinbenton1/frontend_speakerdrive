@@ -56,16 +56,16 @@ export default function LandingPage() {
                 <div className="flex-1 text-left relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
                   <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
-                    What is SpeakerDrive?
+                    Why SpeakerDrive?
                   </h2>
                   
                   <div className="space-y-8">
                     <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                      SpeakerDrive is a specialized prospecting platform for experts with direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
+                      SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
                     </p>
                     
                     <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                      SpeakerDrive is your one-stop shop to escape the feast-or-famine referral cycle and build a steady, profitable sales pipeline—on your terms.
+                      SpeakerDrive replaces the feast-or-famine cycle's uncertainty many speakers face with a systematic approach to finding and connecting with the right decision-makers.
                     </p>
                   </div>
                 </div>
