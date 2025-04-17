@@ -160,8 +160,8 @@ export function Hero() {
 
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              With the prospecting platform that crafts{" "}
-              <span className="relative inline-block handwritten-underline">authentic</span> outreach to decision-makers so you can transform conversations into engagements.
+              With the prospecting platform where{" "}
+              <span className="relative inline-block handwritten-underline">authentic</span> outreach leads to a predictable pipeline and high-value stages.
             </p>
 
             {/* Enhanced CTA Button */}

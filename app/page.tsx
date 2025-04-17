@@ -65,7 +65,7 @@ export default function LandingPage() {
                     </p>
                     
                     <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                      SpeakerDrive replaces the feast-or-famine cycle's uncertainty many speakers face with a systematic approach to finding and connecting with the right decision-makers.
+                      SpeakerDrive replaces the feast-or-famine cycle's uncertainty many speakers face, with a systematic approach to finding and connecting with the right decision-makers.
                     </p>
                   </div>
                 </div>
