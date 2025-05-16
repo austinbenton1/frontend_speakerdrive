@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "How does the message composer work?",
-    answer: "Our AI builds your custom profile at signup. It generates a professional bio, which is what powers our message composer. The composer pairs your bio with the lead details to create tailored messages for every opportunity. Choose SpeakerDrive's proven approach or add your own custom voice profile."
+    answer: "Our AI builds your custom profile at signup. It generates a professional bio, which is what powers our message composer. The composer pairs your bio with the lead details to create custom tailored messages every time. Choose SpeakerDrive's proven approach or add your own custom voice profile."
   },
   {
     question: "Won't your leads become saturated?",
