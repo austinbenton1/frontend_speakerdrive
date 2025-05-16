@@ -9,19 +9,19 @@ const FAQ_ITEMS = [
   },
   {
     question: "How do you find events and opportunities?",
-    answer: "Our team, AI and automation join forces to research the internet continuously for speaking opportunities, conferences, and events as they're announced. Our database continues to grow with both current and historical events. New opportunities are tagged as such in the system so you can easily identify fresh leads."
+    answer: "Our team, AI and automation join forces to research the internet for opportunities, conferences, and events. Our database continues to grow with both current and historical events."
   },
   {
     question: "What about past events? Aren't they outdated?",
-    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future opportunities with the same organization."
+    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future or adjacent opportunities with the same organization."
   },
   {
     question: "How much time should I spend prospecting?",
-    answer: "We recommend 15-30 minutes daily. Consistent, focused prospecting builds momentum and leads to results. We help you position yourself as a solution provider rather than just another vendor."
+    answer: "Consistent, focused prospecting - even for just a few minutes at a time - builds momentum and gets results."
   },
   {
     question: "What makes SpeakerDrive different?",
-    answer: "We're laser focused on speakers and experts. When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references event details, contact information, and your expertise to create highly personalized outreach—our secret weapon for high response rates."
+    answer: "When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references over a dozen data points to create highly personalized "small world moment" outreach—our secret weapon for high response rates."
   },
   {
     question: "How does your message composer work?",
