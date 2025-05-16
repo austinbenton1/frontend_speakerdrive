@@ -161,9 +161,7 @@ export function Hero() {
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
               With the prospecting platform where{" "}
-              SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
-              <br /><br />
-              Turn your expertise into a sustainable business—not just occasional gigs.
+              <span className="relative inline-block handwritten-underline">authentic</span> outreach leads to a predictable pipeline and high-value stages.
             </p>
 
             {/* Enhanced CTA Button */}
