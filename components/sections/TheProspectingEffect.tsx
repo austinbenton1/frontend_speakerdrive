@@ -129,7 +129,7 @@ export function TheProspectingEffect() {
                 </div>
                 
                 <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
-                  <p>Just 15-30 minutes of focused prospecting each day can transform your business.</p>
+                  <p>Just a small window of focused prospecting, done regularly, has the power to transform your business.</p>
                   
                   <p>
                     <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent font-semibold">
