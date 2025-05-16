@@ -173,9 +173,9 @@ export default function LandingPage() {
               </h2>
             </div>
 
-            <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mb-12">
-Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
-            </p>
+           <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mb-12 text-center">
+  Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
+</p>
 
             {/* Expert Types Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 px-4 sm:px-8">
