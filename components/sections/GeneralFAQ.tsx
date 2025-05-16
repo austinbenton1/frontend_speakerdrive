@@ -21,7 +21,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "What makes SpeakerDrive different?",
-    answer: "When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references over a dozen data points to create highly personalized "small world moment" outreach—our secret weapon for high response rates."
+    answer: "When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references over a dozen data points to create highly personalized outreach—our secret weapon for high response rates."
   },
   {
     question: "How does your message composer work?",
