@@ -13,7 +13,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "What about past events? Aren't they outdated?",
-    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our message composer intelligently adapts for past events—highlighting future dates or adjacent opportunities—while also tailoring its approach to factors like recipient influence level. All at the click of a button.
+    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our message composer intelligently adapts for past events—highlighting future dates or adjacent opportunities—while also tailoring its approach to factors like recipient influence level. All at the click of a button."
   },
   {
     question: "What makes SpeakerDrive different?",
