@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const FAQ_ITEMS = [
   {
     question: "What is SpeakerDrive?",
-    answer: "SpeakerDrive is a prospecting platform built specifically for speakers, trainers, coaches, and consultants to find and connect with relevant decision-makers and events. We help you find opportunities that turn the traditional \"sales\" process into a natural extension of your expertise."
+    answer: "SpeakerDrive is a prospecting database and outreach platform built specifically for speakers and experts to find and land more paid opportunities."
   },
   {
     question: "How do you find events and opportunities?",
