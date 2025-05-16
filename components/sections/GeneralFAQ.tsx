@@ -25,7 +25,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "Won't your leads become saturated?",
-    answer: "We've built in an automatic cooling-off period for contacts after being unlocked twice; they are removed from the main list, preventing them from receiving too many outreach attempts. This protects both the recipients from feeling bombarded and ensures your outreach maintains its effectiveness."
+    answer: "No. We've built in an automatic rest period for contacts, temporarily removing them from the SpeakerDrive pool to prevent over-exposure to outreach attempts. This protects both the recipients' experience and ensures your messages maintain their impact and effectiveness."
   }
 ];
 
