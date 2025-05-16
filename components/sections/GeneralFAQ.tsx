@@ -16,12 +16,12 @@ const FAQ_ITEMS = [
     answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our composer automatically adjusts messaging for past events, focusing on future or adjacent opportunities with the same organization."
   },
   {
-    question: "How much time should I spend prospecting?",
-    answer: "Consistent, focused prospecting - even for just a few minutes at a time - builds momentum and gets results."
+    question: "What makes SpeakerDrive different?",
+    answer: "Unlike traditional outreach that's generic and sales-focused, SpeakerDrive's smart system cross-references over a dozen data points between your unique expertise and the opportunity. This intelligence creates genuinely personalized outreach that resonates — delivering response rates that generic approaches simply can't match."
   },
   {
-    question: "What makes SpeakerDrive different?",
-    answer: "When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references over a dozen data points to create highly personalized outreach—our secret weapon for high response rates."
+    question: "How does the message composer work?",
+    answer: "Our AI builds your custom profile at signup, pulling from your bio, experience, and past client work. Your profile powers the message composer, which pairs it with opportunity details to create outreach messages. Choose SpeakerDrive's proven approach or add your own voice profile to match your unique communication style."
   },
   {
     question: "Won't your leads become saturated?",
