@@ -24,16 +24,8 @@ const FAQ_ITEMS = [
     answer: "When it comes to prospecting, traditional outreach fails because it's generic and sales-focused. Our smart system cross-references over a dozen data points to create highly personalized outreach—our secret weapon for high response rates."
   },
   {
-    question: "How does your message composer work?",
-    answer: "The message composer is greared toward sparking conversations, not selling on the first message. The composer will give you three different messages for each opportunity, each with a unique angle. You can choose the one that best fits your style, edit if needed, and send directly from our platform. We've found that shorter messages get more replies—they spark interest without overwhelming."
-  },
-  {
     question: "Won't your leads become saturated?",
     answer: "We've built in an automatic cooling-off period for contacts after being unlocked twice; they are removed from the main list, preventing them from receiving too many outreach attempts. This protects both the recipients from feeling bombarded and ensures your outreach maintains its effectiveness."
-  },
-  {
-    question: "Who is behind SpeakerDrive?",
-    answer: "SpeakerDrive was founded by Austin Benton. To learn more about our team and mission, visit our About page."
   }
 ];
 
