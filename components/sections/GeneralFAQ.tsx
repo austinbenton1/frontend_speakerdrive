@@ -13,15 +13,15 @@ const FAQ_ITEMS = [
   },
   {
     question: "What about past events? Aren't they outdated?",
-    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our message composer intelligently adapts for past events—highlighting future dates or adjacent opportunities—while also customizing its approach to handle any specialized scenario. All at the click of a button."
+    answer: "Past events are valuable prospecting opportunities. Organizations that have invested in experts before are likely to do so again. Our message composer intelligently adapts for past events—highlighting future dates or adjacent opportunities. In fact, it can handle any specialized scenario. All at the click of a button."
   },
   {
     question: "What makes SpeakerDrive different?",
-    answer: "Unlike traditional outreach that's generic and sales-focused, SpeakerDrive's smart system cross-references over a dozen data points between your unique expertise and the opportunity. This intelligence creates genuinely personalized outreach that resonates — delivering response rates that generic approaches simply can't match."
+    answer: "Unlike traditional outreach that's generic and sales-focused, SpeakerDrive's smart system cross-references over a dozen data points between your unique expertise and the opportunity. This intelligence creates authentic outreach that resonates — delivering response rates that generic approaches simply can't match."
   },
   {
     question: "How does the message composer work?",
-    answer: "Our AI builds your custom profile at signup, pulling from your bio, experience, and past client work. Your profile powers the message composer - which it pairs with opportunity details - to create uniquely personalized messaging for every lead. Choose SpeakerDrive's proven approach or add your own voice profile to customize the communication style."
+    answer: "Our AI builds your custom profile at signup. It generates a professional bio, which is what powers our message composer. The composer pairs your bio with the lead details to create tailored messages for every opportunity. Choose SpeakerDrive's proven approach or add your own custom voice profile."
   },
   {
     question: "Won't your leads become saturated?",
