@@ -174,9 +174,7 @@ export default function LandingPage() {
             </div>
 
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mb-12">
-              SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
-              
-              Turn your expertise into a sustainable business—not just occasional gigs.
+Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
             </p>
 
             {/* Expert Types Grid */}
