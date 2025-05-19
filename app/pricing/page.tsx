@@ -60,7 +60,6 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
       <div className="inline-flex items-center text-sm whitespace-nowrap relative">
         <span className={disabled ? "text-gray-400" : "text-gray-700"}>{text}</span>
 
-        {/* Only render the "?" and tooltip if there's actual tooltip content */}
         {tooltip && (
           <div
             className="ml-1 relative text-[10px] text-gray-600 font-medium cursor-help hover:text-gray-800"
@@ -77,7 +76,6 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
                   whitespace-normal break-words text-left leading-snug
                 "
               >
-                {/* Tooltip arrow */}
                 <div className="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-4 border-t-4 border-x-transparent border-t-white" />
                 {tooltip}
               </div>
@@ -128,7 +126,7 @@ function PricingCard({ plan }: PricingCardProps) {
         <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
         <p className="text-gray-600 text-sm text-center mb-6">{plan.description}</p>
 
-        {/* Price Display (consistent size for all) */}
+        {/* Price Display */}
         <div className="mb-6 text-center">
           <div className="text-2xl font-bold leading-none">{plan.priceHeading}</div>
           <p className="text-gray-500 text-sm mt-1">{plan.priceSubtext}</p>
@@ -196,7 +194,6 @@ export default function PricingPage() {
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
-        // ADDED "Connect To Gmail" back in
         { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
@@ -222,6 +219,16 @@ export default function PricingPage() {
               coming soon.
             </>
           )
+        },
+        {
+          text: "Cool Off Period",
+          tooltip:
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+        },
+        {
+          text: "Lead Quality Guarantee",
+          tooltip:
+            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         }
       ]
     },
@@ -236,7 +243,6 @@ export default function PricingPage() {
       features: [
         { text: "300 Leads / Month" },
         { text: "Message Composer" },
-        // ADDED "Connect To Gmail" back in
         { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
@@ -265,6 +271,16 @@ export default function PricingPage() {
               coming soon.
             </>
           )
+        },
+        {
+          text: "Cool Off Period",
+          tooltip:
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+        },
+        {
+          text: "Lead Quality Guarantee",
+          tooltip:
+            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         }
       ]
     },
@@ -278,7 +294,6 @@ export default function PricingPage() {
       features: [
         { text: "1000 Leads / Month" },
         { text: "Message Composer" },
-        // ADDED "Connect To Gmail" back in
         { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
@@ -304,6 +319,16 @@ export default function PricingPage() {
               coming soon.
             </>
           )
+        },
+        {
+          text: "Cool Off Period",
+          tooltip:
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+        },
+        {
+          text: "Lead Quality Guarantee",
+          tooltip:
+            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         }
       ]
     }
