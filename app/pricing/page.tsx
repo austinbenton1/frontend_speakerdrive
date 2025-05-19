@@ -194,17 +194,16 @@ export default function PricingPage() {
       priceSubtext: "No credit card required",
       features: [
         { text: "5 Unlocks" },
-        { text: "Message Composer" },
         { text: "Connect To Gmail" },
         {
           text: "Cool Off Period",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Lead Quality Guarantee",
           tooltip:
-            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
+            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
           text: "Recently Added Leads",
@@ -244,17 +243,16 @@ export default function PricingPage() {
       isPopular: true,
       features: [
         { text: "300 Unlocks /mth" },
-        { text: "Message Composer" },
         { text: "Connect To Gmail" },
         {
           text: "Cool Off Period",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Lead Quality Guarantee",
           tooltip:
-            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
+            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         // Disabled items at bottom:
         {
@@ -297,17 +295,16 @@ export default function PricingPage() {
       priceSubtext: "Cancel / upgrade anytime",
       features: [
         { text: "1000 Unlocks /mth" },
-        { text: "Message Composer" },
         { text: "Connect To Gmail" },
         {
           text: "Cool Off Period",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Lead Quality Guarantee",
           tooltip:
-            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
+            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
           text: "Recently Added Leads",
