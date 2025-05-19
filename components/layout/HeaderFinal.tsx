@@ -75,7 +75,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               href="https://www.speakerdrive.com/coming-soon"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
-              Join Early Access 🚀
+              Get Started. It's FREE 🚀
             </a>
           </div>
         </div>}
@@ -158,7 +158,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Join Early Access 🚀
+              Get Started. It's FREE 🚀
             </a>
           </div>
         </div>
