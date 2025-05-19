@@ -24,15 +24,17 @@ interface PricingFeature {
 interface PricingPlan {
   name: string;
   description: string;
-  oldPrice?: number;
   icon: React.ReactNode;
   ctaLink?: string;
+  // NEW: We'll use these two for paid plan display
+  monthlyPrice?: string;
+  leads?: string;
   features: PricingFeature[];
+  isPopular?: boolean; // Moved here for convenience
 }
 
 interface PricingCardProps {
   plan: PricingPlan;
-  isPopular?: boolean;
 }
 
 // A small component to display each feature row.
@@ -86,7 +88,9 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
 }
 
 // Pricing card layout
-function PricingCard({ plan, isPopular = false }: PricingCardProps) {
+function PricingCard({ plan }: PricingCardProps) {
+  const { isPopular } = plan;
+
   return (
     <div
       className={`
@@ -124,21 +128,17 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
 
         {/* Price Display */}
         <div className="mb-6 text-center">
-          {typeof plan.oldPrice === "number" ? (
-            // Starter & Premium
-            <div className="flex flex-col items-center justify-center gap-1">
-              <div className="text-3xl font-bold leading-none">
-                Free During Pre-Launch
-              </div>
-              <div className="text-base text-gray-400 line-through">
-                ${plan.oldPrice} per month
-                <span className="block text-xs">(paid quarterly)</span>
-              </div>
-            </div>
-          ) : (
-            // Free Trial plan
+          {/* If this plan has a monthlyPrice and leads, display that.
+              Otherwise, display "7 Days Free" + "No credit card required".
+          */}
+          {plan.monthlyPrice && plan.leads ? (
             <>
-              <div className="text-3xl font-bold leading-none">Free</div>
+              <div className="text-3xl font-bold leading-none">{plan.monthlyPrice}</div>
+              <p className="text-gray-500 text-sm mt-1">{plan.leads}</p>
+            </>
+          ) : (
+            <>
+              <div className="text-3xl font-bold leading-none">7 Days Free</div>
               <p className="text-gray-500 text-sm mt-1">No credit card required</p>
             </>
           )}
@@ -163,7 +163,7 @@ function PricingCard({ plan, isPopular = false }: PricingCardProps) {
   );
 }
 
-// ================== FAQ CONTENT (UPDATED) ==================
+// ================== FAQ CONTENT ==================
 const PRICING_FAQ_ITEMS = [
   {
     question: "What is Pre-Launch Access?",
@@ -190,7 +190,6 @@ const PRICING_FAQ_ITEMS = [
     answer:
       "Just click any button on this page and submit the form. We'll be in touch right away to discuss next steps and get you set up."
   }
-
 ];
 
 // ================== PAGE COMPONENT ==================
@@ -202,41 +201,35 @@ export default function PricingPage() {
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
+      // No monthlyPrice => will show 7 Days Free
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-
-        // No tooltips for Free Trial's disabled items
-        { text: "Recently Added Leads", disabled: true },
-        { text: "Bulk Exports", disabled: true },
-        { text: "Integrations", disabled: true }
+        // CHANGED: No longer disabled => checkmarks
+        { text: "Recently Added Leads" },
+        { text: "Bulk Exports" },
+        { text: "Integrations" }
       ]
     },
     {
-      // Starter plan
       name: "Starter",
-      description: "Just getting started",
-      oldPrice: 79,
+      description: "For small teams or individuals",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
+      // CHANGED: Show $149/m + 300 leads
+      monthlyPrice: "$149/m",
+      leads: "300 leads",
+      isPopular: true,
       features: [
-        { text: "300 Unlocks / Month" },
+        { text: "300 Leads / Month" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-
-        {
-          text: "Recently Added Leads",
-          disabled: true,
-          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
-        },
-        {
-          text: "Bulk Exports",
-          disabled: true,
-          tooltip: "Export your unlocked leads to CSV, one at a time"
-        },
+        // If you still want to keep them disabled for Starter, just set them below:
+        { text: "Recently Added Leads", disabled: true },
+        { text: "Bulk Exports", disabled: true },
         {
           text: "Integrations",
           disabled: true,
@@ -258,18 +251,18 @@ export default function PricingPage() {
       ]
     },
     {
-      // Premium plan
       name: "Premium",
       description: "For power users",
-      oldPrice: 179,
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
+      // CHANGED: Show $399/m + 1000 leads
+      monthlyPrice: "$399/m",
+      leads: "1000 leads",
       features: [
-        { text: "1,500 Unlocks / Month" },
+        { text: "1000 Leads / Month" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-
         {
           text: "Recently Added Leads",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
@@ -303,6 +296,7 @@ export default function PricingPage() {
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
         <NotificationBanner />
+
         {/* Header */}
         <HeaderFinal
           companyName="SpeakerDrive"
@@ -324,9 +318,9 @@ export default function PricingPage() {
 
                 {/* Pricing Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                  <PricingCard plan={plans[0]} />
-                  <PricingCard plan={plans[1]} isPopular />
-                  <PricingCard plan={plans[2]} />
+                  {plans.map((plan, index) => (
+                    <PricingCard key={index} plan={plan} />
+                  ))}
                 </div>
 
                 <p className="text-sm text-gray-700 mt-6">
@@ -363,58 +357,57 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              {/* Two-column Accordion */}
+              {/* Accordion */}
               <div className="w-full">
-                {/* Left Column */}
-                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
-                  {PRICING_FAQ_ITEMS.map(
-                    (item, index) => (
-                      <AccordionItem
-                        key={index}
-                        value={`item-${index}`}
-                        className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
-                      >
-                        <AccordionTrigger className="w-full">
-                          <div className="flex items-center justify-between w-full text-left">
-                            <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
-                              <div className="flex-1">
-                                <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
-                                  {item.question}
-                                </span>
-                              </div>
-                              <div className="flex-shrink-0">
-                                <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
-                                  <svg
-                                    className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M19 9l-7 7-7-7"
-                                    />
-                                  </svg>
-                                </div>
+                <Accordion
+                  className="space-y-3"
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                >
+                  {PRICING_FAQ_ITEMS.map((item, index) => (
+                    <AccordionItem
+                      key={index}
+                      value={`item-${index}`}
+                      className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
+                    >
+                      <AccordionTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full text-left">
+                          <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
+                            <div className="flex-1">
+                              <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
+                                {item.question}
+                              </span>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <svg
+                                  className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                  />
+                                </svg>
                               </div>
                             </div>
                           </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="px-6 pb-5">
-                          <div className="relative">
-                            <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
-                            <p className="relative text-gray-600 leading-relaxed text-sm">
-                              {item.answer}
-                            </p>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    )
-                  )}
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-5">
+                        <div className="relative">
+                          <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
+                          <p className="relative text-gray-600 leading-relaxed text-sm">
+                            {item.answer}
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
                 </Accordion>
-
               </div>
 
               {/* Bottom CTA */}
