@@ -367,7 +367,7 @@ export default function PricingPage() {
                 </div>
 
                 <p className="text-sm text-gray-700 mt-6">
-                  Currently in beta – early adopters lock in these rates before prices increase at launch.
+                  SpeakerDrive is currently in beta – early adopters lock in our best rates before prices increase.
                 </p>
                 <div className="mt-6 text-center">
                   <p className="text-gray-500 text-sm">
