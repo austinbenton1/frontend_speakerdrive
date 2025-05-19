@@ -154,29 +154,34 @@ function PricingCard({ plan }: PricingCardProps) {
 // ================== FAQ CONTENT ==================
 const PRICING_FAQ_ITEMS = [
   {
-    question: "What is Pre-Launch Access?",
+    question: "Is SpeakerDrive in Beta?",
     answer:
-      "Your backstage pass to SpeakerDrive before we go live. Join a small group who'll test our platform, provide feedback, and help shape the final product. We're keeping the group limited to ensure everyone gets personal attention during the final development phase."
+      "Yes, SpeakerDrive is currently in beta. Early adopters lock in our special introductory rates which will increase after official launch. Beta users also help shape our roadmap, receive priority support, and get access to new features as they're released."
   },
   {
-    question: "When will SpeakerDrive officially launch?",
+    question: "What is a Lead Cool-Off Period?",
     answer:
-      "We're targeting May 2025 for our full launch. You will be the first to know the exact date."
+      "We've built in an automatic rest period for contacts, temporarily removing them from the SpeakerDrive pool to prevent over-exposure to outreach attempts. This protects both the recipients' experience and ensures your messages maintain their impact and effectiveness."
   },
   {
-    question: "What's in it for early supporters?",
+    question: "How does the Lead Quality Guarantee work?",
     answer:
-      "You'll get early access to all features, a guaranteed lifetime discount, and a one-on-one strategy session with our founder to maximize your results. Plus, you'll have your account fully set up before public launch."
+      "If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as \"Poor\" with the specific reason. We'll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users."
   },
   {
-    question: "Is there any cost to join?",
+    question: "What are Recently Added Leads?",
     answer:
-      "Nope. It's completely free during the pre-launch phase and you'll get to use the platform to grow your business."
+      "Newly discovered opportunities added to our database. This feature is designed to give premium users exclusive access to the freshest opportunities."
   },
   {
-    question: "What's the next step to get started",
+    question: "How do Bulk Exports work?",
     answer:
-      "Just click any button on this page and submit the form. We'll be in touch right away to discuss next steps and get you set up."
+      "While basic users can download leads one at a time, Bulk Exports allow you to select and export multiple leads simultaneously in CSV or Excel format with a single click."
+  },
+  {
+    question: "What integrations do you offer?",
+    answer:
+      "SpeakerDrive provides webhook functionality that allows you to push leads to most CRMs, email tools or marketing automation platforms. If you have specific integration questions, please reach out to our support team."
   }
 ];
 
