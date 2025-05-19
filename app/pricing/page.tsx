@@ -196,7 +196,7 @@ export default function PricingPage() {
         { text: "5 Unlocks" },
         { text: "Connect To Gmail" },
         {
-          text: "Cool Off Period",
+          text: "Lead Cool-Off",
           tooltip:
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
@@ -245,7 +245,7 @@ export default function PricingPage() {
         { text: "300 Unlocks /mth" },
         { text: "Connect To Gmail" },
         {
-          text: "Cool Off Period",
+          text: "Lead Cool-Off",
           tooltip:
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
@@ -297,7 +297,7 @@ export default function PricingPage() {
         { text: "1000 Unlocks /mth" },
         { text: "Connect To Gmail" },
         {
-          text: "Cool Off Period",
+          text: "Lead Cool-Off",
           tooltip:
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
