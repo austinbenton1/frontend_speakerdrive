@@ -315,11 +315,10 @@ export default function PricingPage() {
             <div className="container mx-auto px-4 text-center">
               <div className="mx-auto max-w-3xl">
                 <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                  Get Early Access To SpeakerDrive
+                  Simple, Transparent Pricing
                 </h1>
                 <p className="text-md md:text-lg text-gray-600 mb-8">
-                  Join our pre-launch early access program and help shape our future.
-                  <br />
+                  Choose a plan that fits your needs.
                   You don&apos;t even need a credit card.
                 </p>
 
