@@ -128,7 +128,7 @@ function PricingCard({ plan }: PricingCardProps) {
         <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
         <p className="text-gray-600 text-sm text-center mb-6">{plan.description}</p>
 
-        {/* Price Display (same font/size for all) */}
+        {/* Price Display (consistent size for all) */}
         <div className="mb-6 text-center">
           <div className="text-2xl font-bold leading-none">{plan.priceHeading}</div>
           <p className="text-gray-500 text-sm mt-1">{plan.priceSubtext}</p>
@@ -139,7 +139,7 @@ function PricingCard({ plan }: PricingCardProps) {
           href={plan.ctaLink || "#"}
           className="block w-full py-3 px-4 rounded font-bold text-center bg-green-500 text-white hover:bg-green-600 mb-6"
         >
-          Get Started
+          Start Free
         </Link>
 
         {/* Feature List */}
@@ -196,29 +196,47 @@ export default function PricingPage() {
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
-        { text: "Connect To Gmail" },
-        { text: "Ask SpeakerDrive AI" },
-        // CHANGED to checkmarks
-        { text: "Recently Added Leads" },
-        { text: "Bulk Exports" },
-        { text: "Integrations" }
+        // REMOVED "Ask SpeakerDrive AI"
+        {
+          text: "Recently Added Leads",
+          // Adding a tooltip for free plan
+          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
+        },
+        {
+          text: "Bulk Exports",
+          tooltip: "Export your unlocked leads to CSV, one at a time"
+        },
+        {
+          text: "CRM Integrations",
+          tooltip: (
+            <>
+              Send your unlocks to 3rd party platforms. Direct integration with{" "}
+              <a
+                href="https://instantly.ai/?via=austin"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-blue-600 hover:text-blue-800"
+              >
+                Instant.ly
+              </a>{" "}
+              coming soon.
+            </>
+          )
+        }
       ]
     },
     {
       name: "Starter",
-      // CHANGED to "For individuals"
       description: "For individuals",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
       priceHeading: "$149/m",
-      // Instead of "300 leads", now subtext says:
       priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
         { text: "300 Leads / Month" },
         { text: "Message Composer" },
-        { text: "Connect To Gmail" },
-        { text: "Ask SpeakerDrive AI" },
+        // REMOVED "Ask SpeakerDrive AI"
         {
           text: "Recently Added Leads",
           disabled: true,
@@ -230,7 +248,7 @@ export default function PricingPage() {
           tooltip: "Export your unlocked leads to CSV, one at a time"
         },
         {
-          text: "Integrations",
+          text: "CRM Integrations",
           disabled: true,
           tooltip: (
             <>
@@ -255,13 +273,11 @@ export default function PricingPage() {
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
       priceHeading: "$399/m",
-      // Instead of "1000 leads", now subtext says:
       priceSubtext: "Cancel / upgrade anytime",
       features: [
         { text: "1000 Leads / Month" },
         { text: "Message Composer" },
-        { text: "Connect To Gmail" },
-        { text: "Ask SpeakerDrive AI" },
+        // REMOVED "Ask SpeakerDrive AI"
         {
           text: "Recently Added Leads",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
@@ -271,7 +287,7 @@ export default function PricingPage() {
           tooltip: "Bulk exporting / downloading of your unlocked leads to CSV"
         },
         {
-          text: "Integrations",
+          text: "CRM Integrations",
           tooltip: (
             <>
               Send your unlocks to 3rd party platforms. Direct integration with{" "}
