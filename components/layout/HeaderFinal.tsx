@@ -75,7 +75,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               href="https://www.speakerdrive.com/coming-soon"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
-              Get Started. It's FREE 🚀
+              Start Free Trial
             </a>
           </div>
         </div>}
