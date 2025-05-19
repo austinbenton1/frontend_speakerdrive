@@ -173,11 +173,11 @@ export function Hero() {
               animate="visible"
               transition={{ duration: 0.5, delay: 0.6 }}
             >
-              Join Early Access <span className="ml-2">🚀</span>
+              Get Started. It's FREE <span className="ml-2">🚀</span>
             </motion.a>
 
             {/* No credit card text */}
-            <p className="mt-3 text-neutral-600 text-sm">Join Early Access. No credit card needed.</p>
+            <p className="mt-3 text-neutral-600 text-sm">Get Started. It's FREE. No credit card needed.</p>
           </div>
 
           {/* RIGHT FLOATING IMAGE (hidden below lg) */}
