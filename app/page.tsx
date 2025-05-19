@@ -13,13 +13,11 @@ import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import { MessageComposer } from "@/components/sections/MessageComposer";
 import { ToolsSection } from "@/components/sections/ToolsSection";
-import { NotificationBanner } from "@/components/ui/NotificationBanner";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
-        <NotificationBanner />
         <HeaderFinal
           companyName="SpeakerDrive"
           logo={
