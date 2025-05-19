@@ -185,6 +185,7 @@ const PRICING_FAQ_ITEMS = [
 export default function PricingPage() {
   const plans: PricingPlan[] = [
     {
+      // FREE TRIAL
       name: "Free Trial",
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
@@ -196,6 +197,16 @@ export default function PricingPage() {
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         {
+          text: "Cool Off Period",
+          tooltip:
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+        },
+        {
+          text: "Lead Quality Guarantee",
+          tooltip:
+            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
+        },
+        {
           text: "Recently Added Leads",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
@@ -219,20 +230,11 @@ export default function PricingPage() {
               coming soon.
             </>
           )
-        },
-        {
-          text: "Cool Off Period",
-          tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
-        },
-        {
-          text: "Lead Quality Guarantee",
-          tooltip:
-            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         }
       ]
     },
     {
+      // STARTER
       name: "Starter",
       description: "For individuals",
       icon: <Rocket className="h-9 w-9" />,
@@ -241,9 +243,20 @@ export default function PricingPage() {
       priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
-        { text: "300 Leads / Month" },
+        { text: "300 Unlocks /mth" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
+        {
+          text: "Cool Off Period",
+          tooltip:
+            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
+        },
+        {
+          text: "Lead Quality Guarantee",
+          tooltip:
+            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
+        },
+        // Disabled items at bottom:
         {
           text: "Recently Added Leads",
           disabled: true,
@@ -271,7 +284,21 @@ export default function PricingPage() {
               coming soon.
             </>
           )
-        },
+        }
+      ]
+    },
+    {
+      // PREMIUM
+      name: "Premium",
+      description: "For power users",
+      icon: <Zap className="h-9 w-9" />,
+      ctaLink: "https://www.speakerdrive.com/coming-soon",
+      priceHeading: "$399/m",
+      priceSubtext: "Cancel / upgrade anytime",
+      features: [
+        { text: "1000 Unlocks /mth" },
+        { text: "Message Composer" },
+        { text: "Connect To Gmail" },
         {
           text: "Cool Off Period",
           tooltip:
@@ -281,20 +308,7 @@ export default function PricingPage() {
           text: "Lead Quality Guarantee",
           tooltip:
             "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
-        }
-      ]
-    },
-    {
-      name: "Premium",
-      description: "For power users",
-      icon: <Zap className="h-9 w-9" />,
-      ctaLink: "https://www.speakerdrive.com/coming-soon",
-      priceHeading: "$399/m",
-      priceSubtext: "Cancel / upgrade anytime",
-      features: [
-        { text: "1000 Leads / Month" },
-        { text: "Message Composer" },
-        { text: "Connect To Gmail" },
+        },
         {
           text: "Recently Added Leads",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
@@ -319,16 +333,6 @@ export default function PricingPage() {
               coming soon.
             </>
           )
-        },
-        {
-          text: "Cool Off Period",
-          tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact. Protects your response rates and professional reputation."
-        },
-        {
-          text: "Lead Quality Guarantee",
-          tooltip:
-            "Rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         }
       ]
     }
