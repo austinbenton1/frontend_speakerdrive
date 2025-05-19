@@ -26,11 +26,13 @@ interface PricingPlan {
   description: string;
   icon: React.ReactNode;
   ctaLink?: string;
-  // NEW: We'll use these two for paid plan display
-  monthlyPrice?: string;
-  leads?: string;
+
+  // We'll directly store the main price text and subtext for each plan.
+  priceHeading: string;
+  priceSubtext: string;
+
+  isPopular?: boolean;
   features: PricingFeature[];
-  isPopular?: boolean; // Moved here for convenience
 }
 
 interface PricingCardProps {
@@ -126,22 +128,10 @@ function PricingCard({ plan }: PricingCardProps) {
         <h3 className="text-xl font-bold text-center mb-2">{plan.name}</h3>
         <p className="text-gray-600 text-sm text-center mb-6">{plan.description}</p>
 
-        {/* Price Display */}
+        {/* Price Display (same font/size for all) */}
         <div className="mb-6 text-center">
-          {/* If this plan has a monthlyPrice and leads, display that.
-              Otherwise, display "7 Days Free" + "No credit card required".
-          */}
-          {plan.monthlyPrice && plan.leads ? (
-            <>
-              <div className="text-3xl font-bold leading-none">{plan.monthlyPrice}</div>
-              <p className="text-gray-500 text-sm mt-1">{plan.leads}</p>
-            </>
-          ) : (
-            <>
-              <div className="text-3xl font-bold leading-none">7 Days Free</div>
-              <p className="text-gray-500 text-sm mt-1">No credit card required</p>
-            </>
-          )}
+          <div className="text-2xl font-bold leading-none">{plan.priceHeading}</div>
+          <p className="text-gray-500 text-sm mt-1">{plan.priceSubtext}</p>
         </div>
 
         {/* CTA Button */}
@@ -201,13 +191,14 @@ export default function PricingPage() {
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
-      // No monthlyPrice => will show 7 Days Free
+      priceHeading: "7 Days Free",
+      priceSubtext: "No credit card required",
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-        // CHANGED: No longer disabled => checkmarks
+        // CHANGED to checkmarks
         { text: "Recently Added Leads" },
         { text: "Bulk Exports" },
         { text: "Integrations" }
@@ -215,21 +206,29 @@ export default function PricingPage() {
     },
     {
       name: "Starter",
-      description: "For small teams or individuals",
+      // CHANGED to "For individuals"
+      description: "For individuals",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
-      // CHANGED: Show $149/m + 300 leads
-      monthlyPrice: "$149/m",
-      leads: "300 leads",
+      priceHeading: "$149/m",
+      // Instead of "300 leads", now subtext says:
+      priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
         { text: "300 Leads / Month" },
         { text: "Message Composer" },
         { text: "Connect To Gmail" },
         { text: "Ask SpeakerDrive AI" },
-        // If you still want to keep them disabled for Starter, just set them below:
-        { text: "Recently Added Leads", disabled: true },
-        { text: "Bulk Exports", disabled: true },
+        {
+          text: "Recently Added Leads",
+          disabled: true,
+          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
+        },
+        {
+          text: "Bulk Exports",
+          disabled: true,
+          tooltip: "Export your unlocked leads to CSV, one at a time"
+        },
         {
           text: "Integrations",
           disabled: true,
@@ -255,9 +254,9 @@ export default function PricingPage() {
       description: "For power users",
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
-      // CHANGED: Show $399/m + 1000 leads
-      monthlyPrice: "$399/m",
-      leads: "1000 leads",
+      priceHeading: "$399/m",
+      // Instead of "1000 leads", now subtext says:
+      priceSubtext: "Cancel / upgrade anytime",
       features: [
         { text: "1000 Leads / Month" },
         { text: "Message Composer" },
