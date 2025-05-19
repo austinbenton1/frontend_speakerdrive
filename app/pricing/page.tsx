@@ -196,10 +196,10 @@ export default function PricingPage() {
       features: [
         { text: "5 Unlocks" },
         { text: "Message Composer" },
-        // REMOVED "Ask SpeakerDrive AI"
+        // ADDED "Connect To Gmail" back in
+        { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
-          // Adding a tooltip for free plan
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
@@ -236,7 +236,8 @@ export default function PricingPage() {
       features: [
         { text: "300 Leads / Month" },
         { text: "Message Composer" },
-        // REMOVED "Ask SpeakerDrive AI"
+        // ADDED "Connect To Gmail" back in
+        { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
           disabled: true,
@@ -277,7 +278,8 @@ export default function PricingPage() {
       features: [
         { text: "1000 Leads / Month" },
         { text: "Message Composer" },
-        // REMOVED "Ask SpeakerDrive AI"
+        // ADDED "Connect To Gmail" back in
+        { text: "Connect To Gmail" },
         {
           text: "Recently Added Leads",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
