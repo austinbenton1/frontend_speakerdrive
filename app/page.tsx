@@ -62,8 +62,8 @@ export default function LandingPage() {
                   training workshops, and consulting engagements.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  Our platform breaks the feast-or-famine cycle and turns your expertise into a 
-                  sustainable business—not just occasional gigs.
+                  Break the feast-or-famine cycle and turns your expertise into a 
+                  sustainable business.
                 </p>
               </div>
 
