@@ -240,7 +240,7 @@ export default function PricingPage() {
       priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
-        { text: "300 Unlocks /month" },
+        { text: "300 Unlocked Leads Per Month" },
         { text: "Connect To Gmail" },
         {
           text: "Lead Cool-Off",
@@ -280,7 +280,7 @@ export default function PricingPage() {
       priceHeading: "$399/m",
       priceSubtext: "Cancel / upgrade anytime",
       features: [
-        { text: "1000 Unlocks /month" },
+        { text: "1000 Unlocked Leads Per Month" },
         { text: "Connect To Gmail" },
         {
           text: "Lead Cool-Off",
