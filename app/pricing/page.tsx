@@ -320,7 +320,7 @@ export default function PricingPage() {
             </div>
 
             {/* Pricing cards in a wider container */}
-            <div className="mx-auto max-w-screen-xl px-4">
+            <div className="mx-auto max-w-6xl px-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {plans.map((plan, index) => (
                   <PricingCard key={index} plan={plan} />
@@ -345,7 +345,7 @@ export default function PricingPage() {
           </section>
 
           {/* FAQ Section */}
-          <section id="faq" className="bg-white pt-2 pb-8 overflow-hidden">
+          <section id="faq" className="bg-white pt-12 pb-8 overflow-hidden">
             <div className="max-w-xl mx-auto px-4">
               {/* Section Header */}
               <div className="text-center mb-16 relative">
