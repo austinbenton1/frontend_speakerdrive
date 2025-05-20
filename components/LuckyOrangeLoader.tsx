@@ -6,7 +6,7 @@ export default function LuckyOrangeLoader() {
   return (
     <Script
       id="lucky-orange"
-      src="https://tools.luckyorange.com/core/lo.js?site-id=d7b57e70"
+      src="https://tools.luckyorange.com/core/lo.js?site-id=8c72b161"
       async
       defer
       strategy="afterInteractive"
