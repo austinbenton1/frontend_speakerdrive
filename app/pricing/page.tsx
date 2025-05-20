@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check, Circle, Rocket, Zap } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
+import { NotificationBanner } from "@/components/ui/NotificationBanner";
 import { Footer5 } from "@/components/layout/Footer";
 import {
   Accordion,
@@ -210,11 +211,15 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
+          // Changed to disabled
           text: "New Leads First-Access",
+          disabled: true,
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
+          // Changed to disabled
           text: "Auto Export / Integrations",
+          disabled: true,
           tooltip:
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
@@ -309,6 +314,8 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
+        <NotificationBanner />
+
         {/* Header */}
         <HeaderFinal
           companyName="SpeakerDrive"
@@ -329,7 +336,11 @@ export default function PricingPage() {
                 </p>
 
                 {/* Pricing Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {/*
+                  Changed max-w from 4xl -> 5xl
+                  Increased gap from 6 -> 8
+                */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
                   {plans.map((plan, index) => (
                     <PricingCard key={index} plan={plan} />
                   ))}
