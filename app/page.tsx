@@ -37,45 +37,44 @@ export default function LandingPage() {
         </section>
 
         {/* "How It Works" and Steps 1-3 */}
-        {/*
-          UPDATED BELOW:
-          Changed pt-0 to pt-12 so there's more padding at the top of the cream section
-        */}
         <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
-          <div className="relative px-4 mb-12">
-            <div className="max-w-2xl mx-auto">
-              {/* START of 2-column layout for "Why SpeakerDrive?" + Video */}
-              <div className="flex flex-col md:flex-row items-start gap-8">
-                {/* Left column: Logo + Text */}
-                <div className="md:w-1/2">
-                  <div className="flex items-start gap-4">
-                    <img
-                      src="/SpeakerDrive Logo - Short.png"
-                      alt="SpeakerDrive"
-                      className="w-9 h-9 object-contain flex-shrink-0 mt-1"
-                    />
-                    <div className="flex-1 text-left relative">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
-                      <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
-                        Why SpeakerDrive?
-                      </h2>
-                      <div className="space-y-8">
-                        <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                          SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
-                        </p>
-                        <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                          Our platform breaks the feast-or-famine cycle and turns your expertise into a sustainable business—not just occasional gigs.
-                        </p>
-                      </div>
+          {/* Wrap the entire "Why SpeakerDrive?" in a wider container */}
+          <div className="mx-auto max-w-5xl px-4 mb-12">
+            {/* Two-column layout */}
+            <div className="flex flex-col md:flex-row md:items-start gap-8">
+              {/* Left column: Logo & text */}
+              <div className="md:w-1/2">
+                <div className="flex items-start gap-4">
+                  <img
+                    src="/SpeakerDrive Logo - Short.png"
+                    alt="SpeakerDrive"
+                    className="w-9 h-9 object-contain flex-shrink-0 mt-1"
+                  />
+                  <div className="flex-1 text-left relative">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10" />
+                    <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
+                      Why SpeakerDrive?
+                    </h2>
+                    <div className="space-y-8">
+                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                        SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct
+                        access to verified decision-makers and diverse event opportunities like conferences,
+                        training workshops, and consulting engagements.
+                      </p>
+                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                        Our platform breaks the feast-or-famine cycle and turns your expertise into a 
+                        sustainable business—not just occasional gigs.
+                      </p>
                     </div>
                   </div>
                 </div>
+              </div>
 
-                {/* Right column: YouTube Video */}
-                <div className="md:w-1/2 mt-8 md:mt-0">
+              {/* Right column: responsive YouTube iframe */}
+              <div className="md:w-1/2">
+                <div className="relative aspect-video w-full">
                   <iframe
-                    width="560"
-                    height="315"
+                    className="absolute inset-0 w-full h-full"
                     src="https://www.youtube.com/embed/bQYwZYRS9Z4?si=ERD3D34WfvWx4Mas"
                     title="YouTube video player"
                     frameBorder="0"
@@ -85,15 +84,14 @@ export default function LandingPage() {
                   ></iframe>
                 </div>
               </div>
-              {/* END of 2-column layout */}
+            </div>
 
-              {/* Visual separator */}
-              <div className="mt-24 mb-12 relative">
-                <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-                <div className="flex justify-center">
-                  <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
-                    <span className="text-gray-500 text-sm font-medium">How It Works</span>
-                  </div>
+            {/* Visual separator */}
+            <div className="mt-24 mb-12 relative">
+              <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+              <div className="flex justify-center">
+                <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
+                  <span className="text-gray-500 text-sm font-medium">How It Works</span>
                 </div>
               </div>
             </div>
@@ -129,8 +127,7 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Email Verification",
-                  description:
-                    "All contact information is verified and up-to-date.",
+                  description: "All contact information is verified and up-to-date.",
                 },
                 {
                   title: "Direct Links",
@@ -155,7 +152,8 @@ export default function LandingPage() {
               features={[
                 {
                   title: "Smart Message Composer",
-                  description: "Personalized outreach based on the event, contact, and your specific expertise.",
+                  description:
+                    "Personalized outreach based on the event, contact, and your specific expertise.",
                 },
                 {
                   title: "Multi-Channel Options",
@@ -195,7 +193,6 @@ export default function LandingPage() {
 
             {/* Expert Types Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 px-4 sm:px-8">
-              
               {/* Keynote Speakers */}
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-1 md:order-3 lg:col-span-1 lg:transform lg:scale-105">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
@@ -303,7 +300,7 @@ export default function LandingPage() {
                 Opportunities for experts are everywhere in the&nbsp;market.
               </h3>
             </div>
-            
+
             {/* Visual funnel */}
             <div className="relative flex flex-col items-center">
               <div className="w-full max-w-2xl mb-3 text-center">
@@ -311,7 +308,7 @@ export default function LandingPage() {
                   Yet talented professionals still struggle to fill their calendars
                 </p>
               </div>
-              
+
               <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-2.5 border border-gray-200/50 mb-8">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <span className="text-gray-500 font-bold text-lg">?</span>
@@ -321,7 +318,7 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            
+
             {/* Decorative connector */}
             <div className="flex flex-col items-center">
               <div className="h-16 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
@@ -337,7 +334,7 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
-            
+
         {/* Founder Quote Section */}
         <div className="max-w-2xl mx-auto px-6 sm:px-8 mb-20 mt-12">
           <div className="flex flex-col gap-6">
@@ -351,14 +348,14 @@ export default function LandingPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z"/>
+              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z" />
             </svg>
 
             {/* Smaller on mobile */}
             <p className="text-base sm:text-xl font-normal text-gray-900 leading-relaxed">
-              SpeakerDrive combines what I know works: relationship-building systems that grew my previous
-              businesses, and authentic connections that have directly led to millions in speaker
-              bookings. I've simplified everything I know into one platform.
+              SpeakerDrive combines what I know works: relationship-building systems that grew my
+              previous businesses, and authentic connections that have directly led to millions in
+              speaker bookings. I've simplified everything I know into one platform.
             </p>
 
             <div className="flex items-center mt-2">
@@ -370,7 +367,6 @@ export default function LandingPage() {
               <div className="flex flex-col">
                 <p className="text-base font-semibold text-gray-900">Austin Benton</p>
                 <p className="text-sm text-gray-600">Founder, SpeakerDrive</p>
-                {/* Keep LinkedIn link from before */}
                 <div className="flex items-center gap-2 mt-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
