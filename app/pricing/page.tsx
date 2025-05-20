@@ -211,29 +211,19 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
-          text: "Recently Added Leads",
+          text: "New Leads First-Access",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          text: "Bulk Exports",
-          tooltip: "Export your unlocked leads to CSV, one at a time"
+          text: "Auto Export / Integrations",
+          tooltip:
+            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "CRM Integrations",
-          tooltip: (
-            <>
-              Send your unlocks to 3rd party platforms. Direct integration with{" "}
-              <a
-                href="https://instantly.ai/?via=austin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-blue-600 hover:text-blue-800"
-              >
-                Instant.ly
-              </a>{" "}
-              coming soon.
-            </>
-          )
+          text: "Tech Setup Session",
+          disabled: true,
+          tooltip:
+            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
         }
       ]
     },
@@ -259,34 +249,22 @@ export default function PricingPage() {
           tooltip:
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
-        // Disabled items at bottom:
         {
-          text: "Recently Added Leads",
+          text: "New Leads First-Access",
           disabled: true,
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          text: "Bulk Exports",
+          text: "Auto Export / Integrations",
           disabled: true,
-          tooltip: "Export your unlocked leads to CSV, one at a time"
+          tooltip:
+            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "CRM Integrations",
+          text: "Tech Setup Session",
           disabled: true,
-          tooltip: (
-            <>
-              Send your unlocks to 3rd party platforms. Direct integration with{" "}
-              <a
-                href="https://instantly.ai/?via=austin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-blue-600 hover:text-blue-800"
-              >
-                Instant.ly
-              </a>{" "}
-              coming soon.
-            </>
-          )
+          tooltip:
+            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
         }
       ]
     },
@@ -312,29 +290,18 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
-          text: "Recently Added Leads",
+          text: "New Leads First-Access",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          text: "Bulk Exports",
-          tooltip: "Bulk exporting / downloading of your unlocked leads to CSV"
+          text: "Auto Export / Integrations",
+          tooltip:
+            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "CRM Integrations",
-          tooltip: (
-            <>
-              Send your unlocks to 3rd party platforms. Direct integration with{" "}
-              <a
-                href="https://instantly.ai/?via=austin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline text-blue-600 hover:text-blue-800"
-              >
-                Instant.ly
-              </a>{" "}
-              coming soon.
-            </>
-          )
+          text: "Tech Setup Session",
+          tooltip:
+            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
         }
       ]
     }
