@@ -44,30 +44,48 @@ export default function LandingPage() {
         <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
           <div className="relative px-4 mb-12">
             <div className="max-w-2xl mx-auto">
-              <div className="flex items-start gap-4">
-                <img
-                  src="/SpeakerDrive Logo - Short.png"
-                  alt="SpeakerDrive"
-                  className="w-9 h-9 object-contain flex-shrink-0 mt-1"
-                />
-                
-                <div className="flex-1 text-left relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
-                  <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
-                    Why SpeakerDrive?
-                  </h2>
-                  
-                  <div className="space-y-8">
-                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                      SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
-                    </p>
-                    
-                    <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                      Our platform breaks the feast-or-famine cycle and turns your expertise into a sustainable business—not just occasional gigs.
-                    </p>
+              {/* START of 2-column layout for "Why SpeakerDrive?" + Video */}
+              <div className="flex flex-col md:flex-row items-start gap-8">
+                {/* Left column: Logo + Text */}
+                <div className="md:w-1/2">
+                  <div className="flex items-start gap-4">
+                    <img
+                      src="/SpeakerDrive Logo - Short.png"
+                      alt="SpeakerDrive"
+                      className="w-9 h-9 object-contain flex-shrink-0 mt-1"
+                    />
+                    <div className="flex-1 text-left relative">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10"></div>
+                      <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
+                        Why SpeakerDrive?
+                      </h2>
+                      <div className="space-y-8">
+                        <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                          SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access to verified decision-makers and diverse event opportunities like conferences, training workshops, and consulting engagements.
+                        </p>
+                        <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                          Our platform breaks the feast-or-famine cycle and turns your expertise into a sustainable business—not just occasional gigs.
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
+
+                {/* Right column: YouTube Video */}
+                <div className="md:w-1/2 mt-8 md:mt-0">
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/bQYwZYRS9Z4?si=ERD3D34WfvWx4Mas"
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </div>
+              {/* END of 2-column layout */}
 
               {/* Visual separator */}
               <div className="mt-24 mb-12 relative">
@@ -171,9 +189,9 @@ export default function LandingPage() {
               </h2>
             </div>
 
-           <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mb-12 text-center">
-  Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
-</p>
+            <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-xl max-w-2xl mx-auto mb-12 text-center">
+              Professional speakers & experts who deliver their expertise through keynotes, workshops, coaching, and consulting.
+            </p>
 
             {/* Expert Types Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-12 px-4 sm:px-8">
