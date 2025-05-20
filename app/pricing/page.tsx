@@ -163,7 +163,7 @@ const PRICING_FAQ_ITEMS = [
       "We've built in an automatic rest period for contacts, temporarily removing them from the SpeakerDrive pool to prevent over-exposure to outreach attempts. This protects both the recipients' experience and ensures your messages maintain their impact and effectiveness."
   },
   {
-    question: "How does the Lead Quality Guarantee work?",
+    question: "How does the Invalid Contact Info Refunds work?",
     answer:
       "If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as \"Poor\" with the specific reason. We'll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users."
   },
@@ -205,7 +205,7 @@ export default function PricingPage() {
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
-          text: "Lead Quality Guarantee",
+          text: "Invalid Contact Info Refunds",
           tooltip:
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
@@ -248,7 +248,7 @@ export default function PricingPage() {
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
-          text: "Lead Quality Guarantee",
+          text: "Invalid Contact Info Refunds",
           tooltip:
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
@@ -288,7 +288,7 @@ export default function PricingPage() {
             "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
         },
         {
-          text: "Lead Quality Guarantee",
+          text: "Invalid Contact Info Refunds",
           tooltip:
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
