@@ -202,7 +202,7 @@ export default function PricingPage() {
         {
           text: "Lead Cool-Off",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
+            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Refund Credit For Invalid Info",
@@ -245,7 +245,7 @@ export default function PricingPage() {
         {
           text: "Lead Cool-Off",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
+            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Refund Credit For Invalid Info",
@@ -285,7 +285,7 @@ export default function PricingPage() {
         {
           text: "Lead Cool-Off",
           tooltip:
-            "Temporarily removes contacts after outreach to prevent recipient fatigue and maintain message impact."
+            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
         },
         {
           text: "Refund Credit For Invalid Info",
