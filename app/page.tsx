@@ -68,7 +68,7 @@ export default function LandingPage() {
               </div>
 
               {/* Right column: Responsive YouTube iframe (2/5 width) */}
-              <div className="md:w-2/5">
+              <div className="md:w-3/5">
                 <div className="relative aspect-video w-full">
                   <iframe
                     className="absolute inset-0 w-full h-full"
