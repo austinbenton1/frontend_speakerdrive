@@ -38,8 +38,8 @@ export default function LandingPage() {
 
         {/* "How It Works" and Steps 1-3 */}
         <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
-          {/* Main container */}
-          <div className="mx-auto max-w-5xl px-4 mb-12">
+          {/* Main container: now max-w-7xl for less margin on large screens */}
+          <div className="mx-auto max-w-7xl px-4 mb-12">
             {/* Heading + Short Logo above columns */}
             <div className="flex items-center gap-4 mb-8">
               <img
@@ -57,18 +57,18 @@ export default function LandingPage() {
               {/* Left column: Text paragraphs (3/5 width) */}
               <div className="md:w-3/5 space-y-8">
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access 
-                  to verified decision-makers and diverse event opportunities like conferences, 
+                  SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access
+                  to verified decision-makers and diverse event opportunities like conferences,
                   training workshops, and consulting engagements.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  Our platform breaks the feast-or-famine cycle and turns your expertise into a 
+                  Our platform breaks the feast-or-famine cycle and turns your expertise into a
                   sustainable business—not just occasional gigs.
                 </p>
               </div>
 
               {/* Right column: Responsive YouTube iframe (2/5 width) */}
-              <div className="md:w-3/5">
+              <div className="md:w-2/5">
                 <div className="relative aspect-video w-full">
                   <iframe
                     className="absolute inset-0 w-full h-full"
