@@ -42,8 +42,6 @@ interface PricingCardProps {
 // If there's a tooltip, we handle open/close with React state
 function FeatureItem({ feature }: { feature: PricingFeature }) {
   const { text, disabled, tooltip } = feature;
-
-  // Manage tooltip open/close with mouse events
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -86,7 +84,6 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
   );
 }
 
-// Pricing card layout
 function PricingCard({ plan }: PricingCardProps) {
   const { isPopular } = plan;
 
@@ -165,7 +162,7 @@ const PRICING_FAQ_ITEMS = [
   {
     question: "How does the Refund Credit For Invalid Info work?",
     answer:
-      "If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as \"Poor\" with the specific reason. We'll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users."
+      'If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as "Poor" with the specific reason. We\'ll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users.'
   },
   {
     question: "What is First-Access To Newest Leads?",
@@ -184,7 +181,6 @@ const PRICING_FAQ_ITEMS = [
 export default function PricingPage() {
   const plans: PricingPlan[] = [
     {
-      // FREE TRIAL
       name: "Free Trial",
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
@@ -205,13 +201,11 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
-          // Changed to disabled
           text: "First-Access To Newest Leads ",
           disabled: true,
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          // Changed to disabled
           text: "Integrations / CRM Export",
           disabled: true,
           tooltip:
@@ -226,7 +220,6 @@ export default function PricingPage() {
       ]
     },
     {
-      // STARTER
       name: "Starter",
       description: "For individuals",
       icon: <Rocket className="h-9 w-9" />,
@@ -267,7 +260,6 @@ export default function PricingPage() {
       ]
     },
     {
-      // PREMIUM
       name: "Premium",
       description: "For power users",
       icon: <Zap className="h-9 w-9" />,
@@ -315,43 +307,39 @@ export default function PricingPage() {
         />
 
         <main className="pt-16">
-          {/* Pricing Hero */}
-          <section className="py-8 md:py-12">
-            <div className="container mx-auto px-4 text-center">
-              <div className="mx-auto max-w-3xl">
-                <h1 className="text-3xl md:text-4xl font-bold mb-4">
-                  Simple, Transparent Pricing
-                </h1>
-                <p className="text-md md:text-lg text-gray-600 mb-8">
-                  Choose a plan that fits your needs.
-                  You don&apos;t even need a credit card.
-                </p>
+          {/* Heading + small container for hero text */}
+          <section className="py-8 md:py-12 text-center">
+            <div className="mx-auto max-w-3xl px-4">
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">
+                Simple, Transparent Pricing
+              </h1>
+              <p className="text-md md:text-lg text-gray-600 mb-8">
+                Choose a plan that fits your needs.
+                You don&apos;t even need a credit card.
+              </p>
+            </div>
 
-                {/* Pricing Cards */}
-                {/*
-                  Changed max-w from 4xl -> 5xl
-                  Increased gap from 6 -> 8
-                */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-14xl mx-auto">
-                  {plans.map((plan, index) => (
-                    <PricingCard key={index} plan={plan} />
-                  ))}
-                </div>
+            {/* Pricing cards in a wider container */}
+            <div className="mx-auto max-w-screen-xl px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {plans.map((plan, index) => (
+                  <PricingCard key={index} plan={plan} />
+                ))}
+              </div>
 
-                <p className="text-sm text-gray-700 mt-6">
-                  SpeakerDrive is currently in beta – early adopters lock in our best rates before prices increase.
+              <p className="text-sm text-gray-700 mt-6">
+                SpeakerDrive is currently in beta – early adopters lock in our best rates before prices increase.
+              </p>
+              <div className="mt-6">
+                <p className="text-gray-500 text-sm">
+                  Agency, Company Or Referral Partner?{" "}
+                  <a
+                    href="https://www.speakerdrive.com/contact"
+                    className="text-brand-blue font-medium"
+                  >
+                    Let&apos;s Talk
+                  </a>
                 </p>
-                <div className="mt-6 text-center">
-                  <p className="text-gray-500 text-sm">
-                    Agency, Company Or Referral Partner?{" "}
-                    <a
-                      href="https://www.speakerdrive.com/contact"
-                      className="text-brand-blue font-medium"
-                    >
-                      Let&apos;s Talk
-                    </a>
-                  </p>
-                </div>
               </div>
             </div>
           </section>
@@ -374,10 +362,7 @@ export default function PricingPage() {
 
               {/* Accordion */}
               <div className="w-full">
-                <Accordion
-                  className="space-y-3"
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                >
+                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
                   {PRICING_FAQ_ITEMS.map((item, index) => (
                     <AccordionItem
                       key={index}
@@ -454,4 +439,3 @@ export default function PricingPage() {
       </div>
     </div>
   );
-}
