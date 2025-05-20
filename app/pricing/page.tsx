@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Circle, Rocket, Zap } from "lucide-react"; // Make sure lucide-react is installed
+import { Check, Circle, Rocket, Zap } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import {
@@ -10,7 +10,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger
-} from "@/components/ui/accordion"; // Ensure these paths exist and export the components
+} from "@/components/ui/accordion";
 
 // ================== PRICING TYPES & COMPONENTS ==================
 
@@ -38,7 +38,8 @@ interface PricingCardProps {
   plan: PricingPlan;
 }
 
-// A small component to display each feature row (checkmark / x, text, optional tooltip)
+// A small component to display each feature row.
+// If there's a tooltip, we handle open/close with React state
 function FeatureItem({ feature }: { feature: PricingFeature }) {
   const { text, disabled, tooltip } = feature;
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +84,6 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
   );
 }
 
-// The pricing card layout
 function PricingCard({ plan }: PricingCardProps) {
   const { isPopular } = plan;
 
@@ -307,9 +307,9 @@ export default function PricingPage() {
         />
 
         <main className="pt-16">
-          {/* Intro / Heading */}
-          <section className="py-8 md:py-12">
-            <div className="container mx-auto px-4 text-center">
+          {/* Heading + small container for hero text */}
+          <section className="py-8 md:py-12 text-center">
+            <div className="mx-auto max-w-3xl px-4">
               <h1 className="text-3xl md:text-4xl font-bold mb-4">
                 Simple, Transparent Pricing
               </h1>
@@ -317,9 +317,11 @@ export default function PricingPage() {
                 Choose a plan that fits your needs.
                 You don&apos;t even need a credit card.
               </p>
+            </div>
 
-              {/* Pricing Cards (wider container) */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-screen-xl mx-auto">
+            {/* Pricing cards in a wider container */}
+            <div className="mx-auto max-w-screen-xl px-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {plans.map((plan, index) => (
                   <PricingCard key={index} plan={plan} />
                 ))}
@@ -328,7 +330,7 @@ export default function PricingPage() {
               <p className="text-sm text-gray-700 mt-6">
                 SpeakerDrive is currently in beta – early adopters lock in our best rates before prices increase.
               </p>
-              <div className="mt-6 text-center">
+              <div className="mt-6">
                 <p className="text-gray-500 text-sm">
                   Agency, Company Or Referral Partner?{" "}
                   <a
@@ -347,7 +349,7 @@ export default function PricingPage() {
             <div className="max-w-xl mx-auto px-4">
               {/* Section Header */}
               <div className="text-center mb-16 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-blue-100/30 to-blue-50/20 blur-3xl -z-10 opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-50/20 via-blue-100/30 to-blue-50/20 blur-3xl -z-10 opacity-70"></div>
                 <div className="relative">
                   <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 tracking-tight">
                     Frequently Asked Questions
@@ -359,52 +361,54 @@ export default function PricingPage() {
               </div>
 
               {/* Accordion */}
-              <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
-                {PRICING_FAQ_ITEMS.map((item, index) => (
-                  <AccordionItem
-                    key={index}
-                    value={`item-${index}`}
-                    className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
-                  >
-                    <AccordionTrigger className="w-full">
-                      <div className="flex items-center justify-between w-full text-left">
-                        <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
-                          <div className="flex-1">
-                            <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
-                              {item.question}
-                            </span>
-                          </div>
-                          <div className="flex-shrink-0">
-                            <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
-                              <svg
-                                className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M19 9l-7 7-7-7"
-                                />
-                              </svg>
+              <div className="w-full">
+                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
+                  {PRICING_FAQ_ITEMS.map((item, index) => (
+                    <AccordionItem
+                      key={index}
+                      value={`item-${index}`}
+                      className="group border border-gray-200 rounded-xl overflow-hidden bg-white hover:border-gray-300 hover:shadow-md transition-all duration-200"
+                    >
+                      <AccordionTrigger className="w-full">
+                        <div className="flex items-center justify-between w-full text-left">
+                          <div className="flex items-center gap-3 px-5 py-4 w-full hover:bg-gray-50/80 transition-colors">
+                            <div className="flex-1">
+                              <span className="text-sm font-semibold text-gray-800 group-hover:text-gray-900 transition-colors pr-6">
+                                {item.question}
+                              </span>
+                            </div>
+                            <div className="flex-shrink-0">
+                              <div className="w-6 h-6 rounded-full bg-gray-100 group-hover:bg-gray-200 flex items-center justify-center transition-colors">
+                                <svg
+                                  className="w-4 h-4 text-gray-500 transform transition-transform group-data-[state=open]:rotate-180"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M19 9l-7 7-7-7"
+                                  />
+                                </svg>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="px-6 pb-5">
-                      <div className="relative">
-                        <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity" />
-                        <p className="relative text-gray-600 leading-relaxed text-sm">
-                          {item.answer}
-                        </p>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-6 pb-5">
+                        <div className="relative">
+                          <div className="absolute -inset-2 bg-gradient-to-r from-blue-50/30 via-transparent to-transparent rounded-lg blur-md opacity-0 group-data-[state=open]:opacity-100 transition-opacity"></div>
+                          <p className="relative text-gray-600 leading-relaxed text-sm">
+                            {item.answer}
+                          </p>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
 
               {/* Bottom CTA */}
               <div className="mt-16 text-center">
@@ -420,7 +424,7 @@ export default function PricingPage() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth={2}
+                    strokeWidth="2"
                   >
                     <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
