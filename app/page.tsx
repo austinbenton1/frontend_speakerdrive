@@ -38,39 +38,36 @@ export default function LandingPage() {
 
         {/* "How It Works" and Steps 1-3 */}
         <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
-          {/* Wrap the entire "Why SpeakerDrive?" in a wider container */}
+          {/* Main container */}
           <div className="mx-auto max-w-5xl px-4 mb-12">
+            {/* Heading + Short Logo above columns */}
+            <div className="flex items-center gap-4 mb-8">
+              <img
+                src="/SpeakerDrive Logo - Short.png"
+                alt="SpeakerDrive"
+                className="w-9 h-9 object-contain"
+              />
+              <h2 className="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                What Is SpeakerDrive?
+              </h2>
+            </div>
+
             {/* Two-column layout */}
-            <div className="flex flex-col md:flex-row md:items-start gap-8">
-              {/* Left column: Logo & text */}
-              <div className="md:w-1/2">
-                <div className="flex items-start gap-4">
-                  <img
-                    src="/SpeakerDrive Logo - Short.png"
-                    alt="SpeakerDrive"
-                    className="w-9 h-9 object-contain flex-shrink-0 mt-1"
-                  />
-                  <div className="flex-1 text-left relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-50 via-blue-100/10 to-transparent blur-xl opacity-50 -z-10" />
-                    <h2 className="text-xl sm:text-3xl font-extrabold mb-5 text-gray-900 tracking-tight">
-                      Why SpeakerDrive?
-                    </h2>
-                    <div className="space-y-8">
-                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct
-                        access to verified decision-makers and diverse event opportunities like conferences,
-                        training workshops, and consulting engagements.
-                      </p>
-                      <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                        Our platform breaks the feast-or-famine cycle and turns your expertise into a 
-                        sustainable business—not just occasional gigs.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+            <div className="flex flex-col md:flex-row items-start gap-8">
+              {/* Left column: Text paragraphs */}
+              <div className="md:w-1/2 space-y-8">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                  SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access 
+                  to verified decision-makers and diverse event opportunities like conferences, 
+                  training workshops, and consulting engagements.
+                </p>
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
+                  Our platform breaks the feast-or-famine cycle and turns your expertise into a 
+                  sustainable business—not just occasional gigs.
+                </p>
               </div>
 
-              {/* Right column: responsive YouTube iframe */}
+              {/* Right column: Responsive YouTube iframe */}
               <div className="md:w-1/2">
                 <div className="relative aspect-video w-full">
                   <iframe
@@ -308,7 +305,7 @@ export default function LandingPage() {
                   Yet talented professionals still struggle to fill their calendars
                 </p>
               </div>
-
+              
               <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-2.5 border border-gray-200/50 mb-8">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <span className="text-gray-500 font-bold text-lg">?</span>
@@ -334,7 +331,7 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
-
+            
         {/* Founder Quote Section */}
         <div className="max-w-2xl mx-auto px-6 sm:px-8 mb-20 mt-12">
           <div className="flex flex-col gap-6">
@@ -348,7 +345,7 @@ export default function LandingPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z" />
+              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z"/>
             </svg>
 
             {/* Smaller on mobile */}
