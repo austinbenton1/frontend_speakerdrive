@@ -154,7 +154,7 @@ export function Hero() {
                 delay={0.2}
                 per="char"
               >
-                Find Premium Events And Get Booked To Speak
+                Find Events And Get Booked To Speak
               </TextEffect>
             </div>
 
