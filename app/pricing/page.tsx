@@ -362,7 +362,7 @@ export default function PricingPage() {
 
               {/* Accordion */}
               <div className="w-full">
-                <Accordion className="space-y-3" transition={{ duration: 0.2, ease: "easeInOut" }}>
+                <Accordion type="single" className="space-y-3">
                   {PRICING_FAQ_ITEMS.map((item, index) => (
                     <AccordionItem
                       key={index}
@@ -439,3 +439,4 @@ export default function PricingPage() {
       </div>
     </div>
   );
+}
