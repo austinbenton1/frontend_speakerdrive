@@ -223,7 +223,7 @@ export default function PricingPage() {
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "Tech Setup Session",
+          text: "Integrations Setup Session",
           disabled: true,
           tooltip:
             "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
@@ -264,7 +264,7 @@ export default function PricingPage() {
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "Tech Setup Session",
+          text: "Integrations Setup Session",
           disabled: true,
           tooltip:
             "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
@@ -302,7 +302,7 @@ export default function PricingPage() {
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
         {
-          text: "Tech Setup Session",
+          text: "Integrations Setup Session",
           tooltip:
             "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
         }
