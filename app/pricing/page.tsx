@@ -320,7 +320,7 @@ export default function PricingPage() {
             </div>
 
             {/* Pricing cards in a wider container */}
-            <div className="mx-auto max-w-4xl px-4">
+            <div className="mx-auto max-w-5xl px-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {plans.map((plan, index) => (
                   <PricingCard key={index} plan={plan} />
