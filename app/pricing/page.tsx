@@ -332,7 +332,7 @@ export default function PricingPage() {
                   Changed max-w from 4xl -> 5xl
                   Increased gap from 6 -> 8
                 */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-9xl mx-auto">
                   {plans.map((plan, index) => (
                     <PricingCard key={index} plan={plan} />
                   ))}
