@@ -217,7 +217,7 @@ export default function PricingPage() {
         },
         {
           // Changed to disabled
-          text: "Auto Export / Integrations",
+          text: "CRM Export / Integrations",
           disabled: true,
           tooltip:
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
@@ -258,7 +258,7 @@ export default function PricingPage() {
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          text: "Auto Export / Integrations",
+          text: "CRM Export / Integrations",
           disabled: true,
           tooltip:
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
@@ -297,7 +297,7 @@ export default function PricingPage() {
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
-          text: "Auto Export / Integrations",
+          text: "CRM Export / Integrations",
           tooltip:
             "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
         },
