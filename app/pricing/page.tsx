@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Check, Circle, Rocket, Zap } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
-import { NotificationBanner } from "@/components/ui/NotificationBanner";
 import { Footer5 } from "@/components/layout/Footer";
 import {
   Accordion,
@@ -314,8 +313,6 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
-        <NotificationBanner />
-
         {/* Header */}
         <HeaderFinal
           companyName="SpeakerDrive"
