@@ -52,10 +52,10 @@ export default function LandingPage() {
               </h2>
             </div>
 
-            {/* Two-column layout */}
+            {/* Two-column layout (narrower video) */}
             <div className="flex flex-col md:flex-row items-start gap-8">
-              {/* Left column: Text paragraphs */}
-              <div className="md:w-1/2 space-y-8">
+              {/* Left column: Text paragraphs (3/5 width) */}
+              <div className="md:w-3/5 space-y-8">
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
                   SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access 
                   to verified decision-makers and diverse event opportunities like conferences, 
@@ -67,8 +67,8 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* Right column: Responsive YouTube iframe */}
-              <div className="md:w-1/2">
+              {/* Right column: Responsive YouTube iframe (2/5 width) */}
+              <div className="md:w-2/5">
                 <div className="relative aspect-video w-full">
                   <iframe
                     className="absolute inset-0 w-full h-full"
@@ -315,7 +315,7 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-
+            
             {/* Decorative connector */}
             <div className="flex flex-col items-center">
               <div className="h-16 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
