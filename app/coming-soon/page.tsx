@@ -36,11 +36,6 @@ const PRICING_FAQ_ITEMS = [
       "Newly discovered opportunities added to our database. This feature is designed to give premium users exclusive access to the freshest opportunities."
   },
   {
-    question: "How do Bulk Exports work?",
-    answer:
-      "While basic users can download leads one at a time, Bulk Exports allow you to select and export multiple leads simultaneously in CSV or Excel format with a single click."
-  },
-  {
     question: "What integrations do you offer?",
     answer:
       "SpeakerDrive provides webhook functionality that allows you to push leads to most CRMs, email tools or marketing automation platforms. If you have specific integration questions, please reach out to our support team."
