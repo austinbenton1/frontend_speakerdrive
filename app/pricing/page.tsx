@@ -211,7 +211,7 @@ export default function PricingPage() {
         },
         {
           // Changed to disabled
-          text: "New Leads First-Access",
+          text: "First-Access To New Leads ",
           disabled: true,
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
@@ -253,7 +253,7 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
-          text: "New Leads First-Access",
+          text: "First-Access To New Leads ",
           disabled: true,
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
@@ -293,7 +293,7 @@ export default function PricingPage() {
             "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
         },
         {
-          text: "New Leads First-Access",
+          text: "First-Access To New Leads ",
           tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
         },
         {
