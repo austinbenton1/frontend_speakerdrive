@@ -38,8 +38,8 @@ export default function LandingPage() {
 
         {/* "How It Works" and Steps 1-3 */}
         <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
-          {/* Main container: now max-w-7xl for less margin on large screens */}
-          <div className="mx-auto max-w-7xl px-4 mb-12">
+          {/* Main container: now max-w-4xl for a narrower layout */}
+          <div className="mx-auto max-w-4xl px-4 mb-12">
             {/* Heading + Short Logo above columns */}
             <div className="flex items-center gap-4 mb-8">
               <img
@@ -62,7 +62,7 @@ export default function LandingPage() {
                   training workshops, and consulting engagements.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  Our platform breaks the feast-or-famine cycle and turns your expertise into a
+                  Our platform breaks the feast-or-famine cycle and turns your expertise into a 
                   sustainable business—not just occasional gigs.
                 </p>
               </div>
