@@ -168,9 +168,9 @@ const PRICING_FAQ_ITEMS = [
       "If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as \"Poor\" with the specific reason. We'll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users."
   },
   {
-    question: "What are Recently Added Leads?",
+    question: "What is First-Access To Newest Leads?",
     answer:
-      "Newly discovered opportunities added to our database. This feature is designed to give premium users exclusive access to the freshest opportunities."
+      "These are newly added opportunities to the SpeakerDrive database. This feature is designed to give premium users exclusive access to the freshest opportunities for a short period of time."
   },
   {
     question: "What integrations do you offer?",
