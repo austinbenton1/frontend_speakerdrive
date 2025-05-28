@@ -27,7 +27,7 @@ interface PricingPlan {
   ctaLink?: string;
 
   // We'll directly store the main price text and subtext for each plan.
-  priceHeading: string;
+  priceHeading: React.ReactNode;
   priceSubtext: string;
 
   isPopular?: boolean;
@@ -221,10 +221,14 @@ export default function PricingPage() {
     },
     {
       name: "Starter",
-      description: "For individuals",
+      description: "Limited Time Beta Pricing",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
-      priceHeading: "$149/m",
+      priceHeading: (
+        <>
+          $99/m <span className="text-lg text-gray-400 line-through ml-1">$149/m</span>
+        </>
+      ),
       priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
@@ -261,10 +265,14 @@ export default function PricingPage() {
     },
     {
       name: "Premium",
-      description: "For power users",
+      description: "Limited Time Beta Pricing",
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://www.speakerdrive.com/coming-soon",
-      priceHeading: "$399/m",
+      priceHeading: (
+        <>
+          $249/m <span className="text-lg text-gray-400 line-through ml-1">$399/m</span>
+        </>
+      ),
       priceSubtext: "Cancel / upgrade anytime",
       features: [
         { text: "1000 Unlocked Leads / mth" },
