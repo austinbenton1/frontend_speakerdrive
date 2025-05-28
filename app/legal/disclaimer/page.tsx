@@ -1,163 +1,184 @@
 "use client";
 
-export default function DisclaimerPage() {
+export default function FairUsePolicyPage() {
   return (
     <div className="min-h-screen bg-white py-16">
       <div className="container mx-auto max-w-3xl px-4">
-        <h1 className="text-3xl font-bold mb-8">Disclaimer</h1>
+        <h1 className="text-3xl font-bold mb-8">Fair Use Policy</h1>
         <div className="prose prose-sm max-w-none">
           {/* Last Updated Date */}
-          <p className="text-sm text-gray-500 mb-8">Last Updated: March 21, 2025</p>
+          <p className="text-sm text-gray-500 mb-8">Last Updated: March 28, 2025</p>
 
-          {/* GENERAL DISCLAIMER */}
-          <h2 className="text-xl font-semibold mb-4">GENERAL DISCLAIMER</h2>
+          {/* PURPOSE */}
+          <h2 className="text-xl font-semibold mb-4">Purpose</h2>
           <p className="mb-6">
-            The information contained on the SpeakerDrive platform ("Service") is for general information 
-            purposes only. While we strive to keep the information up to date and correct, we make no 
-            representations or warranties of any kind, express or implied, about the completeness, accuracy, 
-            reliability, suitability, or availability of the Service or the information, products, services, 
-            or related graphics contained on the Service for any purpose.
+            This Fair Use Policy establishes guidelines for reasonable and appropriate use of the SpeakerDrive platform. These guidelines help maintain platform integrity, ensure fair access for all users, and protect the quality of our service.
           </p>
 
-          {/* NO GUARANTEES */}
-          <h2 className="text-xl font-semibold mb-4">NO GUARANTEES</h2>
+          {/* PLATFORM USAGE GUIDELINES */}
+          <h2 className="text-xl font-semibold mb-4">Platform Usage Guidelines</h2>
+
+          <h3 className="text-lg font-medium mb-2">Search and Lead Discovery</h3>
+          <p className="mb-2"><strong>Reasonable Use:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Conduct searches that align with your professional focus and expertise</li>
+            <li>Use filters and search terms to find genuinely relevant opportunities</li>
+            <li>Allow reasonable time between bulk search activities</li>
+          </ul>
+
+          <p className="mb-2"><strong>Usage Limits:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Automated search tools or scripts are not permitted</li>
+            <li>Excessive rapid-fire searching may trigger temporary restrictions</li>
+            <li>Search frequency should reflect genuine prospecting needs</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Lead Unlocks and Credits</h3>
+          <p className="mb-2"><strong>Fair Usage Patterns:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Unlock leads you genuinely intend to contact</li>
+            <li>Use credits for opportunities that match your service offerings</li>
+            <li>Allow reasonable evaluation time before unlocking additional similar leads</li>
+          </ul>
+
+          <p className="mb-2"><strong>Credit Management:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Credits are intended for active prospecting, not stockpiling contacts</li>
+            <li>Sharing unlock data outside the platform violates our terms</li>
+            <li>Bulk unlocking for data harvesting is prohibited</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Email and Integration Usage</h3>
+          <p className="mb-2"><strong>Gmail Integration:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Send outreach messages at reasonable intervals</li>
+            <li>Respect recipient preferences and unsubscribe requests</li>
+            <li>Maintain professional email practices and avoid spam behaviors</li>
+          </ul>
+
+          <p className="mb-2"><strong>API and Integration Limits:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Use third-party integrations (CRM, etc.) within their intended scope</li>
+            <li>Don&apos;t circumvent rate limits or technical restrictions</li>
+            <li>Ensure connected accounts comply with their respective terms of service</li>
+          </ul>
+
+          {/* CREDIT REFUND GUIDELINES */}
+          <h2 className="text-xl font-semibold mb-4">Credit Refund Guidelines</h2>
+
+          <h3 className="text-lg font-medium mb-2">Refund Eligibility</h3>
           <p className="mb-6">
-            SpeakerDrive does not guarantee that speakers will secure engagements or that event planners will 
-            find suitable speakers through our Service. Success in using our platform depends on many factors, 
-            including but not limited to individual qualifications, market conditions, and specific client needs.
+            Credits are automatically refunded when you rate a lead as &quot;Poor&quot; and select one of these qualifying reasons:
+          </p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li><strong>Invalid Contact Info</strong> - Primary contact method doesn&apos;t work (hard email bounce, incorrect LinkedIn URL, etc.)</li>
+            <li><strong>Inaccurate Data</strong> - Core lead details are substantially incorrect (contact no longer at organization, wrong role, fundamentally incorrect event details)</li>
+            <li><strong>Other</strong> - Must include specific explanation for consideration</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Fair Use Guidelines for Refunds</h3>
+          <p className="mb-2"><strong>What Constitutes Fair Use:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Legitimate data quality issues as defined above</li>
+            <li>Reasonable number of refund requests relative to total unlocks</li>
+            <li>Specific, factual explanations for &quot;Other&quot; category requests</li>
+            <li>Good faith efforts to use the provided contact information</li>
+          </ul>
+
+          <p className="mb-2"><strong>What May Indicate Misuse:</strong></p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Requesting refunds for lack of response to outreach (non-response doesn&apos;t indicate bad data)</li>
+            <li>Excessive refund rates compared to typical user patterns</li>
+            <li>Vague or non-specific explanations in &quot;Other&quot; category</li>
+            <li>Requesting refunds for leads that don&apos;t match personal preferences rather than data accuracy issues</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Refund Review Process</h3>
+          <p className="mb-6">
+            <strong>Automatic Refunds:</strong> Most qualifying requests are processed immediately when you submit a &quot;Poor&quot; rating with a valid reason.
+          </p>
+          <p className="mb-2"><strong>Manual Review:</strong> We may review accounts that show unusual refund patterns, including:</p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Refund rates significantly above platform average</li>
+            <li>Repeated &quot;Other&quot; category requests without clear data quality issues</li>
+            <li>Patterns suggesting system abuse rather than legitimate quality concerns</li>
+          </ul>
+
+          {/* ENFORCEMENT AND ACCOUNT PROTECTION */}
+          <h2 className="text-xl font-semibold mb-4">Enforcement and Account Protection</h2>
+
+          <h3 className="text-lg font-medium mb-2">Usage Monitoring</h3>
+          <p className="mb-2">We monitor platform usage to ensure fair access for all users:</p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li><strong>Automated Detection:</strong> Our systems identify unusual usage patterns</li>
+            <li><strong>Usage Alerts:</strong> Users may receive notifications about approaching limits</li>
+            <li><strong>Pattern Analysis:</strong> We review accounts with atypical usage for potential issues</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Response to Policy Violations</h3>
+          <p className="mb-2">Violations of this Fair Use Policy may result in:</p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li><strong>Educational Outreach:</strong> Initial contact to clarify policy expectations</li>
+            <li><strong>Temporary Restrictions:</strong> Limited access to certain features during review</li>
+            <li><strong>Account Suspension/Termination:</strong> We reserve the right to suspend or terminate user accounts at any time, with or without cause, and with or without notice, at our sole discretion</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Data Quality Improvement</h3>
+          <p className="mb-2">We use usage patterns and feedback to continuously improve our platform:</p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Identify and address data quality issues</li>
+            <li>Optimize system performance and reliability</li>
+            <li>Enhance user experience based on legitimate usage patterns</li>
+          </ul>
+
+          {/* YOUR RIGHTS AND RESPONSIBILITIES */}
+          <h2 className="text-xl font-semibold mb-4">Your Rights and Responsibilities</h2>
+
+          <h3 className="text-lg font-medium mb-2">User Rights</h3>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Request clarification on any usage limits or policy decisions</li>
+            <li>Appeal enforcement actions with additional supporting information</li>
+            <li>Receive explanation if your account is flagged for review</li>
+            <li>Access support for legitimate usage questions</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">User Responsibilities</h3>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Use the platform in good faith for its intended professional purposes</li>
+            <li>Respect system limits and avoid circumventing technical restrictions</li>
+            <li>Provide honest feedback to help improve platform quality</li>
+            <li>Report suspected abuse or policy violations</li>
+          </ul>
+
+          <h3 className="text-lg font-medium mb-2">Data Quality Commitment</h3>
+          <p className="mb-2">We use your feedback and usage patterns to continuously improve our service:</p>
+          <ul className="list-disc pl-6 mb-6 space-y-2">
+            <li>Legitimate usage helps us identify and fix data quality issues</li>
+            <li>Fair use patterns improve system performance for all users</li>
+            <li>Honest feedback enhances the platform experience</li>
+          </ul>
+
+          {/* CONTACT US */}
+          <h2 className="text-xl font-semibold mb-4">Contact Us</h2>
+          <p className="mb-6">
+            Questions about this policy or specific refund situations:<br />
+            <strong>Email:</strong> support@speakerdrive.com
+          </p>
+          <p className="mb-6">
+            <strong>Peak Performance Publishing, LLC</strong><br />
+            Blue Bell, PA
           </p>
 
-          {/* THIRD-PARTY INFORMATION */}
-          <h2 className="text-xl font-semibold mb-4">THIRD-PARTY INFORMATION</h2>
-
-          <h3 className="text-lg font-medium mb-2">Event and Contact Data</h3>
+          {/* POLICY UPDATES */}
+          <h2 className="text-xl font-semibold mb-4">Policy Updates</h2>
           <p className="mb-6">
-            Information about events, contacts, and organizations provided through the Service is gathered 
-            from publicly available sources or provided by users. We make reasonable efforts to ensure this 
-            information is accurate, but we cannot guarantee its completeness, currency, or accuracy.
+            We may update this policy as our platform evolves. Material changes will be communicated via email and posted on our website.
           </p>
 
-          <h3 className="text-lg font-medium mb-2">Fee Estimates</h3>
-          <p className="mb-6">
-            Any estimates regarding speaking fees, business potential, or other financial information are 
-            provided for informational purposes only. These estimates are based on market research and industry 
-            knowledge but should not be relied upon as definitive or guaranteed figures. Actual fees and business 
-            arrangements may vary significantly.
-          </p>
+          <hr className="my-8" />
 
-          {/* USER RESPONSIBILITY */}
-          <h2 className="text-xl font-semibold mb-4">USER RESPONSIBILITY</h2>
-
-          <h3 className="text-lg font-medium mb-2">Professional Conduct</h3>
-          <p className="mb-6">
-            Users are solely responsible for their professional conduct, including the content of communications 
-            sent to contacts discovered through our Service. We strongly encourage users to maintain professional 
-            standards and ethical practices in all communications.
-          </p>
-
-          <h3 className="text-lg font-medium mb-2">Due Diligence</h3>
-          <p className="mb-6">
-            Users are responsible for performing their own due diligence regarding any opportunity, contact, or 
-            organization they discover through the Service. We recommend verifying information independently before 
-            making significant business decisions or commitments.
-          </p>
-
-          {/* LIMITED LIABILITY */}
-          <h2 className="text-xl font-semibold mb-4">LIMITED LIABILITY</h2>
-
-          <h3 className="text-lg font-medium mb-2">Service Interruptions</h3>
-          <p className="mb-6">
-            The Service may be temporarily unavailable due to maintenance, technical issues, or factors beyond 
-            our control. We are not liable for any losses or damages that may result from such interruptions.
-          </p>
-
-          <h3 className="text-lg font-medium mb-2">Business Outcomes</h3>
-          <p className="mb-6">
-            We are not liable for any business outcomes, lost opportunities, or financial losses that may result 
-            from using our Service, regardless of whether such outcomes were influenced by information or tools 
-            provided through the Service.
-          </p>
-
-          {/* INTELLECTUAL PROPERTY DISCLAIMER */}
-          <h2 className="text-xl font-semibold mb-4">INTELLECTUAL PROPERTY DISCLAIMER</h2>
-
-          <h3 className="text-lg font-medium mb-2">Third-Party Trademarks</h3>
-          <p className="mb-6">
-            All trademarks, logos, and service marks displayed on the Service are the property of their respective 
-            owners. References to any names, marks, products, or services of third parties do not constitute or 
-            imply endorsement, sponsorship, or recommendation unless explicitly stated.
-          </p>
-
-          <h3 className="text-lg font-medium mb-2">Content Ownership</h3>
-          <p className="mb-6">
-            While we provide tools and templates for outreach and communication, users are responsible for ensuring 
-            their use of these tools does not infringe upon any third-party intellectual property rights.
-          </p>
-
-          {/* PROFESSIONAL ADVICE DISCLAIMER */}
-          <h2 className="text-xl font-semibold mb-4">PROFESSIONAL ADVICE DISCLAIMER</h2>
-
-          <h3 className="text-lg font-medium mb-2">Not Professional Advice</h3>
-          <p className="mb-6">
-            Content provided through the Service is not intended as legal, financial, tax, or professional advice. 
-            Users should consult with appropriate professionals for specific advice tailored to their situation.
-          </p>
-
-          <h3 className="text-lg font-medium mb-2">Industry Guidance</h3>
-          <p className="mb-6">
-            Any guidance regarding speaking industry standards, practices, or approaches is based on general 
-            knowledge and should not be considered definitive for all situations or markets.
-          </p>
-
-          {/* SECURITY AND DATA DISCLAIMER */}
-          <h2 className="text-xl font-semibold mb-4">SECURITY AND DATA DISCLAIMER</h2>
-
-          <h3 className="text-lg font-medium mb-2">External Links</h3>
-          <p className="mb-6">
-            The Service may contain links to external websites that are not provided or maintained by us. We do 
-            not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external 
-            websites.
-          </p>
-
-          <h3 className="text-lg font-medium mb-2">Data Transmission</h3>
-          <p className="mb-6">
-            While we implement security measures to protect information transmitted through our Service, we cannot 
-            guarantee that such transmissions will be completely secure. Users transmit information at their own 
-            risk.
-          </p>
-
-          {/* CHANGES TO THE SERVICE */}
-          <h2 className="text-xl font-semibold mb-4">CHANGES TO THE SERVICE</h2>
-          <p className="mb-6">
-            We reserve the right to modify, suspend, or discontinue any part of the Service without prior notice. 
-            We are not liable to you or any third party for any such modification, suspension, or discontinuation.
-          </p>
-
-          {/* GOVERNING LAW */}
-          <h2 className="text-xl font-semibold mb-4">GOVERNING LAW</h2>
-          <p className="mb-6">
-            This disclaimer shall be governed by and construed in accordance with the laws of Pennsylvania, and you 
-            submit to the exclusive jurisdiction of the courts in Montgomery County, Pennsylvania for resolution of 
-            any disputes.
-          </p>
-
-          {/* SEVERABILITY */}
-          <h2 className="text-xl font-semibold mb-4">SEVERABILITY</h2>
-          <p className="mb-6">
-            If any provision of this disclaimer is held to be invalid or unenforceable, such provision shall be 
-            struck out and the remaining provisions shall remain in force.
-          </p>
-
-          {/* CONTACT INFORMATION */}
-          <h2 className="text-xl font-semibold mb-4">CONTACT INFORMATION</h2>
-          <p className="mb-6">
-            If you have any questions about this Disclaimer, please contact us at: <strong>support@speakerdrive.com</strong>
-          </p>
-          <p className="mb-6">
-            Peak Performance Publishing, LLC <br />
-            531 Village Cr <br />
-            Blue Bell, PA 19422 <br />
-            917-733-1627
+          <p className="text-sm text-gray-600 italic">
+            This Fair Use Policy works in conjunction with our Terms of Service and Privacy Policy. In case of conflicts, our Terms of Service take precedence.
           </p>
         </div>
       </div>
