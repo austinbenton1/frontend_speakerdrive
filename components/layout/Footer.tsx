@@ -131,7 +131,7 @@ export function Footer5() {
               Terms of Service
             </Link>
             <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
-              Disclaimer
+              Fair Use Policy
             </Link>
           </div>
           
