@@ -166,7 +166,7 @@ export function Hero() {
 
             {/* Enhanced CTA Button */}
             <motion.a
-              href="https://www.speakerdrive.com/coming-soon"
+              href="https://app.speakerdrive.com/signup"
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
               variants={fadeUp}
               initial="hidden"

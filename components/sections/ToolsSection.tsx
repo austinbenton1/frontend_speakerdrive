@@ -329,7 +329,7 @@ export function ToolsSection() {
             {/* CTA button replacing the subtext */}
             <div className="p-4 flex justify-center">
               <a
-                href="https://www.speakerdrive.com/coming-soon"
+                href="https://app.speakerdrive.com/signup"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="

@@ -188,7 +188,7 @@ export default function PricingPage() {
       name: "Free Trial",
       description: "Try it risk free",
       icon: <Circle className="h-9 w-9" />,
-      ctaLink: "https://www.speakerdrive.com/coming-soon",
+      ctaLink: "https://app.speakerdrive.com/signup",
       priceHeading: "7 Days Free",
       priceSubtext: "No credit card required",
       features: [
@@ -227,7 +227,7 @@ export default function PricingPage() {
       name: "Starter",
       description: "Limited Time Beta Pricing",
       icon: <Rocket className="h-9 w-9" />,
-      ctaLink: "https://www.speakerdrive.com/coming-soon",
+      ctaLink: "https://app.speakerdrive.com/signup",
       priceHeading: (
         <>
           $99/m <span className="text-lg text-gray-400 line-through ml-1">$149/m</span>
@@ -271,7 +271,7 @@ export default function PricingPage() {
       name: "Premium",
       description: "Limited Time Beta Pricing",
       icon: <Zap className="h-9 w-9" />,
-      ctaLink: "https://www.speakerdrive.com/coming-soon",
+      ctaLink: "https://app.speakerdrive.com/signup",
       priceHeading: (
         <>
           $249/m <span className="text-lg text-gray-400 line-through ml-1">$399/m</span>

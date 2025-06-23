@@ -454,7 +454,7 @@ export default function OneBigTakeawayPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link
-                href="https://www.speakerdrive.com/coming-soon"
+                href="https://app.speakerdrive.com/signup"
                 className="cta-button w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-lg font-semibold text-white bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 rounded-xl hover:shadow-lg transition-all duration-300"
               >
                 Get Started. It&apos;s FREE! 🚀
