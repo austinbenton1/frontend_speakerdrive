@@ -5,9 +5,9 @@ const nextConfig = {
     serverActions: {
       bodySizeLimit: '2mb'
     },
-    // Ensure proper payload fetching
-    serverComponentsExternalPackages: []
   },
+  // Ensure proper payload fetching
+  serverExternalPackages: [],
   eslint: {
     // This allows production builds to complete even if ESLint errors exist
     ignoreDuringBuilds: true,
