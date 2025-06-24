@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"; // Adjust if your util path differs
 import "./globals.css";
 
 // 1) Import both loader components
-import LuckyOrangeLoader from "../components/LuckyOrangeLoader";
+import CharlaLoader from "../components/CharlaLoader";
 import TracerLoader from "../components/TracerLoader";
 
 const inter = InterFont({
@@ -117,7 +117,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {/* 2) Load Lucky Orange and Tracer scripts in the head */}
-        <LuckyOrangeLoader />
+        <CharlaLoader />
         <TracerLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
