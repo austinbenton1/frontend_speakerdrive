@@ -20,5 +20,19 @@ declare global {
       async?: boolean;
       debug?: boolean;
     }) => void;
+    posthog?: {
+      init: (apiKey: string, config: any) => void;
+      capture: (event: string, properties?: any) => void;
+      identify: (userId: string, properties?: any) => void;
+      reset: () => void;
+      [key: string]: any;
+    };
+    gtag?: (command: string, ...args: any[]) => void;
+    dataLayer?: any[];
+    twq?: (command: string, ...args: any[]) => void;
+    fbq?: (command: string, ...args: any[]) => void;
+    lintrk?: (command: string, data?: any) => void;
+    _linkedin_partner_id?: string;
+    _linkedin_data_partner_ids?: string[];
   }
 }

@@ -6,6 +6,11 @@ import "./globals.css";
 // 1) Import both loader components
 import CharlaLoader from "../components/CharlaLoader";
 import TracerLoader from "../components/TracerLoader";
+import PostHogLoader from "../components/PostHogLoader";
+import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
+import TwitterPixelLoader from "../components/TwitterPixelLoader";
+import MetaPixelLoader from "../components/MetaPixelLoader";
+import LinkedInPixelLoader from "../components/LinkedInPixelLoader";
 
 const inter = InterFont({
   subsets: ["latin"],
@@ -116,9 +121,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* 2) Load Lucky Orange and Tracer scripts in the head */}
+        {/* 2) Load analytics scripts in the head */}
         <CharlaLoader />
         <TracerLoader />
+        <PostHogLoader />
+        <GoogleAnalyticsLoader />
+        <TwitterPixelLoader />
+        <MetaPixelLoader />
+        <LinkedInPixelLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
         {children}
