@@ -28,15 +28,20 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Handle scroll effect
+  // Handle scroll effect and close mobile menu on scroll
   useEffect(() => {
     const handleScroll = () => {
       setHasScrolled(window.scrollY > 10);
+      
+      // Close mobile menu when user scrolls
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
     };
     
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobileMenuOpen]);
 
   return (
     <header
@@ -72,6 +77,12 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
           {/* Auth Buttons */}
           <div className="flex items-center space-x-5 ml-10">
             <a
+              href="https://app.speakerdrive.com/login"
+              className="text-base font-medium text-neutral-700 hover:text-brand-blue transition-colors"
+            >
+              Login
+            </a>
+            <a
               href="https://app.speakerdrive.com/signup"
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
@@ -85,7 +96,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
           <button
             type="button"
             className="inline-flex items-center justify-center p-2 text-neutral-500 bg-white/90
-                       hover:text-brand-blue hover:bg-white rounded-md focus:outline-none relative z-20 shadow-sm"
+                       hover:text-brand-blue hover:bg-white rounded-md focus:outline-none relative z-[10000000] shadow-sm"
             aria-expanded={isMobileMenuOpen}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
@@ -113,7 +124,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
 
       {/* Mobile menu overlay */}
       <motion.div 
-        className={cn("fixed inset-0 bg-black/50 z-10 md:hidden", 
+        className={cn("fixed inset-0 bg-black/50 z-[9999998] md:hidden", 
           isMobileMenuOpen ? "block" : "hidden"
         )}
         initial={{ opacity: 0 }}
@@ -127,7 +138,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
       {/* Mobile menu dropdown */}
       <motion.div
         className={cn(
-          "absolute top-full left-0 right-0 bg-white z-10 shadow-lg md:hidden overflow-hidden",
+          "fixed top-[72px] left-0 right-0 bg-white z-[9999999] shadow-lg md:hidden overflow-hidden",
           isMobileMenuOpen ? "block" : "hidden"
         )}
         initial={{ height: 0, opacity: 0 }}
@@ -153,6 +164,13 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
           </nav>
 
           <div className="flex flex-col space-y-2.5 pt-3 mt-2 border-t border-gray-100">
+            <a
+              href="https://app.speakerdrive.com/login"
+              className="mx-auto w-[85%] flex justify-center text-[17px] font-medium text-gray-700 px-4 py-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-all"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Login
+            </a>
             <a
               href="https://app.speakerdrive.com/signup"
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
