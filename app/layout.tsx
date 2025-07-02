@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter as InterFont } from "next/font/google";
+import { PostHogProvider } from "./providers";
 import { cn } from "@/lib/utils"; // Adjust if your util path differs
 import "./globals.css";
 
@@ -131,7 +132,9 @@ export default function RootLayout({
         <LinkedInPixelLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
-        {children}
+        <PostHogProvider>
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );
