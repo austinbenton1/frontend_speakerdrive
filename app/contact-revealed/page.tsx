@@ -17,7 +17,27 @@ function ContactRevealContent() {
   const contactName = searchParams.get('name') || 'Contact Name';
   const organization = searchParams.get('org') || 'Organization';
   const email = searchParams.get('email') || 'email@example.com';
-  const feePotential = searchParams.get('fee') || 'High-value';
+  const feeData = searchParams.get('fee') || 'High-value';
+
+  // Parse fee potential to separate amount from description
+  const parseFeeData = (feeString: string) => {
+    // Look for pattern: "Fee Potential -> $X,XXX description"
+    const match = feeString.match(/Fee Potential\s*->\s*([^A-Z]*?)([A-Z].*)/);
+    if (match) {
+      return {
+        amount: match[1].trim(),
+        description: match[2].trim()
+      };
+    }
+    
+    // Fallback: if no match, treat whole thing as amount
+    return {
+      amount: feeString.replace(/Fee Potential\s*->\s*/, '').trim(),
+      description: ''
+    };
+  };
+
+  const { amount: feeAmount, description: feeDescription } = parseFeeData(feeData);
 
   // Load Vidalytics script
   useEffect(() => {
@@ -78,10 +98,31 @@ function ContactRevealContent() {
         >
           <h2 className="text-2xl font-semibold text-gray-900 mb-2">{contactName}</h2>
           <h3 className="text-xl text-blue-600 mb-4">{organization}</h3>
-          <div className="bg-white p-4 rounded-lg border-2 border-gray-200 mb-3">
+          <div className="bg-white p-4 rounded-lg border-2 border-gray-200 mb-4">
             <p className="text-lg font-mono text-gray-800">{email}</p>
           </div>
-          <p className="text-green-600 font-semibold">Fee Potential: {feePotential}</p>
+          <div className="space-y-3 mb-4">
+            <p className="text-green-600 font-bold text-lg">Fee Potential: {feeAmount}</p>
+            {feeDescription && (
+              <p className="text-gray-700 leading-relaxed">{feeDescription}</p>
+            )}
+          </div>
+          
+          {/* Personalized Outreach CTA */}
+          <div className="text-center pt-4 border-t border-gray-200">
+            <p className="text-gray-600 mb-3 font-medium">
+              Now that you have the verified email, the next step is to reach out
+            </p>
+            <motion.a 
+              href="https://app.speakerdrive.com/signup"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
+            >
+              📤 Continue To SpeakerDrive Message Composer
+            </motion.a>
+            <p className="text-gray-500 text-sm mt-2">Draft the perfect personalized message in 1 click. Start your free trial now.</p>
+          </div>
         </motion.div>
 
         {/* Value Props */}
@@ -95,19 +136,6 @@ function ContactRevealContent() {
           <p className="text-gray-600 mb-6 leading-relaxed">
             This contact was found using SpeakerDrive's research engine. This is just 1 of thousands of opportunities like this in our database.
           </p>
-
-          {/* Early CTA Button */}
-          <div className="text-center mb-6">
-            <motion.a 
-              href="https://app.speakerdrive.com/signup"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
-            >
-              🎤 Start Your SpeakerDrive Free Trial
-            </motion.a>
-            <p className="text-gray-500 text-sm mt-2">(no credit card needed)</p>
-          </div>
           
           <div className="space-y-3">
             {[
