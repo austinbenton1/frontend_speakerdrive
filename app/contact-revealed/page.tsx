@@ -21,18 +21,34 @@ function ContactRevealContent() {
 
   // Parse fee potential to separate amount from description
   const parseFeeData = (feeString: string) => {
-    // Look for pattern: "Fee Potential -> $X,XXX description"
-    const match = feeString.match(/Fee Potential\s*->\s*([^A-Z]*?)([A-Z].*)/);
-    if (match) {
+    console.log('Raw fee data:', feeString);
+    
+    // Remove "Fee Potential -> " prefix
+    let cleanedString = feeString.replace(/Fee Potential\s*->\s*/, '');
+    console.log('After removing prefix:', cleanedString);
+    
+    // Split on newlines to separate amount from description
+    let parts = cleanedString.split(/\n+/).filter(part => part.trim() !== '');
+    console.log('Split parts:', parts);
+    
+    if (parts.length >= 2) {
+      // First part should be the amount, rest is description
+      let amount = parts[0].trim();
+      let description = parts.slice(1).join(' ').trim();
+      
+      console.log('Parsed amount:', amount);
+      console.log('Parsed description:', description);
+      
       return {
-        amount: match[1].trim(),
-        description: match[2].trim()
+        amount: amount,
+        description: description
       };
     }
     
-    // Fallback: if no match, treat whole thing as amount
+    // Fallback: if no clear separation found
+    console.log('No clear separation found, using fallback');
     return {
-      amount: feeString.replace(/Fee Potential\s*->\s*/, '').trim(),
+      amount: cleanedString.trim(),
       description: ''
     };
   };
@@ -104,14 +120,28 @@ function ContactRevealContent() {
           <div className="space-y-3 mb-4">
             <p className="text-green-600 font-bold text-lg">Fee Potential: {feeAmount}</p>
             {feeDescription && (
-              <p className="text-gray-700 leading-relaxed">{feeDescription}</p>
+              <div className="text-gray-700 leading-relaxed">
+                {feeDescription.length > 120 ? (
+                  <>
+                    {feeDescription.substring(0, 120)}...{' '}
+                    <a 
+                      href="https://app.speakerdrive.com/signup" 
+                      className="text-blue-600 hover:text-blue-800 font-medium"
+                    >
+                      View more
+                    </a>
+                  </>
+                ) : (
+                  feeDescription
+                )}
+              </div>
             )}
           </div>
           
           {/* Personalized Outreach CTA */}
           <div className="text-center pt-4 border-t border-gray-200">
             <p className="text-gray-600 mb-3 font-medium">
-              Now that you have the verified email, the next step is to reach out
+              Next step: send them a message
             </p>
             <motion.a 
               href="https://app.speakerdrive.com/signup"
