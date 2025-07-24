@@ -8,7 +8,199 @@ export default function LandingPage() {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [visibleCards, setVisibleCards] = useState(new Set());
   const [screenshotModal, setScreenshotModal] = useState(null);
+  const [videoStartTime, setVideoStartTime] = useState(null);
+  const [videoEvents, setVideoEvents] = useState([]);
   const cardRefs = useRef([]);
+
+  // Generate or retrieve session ID
+  const getSessionId = () => {
+    if (typeof window === 'undefined') return null;
+    
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      sessionStorage.setItem('sessionId', sessionId);
+    }
+    return sessionId;
+  };
+
+  // Get current scroll depth as percentage
+  const getScrollDepth = () => {
+    if (typeof window === 'undefined') return 0;
+    
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    return scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
+  };
+
+  // Enhanced webhook function to track events
+  const trackEvent = async (eventType, eventData = {}) => {
+    try {
+      const payload = {
+        event: eventType,
+        timestamp: new Date().toISOString(),
+        sessionId: getSessionId(),
+        url: window.location.href,
+        referrer: document.referrer,
+        userAgent: navigator.userAgent,
+        scrollDepth: getScrollDepth(),
+        ...eventData
+      };
+
+      // Fire and forget - don't await to avoid blocking user action
+      fetch('https://n8n.speakerdrive.com/webhook/lander', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        // Keepalive ensures the request completes even if the page navigates away
+        keepalive: true
+      }).catch(err => {
+        console.error('Webhook error:', err);
+      });
+    } catch (error) {
+      console.error('Error sending webhook:', error);
+    }
+  };
+
+  // Wrapper for button clicks to maintain backward compatibility
+  const trackButtonClick = (buttonName, additionalData = {}) => {
+    trackEvent('button_click', {
+      button: buttonName,
+      ...additionalData
+    });
+  };
+
+  // Track video events
+  const trackVideoEvent = (action, additionalData = {}) => {
+    const currentTime = videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0;
+    
+    trackEvent('video_event', {
+      videoAction: action,
+      videoId: 'Uabk76NYie1QwFyi',
+      watchTime: currentTime,
+      ...additionalData
+    });
+
+    // Keep track of events for percentage calculation
+    if (action === 'play' && !videoStartTime) {
+      setVideoStartTime(Date.now());
+    }
+    setVideoEvents(prev => [...prev, { action, time: currentTime }]);
+  };
+
+  // Enhanced button click handlers
+  const handleGetListClick = () => {
+    trackButtonClick('get_the_list', { location: 'hero' });
+    setIsPopupOpen(true);
+  };
+
+  const handleTryFreeClick = (location) => {
+    trackButtonClick('try_speakerdrive_free', { location });
+    // Navigation happens via the anchor tag
+  };
+
+  const handleAccessListClick = () => {
+    trackButtonClick('access_the_list', { 
+      location: 'video_popup',
+      video_watched: true,
+      videoWatchTime: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0
+    });
+    // Navigation happens via the anchor tag
+  };
+
+  const handleScreenshotClick = (screenshotName) => {
+    trackButtonClick('view_screenshot', { 
+      screenshot: screenshotName,
+      location: 'faq_section' 
+    });
+    setScreenshotModal({ 
+      src: `/${screenshotName}`, 
+      alt: screenshotName.replace(/-/g, ' ').replace('.png', '') 
+    });
+  };
+
+  const handlePopupClose = () => {
+    // Track video abandonment if video was playing
+    if (videoStartTime) {
+      const watchTime = Math.round((Date.now() - videoStartTime) / 1000);
+      trackVideoEvent('abandon', { 
+        watchTime,
+        watchPercentage: Math.min(Math.round((watchTime / 161) * 100), 100) // 2:41 = 161 seconds
+      });
+    }
+    setIsPopupOpen(false);
+    setVideoStartTime(null);
+    setVideoEvents([]);
+  };
+
+  // Track page load and page unload
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const pageLoadTime = Date.now();
+      
+      // Track initial page view
+      trackEvent('page_view', {
+        pageTitle: document.title,
+        pageUrl: window.location.href
+      });
+
+      // Track when user leaves the page
+      const handleBeforeUnload = () => {
+        const timeOnPage = Math.round((Date.now() - pageLoadTime) / 1000);
+        trackEvent('page_leave', {
+          timeOnPage,
+          finalScrollDepth: getScrollDepth()
+        });
+      };
+
+      window.addEventListener('beforeunload', handleBeforeUnload);
+      
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+      };
+    }
+  }, []);
+
+  // Track scroll depth milestones
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const scrollMilestones = new Set();
+    const milestones = [25, 50, 75, 90, 100];
+
+    const handleScroll = () => {
+      const currentDepth = getScrollDepth();
+      
+      milestones.forEach(milestone => {
+        if (currentDepth >= milestone && !scrollMilestones.has(milestone)) {
+          scrollMilestones.add(milestone);
+          trackEvent('scroll_milestone', {
+            depth: milestone,
+            milestone: `${milestone}%`
+          });
+        }
+      });
+    };
+
+    // Throttle scroll events
+    let scrollTimer;
+    const throttledScroll = () => {
+      if (scrollTimer) return;
+      scrollTimer = setTimeout(() => {
+        handleScroll();
+        scrollTimer = null;
+      }, 150);
+    };
+
+    window.addEventListener('scroll', throttledScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', throttledScroll);
+      if (scrollTimer) clearTimeout(scrollTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (isPopupOpen && !videoLoaded) {
@@ -26,19 +218,90 @@ export default function LandingPage() {
       `;
       document.body.appendChild(script);
       setVideoLoaded(true);
+
+      // Setup Vidalytics video tracking
+      const setupVideoTracking = () => {
+        try {
+          // Vidalytics typically exposes player events through window.vidalytics
+          const checkInterval = setInterval(() => {
+            const player = window.vidalytics_embed_Uabk76NYie1QwFyi || 
+                          window.Vidalytics?.players?.['Uabk76NYie1QwFyi'] ||
+                          document.querySelector('#vidalytics_embed_Uabk76NYie1QwFyi iframe');
+
+            if (player) {
+              clearInterval(checkInterval);
+              
+              // Track when video starts
+              trackVideoEvent('view', { source: 'popup_opened' });
+
+              // Try to add event listeners based on Vidalytics API
+              if (window.Vidalytics && window.Vidalytics.players) {
+                const vid = window.Vidalytics.players['Uabk76NYie1QwFyi'];
+                if (vid && vid.on) {
+                  vid.on('play', () => trackVideoEvent('play'));
+                  vid.on('pause', () => trackVideoEvent('pause'));
+                  vid.on('ended', () => trackVideoEvent('complete', { watchPercentage: 100 }));
+                  
+                  // Track progress at 25%, 50%, 75%
+                  let trackedProgress = new Set();
+                  vid.on('timeupdate', (e) => {
+                    const percentage = Math.round((e.currentTime / e.duration) * 100);
+                    
+                    [25, 50, 75].forEach(milestone => {
+                      if (percentage >= milestone && !trackedProgress.has(milestone)) {
+                        trackedProgress.add(milestone);
+                        trackVideoEvent('progress', { 
+                          milestone: `${milestone}%`,
+                          watchPercentage: milestone 
+                        });
+                      }
+                    });
+                  });
+                }
+              }
+
+              // Fallback: Try postMessage approach for iframe-based players
+              const iframe = document.querySelector('#vidalytics_embed_Uabk76NYie1QwFyi iframe');
+              if (iframe) {
+                window.addEventListener('message', (event) => {
+                  if (event.origin.includes('vidalytics')) {
+                    const data = event.data;
+                    if (data.event === 'play') trackVideoEvent('play');
+                    if (data.event === 'pause') trackVideoEvent('pause');
+                    if (data.event === 'ended') trackVideoEvent('complete');
+                  }
+                });
+              }
+            }
+          }, 500);
+
+          // Stop checking after 10 seconds
+          setTimeout(() => clearInterval(checkInterval), 10000);
+        } catch (error) {
+          console.error('Error setting up video tracking:', error);
+        }
+      };
+
+      // Set up video tracking after a delay to ensure player is ready
+      setTimeout(() => {
+        setupVideoTracking();
+      }, 2000);
     }
   }, [isPopupOpen, videoLoaded]);
 
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') {
-        setIsPopupOpen(false);
-        setScreenshotModal(null);
+        if (isPopupOpen) {
+          handlePopupClose();
+        } else {
+          setScreenshotModal(null);
+        }
       }
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
+  }, [isPopupOpen, videoStartTime]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -97,12 +360,12 @@ export default function LandingPage() {
               </h1>
 
               <p className="text-xl text-gray-600 mb-10 max-w-2xl font-normal leading-relaxed">
-                Browse opportunities, find good matches, reach out directly. We'll show you how.
+                Browse opportunities, find good matches, reach out directly. Here's how.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <button
-                  onClick={() => setIsPopupOpen(true)}
+                  onClick={handleGetListClick}
                   className="group inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                 >
                   <span className="mr-1 group-hover:animate-bounce">📋</span>
@@ -113,6 +376,7 @@ export default function LandingPage() {
                 </button>
                 <a
                   href="https://app.speakerdrive.com/signup"
+                  onClick={() => handleTryFreeClick('hero')}
                   className="group inline-flex items-center gap-2 px-7 py-3 bg-white text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-1"
                 >
                   <div className="text-left">
@@ -152,12 +416,17 @@ export default function LandingPage() {
                 {
                   color: 'bg-green-500',
                   question: 'How is this list different from SpeakerDrive?',
-                  answer: 'The list is a shared resource - great for getting started with direct outreach. SpeakerDrive has thousands of opportunities, plus the tools to turn them into booked gigs: search filters, fee estimates, 1 click AI messaging.'
+                  answer: (
+                    <>
+                      <p>The list is a shared resource - great for getting started with direct outreach.</p>
+                      <p className="mt-3">SpeakerDrive has thousands of opportunities, plus the tools to turn them into booked gigs: search filters, fee estimates, 1 click AI messaging and much more.</p>
+                    </>
+                  )
                 },
                 {
                   color: 'bg-blue-500',
                   question: 'Why are you giving this away?',
-                  answer: 'Simple: we believe in showing, not telling. Once you get a feel for the approach, we think you\'ll want to take it to the next level with SpeakerDrive\'s full database, search filters, and AI messaging tools.'
+                  answer: 'Simple: we\'d rather show, not just tell. Once you get a feel for the approach, we think you\'ll want to take it to the next level with SpeakerDrive\'s full database, search filters, and AI messaging tools.'
                 },
                 {
                   color: 'bg-purple-500',
@@ -168,19 +437,19 @@ export default function LandingPage() {
                       <ul className="mt-3 space-y-2 ml-4">
                         <li className="flex items-start">
                           <span className="mr-2">•</span>
-                          <span>First meeting booked in 3 days using SpeakerDrive <button onClick={() => setScreenshotModal({ src: '/3rd_day-mh.png', alt: 'First meeting booked in 3 days' })} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
+                          <span>First meeting booked in 3 days using SpeakerDrive <button onClick={() => handleScreenshotClick('3rd_day-mh.png')} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
                         </li>
                         <li className="flex items-start">
                           <span className="mr-2">•</span>
-                          <span>7 minutes from outreach to booking <button onClick={() => setScreenshotModal({ src: '/7mins_meeting-mh.png', alt: '7 minutes from outreach to booking' })} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
+                          <span>7 minutes from outreach to booking <button onClick={() => handleScreenshotClick('7mins_meeting-mh.png')} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
                         </li>
                         <li className="flex items-start">
                           <span className="mr-2">•</span>
-                          <span>$45K corporate training budget approved <button onClick={() => setScreenshotModal({ src: '/45k_event-mh.png', alt: '$45K corporate training budget approved' })} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
+                          <span>$45K corporate training budget approved <button onClick={() => handleScreenshotClick('45k_event-mh.png')} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
                         </li>
                         <li className="flex items-start">
                           <span className="mr-2">•</span>
-                          <span>$12.5K-$15K conference keynote booked <button onClick={() => setScreenshotModal({ src: '/12k_keynote-mh.png', alt: '$12.5K-$15K conference keynote booked' })} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
+                          <span>$12.5K-$15K conference keynote booked <button onClick={() => handleScreenshotClick('12k_keynote-mh.png')} className="text-purple-600 hover:text-purple-700 underline font-medium">[view screenshot →]</button></span>
                         </li>
                       </ul>
                       <p className="text-sm text-gray-500 mt-3 italic">*Screenshots shared with permission</p>
@@ -191,7 +460,12 @@ export default function LandingPage() {
                 {
                   color: 'bg-orange-500',
                   question: 'How much does it cost?',
-                  answer: 'The list is free. SpeakerDrive is $99/month after a 7 day trial. 30 seconds to sign up. No credit card needed. No tricks, no contracts. One $5K speaking gig covers 4 years of membership. Do the math.'
+                  answer: (
+                    <>
+                      <p>The list is free. SpeakerDrive is $99/month after a 7 day trial. 30 seconds to sign up. No credit card needed. No tricks, no contracts.</p>
+                      <p className="mt-3">One $5K speaking gig covers 4 years of membership. Do the math.</p>
+                    </>
+                  )
                 }
               ].map((faq, index) => (
                 <div key={index} className="bg-white rounded-2xl border border-gray-200 p-6 hover:border-gray-300 hover:shadow-md transition-all duration-300 group">
@@ -263,7 +537,7 @@ export default function LandingPage() {
                   step: '1',
                   title: 'Find Your Perfect Events',
                   video: 'https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21aa6244f61209f98b0.mp4',
-                  description: 'Search thousands of opportunities by industry, location, audience size, and speaking fees',
+                  description: 'Search thousands of opportunities by industry, location, and more',
                   color: 'from-green-400 to-green-600',
                   bgColor: 'bg-green-50',
                   borderColor: 'border-green-200'
@@ -328,7 +602,10 @@ export default function LandingPage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
                 <button
-                  onClick={() => setIsPopupOpen(true)}
+                  onClick={() => {
+                    trackButtonClick('start_free_list', { location: 'how_it_works' });
+                    setIsPopupOpen(true);
+                  }}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   <span className="mr-1">📋</span>
@@ -336,6 +613,7 @@ export default function LandingPage() {
                 </button>
                 <a
                   href="https://app.speakerdrive.com/signup"
+                  onClick={() => handleTryFreeClick('how_it_works')}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200"
                 >
                   Scale with SpeakerDrive
@@ -439,7 +717,8 @@ export default function LandingPage() {
               Be among the first to transform your speaking business.
             </p>
             <a 
-              href="https://app.speakerdrive.com/signup" 
+              href="https://app.speakerdrive.com/signup"
+              onClick={() => handleTryFreeClick('final_cta')}
               className="inline-flex items-center px-12 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-lg font-medium rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
             >
               <span className="mr-2">✨</span>
@@ -471,12 +750,12 @@ export default function LandingPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div 
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={() => setIsPopupOpen(false)}
+            onClick={handlePopupClose}
           />
           
           <div className="relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[85vh] md:max-h-[90vh] overflow-hidden flex flex-col">
             <button
-              onClick={() => setIsPopupOpen(false)}
+              onClick={handlePopupClose}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg"
             >
               <X className="w-5 h-5 text-gray-700" />
@@ -487,7 +766,7 @@ export default function LandingPage() {
               {/* Title above video */}
               <div className="p-4 md:p-6 pb-2 md:pb-4 text-center bg-white">
                 <h3 className="text-lg md:text-xl">
-                  <strong>How To Use The List To Book Gigs</strong> (🎬 2:41 seconds)
+                  <strong>How To Use The List</strong> (🎬 2:41 seconds)
                 </h3>
               </div>
               
@@ -504,6 +783,7 @@ export default function LandingPage() {
                   href="https://airtable.com/appnizVdwMfOgz1gT/shrZIOIYhYfjQdqli"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={handleAccessListClick}
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-lg font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   ACCESS THE LIST
