@@ -152,12 +152,12 @@ export default function LandingPage() {
                 {
                   color: 'bg-green-500',
                   question: 'How is this list different from SpeakerDrive?',
-                  answer: 'The list is a shared resource - great for getting started with direct outreach. SpeakerDrive has 8,000+ plus the tools to turn them into booked gigs - search filters, fee estimates, 1 click AI messaging. Start with the list, scale with the platform.'
+                  answer: 'The list is a shared resource - great for getting started with direct outreach. SpeakerDrive has thousands of opportunities, plus the tools to turn them into booked gigs: search filters, fee estimates, 1 click AI messaging.'
                 },
                 {
                   color: 'bg-blue-500',
                   question: 'Why are you giving this away?',
-                  answer: 'Going straight to decision makers with budgets works. Most speakers rely on referrals - great when they come, but unpredictable. Direct outreach puts you in control of your calendar and income. This list proves the concept. SpeakerDrive scales it.'
+                  answer: 'Simple: we believe in showing, not telling. Once you get a feel for the approach, we think you\'ll want to take it to the next level with SpeakerDrive\'s full database, search filters, and AI messaging tools.'
                 },
                 {
                   color: 'bg-purple-500',
@@ -501,7 +501,7 @@ export default function LandingPage() {
               <div className="p-6 md:p-8 text-center bg-gradient-to-b from-white to-gray-50">
                 <p className="text-base md:text-lg text-gray-700 mb-6">Click The Button Below To Access Your List 🎉</p>
                 <a
-                  href="https://airtable.com/appnizVdwMfOgz1gT/pagrzrJPaiVIkvSDD"
+                  href="https://airtable.com/appnizVdwMfOgz1gT/shrZIOIYhYfjQdqli"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-lg font-semibold rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
