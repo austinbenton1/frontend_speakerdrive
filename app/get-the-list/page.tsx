@@ -2,27 +2,55 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
+import { GetTheListTracking } from '../components/tracking/get-the-list-tracking'
+import { Suspense } from 'react'
+
+// Type definitions
+type EventData = Record<string, any>;
+
+// Extend the existing Window interface to add the specific embed
+declare global {
+  interface Window {
+    vidalytics_embed_Uabk76NYie1QwFyi?: any;
+  }
+}
+
+// No need to extend Window - it's already declared in contact-revealed/page.tsx
 
 export default function LandingPage() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [visibleCards, setVisibleCards] = useState(new Set());
-  const [screenshotModal, setScreenshotModal] = useState(null);
-  const [videoStartTime, setVideoStartTime] = useState(null);
-  const [videoEvents, setVideoEvents] = useState([]);
-  const cardRefs = useRef([]);
+  const [visibleCards, setVisibleCards] = useState(new Set<number>());
+  const [screenshotModal, setScreenshotModal] = useState<{src: string; alt: string} | null>(null);
+  const [videoStartTime, setVideoStartTime] = useState<number | null>(null);
+  const [videoEvents, setVideoEvents] = useState<Array<{action: string; time: number}>>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Generate or retrieve session ID
+  // Generate or retrieve session ID - FIXED for hydration
   const getSessionId = () => {
-    if (typeof window === 'undefined') return null;
+    if (typeof window === 'undefined') return 'ssr-placeholder';
     
     let sessionId = sessionStorage.getItem('sessionId');
     if (!sessionId) {
-      sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      sessionStorage.setItem('sessionId', sessionId);
+      // Use a deterministic ID during SSR/initial render
+      sessionId = 'pending-client-init';
+      // Set the real ID after mount
+      if (typeof window !== 'undefined' && window.sessionStorage) {
+        const realId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        sessionStorage.setItem('sessionId', realId);
+        return realId;
+      }
     }
     return sessionId;
   };
+
+  // Initialize session ID after mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !sessionStorage.getItem('sessionId')) {
+      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      sessionStorage.setItem('sessionId', sessionId);
+    }
+  }, []);
 
   // Get current scroll depth as percentage
   const getScrollDepth = () => {
@@ -33,39 +61,44 @@ export default function LandingPage() {
     return scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
   };
 
-  // Enhanced webhook function to track events
-  const trackEvent = async (eventType, eventData = {}) => {
-    try {
-      const payload = {
-        event: eventType,
-        timestamp: new Date().toISOString(),
-        sessionId: getSessionId(),
-        url: window.location.href,
-        referrer: document.referrer,
-        userAgent: navigator.userAgent,
-        scrollDepth: getScrollDepth(),
-        ...eventData
-      };
+// Enhanced webhook function to track events
+const trackEvent = async (eventType: string, eventData: EventData = {}) => {
+  try {
+    // Only track on client side
+    if (typeof window === 'undefined') return;
+    
+    const payload = {
+      event: eventType,
+      timestamp: new Date().toISOString(),
+      sessionId: getSessionId(),
+      url: window.location.href,
+      referrer: document.referrer,
+      userAgent: navigator.userAgent,
+      scrollDepth: getScrollDepth(),
+      ...eventData
+    };
 
-      // Fire and forget - don't await to avoid blocking user action
-      fetch('https://n8n.speakerdrive.com/webhook/lander', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-        // Keepalive ensures the request completes even if the page navigates away
-        keepalive: true
-      }).catch(err => {
-        console.error('Webhook error:', err);
-      });
-    } catch (error) {
-      console.error('Error sending webhook:', error);
-    }
-  };
+    // Fire and forget - don't await to avoid blocking user action
+    fetch('https://n8n.speakerdrive.com/webhook/lander', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+      // Keepalive ensures the request completes even if the page navigates away
+      keepalive: true
+    }).catch(err => {
+      // Silently fail - don't break the user experience
+      // console.error('Webhook error:', err);
+    });
+  } catch (error) {
+    // Silently fail - don't break the user experience
+    // console.error('Error sending webhook:', error);
+  }
+};
 
   // Wrapper for button clicks to maintain backward compatibility
-  const trackButtonClick = (buttonName, additionalData = {}) => {
+  const trackButtonClick = (buttonName: string, additionalData: EventData = {}) => {
     trackEvent('button_click', {
       button: buttonName,
       ...additionalData
@@ -73,7 +106,7 @@ export default function LandingPage() {
   };
 
   // Track video events
-  const trackVideoEvent = (action, additionalData = {}) => {
+  const trackVideoEvent = (action: string, additionalData: EventData = {}) => {
     const currentTime = videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0;
     
     trackEvent('video_event', {
@@ -96,7 +129,7 @@ export default function LandingPage() {
     setIsPopupOpen(true);
   };
 
-  const handleTryFreeClick = (location) => {
+  const handleTryFreeClick = (location: string) => {
     trackButtonClick('try_speakerdrive_free', { location });
     // Navigation happens via the anchor tag
   };
@@ -110,7 +143,7 @@ export default function LandingPage() {
     // Navigation happens via the anchor tag
   };
 
-  const handleScreenshotClick = (screenshotName) => {
+  const handleScreenshotClick = (screenshotName: string) => {
     trackButtonClick('view_screenshot', { 
       screenshot: screenshotName,
       location: 'faq_section' 
@@ -167,7 +200,7 @@ export default function LandingPage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const scrollMilestones = new Set();
+    const scrollMilestones = new Set<number>();
     const milestones = [25, 50, 75, 90, 100];
 
     const handleScroll = () => {
@@ -185,7 +218,7 @@ export default function LandingPage() {
     };
 
     // Throttle scroll events
-    let scrollTimer;
+    let scrollTimer: NodeJS.Timeout | null = null;
     const throttledScroll = () => {
       if (scrollTimer) return;
       scrollTimer = setTimeout(() => {
@@ -244,7 +277,7 @@ export default function LandingPage() {
                   
                   // Track progress at 25%, 50%, 75%
                   let trackedProgress = new Set();
-                  vid.on('timeupdate', (e) => {
+                  vid.on('timeupdate', (e: any) => {
                     const percentage = Math.round((e.currentTime / e.duration) * 100);
                     
                     [25, 50, 75].forEach(milestone => {
@@ -290,7 +323,7 @@ export default function LandingPage() {
   }, [isPopupOpen, videoLoaded]);
 
   useEffect(() => {
-    const handleEsc = (e) => {
+    const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (isPopupOpen) {
           handlePopupClose();
@@ -322,7 +355,7 @@ export default function LandingPage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = cardRefs.current.indexOf(entry.target);
+            const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
             if (index !== -1) {
               setVisibleCards((prev) => new Set(prev).add(index));
             }
@@ -348,6 +381,9 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Suspense fallback={null}>
+        <GetTheListTracking />
+      </Suspense>
       <main>
         {/* Hero Section */}
         <section className="px-4 pt-12 pb-8 relative overflow-hidden">
@@ -673,7 +709,9 @@ export default function LandingPage() {
               ].map((expert, index) => (
                 <div
                   key={index}
-                  ref={(el) => (cardRefs.current[index] = el)}
+                  ref={(el) => {
+                    cardRefs.current[index] = el;
+                  }}
                   className={`text-center transition-all duration-700 ${expert.order} ${
                     visibleCards.has(index)
                       ? 'opacity-100 translate-y-0 md:hover:scale-105'

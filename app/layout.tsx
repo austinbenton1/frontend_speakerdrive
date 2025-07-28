@@ -11,6 +11,9 @@ import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
 import TwitterPixelLoader from "../components/TwitterPixelLoader";
 import MetaPixelLoader from "../components/MetaPixelLoader";
 import LinkedInPixelLoader from "../components/LinkedInPixelLoader";
+import { PHProvider, PostHogPageview } from './providers/posthog-provider';
+import { GlobalEngagementTracker } from '@/app/components/tracking/global-engagement-tracker';
+import { Suspense } from 'react';
 
 const inter = InterFont({
   subsets: ["latin"],
@@ -131,7 +134,15 @@ export default function RootLayout({
         <LinkedInPixelLoader />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
-        {children}
+        <PHProvider>
+          <Suspense fallback={null}>
+            <PostHogPageview />
+          </Suspense>
+          <Suspense fallback={null}>
+            <GlobalEngagementTracker />
+          </Suspense>
+          {children}
+        </PHProvider>
       </body>
     </html>
   );
