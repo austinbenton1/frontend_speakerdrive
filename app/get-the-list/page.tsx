@@ -497,7 +497,15 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
       });
     }
     
-    // Navigation happens via the anchor tag
+    // BUILD THE ENHANCED URL HERE (THIS IS THE NEW PART)
+    const score = coldEmailIntelligence.current?.calculateQualityScore() || 0;
+    const city = enrichedData.city || 'unknown';
+    const campaignName = campaign.campaign || 'unknown';
+    
+    const enhancedUrl = `https://app.speakerdrive.com/signup?ref=cold_email&score=${score}&city=${city}&campaign=${campaignName}`;
+    
+    // Navigate to the enhanced URL (THIS IS ALSO NEW)
+    window.location.href = enhancedUrl;
   };
 
   const handleAccessListClick = () => {
@@ -814,7 +822,10 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
                 </button>
                 <a
                   href="https://app.speakerdrive.com/signup"
-                  onClick={() => handleTryFreeClick('hero')}
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.preventDefault();
+                    handleTryFreeClick('hero');
+                  }}
                   className="group inline-flex items-center gap-2 px-7 py-3 bg-white text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-1"
                 >
                   <div className="text-left">
@@ -1051,7 +1062,10 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
                 </button>
                 <a
                   href="https://app.speakerdrive.com/signup"
-                  onClick={() => handleTryFreeClick('how_it_works')}
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.preventDefault();
+                    handleTryFreeClick('how_it_works');
+                  }}
                   className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200"
                 >
                   Scale with SpeakerDrive
@@ -1158,7 +1172,10 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
             </p>
             <a 
               href="https://app.speakerdrive.com/signup"
-              onClick={() => handleTryFreeClick('final_cta')}
+              onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.preventDefault();
+                handleTryFreeClick('final_cta');
+              }}
               className="inline-flex items-center px-12 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white text-lg font-medium rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
             >
               <span className="mr-2">✨</span>
