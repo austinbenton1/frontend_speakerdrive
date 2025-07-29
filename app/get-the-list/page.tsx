@@ -258,9 +258,15 @@ class ColdEmailIntelligence {
       
       // Auto-identify if email is provided in URL (for better tracking)
       const email = urlParams.get('email');
-      if (email && window.posthog.get_distinct_id() !== email) {
+      const firstName = urlParams.get('first_name') || '';
+      const lastName = urlParams.get('last_name') || '';
+      
+      if (email && window.posthog.get_distinct_id && window.posthog.get_distinct_id() !== email) {
         window.posthog.identify(email, {
           email: email,
+          first_name: firstName,
+          last_name: lastName,
+          name: `${firstName} ${lastName}`.trim(), // Combined name for display
           source: 'cold_email_click',
           campaign: campaignData.campaign
         });
