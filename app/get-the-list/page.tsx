@@ -12,7 +12,13 @@ type EventData = Record<string, any>;
 declare global {
   interface Window {
     vidalytics_embed_Uabk76NYie1QwFyi?: any;
-    posthog?: any;
+    Vidalytics?: any;
+    posthog?: {
+      capture: (event: string, properties?: any) => void;
+      identify: (id: string, properties?: any) => void;
+      setPersonProperties?: (properties: any) => void;
+      get_distinct_id?: () => string;
+    };
   }
 }
 
@@ -83,16 +89,18 @@ class ColdEmailIntelligence {
         });
         
         // Set person properties for filtering
-        window.posthog.people?.set({
-          city: geoData.city,
-          state: geoData.region,
-          country: geoData.country_code,
-          company: geoData.org,
-          company_type: isBusinessISP ? 'Business' : 'Personal',
-          timezone: geoData.timezone,
-          traffic_source: 'cold_email',
-          is_business_visitor: isBusinessISP
-        });
+        if (window.posthog.setPersonProperties) {
+          window.posthog.setPersonProperties({
+            city: geoData.city,
+            state: geoData.region,
+            country: geoData.country_code,
+            company: geoData.org,
+            company_type: isBusinessISP ? 'Business' : 'Personal',
+            timezone: geoData.timezone,
+            traffic_source: 'cold_email',
+            is_business_visitor: isBusinessISP
+          });
+        }
       }
       
       return geoData;
@@ -241,10 +249,12 @@ class ColdEmailIntelligence {
       sessionStorage.setItem('cold_email_campaign', JSON.stringify(campaignData));
       
       // Set campaign as person property for segmentation
-      window.posthog.people?.set({
-        last_campaign: campaignData.campaign,
-        last_campaign_date: new Date().toISOString()
-      });
+      if (window.posthog.setPersonProperties) {
+        window.posthog.setPersonProperties({
+          last_campaign: campaignData.campaign,
+          last_campaign_date: new Date().toISOString()
+        });
+      }
       
       // Auto-identify if email is provided in URL (for better tracking)
       const email = urlParams.get('email');
@@ -267,31 +277,36 @@ class ColdEmailIntelligence {
   }
 
   init() {
-    // Run enrichment
-    this.enrichVisitorData();
-    
-    // Setup tracking
-    this.trackEngagementMilestones();
-    this.setupExitIntentTracking();
-    this.setupCampaignAttribution();
-    
-    // Track initial cold email landing
-    if (window.posthog) {
-      const urlParams = new URLSearchParams(window.location.search);
-      window.posthog.capture('cold_email_page_landed', {
-        entry_time: new Date().toISOString(),
-        viewport: `${window.innerWidth}x${window.innerHeight}`,
-        referrer: document.referrer || 'direct',
-        
-        // Campaign tracking
-        campaign: urlParams.get('utm_campaign') || urlParams.get('campaign') || 'unknown',
-        variant: urlParams.get('utm_content') || urlParams.get('variant') || 'default',
-        instantly_id: urlParams.get('iid') || null,
-        
-        // Device info
-        device_type: this.getDeviceType(),
-        is_business_hours: this.isBusinessHours()
-      });
+    try {
+      // Run enrichment
+      this.enrichVisitorData();
+      
+      // Setup tracking
+      this.trackEngagementMilestones();
+      this.setupExitIntentTracking();
+      this.setupCampaignAttribution();
+      
+      // Track initial cold email landing
+      if (window.posthog) {
+        const urlParams = new URLSearchParams(window.location.search);
+        window.posthog.capture('cold_email_page_landed', {
+          entry_time: new Date().toISOString(),
+          viewport: `${window.innerWidth}x${window.innerHeight}`,
+          referrer: document.referrer || 'direct',
+          
+          // Campaign tracking
+          campaign: urlParams.get('utm_campaign') || urlParams.get('campaign') || 'unknown',
+          variant: urlParams.get('utm_content') || urlParams.get('variant') || 'default',
+          instantly_id: urlParams.get('iid') || null,
+          
+          // Device info
+          device_type: this.getDeviceType(),
+          is_business_hours: this.isBusinessHours()
+        });
+      }
+    } catch (error) {
+      console.error('Cold email intelligence error:', error);
+      // Don't let tracking errors break the page
     }
   }
 }
@@ -353,7 +368,11 @@ export default function LandingPage() {
       
       // Initialize Cold Email Intelligence
       if (!coldEmailIntelligence.current) {
-        coldEmailIntelligence.current = new ColdEmailIntelligence();
+        try {
+          coldEmailIntelligence.current = new ColdEmailIntelligence();
+        } catch (error) {
+          console.error('Failed to initialize Cold Email Intelligence:', error);
+        }
       }
     }
   }, []);
@@ -773,7 +792,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
               </h1>
 
               <p className="text-xl text-gray-600 mb-10 max-w-2xl font-normal leading-relaxed">
-                As promised in my email - browse opportunities, find good matches, reach out directly. Here's how.
+                Browse opportunities, find good matches, reach out directly. Here's how.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
