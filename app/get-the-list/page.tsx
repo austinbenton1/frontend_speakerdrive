@@ -12,10 +12,289 @@ type EventData = Record<string, any>;
 declare global {
   interface Window {
     vidalytics_embed_Uabk76NYie1QwFyi?: any;
+    posthog?: any;
   }
 }
 
-// No need to extend Window - it's already declared in contact-revealed/page.tsx
+// Cold Email Intelligence Class
+class ColdEmailIntelligence {
+  startTime: number;
+  sessionData: any;
+  
+  constructor() {
+    this.startTime = Date.now();
+    this.sessionData = {};
+    this.init();
+  }
+
+  isBusinessHours() {
+    const hour = new Date().getHours();
+    const day = new Date().getDay();
+    return day >= 1 && day <= 5 && hour >= 8 && hour <= 18;
+  }
+
+  async enrichVisitorData() {
+    try {
+      // Get location and company data
+      const response = await fetch('https://ipapi.co/json/');
+      const geoData = await response.json();
+      
+      // Determine if it's a business or personal email
+      const isBusinessISP = this.checkBusinessISP(geoData.org);
+      
+      // Store enriched data
+      this.sessionData = {
+        city: geoData.city,
+        region: geoData.region_code,
+        country: geoData.country_name,
+        timezone: geoData.timezone,
+        organization: geoData.org,
+        is_business_isp: isBusinessISP
+      };
+      
+      // Track with PostHog if available
+      if (window.posthog) {
+        window.posthog.capture('cold_email_visitor_landed', {
+          // Geographic data
+          city: geoData.city,
+          region: geoData.region_code,
+          country: geoData.country_name,
+          timezone: geoData.timezone,
+          
+          // Company intelligence
+          organization: geoData.org,
+          is_business_isp: isBusinessISP,
+          company_type: isBusinessISP ? 'Business' : 'Personal',
+          
+          // Campaign data from URL
+          campaign_name: new URLSearchParams(window.location.search).get('utm_campaign') || 'unknown',
+          campaign_variant: new URLSearchParams(window.location.search).get('utm_content') || 'default',
+          
+          // Visit intelligence
+          local_time: new Date().toLocaleTimeString(),
+          local_hour: new Date().getHours(),
+          visit_day: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()],
+          is_business_hours: this.isBusinessHours(),
+          
+          // Quality signals
+          device_type: this.getDeviceType(),
+          viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+          connection_quality: (navigator as any).connection?.effectiveType || 'unknown'
+        });
+        
+        // Set person properties for filtering
+        window.posthog.people?.set({
+          city: geoData.city,
+          state: geoData.region,
+          country: geoData.country_code,
+          company: geoData.org,
+          company_type: isBusinessISP ? 'Business' : 'Personal',
+          timezone: geoData.timezone,
+          traffic_source: 'cold_email',
+          is_business_visitor: isBusinessISP
+        });
+      }
+      
+      return geoData;
+      
+    } catch (error) {
+      console.error('Enrichment failed:', error);
+      return null;
+    }
+  }
+
+  checkBusinessISP(org: string) {
+    if (!org) return false;
+    const consumerISPs = [
+      'comcast', 'verizon', 'at&t', 'spectrum', 'cox', 'charter',
+      'centurylink', 'frontier', 'windstream', 'mediacom', 'residential'
+    ];
+    const orgLower = org.toLowerCase();
+    return !consumerISPs.some(isp => orgLower.includes(isp));
+  }
+
+  getDeviceType() {
+    const ua = navigator.userAgent;
+    if (/tablet|ipad|playbook|silk/i.test(ua)) return 'tablet';
+    if (/mobile|iphone|ipod|android|blackberry|opera mini|iemobile/i.test(ua)) return 'mobile';
+    return 'desktop';
+  }
+
+  trackEngagementMilestones() {
+    // Track 15-second milestone (interested visitor)
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && window.posthog) {
+        window.posthog.capture('cold_email_engagement_milestone', {
+          milestone: '15_seconds',
+          scroll_depth: this.getScrollDepth(),
+          ...this.sessionData
+        });
+      }
+    }, 15000);
+    
+    // Track 30-second milestone (engaged visitor)
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && window.posthog) {
+        window.posthog.capture('cold_email_highly_engaged', {
+          milestone: '30_seconds',
+          scroll_depth: this.getScrollDepth(),
+          quality_score: this.calculateQualityScore(),
+          ...this.sessionData
+        });
+      }
+    }, 30000);
+    
+    // Track 60-second milestone (very engaged visitor)
+    setTimeout(() => {
+      if (document.visibilityState === 'visible' && window.posthog) {
+        window.posthog.capture('cold_email_super_engaged', {
+          milestone: '60_seconds',
+          scroll_depth: this.getScrollDepth(),
+          quality_score: this.calculateQualityScore(),
+          ...this.sessionData
+        });
+      }
+    }, 60000);
+  }
+
+  getScrollDepth() {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return Math.round(((scrollTop + windowHeight) / documentHeight) * 100);
+  }
+
+  calculateQualityScore() {
+    // Quality indicators for cold email leads
+    const indicators = {
+      spent_15_seconds: (Date.now() - this.startTime) > 15000,
+      scrolled_past_fold: this.getScrollDepth() > 25,
+      is_business_hours: this.isBusinessHours(),
+      is_desktop: this.getDeviceType() === 'desktop',
+      has_good_connection: (navigator as any).connection?.effectiveType === '4g',
+      multiple_pageviews: performance.navigation.type === 1
+    };
+    
+    const score = Object.values(indicators).filter(Boolean).length;
+    return (score / Object.keys(indicators).length) * 100;
+  }
+
+  setupExitIntentTracking() {
+    let exitIntentFired = false;
+    
+    document.addEventListener('mouseleave', (e) => {
+      if (e.clientY <= 0 && !exitIntentFired && window.posthog) {
+        exitIntentFired = true;
+        
+        const timeOnPage = Math.round((Date.now() - this.startTime) / 1000);
+        window.posthog.capture('cold_email_exit_intent', {
+          time_on_page_seconds: timeOnPage,
+          scroll_depth: this.getScrollDepth(),
+          quality_score: this.calculateQualityScore(),
+          engagement_level: timeOnPage > 30 ? 'high' : timeOnPage > 15 ? 'medium' : 'low',
+          ...this.sessionData
+        });
+      }
+    });
+  }
+
+  // Enhanced campaign Attribution Helper for cold email
+  setupCampaignAttribution() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    // Extract all campaign data
+    const campaignData = {
+      // Standard UTM params
+      source: urlParams.get('utm_source') || 'cold_email',
+      campaign: urlParams.get('utm_campaign') || urlParams.get('campaign') || 'unknown',
+      content: urlParams.get('utm_content') || urlParams.get('variant') || 'default',
+      medium: urlParams.get('utm_medium') || 'email',
+      
+      // Instantly specific tracking
+      instantly_id: urlParams.get('iid'),
+      instantly_campaign: urlParams.get('campaign'),
+      sequence_step: urlParams.get('step'),
+      contact_id: urlParams.get('cid'),
+      
+      // Time-based attribution
+      sent_date: urlParams.get('sent_date'),
+      days_since_send: this.calculateDaysSinceSend(urlParams.get('sent_date')),
+      
+      // A/B testing
+      subject_line: urlParams.get('subject'),
+      email_variant: urlParams.get('variant'),
+      
+      // Performance tracking
+      email_open_to_click_minutes: urlParams.get('otc') // open to click time
+    };
+    
+    if (window.posthog) {
+      window.posthog.capture('cold_email_campaign_performance', {
+        ...campaignData,
+        campaign_identified: campaignData.campaign !== 'unknown',
+        has_instantly_tracking: !!campaignData.instantly_id,
+        click_timing: this.isBusinessHours() ? 'business_hours' : 'after_hours',
+        device_on_click: this.getDeviceType()
+      });
+      
+      // Store for conversion attribution
+      sessionStorage.setItem('cold_email_campaign', JSON.stringify(campaignData));
+      
+      // Set campaign as person property for segmentation
+      window.posthog.people?.set({
+        last_campaign: campaignData.campaign,
+        last_campaign_date: new Date().toISOString()
+      });
+      
+      // Auto-identify if email is provided in URL (for better tracking)
+      const email = urlParams.get('email');
+      if (email && window.posthog.get_distinct_id() !== email) {
+        window.posthog.identify(email, {
+          email: email,
+          source: 'cold_email_click',
+          campaign: campaignData.campaign
+        });
+      }
+    }
+  }
+
+  calculateDaysSinceSend(sentDate: string | null) {
+    if (!sentDate) return null;
+    const sent = new Date(sentDate);
+    const now = new Date();
+    const diffTime = Math.abs(now.getTime() - sent.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  init() {
+    // Run enrichment
+    this.enrichVisitorData();
+    
+    // Setup tracking
+    this.trackEngagementMilestones();
+    this.setupExitIntentTracking();
+    this.setupCampaignAttribution();
+    
+    // Track initial cold email landing
+    if (window.posthog) {
+      const urlParams = new URLSearchParams(window.location.search);
+      window.posthog.capture('cold_email_page_landed', {
+        entry_time: new Date().toISOString(),
+        viewport: `${window.innerWidth}x${window.innerHeight}`,
+        referrer: document.referrer || 'direct',
+        
+        // Campaign tracking
+        campaign: urlParams.get('utm_campaign') || urlParams.get('campaign') || 'unknown',
+        variant: urlParams.get('utm_content') || urlParams.get('variant') || 'default',
+        instantly_id: urlParams.get('iid') || null,
+        
+        // Device info
+        device_type: this.getDeviceType(),
+        is_business_hours: this.isBusinessHours()
+      });
+    }
+  }
+}
 
 export default function LandingPage() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -25,6 +304,25 @@ export default function LandingPage() {
   const [videoStartTime, setVideoStartTime] = useState<number | null>(null);
   const [videoEvents, setVideoEvents] = useState<Array<{action: string; time: number}>>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const coldEmailIntelligence = useRef<ColdEmailIntelligence | null>(null);
+
+  /* 
+    COLD EMAIL URL STRUCTURE FOR INSTANTLY:
+    
+    Base: https://speakerdrive.com/get-the-list
+    
+    Add these parameters:
+    ?utm_source=cold_email
+    &utm_campaign={{campaign.name}}
+    &utm_content={{variant.name}}
+    &iid={{contact.id}}
+    &sent_date={{campaign.sent_date}}
+    &subject={{subject_line_variant}}
+    &email={{contact.email}} (optional - for auto-identification)
+    
+    Example:
+    https://speakerdrive.com/get-the-list?utm_source=cold_email&utm_campaign=event_planners_q1&utm_content=variant_a&iid=12345&sent_date=2025-01-28&email=john@company.com
+  */
 
   // Generate or retrieve session ID - FIXED for hydration
   const getSessionId = () => {
@@ -44,11 +342,19 @@ export default function LandingPage() {
     return sessionId;
   };
 
-  // Initialize session ID after mount
+  // Initialize session ID and Cold Email Intelligence after mount
   useEffect(() => {
-    if (typeof window !== 'undefined' && !sessionStorage.getItem('sessionId')) {
-      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      sessionStorage.setItem('sessionId', sessionId);
+    if (typeof window !== 'undefined') {
+      // Initialize session ID
+      if (!sessionStorage.getItem('sessionId')) {
+        const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        sessionStorage.setItem('sessionId', sessionId);
+      }
+      
+      // Initialize Cold Email Intelligence
+      if (!coldEmailIntelligence.current) {
+        coldEmailIntelligence.current = new ColdEmailIntelligence();
+      }
     }
   }, []);
 
@@ -67,6 +373,9 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
     // Only track on client side
     if (typeof window === 'undefined') return;
     
+    // Include cold email intelligence data if available
+    const enrichedData = coldEmailIntelligence.current?.sessionData || {};
+    
     const payload = {
       event: eventType,
       timestamp: new Date().toISOString(),
@@ -75,6 +384,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
       referrer: document.referrer,
       userAgent: navigator.userAgent,
       scrollDepth: getScrollDepth(),
+      ...enrichedData,
       ...eventData
     };
 
@@ -125,29 +435,96 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
 
   // Enhanced button click handlers
   const handleGetListClick = () => {
-    trackButtonClick('get_the_list', { location: 'hero' });
+    // Get campaign data from session
+    const campaignData = sessionStorage.getItem('cold_email_campaign');
+    const campaign = campaignData ? JSON.parse(campaignData) : {};
+    
+    trackButtonClick('get_the_list', { 
+      location: 'hero',
+      campaign: campaign.campaign || 'unknown',
+      time_to_click: coldEmailIntelligence.current ? 
+        Math.round((Date.now() - coldEmailIntelligence.current.startTime) / 1000) : 0
+    });
     setIsPopupOpen(true);
   };
 
   const handleTryFreeClick = (location: string) => {
-    trackButtonClick('try_speakerdrive_free', { location });
+    // Get campaign and enrichment data
+    const campaignData = sessionStorage.getItem('cold_email_campaign');
+    const campaign = campaignData ? JSON.parse(campaignData) : {};
+    const enrichedData = coldEmailIntelligence.current?.sessionData || {};
+    
+    trackButtonClick('try_speakerdrive_free', { 
+      location,
+      campaign: campaign.campaign || 'unknown',
+      time_on_page: coldEmailIntelligence.current ? 
+        Math.round((Date.now() - coldEmailIntelligence.current.startTime) / 1000) : 0,
+      is_business_visitor: enrichedData.is_business_isp || false
+    });
+    
+    // Track high-value conversion
+    if (window.posthog) {
+      window.posthog.capture('cold_email_high_intent_conversion', {
+        conversion_type: 'clicked_trial',
+        button_location: location,
+        ...campaign,
+        ...enrichedData
+      });
+    }
+    
     // Navigation happens via the anchor tag
   };
 
   const handleAccessListClick = () => {
+    // Get campaign and enrichment data
+    const campaignData = sessionStorage.getItem('cold_email_campaign');
+    const campaign = campaignData ? JSON.parse(campaignData) : {};
+    const enrichedData = coldEmailIntelligence.current?.sessionData || {};
+    
     trackButtonClick('access_the_list', { 
       location: 'video_popup',
       video_watched: true,
-      videoWatchTime: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0
+      videoWatchTime: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0,
+      total_time_on_page: coldEmailIntelligence.current ? 
+        Math.round((Date.now() - coldEmailIntelligence.current.startTime) / 1000) : 0,
+      campaign: campaign.campaign || 'unknown',
+      is_business_visitor: enrichedData.is_business_isp || false,
+      city: enrichedData.city || 'unknown'
     });
+    
+    // Track conversion event for cold email
+    if (window.posthog) {
+      window.posthog.capture('cold_email_conversion', {
+        conversion_type: 'accessed_list',
+        ...campaign,
+        ...enrichedData,
+        video_watched_seconds: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0
+      });
+    }
+    
     // Navigation happens via the anchor tag
   };
 
   const handleScreenshotClick = (screenshotName: string) => {
+    // Get campaign data
+    const campaignData = sessionStorage.getItem('cold_email_campaign');
+    const campaign = campaignData ? JSON.parse(campaignData) : {};
+    
     trackButtonClick('view_screenshot', { 
       screenshot: screenshotName,
-      location: 'faq_section' 
+      location: 'faq_section',
+      campaign: campaign.campaign || 'unknown'
     });
+    
+    // Track high-intent signal
+    if (window.posthog) {
+      window.posthog.capture('cold_email_proof_viewed', {
+        proof_type: 'success_screenshot',
+        screenshot: screenshotName,
+        ...campaign
+      });
+    }
+    
     setScreenshotModal({ 
       src: `/${screenshotName}`, 
       alt: screenshotName.replace(/-/g, ' ').replace('.png', '') 
@@ -396,7 +773,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
               </h1>
 
               <p className="text-xl text-gray-600 mb-10 max-w-2xl font-normal leading-relaxed">
-                Browse opportunities, find good matches, reach out directly. Here's how.
+                As promised in my email - browse opportunities, find good matches, reach out directly. Here's how.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
