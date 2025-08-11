@@ -1244,6 +1244,7 @@ export default function LandingPage() {
                         controls
                         playsInline
                         preload="metadata"
+                        poster="/video-thumbnail.png"
                       >
                         <source 
                           src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/689a09dfaf2898fb395ebce7.mp4" 
