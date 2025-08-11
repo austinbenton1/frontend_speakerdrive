@@ -8,11 +8,9 @@ import { Suspense } from 'react'
 // Type definitions
 type EventData = Record<string, any>;
 
-// Extend the existing Window interface to add the specific embed
+// Extend the existing Window interface
 declare global {
   interface Window {
-    vidalytics_embed_Uabk76NYie1QwFyi?: any;
-    Vidalytics?: any;
     posthog?: {
       capture: (event: string, properties?: any) => void;
       identify: (id: string, properties?: any) => void;
@@ -319,11 +317,12 @@ class ColdEmailIntelligence {
 
 export default function LandingPage() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoStartTime, setVideoStartTime] = useState<number | null>(null);
   const [visibleCards, setVisibleCards] = useState(new Set<number>());
   const [screenshotModal, setScreenshotModal] = useState<{src: string; alt: string} | null>(null);
-  const [videoStartTime, setVideoStartTime] = useState<number | null>(null);
-  const [videoEvents, setVideoEvents] = useState<Array<{action: string; time: number}>>([]);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const coldEmailIntelligence = useRef<ColdEmailIntelligence | null>(null);
 
@@ -392,45 +391,45 @@ export default function LandingPage() {
     return scrollHeight > 0 ? Math.round((scrollTop / scrollHeight) * 100) : 0;
   };
 
-// Enhanced webhook function to track events
-const trackEvent = async (eventType: string, eventData: EventData = {}) => {
-  try {
-    // Only track on client side
-    if (typeof window === 'undefined') return;
-    
-    // Include cold email intelligence data if available
-    const enrichedData = coldEmailIntelligence.current?.sessionData || {};
-    
-    const payload = {
-      event: eventType,
-      timestamp: new Date().toISOString(),
-      sessionId: getSessionId(),
-      url: window.location.href,
-      referrer: document.referrer,
-      userAgent: navigator.userAgent,
-      scrollDepth: getScrollDepth(),
-      ...enrichedData,
-      ...eventData
-    };
+  // Enhanced webhook function to track events
+  const trackEvent = async (eventType: string, eventData: EventData = {}) => {
+    try {
+      // Only track on client side
+      if (typeof window === 'undefined') return;
+      
+      // Include cold email intelligence data if available
+      const enrichedData = coldEmailIntelligence.current?.sessionData || {};
+      
+      const payload = {
+        event: eventType,
+        timestamp: new Date().toISOString(),
+        sessionId: getSessionId(),
+        url: window.location.href,
+        referrer: document.referrer,
+        userAgent: navigator.userAgent,
+        scrollDepth: getScrollDepth(),
+        ...enrichedData,
+        ...eventData
+      };
 
-    // Fire and forget - don't await to avoid blocking user action
-    fetch('https://n8n.speakerdrive.com/webhook/lander', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-      // Keepalive ensures the request completes even if the page navigates away
-      keepalive: true
-    }).catch(err => {
+      // Fire and forget - don't await to avoid blocking user action
+      fetch('https://n8n.speakerdrive.com/webhook/lander', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+        // Keepalive ensures the request completes even if the page navigates away
+        keepalive: true
+      }).catch(err => {
+        // Silently fail - don't break the user experience
+        // console.error('Webhook error:', err);
+      });
+    } catch (error) {
       // Silently fail - don't break the user experience
-      // console.error('Webhook error:', err);
-    });
-  } catch (error) {
-    // Silently fail - don't break the user experience
-    // console.error('Error sending webhook:', error);
-  }
-};
+      // console.error('Error sending webhook:', error);
+    }
+  };
 
   // Wrapper for button clicks to maintain backward compatibility
   const trackButtonClick = (buttonName: string, additionalData: EventData = {}) => {
@@ -440,22 +439,19 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
     });
   };
 
-  // Track video events
+  // Simplified video tracking for MP4
   const trackVideoEvent = (action: string, additionalData: EventData = {}) => {
-    const currentTime = videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0;
+    const currentTime = videoRef.current?.currentTime || 0;
+    const duration = videoRef.current?.duration || 161; // 2:41 = 161 seconds
     
     trackEvent('video_event', {
       videoAction: action,
-      videoId: 'Uabk76NYie1QwFyi',
-      watchTime: currentTime,
+      videoType: 'mp4',
+      currentTime: Math.round(currentTime),
+      duration: Math.round(duration),
+      percentage: Math.round((currentTime / duration) * 100),
       ...additionalData
     });
-
-    // Keep track of events for percentage calculation
-    if (action === 'play' && !videoStartTime) {
-      setVideoStartTime(Date.now());
-    }
-    setVideoEvents(prev => [...prev, { action, time: currentTime }]);
   };
 
   // Enhanced button click handlers
@@ -470,7 +466,9 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
       time_to_click: coldEmailIntelligence.current ? 
         Math.round((Date.now() - coldEmailIntelligence.current.startTime) / 1000) : 0
     });
+    
     setIsPopupOpen(true);
+    setVideoError(false); // Reset error state
   };
 
   const handleTryFreeClick = (location: string) => {
@@ -497,14 +495,14 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
       });
     }
     
-    // BUILD THE ENHANCED URL HERE (THIS IS THE NEW PART)
+    // BUILD THE ENHANCED URL HERE
     const score = coldEmailIntelligence.current?.calculateQualityScore() || 0;
     const city = enrichedData.city || 'unknown';
     const campaignName = campaign.campaign || 'unknown';
     
     const enhancedUrl = `https://app.speakerdrive.com/signup?ref=cold_email&score=${score}&city=${city}&campaign=${campaignName}`;
     
-    // Navigate to the enhanced URL (THIS IS ALSO NEW)
+    // Navigate to the enhanced URL
     window.location.href = enhancedUrl;
   };
 
@@ -514,10 +512,11 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
     const campaign = campaignData ? JSON.parse(campaignData) : {};
     const enrichedData = coldEmailIntelligence.current?.sessionData || {};
     
+    // Track the click
     trackButtonClick('access_the_list', { 
       location: 'video_popup',
-      video_watched: true,
-      videoWatchTime: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0,
+      video_watched: videoRef.current ? videoRef.current.currentTime > 0 : false,
+      videoWatchTime: videoRef.current ? Math.round(videoRef.current.currentTime) : 0,
       total_time_on_page: coldEmailIntelligence.current ? 
         Math.round((Date.now() - coldEmailIntelligence.current.startTime) / 1000) : 0,
       campaign: campaign.campaign || 'unknown',
@@ -531,7 +530,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
         conversion_type: 'accessed_list',
         ...campaign,
         ...enrichedData,
-        video_watched_seconds: videoStartTime ? Math.round((Date.now() - videoStartTime) / 1000) : 0
+        video_watched_seconds: videoRef.current ? Math.round(videoRef.current.currentTime) : 0
       });
     }
     
@@ -565,18 +564,87 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
   };
 
   const handlePopupClose = () => {
-    // Track video abandonment if video was playing
-    if (videoStartTime) {
-      const watchTime = Math.round((Date.now() - videoStartTime) / 1000);
+    // Pause video if playing
+    if (videoRef.current && !videoRef.current.paused) {
+      videoRef.current.pause();
+      const watchTime = videoRef.current.currentTime;
       trackVideoEvent('abandon', { 
-        watchTime,
-        watchPercentage: Math.min(Math.round((watchTime / 161) * 100), 100) // 2:41 = 161 seconds
+        watchTime: Math.round(watchTime),
+        watchPercentage: Math.round((watchTime / 161) * 100)
       });
     }
+    
     setIsPopupOpen(false);
+    setVideoPlaying(false);
     setVideoStartTime(null);
-    setVideoEvents([]);
   };
+
+  // Handle video events
+  useEffect(() => {
+    if (!videoRef.current || !isPopupOpen) return;
+    
+    const video = videoRef.current;
+    let progressTracked = new Set<number>();
+    
+    const handlePlay = () => {
+      setVideoPlaying(true);
+      if (!videoStartTime) {
+        setVideoStartTime(Date.now());
+      }
+      trackVideoEvent('play');
+    };
+    
+    const handlePause = () => {
+      setVideoPlaying(false);
+      trackVideoEvent('pause');
+    };
+    
+    const handleEnded = () => {
+      trackVideoEvent('complete', { watchPercentage: 100 });
+    };
+    
+    const handleError = () => {
+      console.error('Video failed to load');
+      setVideoError(true);
+      trackVideoEvent('error', { 
+        error: 'Video failed to load',
+        src: video.src 
+      });
+    };
+    
+    const handleTimeUpdate = () => {
+      const percentage = Math.round((video.currentTime / video.duration) * 100);
+      
+      // Track progress milestones
+      [25, 50, 75].forEach(milestone => {
+        if (percentage >= milestone && !progressTracked.has(milestone)) {
+          progressTracked.add(milestone);
+          trackVideoEvent('progress', { 
+            milestone: `${milestone}%`,
+            watchPercentage: milestone 
+          });
+        }
+      });
+    };
+    
+    // Add event listeners
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('ended', handleEnded);
+    video.addEventListener('error', handleError);
+    video.addEventListener('timeupdate', handleTimeUpdate);
+    
+    // Track that video was viewed
+    trackVideoEvent('view', { source: 'popup_opened' });
+    
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('ended', handleEnded);
+      video.removeEventListener('error', handleError);
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, [isPopupOpen, videoStartTime]);
 
   // Track page load and page unload
   useEffect(() => {
@@ -646,93 +714,6 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
   }, []);
 
   useEffect(() => {
-    if (isPopupOpen && !videoLoaded) {
-      const script = document.createElement('script');
-      script.innerHTML = `
-        (function (v, i, d, a, l, y, t, c, s) {
-            y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-            if (!vsl){vsl=function(u,cb){
-                if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-                if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
-                i.getElementsByTagName("head")[0].appendChild(s);
-            };}
-            vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-        })(window, document, 'Vidalytics', 'vidalytics_embed_Uabk76NYie1QwFyi', 'https://fast.vidalytics.com/embeds/wh2tGsur/Uabk76NYie1QwFyi/');
-      `;
-      document.body.appendChild(script);
-      setVideoLoaded(true);
-
-      // Setup Vidalytics video tracking
-      const setupVideoTracking = () => {
-        try {
-          // Vidalytics typically exposes player events through window.vidalytics
-          const checkInterval = setInterval(() => {
-            const player = window.vidalytics_embed_Uabk76NYie1QwFyi || 
-                          window.Vidalytics?.players?.['Uabk76NYie1QwFyi'] ||
-                          document.querySelector('#vidalytics_embed_Uabk76NYie1QwFyi iframe');
-
-            if (player) {
-              clearInterval(checkInterval);
-              
-              // Track when video starts
-              trackVideoEvent('view', { source: 'popup_opened' });
-
-              // Try to add event listeners based on Vidalytics API
-              if (window.Vidalytics && window.Vidalytics.players) {
-                const vid = window.Vidalytics.players['Uabk76NYie1QwFyi'];
-                if (vid && vid.on) {
-                  vid.on('play', () => trackVideoEvent('play'));
-                  vid.on('pause', () => trackVideoEvent('pause'));
-                  vid.on('ended', () => trackVideoEvent('complete', { watchPercentage: 100 }));
-                  
-                  // Track progress at 25%, 50%, 75%
-                  let trackedProgress = new Set();
-                  vid.on('timeupdate', (e: any) => {
-                    const percentage = Math.round((e.currentTime / e.duration) * 100);
-                    
-                    [25, 50, 75].forEach(milestone => {
-                      if (percentage >= milestone && !trackedProgress.has(milestone)) {
-                        trackedProgress.add(milestone);
-                        trackVideoEvent('progress', { 
-                          milestone: `${milestone}%`,
-                          watchPercentage: milestone 
-                        });
-                      }
-                    });
-                  });
-                }
-              }
-
-              // Fallback: Try postMessage approach for iframe-based players
-              const iframe = document.querySelector('#vidalytics_embed_Uabk76NYie1QwFyi iframe');
-              if (iframe) {
-                window.addEventListener('message', (event) => {
-                  if (event.origin.includes('vidalytics')) {
-                    const data = event.data;
-                    if (data.event === 'play') trackVideoEvent('play');
-                    if (data.event === 'pause') trackVideoEvent('pause');
-                    if (data.event === 'ended') trackVideoEvent('complete');
-                  }
-                });
-              }
-            }
-          }, 500);
-
-          // Stop checking after 10 seconds
-          setTimeout(() => clearInterval(checkInterval), 10000);
-        } catch (error) {
-          console.error('Error setting up video tracking:', error);
-        }
-      };
-
-      // Set up video tracking after a delay to ensure player is ready
-      setTimeout(() => {
-        setupVideoTracking();
-      }, 2000);
-    }
-  }, [isPopupOpen, videoLoaded]);
-
-  useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (isPopupOpen) {
@@ -744,7 +725,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [isPopupOpen, videoStartTime]);
+  }, [isPopupOpen]);
 
   // Prevent body scroll when modal is open
   useEffect(() => {
@@ -1202,7 +1183,7 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
         </div>
       </footer>
 
-      {/* Video Popup Modal */}
+      {/* Video Popup Modal with MP4 */}
       {isPopupOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div 
@@ -1214,28 +1195,83 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
             <button
               onClick={handlePopupClose}
               className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg"
+              aria-label="Close popup"
             >
               <X className="w-5 h-5 text-gray-700" />
             </button>
             
-            {/* Scrollable content container with smooth scroll */}
             <div className="overflow-y-auto flex-1 scroll-smooth">
-              {/* Title above video */}
               <div className="p-4 md:p-6 pb-2 md:pb-4 text-center bg-white">
                 <h3 className="text-lg md:text-xl">
                   <strong>How To Use The List</strong> (🎬 2:41 seconds)
                 </h3>
               </div>
               
-              {/* Video container - smaller on desktop */}
+              {/* Video container with HTML5 player */}
               <div className="w-full bg-gray-100 px-4 md:px-8">
                 <div className="max-w-3xl mx-auto">
-                  <div id="vidalytics_embed_Uabk76NYie1QwFyi" style={{ width: '100%', position: 'relative', paddingTop: '53.33%' }}></div>
+                  {videoError ? (
+                    // Error fallback
+                    <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6 my-4">
+                      <div className="flex items-start">
+                        <div className="flex-shrink-0">
+                          <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                        </div>
+                        <div className="ml-3">
+                          <h3 className="text-sm font-medium text-red-800">
+                            Video couldn't load
+                          </h3>
+                          <div className="mt-2 text-sm text-red-700">
+                            <p>There was an issue loading the video. Here's what it covers:</p>
+                            <ul className="mt-2 list-disc list-inside space-y-1">
+                              <li>How to browse event opportunities</li>
+                              <li>Clicking events to reveal contact details</li>
+                              <li>Using the emails for direct outreach</li>
+                            </ul>
+                            <p className="mt-3 font-semibold">You can still access the list below!</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    // HTML5 Video Player
+                    <div className="relative rounded-lg overflow-hidden bg-black">
+                      <video
+                        ref={videoRef}
+                        className="w-full"
+                        controls
+                        playsInline
+                        preload="metadata"
+                      >
+                        <source 
+                          src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/689a09dfaf2898fb395ebce7.mp4" 
+                          type="video/mp4" 
+                        />
+                        {/* Fallback for browsers that don't support MP4 */}
+                        <p className="text-white text-center p-4">
+                          Your browser doesn't support HTML5 video. 
+                          <a 
+                            href="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/689a09dfaf2898fb395ebce7.mp4" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline"
+                          >
+                            Click here to watch the video
+                          </a>
+                        </p>
+                      </video>
+                    </div>
+                  )}
                 </div>
               </div>
               
               <div className="p-6 md:p-8 text-center bg-gradient-to-b from-white to-gray-50">
-                <p className="text-base md:text-lg text-gray-700 mb-6">Click The Button Below To Access Your List 🎉</p>
+                <p className="text-base md:text-lg text-gray-700 mb-6">
+                  Click The Button Below To Access Your List 🎉
+                </p>
+                
                 <a
                   href="https://airtable.com/appnizVdwMfOgz1gT/shrZIOIYhYfjQdqli"
                   target="_blank"
@@ -1248,6 +1284,10 @@ const trackEvent = async (eventType: string, eventData: EventData = {}) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>
+                
+                <p className="mt-4 text-sm text-gray-500">
+                  The list opens in a new tab - come back here anytime!
+                </p>
               </div>
             </div>
           </div>

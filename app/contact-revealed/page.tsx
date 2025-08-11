@@ -2,14 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Suspense, useEffect } from 'react';
-
-// Type declaration for Vidalytics
-declare global {
-  interface Window {
-    Vidalytics?: any;
-  }
-}
+import { Suspense } from 'react';
 
 function ContactRevealContent() {
   const searchParams = useSearchParams();
@@ -54,30 +47,6 @@ function ContactRevealContent() {
   };
 
   const { amount: feeAmount, description: feeDescription } = parseFeeData(feeData);
-
-  // Load Vidalytics script
-  useEffect(() => {
-    const loadVidalytics = () => {
-      if (window.Vidalytics) return; // Already loaded
-      
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.innerHTML = `
-        (function (v, i, d, a, l, y, t, c, s) {
-          y='_'+d.toLowerCase();c=d+'L';if(!v[d]){v[d]={};}if(!v[c]){v[c]={};}if(!v[y]){v[y]={};}var vl='Loader',vli=v[y][vl],vsl=v[c][vl + 'Script'],vlf=v[c][vl + 'Loaded'],ve='Embed';
-          if (!vsl){vsl=function(u,cb){
-            if(t){cb();return;}s=i.createElement("script");s.type="text/javascript";s.async=1;s.src=u;
-            if(s.readyState){s.onreadystatechange=function(){if(s.readyState==="loaded"||s.readyState=="complete"){s.onreadystatechange=null;vlf=1;cb();}};}else{s.onload=function(){vlf=1;cb();};}
-            i.getElementsByTagName("head")[0].appendChild(s);
-          };}
-          vsl(l+'loader.min.js',function(){if(!vli){var vlc=v[c][vl];vli=new vlc();}vli.loadScript(l+'player.min.js',function(){var vec=v[d][ve];t=new vec();t.run(a);});});
-        })(window, document, 'Vidalytics', 'vidalytics_embed_eocHDE6rxQXbnFCO', 'https://fast.vidalytics.com/embeds/wh2tGsur/eocHDE6rxQXbnFCO/');
-      `;
-      document.head.appendChild(script);
-    };
-
-    loadVidalytics();
-  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-800 flex items-center justify-center p-4">
@@ -214,7 +183,7 @@ function ContactRevealContent() {
           </p>
         </motion.div>
 
-        {/* Video Section */}
+        {/* Video Section - Now with YouTube */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -227,11 +196,20 @@ function ContactRevealContent() {
           <p className="text-gray-600 mb-6">
             Watch how speakers are using our platform to book premium engagements
           </p>
-          <div className="relative w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg">
-            <div 
-              id="vidalytics_embed_eocHDE6rxQXbnFCO" 
-              style={{ width: '100%', position: 'relative', paddingTop: '56.25%' }}
-            />
+          
+          {/* YouTube Video Embed */}
+          <div className="relative w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg bg-gray-100">
+            <div className="relative" style={{ paddingTop: '56.25%' }}>
+              <iframe 
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/bQYwZYRS9Z4?si=sFBhgETN5lFC1yQN&controls=0&rel=0&modestbranding=1"
+                title="SpeakerDrive Demo Video"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
           </div>
           
           {/* Secondary CTA after video */}
