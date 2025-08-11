@@ -1203,7 +1203,7 @@ export default function LandingPage() {
             <div className="overflow-y-auto flex-1 scroll-smooth">
               <div className="p-4 md:p-6 pb-2 md:pb-4 text-center bg-white">
                 <h3 className="text-lg md:text-xl">
-                  <strong>How To Use The List</strong> (🎬 2:41 seconds)
+                  <strong>How To Use The List</strong> (🎬 2:16 seconds)
                 </h3>
               </div>
               
@@ -1285,10 +1285,6 @@ export default function LandingPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>
                 </a>
-                
-                <p className="mt-4 text-sm text-gray-500">
-                  The list opens in a new tab - come back here anytime!
-                </p>
               </div>
             </div>
           </div>
