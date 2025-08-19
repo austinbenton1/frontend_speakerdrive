@@ -189,7 +189,7 @@ export default function GlobePage() {
                 rel="noopener noreferrer"
                 className="block w-full text-center px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold text-sm rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-sm"
               >
-                UNLOCK THIS OPPORTUNITY →
+                VIEW MORE DETAILS →
               </a>
             </div>
           ) : (
