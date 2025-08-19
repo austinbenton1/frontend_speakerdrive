@@ -406,7 +406,7 @@ export default function PricingPage() {
                   
                   <div className="mt-6 pt-6 border-t border-gray-200">
                     <p className="text-sm text-gray-700">
-                      <span className="font-bold">Many speakers book meetings within their first couple of weeks.</span>
+                      <span className="font-bold">Ask Yourself:</span>
                       <br />What's the cost of NOT being on SpeakerDrive?
                     </p>
                   </div>
