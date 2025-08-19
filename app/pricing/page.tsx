@@ -118,7 +118,7 @@ const PRICING_FAQ_ITEMS = [
   },
   {
     question: "How is this different from hiring an assistant or marketing agency?",
-    answer: "Assistants cost $2,000-4,000/month and still need training. Marketing agencies charge even more than that for lead generation. SpeakerDrive gives you the same result for the price of a coffee per day, and you keep 100% of your speaking fees."
+    answer: "Assistants cost $2,000-4,000/month and still need training. Marketing agencies charge even more than that for lead generation. SpeakerDrive gives you the same result for the price of a coffee per day, and you're in full control."
   },
   {
     question: "What's the difference between Event and Contact Emails?",
