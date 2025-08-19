@@ -745,6 +745,19 @@ export default function GlobePage() {
       <div ref={mapContainer} className="w-full h-full" />
       
       {/* Top Right Controls */}
+      {/* Loading indicator while data loads */}
+      {stats.loading && (
+        <div className="absolute top-6 left-6 z-40 animate-fade-in">
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg px-4 py-3 flex items-center space-x-3">
+            <div className="flex space-x-1">
+              <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+              <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+              <div className="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div> {/* <-- This closing div is missing in your code */}
+            <span className="text-sm font-medium text-gray-700">Opportunities Populating</span>
+          </div>
+        </div>
+      )}
       <div className="absolute top-6 right-6 flex flex-col items-end space-y-3">
         <button
           onClick={() => {
