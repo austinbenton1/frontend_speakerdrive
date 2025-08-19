@@ -81,12 +81,11 @@ export default function LandingPage() {
               <div className="md:w-3/5 space-y-8">
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
                 SpeakerDrive is the discovery platform for professional speakers and experts. 
-                Search 11,000+ speaking opportunities then unlock the decision-makers
-                who book speakers.
+                Search 11,000+ gigs and unlock the decision-maker contact info.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                Go straight to the people who can hire you. People with real budgets and
-                authority. And connect instantly with our AI outreach platform.
+                Go straight to the people who can hire you—decision-makers with real budgets.
+                Then use our outreach tools to craft the perfect message and connect instantly.
                 </p>
               </div>
 
