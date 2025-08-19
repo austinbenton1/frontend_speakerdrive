@@ -38,7 +38,7 @@ export function MessageComposerFormula() {
           variants={fadeIn}
         >
           <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-900 mb-2 tracking-tight leading-tight">
-            Ultra Personalized Messaging
+          Smart One-Click Outreach
           </h2>
           <p className="text-left md:text-center text-lg sm:text-xl font-medium text-gray-700 leading-relaxed max-w-lg md:mx-auto">
             Share your expertise naturally, without the pressure of pitching
