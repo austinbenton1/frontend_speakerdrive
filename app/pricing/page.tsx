@@ -126,7 +126,7 @@ const PRICING_FAQ_ITEMS = [
   },
   {
     question: "What if I'm not getting responses?",
-    answer: "Our Success Team reviews your outreach strategy in your first 30 days. If you're not getting responses, we'll personally help you refine your approach until you do. We only succeed when you're booking gigs."
+    answer: "If you're not getting responses, we'll personally help you refine your approach until you do. We only succeed when you're booking gigs."
   },
   {
     question: "How quickly will I see results?",
