@@ -80,13 +80,13 @@ export default function LandingPage() {
               {/* Left column: Text paragraphs (3/5 width) */}
               <div className="md:w-3/5 space-y-8">
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  SpeakerDrive eliminates "waiting for the phone to ring" by giving you direct access
-                  to verified decision-makers and diverse event opportunities like conferences,
-                  training workshops, and consulting engagements.
+                SpeakerDrive is the discovery platform for professional speakers and experts. 
+                Search 11,000+ speaking opportunities then unlock the decision-makers
+                who book speakers.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  Break the feast-or-famine cycle and turns your expertise into a
-                  sustainable business.
+                Go straight to the people who can hire you. People with real budgets and
+                authority. And connect instantly with our AI outreach platform.
                 </p>
               </div>
 

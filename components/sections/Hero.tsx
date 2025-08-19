@@ -160,8 +160,8 @@ export function Hero() {
 
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              Every gig in one place. {" "}
-              <span className="relative inline-block handwritten-underline">Authentic</span> outreach in a single click. Land stages on your terms.
+              Every gig in one place. Generate {" "}
+              <span className="relative inline-block handwritten-underline">authentic</span> outreach in a single click. Land stages on your terms.
             </p>
 
             {/* Enhanced CTA Button */}
@@ -272,7 +272,7 @@ export function Hero() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Every dot is an opportunity. We've done the hard work for you.
+            Every dot is an opportunity. We've done the work for you.
           </motion.p>
 
           {/* Optional: Add a scroll indicator or arrow pointing down */}

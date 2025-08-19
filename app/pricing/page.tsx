@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Circle, Rocket, Zap } from "lucide-react";
+import { Check, Sparkles, Rocket, Zap } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import {
@@ -25,6 +25,7 @@ interface PricingPlan {
   description: string;
   icon: React.ReactNode;
   ctaLink?: string;
+  ctaText?: string;
 
   // We'll directly store the main price text and subtext for each plan.
   priceHeading: React.ReactNode;
@@ -48,9 +49,9 @@ function FeatureItem({ feature }: { feature: PricingFeature }) {
     <div className="flex items-center gap-2">
       {/* Checkmark or X */}
       {disabled ? (
-        <div className="h-5 w-5 flex-shrink-0 text-red-500">✕</div>
+        <div className="h-5 w-5 flex-shrink-0 text-red-500">❌</div>
       ) : (
-        <Check className="h-5 w-5 flex-shrink-0 text-green-500" />
+        <div className="h-5 w-5 flex-shrink-0 text-green-500">✅</div>
       )}
 
       {/* Text + optional "?" tooltip */}
@@ -133,7 +134,7 @@ function PricingCard({ plan }: PricingCardProps) {
           href={plan.ctaLink || "#"}
           className="block w-full py-3 px-4 rounded font-bold text-center bg-green-500 text-white hover:bg-green-600 mb-6"
         >
-          Start Free
+          {plan.ctaText || "Start Free"}
         </Link>
 
         {/* Feature List */}
@@ -153,25 +154,25 @@ const PRICING_FAQ_ITEMS = [
     question: "Will SpeakerDrive really work for me?",
     answer: "Absolutely. SpeakerDrive works because it transforms prospecting from a guessing game into a systematic process. We've used this exact approach to book countless engagements, including 4 and 5-figure gigs and keynote presentations at Fortune 500 companies. The platform isn't magic – it's a proven system that puts you in front of the right people with the right messaging. But here's the key: Members who commit to consistent daily outreach typically see their first responses within a week and are well on their way to booking their first engagement within 30-60 days.\n\nSuccess comes down to one simple shift: treating prospecting like any other professional habit. Just as you prepare for speeches or update your content regularly, SpeakerDrive makes outreach a predictable part of your business routine. As your pipeline grows, opportunities compound – today's connection becomes tomorrow's keynote, next quarter's workshop series, and referrals to their entire network. Show up consistently, and watch your calendar transform."
   },
-   {
+  {
     question: "Is SpeakerDrive in Beta?",
     answer:
       "Yes, SpeakerDrive is currently in beta. Early adopters lock in our special introductory rates which will increase after official launch. Beta users also help shape our roadmap, receive priority support, and get access to new features as they're released."
   },
   {
-    question: "What is a Lead Cool-Off Period?",
+    question: "What's the difference between Event and Contact Emails?",
     answer:
-      "We've built in an automatic rest period for contacts, temporarily removing them from the SpeakerDrive pool to prevent over-exposure to outreach attempts. This protects both the recipients' experience and ensures your messages maintain their impact and effectiveness."
+      "Event Emails are general inboxes (events@, speakers@) while Contact Emails are personal addresses for specific decision-makers. Lite plans unlock Event Emails only. Starter and Premium unlock both types."
   },
   {
-    question: "How does the Refund Credit For Invalid Info work?",
+    question: "What counts as an Email Unlock?",
     answer:
-      'If you discover a lead has invalid contact information or substantially inaccurate data, simply rate it as "Poor" with the specific reason. We\'ll automatically refund your credit. Subject to our fair use policy to prevent abuse while maintaining data quality for all users.'
+      "Each email address you reveal uses one unlock from your monthly allowance. LinkedIn profiles are always visible without using unlocks. Unused unlocks expire at month end."
   },
   {
-    question: "What is First-Access To Newest Leads?",
+    question: "Can I change plans anytime?",
     answer:
-      "These are newly added opportunities to the SpeakerDrive database. This feature is designed to give premium users exclusive access to the freshest opportunities for a short period of time."
+      "Yes, upgrade or downgrade anytime. Upgrades take effect immediately, downgrades at your next billing cycle."
   },
   {
     question: "What integrations do you offer?",
@@ -185,42 +186,27 @@ const PRICING_FAQ_ITEMS = [
 export default function PricingPage() {
   const plans: PricingPlan[] = [
     {
-      name: "Free Trial",
-      description: "Try it risk free",
-      icon: <Circle className="h-9 w-9" />,
+      name: "Lite",
+      description: "Limited Time Beta Pricing",
+      icon: <Sparkles className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
-      priceHeading: "7 Days Free",
-      priceSubtext: "No credit card required",
+      ctaText: "Start Free Trial",
+      priceHeading: (
+        <>
+          $29/m <span className="text-lg text-gray-400 line-through ml-1">$49/m</span>
+        </>
+      ),
+      priceSubtext: "Cancel / upgrade anytime",
       features: [
-        { text: "5 Unlocks" },
+        { text: "Unlimited Search & Discovery" },
+        { text: "50 Email Unlocks per Month" },
+        { text: "LinkedIn Profiles Included" },
+        { text: "Filter by Fee, Location & More" },
         { text: "Connect To Gmail" },
-        {
-          text: "Lead Cool-Off",
-          tooltip:
-            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
-        },
-        {
-          text: "Refund Credit For Invalid Info",
-          tooltip:
-            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
-        },
-        {
-          text: "First-Access To Newest Leads ",
-          disabled: true,
-          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
-        },
-        {
-          text: "Integrations / CRM Export",
-          disabled: true,
-          tooltip:
-            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
-        },
-        {
-          text: "Integrations Setup 1:1 Session",
-          disabled: true,
-          tooltip:
-            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
-        }
+        { text: "Unlock Event Emails" },
+        { text: "Unlock Contact Emails", disabled: true },
+        { text: "Integrations / CRM Export", disabled: true },
+        { text: "Integrations Setup 1:1 Session", disabled: true }
       ]
     },
     {
@@ -228,6 +214,7 @@ export default function PricingPage() {
       description: "Limited Time Beta Pricing",
       icon: <Rocket className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
+      ctaText: "Start Free Trial",
       priceHeading: (
         <>
           $99/m <span className="text-lg text-gray-400 line-through ml-1">$149/m</span>
@@ -236,35 +223,15 @@ export default function PricingPage() {
       priceSubtext: "Cancel / upgrade anytime",
       isPopular: true,
       features: [
-        { text: "200 Unlocked Leads / mth" },
+        { text: "Unlimited Search & Discovery" },
+        { text: "200 Email Unlocks per Month" },
+        { text: "LinkedIn Profiles Included" },
+        { text: "Filter by Fee, Location & More" },
         { text: "Connect To Gmail" },
-        {
-          text: "Lead Cool-Off",
-          tooltip:
-            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
-        },
-        {
-          text: "Refund Credit For Invalid Info",
-          tooltip:
-            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
-        },
-        {
-          text: "First-Access To Newest Leads ",
-          disabled: true,
-          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
-        },
-        {
-          text: "Integrations / CRM Export",
-          disabled: true,
-          tooltip:
-            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
-        },
-        {
-          text: "Integrations Setup 1:1 Session",
-          disabled: true,
-          tooltip:
-            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
-        }
+        { text: "Unlock Event Emails" },
+        { text: "Unlock Contact Emails" },
+        { text: "Integrations / CRM Export", disabled: true },
+        { text: "Integrations Setup 1:1 Session", disabled: true }
       ]
     },
     {
@@ -272,6 +239,7 @@ export default function PricingPage() {
       description: "Limited Time Beta Pricing",
       icon: <Zap className="h-9 w-9" />,
       ctaLink: "https://app.speakerdrive.com/signup",
+      ctaText: "Start Free Trial",
       priceHeading: (
         <>
           $249/m <span className="text-lg text-gray-400 line-through ml-1">$399/m</span>
@@ -279,32 +247,15 @@ export default function PricingPage() {
       ),
       priceSubtext: "Cancel / upgrade anytime",
       features: [
-        { text: "750 Unlocked Leads / mth" },
+        { text: "Unlimited Search & Discovery" },
+        { text: "750 Email Unlocks per Month" },
+        { text: "LinkedIn Profiles Included" },
+        { text: "Filter by Fee, Location & More" },
         { text: "Connect To Gmail" },
-        {
-          text: "Lead Cool-Off",
-          tooltip:
-            "Temporarily removes unlocked contacts to prevent recipient fatigue and maintain message impact."
-        },
-        {
-          text: "Refund Credit For Invalid Info",
-          tooltip:
-            "Ability to rate leads as invalid or inaccurate to receive automatic credit refund. Subject to fair use policy."
-        },
-        {
-          text: "First-Access To Newest Leads ",
-          tooltip: "Immediate access to the freshest leads as they are added into SpeakerDrive"
-        },
-        {
-          text: "Integrations / CRM Export",
-          tooltip:
-            "Automatically push leads to your existing tools via webhooks. Connect seamlessly with CRMs, email platforms and more"
-        },
-        {
-          text: "Integrations Setup 1:1 Session",
-          tooltip:
-            "Live one-on-one session to walk through connecting SpeakerDrive to your tools"
-        }
+        { text: "Unlock Event Emails" },
+        { text: "Unlock Contact Emails" },
+        { text: "Integrations / CRM Export" },
+        { text: "Integrations Setup 1:1 Session" }
       ]
     }
   ];
@@ -342,6 +293,25 @@ export default function PricingPage() {
               <p className="text-sm text-gray-700 mt-6">
                 SpeakerDrive is currently in beta – early adopters lock in our best rates before prices increase.
               </p>
+
+              {/* New Features Explanation Section */}
+              <div className="mt-12 p-8 bg-gray-50 rounded-xl border border-gray-200">
+                <h3 className="text-xl font-bold mb-6 text-gray-900">
+                  What's Included in Every Plan:
+                </h3>
+                <div className="space-y-4 max-w-3xl">
+                  <div className="text-base text-gray-700 leading-relaxed">
+                    <span className="font-semibold text-gray-900">🔄 Lead Cool-Off</span> — Contacts are temporarily removed after outreach to prevent over-exposure and maintain platform effectiveness.
+                  </div>
+                  <div className="text-base text-gray-700 leading-relaxed">
+                    <span className="font-semibold text-gray-900">💳 Invalid Info Refunds</span> — Found bad data? Rate it "Poor" and get your credit back automatically (fair use applies).
+                  </div>
+                  <div className="text-base text-gray-700 leading-relaxed">
+                    <span className="font-semibold text-gray-900">⚡ First-Access to New Leads</span> — Premium users get exclusive early access to freshly added opportunities before they're released to everyone.
+                  </div>
+                </div>
+              </div>
+
               <div className="mt-6">
                 <p className="text-gray-500 text-sm">
                   Agency, Company Or Referral Partner?{" "}
@@ -372,9 +342,9 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              {/* Accordion */}
+              {/* Accordion - Fixed: removed 'type' prop, using collapsible instead */}
               <div className="w-full">
-                <Accordion type="single" className="space-y-3">
+                <Accordion collapsible className="space-y-3">
                   {PRICING_FAQ_ITEMS.map((item, index) => (
                     <AccordionItem
                       key={index}
