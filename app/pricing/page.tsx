@@ -289,7 +289,7 @@ export default function PricingPage() {
               {/* Social Proof Bar */}
               <div className="mt-12 text-center">
                 <p className="text-sm text-gray-600">
-                  <span className="font-semibold">🔥 Beta members are seeing results:</span> First interested responses within days
+                  <span className="font-semibold">🔥 Beta members are seeing results:</span> First interested responses normally within days
                 </p>
               </div>
             </div>
