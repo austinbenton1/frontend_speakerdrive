@@ -238,7 +238,7 @@ export default function PricingPage() {
                 Simple Pricing. Serious Results.
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-3">
-                Launched in July 2025. We're growing FAST—don't miss out.
+                Launched in July 2025. We're growing FAST-don't miss out.
               </p>
               <p className="text-sm text-green-600 font-medium">
                 🎯 No credit card required • 🚀 Beta pricing ends soon
