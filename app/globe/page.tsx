@@ -437,9 +437,10 @@ export default function GlobePage() {
       zoom: 1.5,
       pitch: 35,
       projection: 'globe' as any,
-      // Disable rotation on mobile for better UX
-      dragRotate: !currentIsMobile,
-      pitchWithRotate: !currentIsMobile
+      // Start with interactions disabled during loading
+      interactive: false,
+      dragRotate: false,
+      pitchWithRotate: false
     });
 
     map.current.on('style.load', () => {
@@ -711,6 +712,23 @@ export default function GlobePage() {
         const eventCount = data.filter(lead => lead.lead_type === 'Event').length;
         const contactCount = data.filter(lead => lead.lead_type === 'Contact').length;
         setStats({ events: eventCount, contacts: contactCount, regions: new Set(data.map(e => e.region)).size, states: new Set(data.map(e => e.state)).size, cities: new Set(data.map(e => `${e.city},${e.state}`)).size, loading: false });
+
+// Enable interactions after data loads
+if (map.current) {
+  map.current.boxZoom.enable();
+  map.current.doubleClickZoom.enable();
+  map.current.dragPan.enable();
+  map.current.dragRotate.enable();
+  map.current.keyboard.enable();
+  map.current.scrollZoom.enable();
+  map.current.touchZoomRotate.enable();
+  
+  // Keep rotation disabled on mobile
+  if (currentIsMobile) {
+    map.current.dragRotate.disable();
+    map.current.touchPitch.disable();
+  }
+}
 
         const shuffled = [...data].sort(() => Math.random() - 0.5);
         const randomLeads = shuffled.slice(0, 10);
