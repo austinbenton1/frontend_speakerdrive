@@ -160,8 +160,8 @@ export function Hero() {
 
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              With the prospecting platform where{" "}
-              <span className="relative inline-block handwritten-underline">authentic</span> outreach converts opportunities into high-value stages.
+              Every gig in one place. {" "}
+              <span className="relative inline-block handwritten-underline">Authentic</span> outreach in a single click. Land stages on your terms.
             </p>
 
             {/* Enhanced CTA Button */}
@@ -177,7 +177,7 @@ export function Hero() {
             </motion.a>
 
             {/* No credit card text */}
-            <p className="mt-3 text-neutral-600 text-sm">Get Started. It's FREE. No credit card needed.</p>
+            <p className="mt-3 text-neutral-600 text-sm">No credit card needed.</p>
           </div>
 
           {/* RIGHT FLOATING IMAGE (hidden below lg) */}
@@ -202,10 +202,6 @@ export function Hero() {
         </div>
 
         {/* MAIN HERO IMAGE */}
-        {/*
-          UPDATED BELOW:
-          Changed mt-10 sm:mt-16 to mt-4 sm:mt-8 so the hero image is closer to the cream
-        */}
         <div className="mt-4 sm:mt-8 px-0 overflow-visible">
           <div className="relative mx-auto max-w-screen-lg [perspective:1000px]">
             <motion.div
@@ -241,15 +237,63 @@ export function Hero() {
           </div>
         </div>
 
-        {/* MOBILE SCROLL INDICATOR */}
-        <div className="lg:hidden flex justify-center mt-6">
-          <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
-            <ChevronDown className="h-6 w-6 text-gray-500" />
+        {/* MOBILE SCROLL INDICATOR - Removed as we'll have content below now */}
+      </div>
+
+      {/* NEW MARKETING SECTION - Added below hero image */}
+      <div className="bg-white pt-12 pb-6 sm:pt-16 sm:pb-8">
+        <div className="container mx-auto max-w-6xl px-4 text-center">
+        <motion.p 
+            className="text-gray-600 text-base sm:text-lg font-semibold tracking-wide uppercase mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Stop Searching The Web For Gigs
+          </motion.p>
+          
+          <motion.h2 
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 animate-gradient">$10K</span> Speaking Gig 
+            <br className="hidden sm:block" />
+            Is One Click Away
+          </motion.h2>
+          
+          <motion.p 
+            className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Every dot is an opportunity. We've done the hard work for you.
+          </motion.p>
+
+          {/* Optional: Add a scroll indicator or arrow pointing down */}
+          <motion.div 
+            className="mt-3 flex justify-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <motion.div 
+              animate={{ y: [0, 10, 0] }} 
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="h-8 w-8 text-gray-400" />
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
-      {/* CSS for the handwritten underline effect */}
+      {/* CSS for the handwritten underline effect and gradient animation */}
       <style jsx global>{`
         .handwritten-underline {
           display: inline-block;
@@ -275,6 +319,17 @@ export function Hero() {
             #7a7a7a 2px,
             #7a7a7a 4px
           );
+        }
+        
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        .animate-gradient {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
         }
       `}</style>
     </div>

@@ -13,8 +13,18 @@ import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import { MessageComposer } from "@/components/sections/MessageComposer";
 import { ToolsSection } from "@/components/sections/ToolsSection";
+import Globe from "@/app/globe/page";
+import { ScrollArrows } from "@/components/ui/ScrollArrows"; // 1. Import the new component
 
 export default function LandingPage() {
+  // 2. Add the scroll handler function
+  const handleScroll = (targetId: string) => {
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
@@ -34,6 +44,19 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section id="hero" className="pb-0">
           <Hero />
+        </section>
+
+        {/* Globe Section - UPDATED */}
+        <section id="globe" className="bg-white py-12">
+          {/* This container constrains the globe's height and acts as a positioning
+              parent for the fixed-position arrows. */}
+          <div className="relative max-h-[600px] overflow-hidden">
+            <Globe />
+            <ScrollArrows
+              onScrollUp={() => handleScroll("hero")}
+              onScrollDown={() => handleScroll("how-it-works")}
+            />
+          </div>
         </section>
 
         {/* "How It Works" and Steps 1-3 */}
@@ -62,7 +85,7 @@ export default function LandingPage() {
                   training workshops, and consulting engagements.
                 </p>
                 <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                  Break the feast-or-famine cycle and turns your expertise into a 
+                  Break the feast-or-famine cycle and turns your expertise into a
                   sustainable business.
                 </p>
               </div>
@@ -305,7 +328,7 @@ export default function LandingPage() {
                   Yet talented professionals still struggle to fill their calendars
                 </p>
               </div>
-              
+
               <div className="flex items-center justify-center gap-3 bg-gray-50/80 rounded-full px-6 py-2.5 border border-gray-200/50 mb-8">
                 <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center">
                   <span className="text-gray-500 font-bold text-lg">?</span>
@@ -315,7 +338,7 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-            
+
             {/* Decorative connector */}
             <div className="flex flex-col items-center">
               <div className="h-16 w-[3px] bg-gradient-to-b from-gray-300/50 to-red-300/50"></div>
@@ -331,7 +354,7 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
-            
+
         {/* Founder Quote Section */}
         <div className="max-w-2xl mx-auto px-6 sm:px-8 mb-20 mt-12">
           <div className="flex flex-col gap-6">
