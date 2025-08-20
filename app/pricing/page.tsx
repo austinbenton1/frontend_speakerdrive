@@ -92,7 +92,7 @@ function PricingCard({ plan }: PricingCardProps) {
           className="block w-full py-3 px-4 rounded-lg text-center transition-colors mb-6 bg-green-500 text-white hover:bg-green-600 shadow-md"
         >
           <div className="text-lg font-bold">Start Free Trial</div>
-          <div className="text-xs font-normal -mt-0.5">Full Featured Trial • No Credit Card Needed</div>
+          <div className="text-xs font-normal -mt-0.5">No Credit Card Needed</div>
         </Link>
 
         {/* Feature List */}
@@ -172,7 +172,7 @@ export default function PricingPage() {
           $29 <span className="text-base text-gray-400 line-through ml-2">$49</span>
         </>
       ),
-      priceSubtext: "Beta pricing • Cancel anytime",
+      priceSubtext: "Full Featured Trial • Cancel anytime",
       features: [
         { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
@@ -199,7 +199,7 @@ export default function PricingPage() {
           $99 <span className="text-base text-gray-400 line-through ml-2">$149</span>
         </>
       ),
-      priceSubtext: "Beta pricing • Cancel anytime",
+      priceSubtext: "Full Featured Trial • Cancel anytime",
       isPopular: true,
       features: [
         { text: "Discovery", isHeader: true },
@@ -227,7 +227,7 @@ export default function PricingPage() {
           $249 <span className="text-base text-gray-400 line-through ml-2">$399</span>
         </>
       ),
-      priceSubtext: "Beta pricing • Cancel anytime",
+      priceSubtext: "Full Featured Trial • Cancel anytime",
       features: [
         { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
