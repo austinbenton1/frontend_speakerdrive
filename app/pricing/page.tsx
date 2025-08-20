@@ -54,7 +54,7 @@ function PricingCard({ plan }: PricingCardProps) {
       `}
     >
       {isPopular && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+        <div className="absolute -top-4 w-full flex justify-center">
           <div className="bg-green-500 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full shadow-md">
             ⭐ Most Popular
           </div>
