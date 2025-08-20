@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Check, Sparkles, Rocket, Zap, TrendingUp, Calendar, Target } from "lucide-react";
+import { Check, X, Sparkles, Rocket, Zap, TrendingUp, Calendar, Target } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import {
@@ -17,6 +17,10 @@ import {
 interface PricingFeature {
   text: string;
   disabled?: boolean;
+  bold?: boolean;
+  indent?: boolean;
+  isHeader?: boolean;
+  hideIcon?: boolean;
 }
 
 interface PricingPlan {
@@ -43,7 +47,7 @@ function PricingCard({ plan }: PricingCardProps) {
       className={`
         relative bg-white rounded-xl
         ${isPopular
-          ? "border-2 border-green-500 shadow-xl scale-105"
+          ? "border-2 border-green-500 shadow-xl"
           : "border border-gray-200 shadow-sm"
         }
         overflow-visible transition-all hover:shadow-lg
@@ -91,17 +95,27 @@ function PricingCard({ plan }: PricingCardProps) {
         </Link>
 
         {/* Feature List */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           {plan.features.map((feature, i) => (
-            <div key={i} className="flex items-start gap-3">
-              {feature.disabled ? (
-                <span className="text-red-400 mt-0.5 text-base">✕</span>
+            <div key={i}>
+              {feature.isHeader ? (
+                <div className={`text-xs font-semibold text-gray-500 uppercase tracking-wider ${i === 0 ? '' : 'mt-5'} mb-3`}>
+                  {feature.text}
+                </div>
               ) : (
-                <span className="text-green-500 mt-0.5">✓</span>
+                <div className={`flex items-start gap-3`}>
+                  {!feature.hideIcon && (
+                    feature.disabled ? (
+                      <X className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                    ) : (
+                      <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                    )
+                  )}
+                  <span className={`text-sm text-gray-700 ${feature.bold ? 'font-bold' : ''} ${feature.hideIcon && !feature.indent ? 'mb-1' : ''}`}>
+                    {feature.text}
+                  </span>
+                </div>
               )}
-              <span className={`text-sm ${feature.disabled ? "text-gray-400" : "text-gray-700"}`}>
-                {feature.text}
-              </span>
             </div>
           ))}
         </div>
@@ -159,15 +173,18 @@ export default function PricingPage() {
       ),
       priceSubtext: "Beta pricing • Cancel anytime",
       features: [
+        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "50 Email Unlocks per Month" },
         { text: "LinkedIn Profiles Included" },
         { text: "Filter by Fee, Location & More" },
-        { text: "Connect To Gmail" },
+        { text: "Email Unlocks", isHeader: true },
+        { text: "50 Email Unlocks per Month", bold: true, hideIcon: true },
         { text: "Unlock Event Emails" },
         { text: "Unlock Contact Emails", disabled: true },
-        { text: "Integrations / CRM Export", disabled: true },
-        { text: "Integrations Setup 1:1 Session", disabled: true }
+        { text: "Integrations", isHeader: true },
+        { text: "Connect to Gmail" },
+        { text: "CRM Export / Webhooks", disabled: true },
+        { text: "Integration Setup 1:1 Session", disabled: true }
       ]
     },
     {
@@ -184,20 +201,23 @@ export default function PricingPage() {
       priceSubtext: "Beta pricing • Cancel anytime",
       isPopular: true,
       features: [
+        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "200 Email Unlocks per Month" },
         { text: "LinkedIn Profiles Included" },
         { text: "Filter by Fee, Location & More" },
-        { text: "Connect To Gmail" },
+        { text: "Email Unlocks", isHeader: true },
+        { text: "200 Email Unlocks per Month", bold: true, hideIcon: true },
         { text: "Unlock Event Emails" },
         { text: "Unlock Contact Emails" },
-        { text: "Integrations / CRM Export", disabled: true },
-        { text: "Integrations Setup 1:1 Session", disabled: true }
+        { text: "Integrations", isHeader: true },
+        { text: "Connect to Gmail" },
+        { text: "CRM Export / Webhooks" },
+        { text: "Integration Setup 1:1 Session", disabled: true }
       ]
     },
     {
       name: "DOMINATE",
-      subtitle: "Own your market",
+      subtitle: "Scale your impact",
       icon: <Zap className="h-10 w-10" />,
       ctaLink: "https://app.speakerdrive.com/signup",
       ctaText: "Start Free Trial",
@@ -208,15 +228,18 @@ export default function PricingPage() {
       ),
       priceSubtext: "Beta pricing • Cancel anytime",
       features: [
+        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "750 Email Unlocks per Month" },
         { text: "LinkedIn Profiles Included" },
         { text: "Filter by Fee, Location & More" },
-        { text: "Connect To Gmail" },
+        { text: "Email Unlocks", isHeader: true },
+        { text: "750 Email Unlocks per Month", bold: true, hideIcon: true },
         { text: "Unlock Event Emails" },
         { text: "Unlock Contact Emails" },
-        { text: "Integrations / CRM Export" },
-        { text: "Integrations Setup 1:1 Session" }
+        { text: "Integrations", isHeader: true },
+        { text: "Connect to Gmail" },
+        { text: "CRM Export / Webhooks" },
+        { text: "Integration Setup 1:1 Session" }
       ]
     }
   ];
@@ -238,7 +261,7 @@ export default function PricingPage() {
                 Simple Pricing. Serious Results.
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-3">
-                Launched in July 2025. We're growing FAST-don't miss out.
+                Lock in beta pricing while it lasts
               </p>
               <p className="text-sm text-green-600 font-medium">
                 🎯 No credit card required • 🚀 Beta pricing ends soon
@@ -340,7 +363,7 @@ export default function PricingPage() {
                   Frequently Asked Questions
                 </h2>
                 <p className="text-gray-600">
-                  Real answers to real concerns
+                  We're here to help
                 </p>
               </div>
 
