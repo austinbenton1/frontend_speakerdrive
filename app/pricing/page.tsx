@@ -89,10 +89,13 @@ function PricingCard({ plan }: PricingCardProps) {
         {/* CTA Button */}
         <Link
           href={plan.ctaLink || "#"}
-          className="block w-full py-3 px-4 rounded-lg font-bold text-center transition-colors mb-6 bg-green-500 text-white hover:bg-green-600 shadow-md"
+          className="block w-full py-3 px-4 rounded-lg font-bold text-center transition-colors bg-green-500 text-white hover:bg-green-600 shadow-md"
         >
           {plan.ctaText || "Start Free Trial"}
         </Link>
+        <p className="text-xs text-gray-500 text-center mt-2 mb-4">
+          Full Featured Trial. No Credit Card Needed.
+        </p>
 
         {/* Feature List */}
         <div className="space-y-2">
@@ -321,7 +324,7 @@ export default function PricingPage() {
           {/* Platform Features */}
           <section className="py-12 bg-white">
             <div className="mx-auto max-w-4xl px-4">
-              <h2 className="text-2xl font-bold text-center mb-8">What's Included in Every Plan</h2>
+              <h2 className="text-2xl font-bold text-center mb-8">Other Great Platform Features</h2>
               
               <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
                 <div className="space-y-6">
