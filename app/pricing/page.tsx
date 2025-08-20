@@ -89,13 +89,11 @@ function PricingCard({ plan }: PricingCardProps) {
         {/* CTA Button */}
         <Link
           href={plan.ctaLink || "#"}
-          className="block w-full py-3 px-4 rounded-lg font-bold text-center transition-colors bg-green-500 text-white hover:bg-green-600 shadow-md"
+          className="block w-full py-3 px-4 rounded-lg font-bold text-center transition-colors mb-6 bg-green-500 text-white hover:bg-green-600 shadow-md"
         >
-          {plan.ctaText || "Start Free Trial"}
+          <div>{plan.ctaText || "Start Free Trial"}</div>
+          <div className="text-xs font-normal mt-0.5">No Credit Card Needed</div>
         </Link>
-        <p className="text-xs text-gray-500 text-center mt-2 mb-4">
-          Full Featured Trial. No Credit Card Needed.
-        </p>
 
         {/* Feature List */}
         <div className="space-y-2">
