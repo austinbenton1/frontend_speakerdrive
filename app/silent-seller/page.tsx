@@ -108,6 +108,17 @@ export default function SilentSellerPage() {
           content: "—";
           margin: 0 1rem;
         }
+
+        .comparison-example {
+          display: flex;
+          align-items: center;
+          margin: 0.5rem 0;
+        }
+
+        .comparison-icon {
+          width: 24px;
+          margin-right: 0.5rem;
+        }
       `}</style>
 
       {/* Logo */}
@@ -136,36 +147,70 @@ export default function SilentSellerPage() {
           {/* MAIN HEADING */}
           <h1>THE SILENT SELLER: EMAIL SIGNATURE CREDENTIAL FRAMEWORK</h1>
           <p className="mb-6 text-lg font-semibold">
-            The subtle but powerful credibility builder working behind every email you send
+            Your email signature is the most overlooked asset into email toolbox
           </p>
 
+          {/* The Hidden Revenue Driver */}
+          
           <p>
-            Your email signature is a subtle yet powerful credibility builder that
-            works in the background of every message you send. A well-crafted
-            credential positioned right above your website link can establish authority
-            without appearing boastful.
+            A speaker recently told me: "I never thought my email signature would help land a keynote."
+          </p>
+          <p>
+            But that's exactly what happened when she changed her signature from "Leadership Speaker" 
+            to a specific credential + third-party validation.
+          </p>
+
+          <h3 style={{ fontSize: '1.25rem', marginTop: '1.5rem' }}>It's a hidden revenue driver:</h3>
+          <ul className="tips">
+            <li>Your signature often gets more attention than your email's body text </li>
+            <li>The right signature credential can double (I've seen this first-hand)</li>
+            <li>Planners see your signature in EVERY email</li>
+          </ul>
+
+          <p>
+            This is prime email real estate! We can do better than generic titles like "Motivational Speaker" 
+            or "Leadership Expert."
           </p>
 
           <div className="section-divider">•</div>
 
-          {/* What Makes a Powerful Signature Credential */}
-          <h2 className="headline">What Makes a Powerful Signature Credential</h2>
+          {/* The Silent Seller Principle */}
+          <h2 className="headline">The Silent Seller Principle</h2>
           <p>
-            The most effective email signature credentials follow these principles:
+            Your signature does the credibility-building. 
+            No bragging required.
           </p>
-          <ul className="tips">
-            <li>
-              <strong>Third-party validation</strong> is always strongest (awards,
-              features in publications, endorsements)
-            </li>
-            <li>
-              <strong>Specificity</strong> beats generality (exact numbers, precise
-              roles, named organizations)
-            </li>
-          </ul>
+
+          <h3 style={{ fontSize: '1.25rem', marginTop: '1.5rem' }}>The Two Rules Of Thumb:</h3>
+          
+          <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+            <p><strong>1. Third-party validation always beats self-proclamation</strong></p>
+            <div className="comparison-example">
+              <span className="comparison-icon">❌</span>
+              <span>"Award-winning speaker"</span>
+            </div>
+            <div className="comparison-example">
+              <span className="comparison-icon">✅</span>
+              <span>"2024 NSA Keynote of the Year"</span>
+            </div>
+          </div>
+
+          <div style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+            <p><strong>2. Specificity always beats generality</strong></p>
+            <div className="comparison-example">
+              <span className="comparison-icon">❌</span>
+              <span>"Helped many companies"</span>
+            </div>
+            <div className="comparison-example">
+              <span className="comparison-icon">✅</span>
+              <span>"Former Microsoft Director: Built $4M Training Program"</span>
+            </div>
+          </div>
+
+          <h3 style={{ fontSize: '1.25rem', marginTop: '2rem' }}>Your Starting Point</h3>
           <p>
-            Choose the framework below that best matches your current credentials and
-            transform it into a signature that sells for you.
+            Don't have a TEDx talk or Fortune 500 client yet? No problem. The frameworks below work 
+            for every experience level – from industry expert to seasoned pro.
           </p>
 
           <div className="section-divider">•</div>
@@ -173,8 +218,8 @@ export default function SilentSellerPage() {
           {/* When You Have Industry Experience */}
           <h2 className="headline">When You Have Industry Experience (But No Speaking Credentials)</h2>
           <p>
-            When you're just starting out as a speaker but have valuable professional
-            expertise, focus on translating your industry knowledge into speaking
+            When you're just starting out as a speaker but have much professional
+            expertise, focus on translating your industry knowledge into
             credibility.
           </p>
           <div className="template-box">
@@ -189,12 +234,12 @@ export default function SilentSellerPage() {
             <br />
             <p>
               <strong>Better Example:</strong> <br />
-              "Financial Strategy Advisor for Tech Startups (Former PayPal Director)"<br />
-              "Healthcare Operations Specialist: Created $4.2M Efficiency System for Rural Hospitals"
+              "Ex-PayPal Director: Tech Startup CFO Advisor"<br />
+              "Saved Rural Hospitals $4.2M Through System Redesign"
             </p>
           </div>
           <p>
-            <strong>Implementation Guidance:</strong>
+            <strong>Key Points:</strong>
           </p>
           <ul className="tips">
             <li>Identify the most specific problem you've solved with measurable results</li>
@@ -221,16 +266,16 @@ export default function SilentSellerPage() {
             <br />
             <p>
               <strong>Better Example:</strong> <br />
-              "Advisory Council: National Retail Federation Technology Division"<br />
-              "Research Contributor: LinkedIn's Future of Work Initiative (2023-Present)"
+              "Advisory Council: National Retail Federation Tech Division"<br />
+              "Research Contributor: LinkedIn's Future of Work Initiative"
             </p>
           </div>
           <p>
-            <strong>Implementation Guidance:</strong>
+            <strong>Key Points:</strong>
           </p>
           <ul className="tips">
             <li>Choose organizations immediately recognizable to your target audience</li>
-            <li>Specify your exact role and timeframe to demonstrate ongoing involvement</li>
+            <li>Specify your exact role to demonstrate ongoing involvement</li>
           </ul>
 
           <div className="section-divider">•</div>
@@ -248,7 +293,7 @@ export default function SilentSellerPage() {
             <br />
             <p>
               <strong>Bad Example:</strong> <br />
-              "Published Author and Popular Podcaster"
+              "Published Author and Podcaster"
             </p>
             <br />
             <p>
@@ -258,7 +303,7 @@ export default function SilentSellerPage() {
             </p>
           </div>
           <p>
-            <strong>Implementation Guidance:</strong>
+            <strong>Key Points:</strong>
           </p>
           <ul className="tips">
             <li>Include specific metrics that demonstrate impact whenever possible</li>
@@ -290,7 +335,7 @@ export default function SilentSellerPage() {
             </p>
           </div>
           <p>
-            <strong>Implementation Guidance:</strong>
+            <strong>Key Points:</strong>
           </p>
           <ul className="tips">
             <li>Feature the most recognized organizations or events you've spoken for</li>
@@ -300,13 +345,12 @@ export default function SilentSellerPage() {
           <div className="section-divider">•</div>
 
           {/* Why This Matters */}
-          <h2 className="headline">Why This Matters: The Conversation-Starting Signature</h2>
+          <h2 className="headline">Final Thoughts</h2>
           <p>
-            Your first outreach message has one primary goal: starting a conversation, not
-            making a sale. Your signature credential works silently to build credibility
-            while your message focuses on building connection.
+            Your first outreach message has one primary goal: starting a conversation. NOT
+            making a sale! Your signature credential works silently to build credibility.
           </p>
-          <p>This is strategically powerful because:</p>
+          <p>This is impactful because:</p>
           <ol className="list-decimal list-inside mb-4">
             <li>
               <strong>Positioning Above Website Link:</strong> When decision-makers are
@@ -315,8 +359,7 @@ export default function SilentSellerPage() {
             </li>
             <li>
               <strong>Reduced Pressure in Messages:</strong> With your signature handling
-              the credibility-building, your messages can be more conversational and
-              less sales-focused.
+              the credibility-building, your messages can be more conversational.
             </li>
             <li>
               <strong>Consistent Background Authority:</strong> Every email you send
@@ -325,10 +368,9 @@ export default function SilentSellerPage() {
             </li>
           </ol>
           <p>
-            The best speakers know that getting booked isn't about selling your services –
+            When it comes to cold outreach, getting booked isn't about selling your services –
             it's about starting meaningful conversations with the right people. Your
-            signature credential does the heavy lifting so your message can focus on
-            building genuine connection.
+            signature credential punches above it's weight in that regard.
           </p>
 
           <div className="section-divider">•</div>
