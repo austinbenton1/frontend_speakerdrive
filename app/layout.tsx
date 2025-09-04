@@ -11,6 +11,7 @@ import GoogleAnalyticsLoader from "../components/GoogleAnalyticsLoader";
 import TwitterPixelLoader from "../components/TwitterPixelLoader";
 import MetaPixelLoader from "../components/MetaPixelLoader";
 import LinkedInPixelLoader from "../components/LinkedInPixelLoader";
+import AffiliateTracker from "../components/AffiliateTracker";
 import { PHProvider, PostHogPageview } from './providers/posthog-provider';
 import { GlobalEngagementTracker } from '@/app/components/tracking/global-engagement-tracker';
 import { Suspense } from 'react';
@@ -132,11 +133,7 @@ export default function RootLayout({
         <TwitterPixelLoader />
         <MetaPixelLoader />
         <LinkedInPixelLoader />
-        <script 
-  src="https://pushlapgrowth.com/affiliate-tracker.js" 
-  data-affiliate data-program-id="c00cd5d8-d6fc-422a-955e-3cb86ca90301" 
-  async>
-</script>
+        <AffiliateTracker />
       </head>
       <body className={cn(inter.className, "antialiased bg-white text-black")}>
         <PHProvider>
