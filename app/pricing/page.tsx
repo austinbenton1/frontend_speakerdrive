@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Check, X, Sparkles, Rocket, Zap, TrendingUp, Calendar, Target } from "lucide-react";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
@@ -160,12 +160,35 @@ const PRICING_FAQ_ITEMS = [
 // ================== PAGE COMPONENT ==================
 
 export default function PricingPage() {
+  // Affiliate tracking
+  const [signupUrl, setSignupUrl] = useState('https://app.speakerdrive.com/signup');
+
+  // Listen for affiliate ID changes and update signup URL
+  useEffect(() => {
+    const updateSignupUrl = () => {
+      const baseUrl = 'https://app.speakerdrive.com/signup';
+      if (typeof window !== 'undefined' && window.affiliateId) {
+        setSignupUrl(`${baseUrl}?ref=${window.affiliateId}`);
+      } else {
+        setSignupUrl(baseUrl);
+      }
+    };
+
+    // Check immediately
+    updateSignupUrl();
+
+    // Set up interval to check for changes
+    const interval = setInterval(updateSignupUrl, 100);
+
+    return () => clearInterval(interval);
+  }, []);
+
   const plans: PricingPlan[] = [
     {
       name: "LAUNCH",
       subtitle: "Start booking paid gigs",
       icon: <Sparkles className="h-10 w-10" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: signupUrl,
       ctaText: "Start Free Trial",
       priceHeading: (
         <>
@@ -192,7 +215,7 @@ export default function PricingPage() {
       name: "SCALE",
       subtitle: "Build steady revenue",
       icon: <Rocket className="h-10 w-10" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: signupUrl,
       ctaText: "Start Free Trial",
       priceHeading: (
         <>
@@ -220,7 +243,7 @@ export default function PricingPage() {
       name: "DOMINATE",
       subtitle: "Scale your impact",
       icon: <Zap className="h-10 w-10" />,
-      ctaLink: "https://app.speakerdrive.com/signup",
+      ctaLink: signupUrl,
       ctaText: "Start Free Trial",
       priceHeading: (
         <>
@@ -351,8 +374,6 @@ export default function PricingPage() {
                   </div>
                 </div>
               </div>
-
-
             </div>
           </section>
 
@@ -465,7 +486,7 @@ export default function PricingPage() {
               </div>
 
               <Link
-                href="https://app.speakerdrive.com/signup"
+                href={signupUrl}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-white text-gray-900 hover:bg-gray-100 transition-colors font-bold text-lg shadow-xl"
               >
                 Start Your Free Trial →

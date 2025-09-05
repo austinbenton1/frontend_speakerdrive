@@ -12,8 +12,8 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
       if (process.env.NODE_ENV === 'development') posthog.debug();
     },
     capture_pageview: false,
-    capture_pageleave: true,
-    autocapture: true,
+    capture_pageleave: false,
+    autocapture: false,
     session_recording: {
       maskAllInputs: false,
       maskTextSelector: '.sensitive',

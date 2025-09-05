@@ -1,6 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+// Extend Window interface for affiliate tracking
+declare global {
+  interface Window {
+    affiliateId?: string | null;
+  }
+}
 import {
   ChevronLeft,
   ChevronRight,
@@ -122,6 +129,29 @@ export function ToolsSection() {
   const [selectedCard, setSelectedCard] = useState<any>(null);
   const openModal = (card: any) => setSelectedCard(card);
   const closeModal = () => setSelectedCard(null);
+
+  // Affiliate tracking
+  const [signupUrl, setSignupUrl] = useState('https://app.speakerdrive.com/signup');
+
+  // Listen for affiliate ID changes and update signup URL
+  useEffect(() => {
+    const updateSignupUrl = () => {
+      const baseUrl = 'https://app.speakerdrive.com/signup';
+      if (typeof window !== 'undefined' && window.affiliateId) {
+        setSignupUrl(`${baseUrl}?ref=${window.affiliateId}`);
+      } else {
+        setSignupUrl(baseUrl);
+      }
+    };
+
+    // Check immediately
+    updateSignupUrl();
+
+    // Set up interval to check for changes
+    const interval = setInterval(updateSignupUrl, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Navigation handlers
   const handlePrev = () => {
@@ -329,7 +359,7 @@ export function ToolsSection() {
             {/* CTA button replacing the subtext */}
             <div className="p-4 flex justify-center">
               <a
-                href="https://app.speakerdrive.com/signup"
+                href={signupUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="
