@@ -4,7 +4,14 @@ import { ArrowRight, ChevronRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+
+// Extend Window interface for affiliate tracking
+declare global {
+  interface Window {
+    affiliateId?: string | null;
+  }
+}
 
 // Adjusted animations for dramatic fly-in for left/right images
 const floatLeft = {
@@ -63,6 +70,7 @@ export function Hero() {
   const MotionLink = motion(Link);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
+  const [signupUrl, setSignupUrl] = useState('https://app.speakerdrive.com/signup');
 
   // Adjusted scroll behavior: starts at 35° and ends fully upright (0°)
   const { scrollYProgress } = useScroll({
@@ -70,6 +78,26 @@ export function Hero() {
     offset: ["start start", "end end"],
   });
   const rotateX = useTransform(scrollYProgress, [0, 1], [35, 0]);
+
+  // Listen for affiliate ID changes and update signup URL
+  useEffect(() => {
+    const updateSignupUrl = () => {
+      const baseUrl = 'https://app.speakerdrive.com/signup';
+      if (typeof window !== 'undefined' && window.affiliateId) {
+        setSignupUrl(`${baseUrl}?ref=${window.affiliateId}`);
+      } else {
+        setSignupUrl(baseUrl);
+      }
+    };
+
+    // Check immediately
+    updateSignupUrl();
+
+    // Set up interval to check for changes
+    const interval = setInterval(updateSignupUrl, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Preload images
   useEffect(() => {
@@ -166,7 +194,7 @@ export function Hero() {
 
             {/* Enhanced CTA Button */}
             <motion.a
-              href="https://app.speakerdrive.com/signup"
+              href={signupUrl}
               className="cta-button inline-flex items-center justify-center rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 text-white px-6 py-3 text-lg font-bold shadow-md"
               variants={fadeUp}
               initial="hidden"

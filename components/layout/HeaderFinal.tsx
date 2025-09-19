@@ -4,11 +4,18 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
+// Extend Window interface for affiliate tracking
+declare global {
+  interface Window {
+    affiliateId?: string | null;
+  }
+}
+
 // Full nav includes "Home" for mobile
 const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Pricing", href: "http://speakerdrive.com/pricing" },
-  { label: "Contact", href: "http://speakerdrive.com/contact" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Contact", href: "/contact" },
 ];
 
 interface HeaderFinalProps {
@@ -27,6 +34,27 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
 
   const [hasScrolled, setHasScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [signupUrl, setSignupUrl] = useState('https://app.speakerdrive.com/signup');
+
+  // Listen for affiliate ID changes and update signup URL
+  useEffect(() => {
+    const updateSignupUrl = () => {
+      const baseUrl = 'https://app.speakerdrive.com/signup';
+      if (typeof window !== 'undefined' && window.affiliateId) {
+        setSignupUrl(`${baseUrl}?ref=${window.affiliateId}`);
+      } else {
+        setSignupUrl(baseUrl);
+      }
+    };
+
+    // Check immediately
+    updateSignupUrl();
+
+    // Set up interval to check for changes
+    const interval = setInterval(updateSignupUrl, 100);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Handle scroll effect and close mobile menu on scroll
   useEffect(() => {
@@ -83,7 +111,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               Login
             </a>
             <a
-              href="https://app.speakerdrive.com/signup"
+              href={signupUrl}
               className="cta-button text-base font-medium text-white px-5 py-2.5 rounded-lg animated-gradient bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600"
             >
               Start Free Trial
@@ -172,7 +200,7 @@ export function HeaderFinal({ companyName, logo, links, hideNavigation }: Header
               Login
             </a>
             <a
-              href="https://app.speakerdrive.com/signup"
+              href={signupUrl}
               className="mx-auto w-[85%] cta-button flex justify-center text-[17px] font-semibold text-white px-4 py-3 rounded-lg bg-gradient-to-r from-brand-blue to-blue-600 hover:from-brand-blue/90 hover:to-blue-600/90 transition-all shadow-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >

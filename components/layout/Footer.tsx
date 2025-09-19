@@ -38,19 +38,19 @@ export function Footer5() {
             <div className="w-1/2 md:w-auto flex flex-col gap-3 mb-8 md:mb-0">
               <h3 className="text-base font-bold text-zinc-300">Product</h3>
               <a
-                href="http://speakerdrive.com/about"
+                href="/about"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
                 About
               </a>
               <a
-                href="http://speakerdrive.com/pricing"
+                href="/pricing"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
                 Pricing
               </a>
               <a
-                href="http://speakerdrive.com/contact"
+                href="/contact"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
                 Contact
@@ -79,7 +79,7 @@ export function Footer5() {
                 support@speakerdrive.com
               </a>
               <a
-                href="http://speakerdrive.com/demo"
+                href="/demo"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
                 Book A Demo
@@ -108,7 +108,7 @@ export function Footer5() {
                 LinkedIn
               </a>
               <a
-                href="http://speakerdrive.com/contact"
+                href="/contact"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
                 Affiliates
@@ -129,7 +129,7 @@ export function Footer5() {
             </Link>
             <Link href="/legal/terms" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
               Terms of Service
-            </Link>
+            </Link> 
             <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
               Fair Use Policy
             </Link>

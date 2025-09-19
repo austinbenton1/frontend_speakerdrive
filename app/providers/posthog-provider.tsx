@@ -5,15 +5,15 @@ import { PostHogProvider } from 'posthog-js/react';
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-if (typeof window !== 'undefined') {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
     loaded: (posthog) => {
       if (process.env.NODE_ENV === 'development') posthog.debug();
     },
     capture_pageview: false,
-    capture_pageleave: true,
-    autocapture: true,
+    capture_pageleave: false,
+    autocapture: false,
     session_recording: {
       maskAllInputs: false,
       maskTextSelector: '.sensitive',
@@ -27,7 +27,7 @@ export function PostHogPageview(): null {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (pathname) {
+    if (pathname && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
       let url = window.origin + pathname;
       if (searchParams && searchParams.toString()) {
         url = url + `?${searchParams.toString()}`;
