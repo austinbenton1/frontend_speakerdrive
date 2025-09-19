@@ -12,6 +12,7 @@ import TwitterPixelLoader from "../components/TwitterPixelLoader";
 import MetaPixelLoader from "../components/MetaPixelLoader";
 import LinkedInPixelLoader from "../components/LinkedInPixelLoader";
 import { PHProvider, PostHogPageview } from './providers/posthog-provider';
+import ActiveCampaignLoader from "../components/ActiveCampaignLoader";
 import { GlobalEngagementTracker } from '@/app/components/tracking/global-engagement-tracker';
 import { Suspense } from 'react';
 
