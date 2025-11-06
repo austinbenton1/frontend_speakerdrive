@@ -89,20 +89,19 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* Right column: Responsive YouTube iframe (2/5 width) */}
-              <div className="md:w-3/5">
-                <div className="relative aspect-video w-full">
-                  <iframe
-                    className="absolute inset-0 w-full h-full"
-                    src="https://www.youtube.com/embed/bQYwZYRS9Z4?si=ERD3D34WfvWx4Mas"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </div>
+              {/* Right column: Responsive video (2/5 width) */}
+<div className="md:w-3/5">
+  <div className="relative aspect-video w-full">
+    <video 
+      controls 
+      poster="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/690c89b95c1881511aded820.jpg"
+      className="w-full h-full object-cover rounded-lg"
+    >
+      <source src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/690c8283ac59276208439709.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
             </div>
 
             {/* Visual separator */}
