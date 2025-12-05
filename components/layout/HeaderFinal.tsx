@@ -14,6 +14,7 @@ declare global {
 // Full nav includes "Home" for mobile
 const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Autopilot", href: "/autopilot" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
 ];
