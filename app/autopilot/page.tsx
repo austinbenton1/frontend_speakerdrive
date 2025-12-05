@@ -7,11 +7,11 @@ import { Footer5 } from "@/components/layout/Footer";
 
 export default function AutopilotPage() {
   // Affiliate tracking (matching pricing page logic)
-  const [ctaUrl, setCtaUrl] = useState('https://app.speakerdrive.com/login');
+  const [ctaUrl, setCtaUrl] = useState('https://app.speakerdrive.com/signup');
 
   useEffect(() => {
     const updateCtaUrl = () => {
-      const baseUrl = 'https://app.speakerdrive.com/login';
+      const baseUrl = 'https://app.speakerdrive.com/signup';
       if (typeof window !== 'undefined' && window.affiliateId) {
         setCtaUrl(`${baseUrl}?ref=${window.affiliateId}`);
       } else {
