@@ -133,6 +133,9 @@ export function Footer5() {
             <Link href="/legal/disclaimer" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
               Fair Use Policy
             </Link>
+            <Link href="/legal/affiliate" className="text-sm text-zinc-400 hover:text-brand-blue transition-colors">
+              Affiliate Terms
+            </Link>
           </div>
           
           {/* Copyright scramble */}
