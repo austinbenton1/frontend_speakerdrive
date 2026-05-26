@@ -108,8 +108,10 @@ export function Footer5() {
                 LinkedIn
               </a>
               <a
-                href="/contact"
+                href="https://affiliates.speakerdrive.com/register"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Affiliates
               </a>
