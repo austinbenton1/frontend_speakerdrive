@@ -190,25 +190,13 @@ export default function PricingPage() {
       icon: <Sparkles className="h-10 w-10" />,
       ctaLink: signupUrl,
       ctaText: "Start Free Trial",
-      priceHeading: (
-        <>
-          $29 <span className="text-base text-gray-400 line-through ml-2">$49</span>
-        </>
-      ),
+      priceHeading: "$49",
       priceSubtext: "Full Featured Trial • Cancel anytime",
       features: [
-        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "LinkedIn Profiles Included" },
-        { text: "Filter by Fee, Location & More" },
-        { text: "Email Unlocks", isHeader: true },
-        { text: "50 Email Unlocks per Month", bold: true, hideIcon: true },
-        { text: "Unlock Event Emails" },
-        { text: "Unlock Contact Emails", disabled: true },
-        { text: "Integrations", isHeader: true },
-        { text: "Connect to Gmail" },
-        { text: "CRM Export / Webhooks", disabled: true },
-        { text: "Integration Setup 1:1 Session", disabled: true }
+        { text: "Autopilot Messaging" },
+        { text: "50 Unlocks per Month" },
+        { text: "Bulk Lead Exports", disabled: true }
       ]
     },
     {
@@ -225,18 +213,10 @@ export default function PricingPage() {
       priceSubtext: "Full Featured Trial • Cancel anytime",
       isPopular: true,
       features: [
-        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "LinkedIn Profiles Included" },
-        { text: "Filter by Fee, Location & More" },
-        { text: "Email Unlocks", isHeader: true },
-        { text: "200 Email Unlocks per Month", bold: true, hideIcon: true },
-        { text: "Unlock Event Emails" },
-        { text: "Unlock Contact Emails" },
-        { text: "Integrations", isHeader: true },
-        { text: "Connect to Gmail" },
-        { text: "CRM Export / Webhooks" },
-        { text: "Integration Setup 1:1 Session", disabled: true }
+        { text: "Autopilot Messaging" },
+        { text: "200 Unlocks per Month" },
+        { text: "Bulk Lead Exports" }
       ]
     },
     {
@@ -252,18 +232,10 @@ export default function PricingPage() {
       ),
       priceSubtext: "Full Featured Trial • Cancel anytime",
       features: [
-        { text: "Discovery", isHeader: true },
         { text: "Unlimited Search & Discovery" },
-        { text: "LinkedIn Profiles Included" },
-        { text: "Filter by Fee, Location & More" },
-        { text: "Email Unlocks", isHeader: true },
-        { text: "750 Email Unlocks per Month", bold: true, hideIcon: true },
-        { text: "Unlock Event Emails" },
-        { text: "Unlock Contact Emails" },
-        { text: "Integrations", isHeader: true },
-        { text: "Connect to Gmail" },
-        { text: "CRM Export / Webhooks" },
-        { text: "Integration Setup 1:1 Session" }
+        { text: "Autopilot Messaging" },
+        { text: "750 Unlocks per Month" },
+        { text: "Bulk Lead Exports" }
       ]
     }
   ];
