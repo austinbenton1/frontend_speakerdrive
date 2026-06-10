@@ -152,32 +152,3 @@ export function ScreenshotLightbox({
     </figure>
   );
 }
-
-/** One line of the "what the replies turn into" strip — text-first, screenshot in a lightbox. */
-export function ProofLink({
-  label,
-  src,
-  alt,
-}: {
-  label: string;
-  src: string;
-  alt: string;
-}) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <li className="flex items-baseline justify-between gap-3 py-2.5">
-      <span className="text-[15px] leading-snug text-gray-800">{label}</span>
-      <button
-        onClick={() => setOpen(true)}
-        style={{ color: ACCENT }}
-        className="flex-shrink-0 whitespace-nowrap text-sm font-semibold italic underline decoration-1 underline-offset-2 hover:opacity-75"
-      >
-        view screenshot
-      </button>
-      {open && (
-        <LightboxOverlay src={src} alt={alt} onClose={() => setOpen(false)} />
-      )}
-    </li>
-  );
-}

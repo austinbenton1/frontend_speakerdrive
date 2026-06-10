@@ -9,7 +9,7 @@ import {
   REPLY_ENTRIES,
   templateAsPlainText,
 } from "../data";
-import { CopyTemplateButton, ProofLink, ScreenshotLightbox } from "../ui";
+import { CopyTemplateButton, ScreenshotLightbox } from "../ui";
 
 // Section 5 is constant across weekly entries.
 const BRACKET_ROWS: { chip: string; fill: React.ReactNode }[] = [
@@ -28,29 +28,6 @@ const BRACKET_ROWS: { chip: string; fill: React.ReactNode }[] = [
   {
     chip: "[what their audience worries about]",
     fill: null, // rendered inline so the ③ marker can be embedded
-  },
-];
-
-const PROOF_ITEMS = [
-  {
-    label: "First meeting booked in 3 days",
-    src: "/3rd_day-mh.png",
-    alt: "Screenshot: first meeting booked three days after outreach",
-  },
-  {
-    label: "7 minutes from outreach to booking",
-    src: "/7mins_meeting-mh.png",
-    alt: "Screenshot: meeting booked seven minutes after outreach",
-  },
-  {
-    label: "$45K corporate training budget approved",
-    src: "/45k_event-mh.png",
-    alt: "Screenshot: $45K corporate training budget approved",
-  },
-  {
-    label: "$12.5K–$15K conference keynote booked",
-    src: "/12k_keynote-mh.png",
-    alt: "Screenshot: $12.5K–$15K conference keynote booked",
   },
 ];
 
@@ -322,30 +299,10 @@ export default async function ReplyTeardownPage({
             </p>
           </div>
 
-          {/* Proof strip */}
-          <div className="mt-8">
-            <h3 className="text-base font-bold text-gray-900">
-              What the replies turn into:
-            </h3>
-            <ul className="mt-2 divide-y divide-gray-100">
-              {PROOF_ITEMS.map((item) => (
-                <ProofLink
-                  key={item.src}
-                  label={item.label}
-                  src={item.src}
-                  alt={item.alt}
-                />
-              ))}
-            </ul>
-            <p className="mt-1.5 text-xs italic text-gray-400">
-              Screenshots shared with permission.
-            </p>
-          </div>
-
         </section>
       </article>
 
-      {/* Shared closer — full-bleed dark band, copy lives in components/cta */}
+      {/* Shared closer — results, pricing, FAQ live in components/cta */}
       <div className="mt-16">
         <CtaSection
           variant="primary"

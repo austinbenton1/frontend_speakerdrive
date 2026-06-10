@@ -1,15 +1,17 @@
+"use client";
+
 // Reusable CTA sections — closers, not explainers. They sit below demo videos,
-// at the bottom of free resources, and at other warm-traffic moments. One job:
-// kill the last three objections (cost, effort, saturation) and produce one click.
+// at the bottom of free resources, and at other warm-traffic moments.
 //
 //   <CtaSection variant="primary" slot="replies-01" />
-//   <CtaSection variant="slim" placement="resource" slot="guide-followup" />
+//   <CtaSection variant="slim" placement="resource" slot="guide-xyz" />
 //
-// All numbers/strings come from components/cta/config.ts — never hardcode
-// counts in instances. `slot` lands in data-cta-placement on the button so
-// each placement's conversion can be compared.
+// Shared numbers come from components/cta/config.ts — never hardcode counts in
+// instances. `slot` lands in data-cta-placement on the button so each
+// placement's conversion can be compared.
 
-import { CTA_CONFIG, USE_REPLY_RATE_STAT } from "./config";
+import { useEffect, useState } from "react";
+import { CTA_CONFIG } from "./config";
 
 type CommonProps = {
   /** Page-or-slot name for click tracking (data-cta-placement). */
@@ -20,16 +22,9 @@ type CommonProps = {
 
 type PrimaryProps = CommonProps & {
   variant: "primary";
-  imageSrc?: string;
-  imageAlt?: string;
-  /** Small caption under the visual. Only pass when it matches the image
-   *  (e.g. "A real reply, from a real planner. This is the whole point."
-   *  once the reply screenshot exists). */
-  imageCaption?: string;
-  /** Green "Replied" pill on the visual — only with a reply screenshot. */
-  showRepliedBadge?: boolean;
-  /** Founder strip for lower-trust pages (free resources). Omit below demos. */
-  founderStrip?: boolean;
+  /** The "Are you looking for paid speaking engagements? 👇" transition line.
+   *  On by default — disable if the page provides its own lead-in. */
+  leadIn?: boolean;
 };
 
 type SlimProps = CommonProps & {
@@ -39,28 +34,48 @@ type SlimProps = CommonProps & {
 
 export type CtaSectionProps = PrimaryProps | SlimProps;
 
-const { EVENT_COUNT, REPLY_RATE, FREE_UNLOCKS, CTA_URL } = CTA_CONFIG;
+const { EVENT_COUNT, FREE_UNLOCKS, CTA_URL } = CTA_CONFIG;
 
-const STATS: { big: string; label: string }[] = [
+const RESULTS = [
   {
-    big: EVENT_COUNT,
-    label:
-      "Vetted events & decision-makers, with fee estimates. New opportunities added daily.",
+    label: "First meeting booked in 3 days using SpeakerDrive",
+    src: "/3rd_day-mh.png",
   },
-  USE_REPLY_RATE_STAT
-    ? {
-        big: REPLY_RATE,
-        label: "Average reply rate across outreach sent on the platform.",
-      }
-    : {
-        big: "$3K–$20K+",
-        label:
-          "Fee-potential estimates on every event, so you pitch where the budget is.",
-      },
+  { label: "7 minutes from outreach to booking", src: "/7mins_meeting-mh.png" },
+  { label: "$45K corporate training budget approved", src: "/45k_event-mh.png" },
+  { label: "$12.5K-$15K conference keynote booked", src: "/12k_keynote-mh.png" },
+];
+
+const FAQS: { color: string; question: string; answer: string }[] = [
   {
-    big: "1 speaker per lead",
-    label:
-      "Unlock a lead and it leaves the platform. You're never pitching alongside 50 other speakers.",
+    color: "bg-green-500",
+    question: "What is SpeakerDrive?",
+    answer:
+      "Events actively booking speakers, the decision-maker's verified email, and outreach that gets replies — one platform.",
+  },
+  {
+    color: "bg-blue-500",
+    question: "Won't the leads get saturated?",
+    answer:
+      "No. Unlock a lead and it's pulled from the platform for everyone else, three weeks minimum. The planner hears from you — not a crowd.",
+  },
+  {
+    color: "bg-purple-500",
+    question: "How does “a month of outreach in one sitting” work?",
+    answer:
+      "Pick your events, add them to Autopilot. It sends 25–30 personalized emails a day with automatic follow-ups — and stops the moment someone replies.",
+  },
+  {
+    color: "bg-orange-500",
+    question: "What's the actual ROI?",
+    answer:
+      "The most popular plan is $99/month. One $5,000 keynote covers four years of it.",
+  },
+  {
+    color: "bg-rose-500",
+    question: "Am I signing a contract?",
+    answer:
+      "No. Month-to-month, cancel anytime. The trial doesn't even ask for a card.",
   },
 ];
 
@@ -85,32 +100,85 @@ const SLIM_COPY = {
   },
 } as const;
 
+function ScreenshotModal({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 cursor-zoom-out overflow-auto bg-black/80 p-3 backdrop-blur-sm sm:p-8"
+    >
+      <button
+        onClick={onClose}
+        aria-label="Close screenshot"
+        className="fixed right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        className="mx-auto my-auto min-h-full w-full max-w-3xl rounded-lg object-contain sm:min-h-0"
+      />
+    </div>
+  );
+}
+
 function CtaButton({
-  label,
   href,
   slot,
-  fullWidthMobile,
+  label = "Get Started. It's FREE",
+  emoji = "🚀",
 }: {
-  label: string;
   href: string;
   slot: string;
-  fullWidthMobile?: boolean;
+  label?: string;
+  emoji?: string;
 }) {
   return (
     <a
       href={href}
       data-cta-placement={slot}
-      className={`inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 px-8 py-4 text-lg font-semibold text-white shadow-md transition-shadow hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400 ${
-        fullWidthMobile ? "w-full min-[960px]:w-auto" : ""
-      }`}
+      className="cta-button animated-gradient inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 px-6 py-3 text-lg font-bold text-white shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
     >
-      {label}
+      {label} {emoji && <span className="ml-2">{emoji}</span>}
     </a>
   );
 }
 
 export function CtaSection(props: CtaSectionProps) {
   const href = props.href ?? CTA_URL;
+  const [modal, setModal] = useState<{ src: string; alt: string } | null>(null);
 
   if (props.variant === "slim") {
     const copy = SLIM_COPY[props.placement ?? "generic"];
@@ -124,12 +192,13 @@ export function CtaSection(props: CtaSectionProps) {
             <p className="mt-1.5 text-[15px] text-gray-500">{copy.sub}</p>
           </div>
           <div className="w-full flex-shrink-0 text-center min-[960px]:w-auto">
-            <CtaButton
-              label={copy.button}
+            <a
               href={href}
-              slot={props.slot}
-              fullWidthMobile
-            />
+              data-cta-placement={props.slot}
+              className="cta-button animated-gradient inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-brand-blue via-blue-500 to-blue-600 px-6 py-3 text-lg font-bold text-white shadow-md min-[960px]:w-auto"
+            >
+              {copy.button}
+            </a>
             <p className="mt-2 text-xs text-gray-400">{copy.micro}</p>
           </div>
         </div>
@@ -137,125 +206,107 @@ export function CtaSection(props: CtaSectionProps) {
     );
   }
 
-  const {
-    imageSrc = CTA_CONFIG.PRIMARY_IMAGE,
-    imageAlt = CTA_CONFIG.PRIMARY_IMAGE_ALT,
-    imageCaption,
-    showRepliedBadge,
-    founderStrip,
-  } = props;
-
-  const visual = (
-    <div>
-      <div className="relative -rotate-[1.5deg]">
-        {showRepliedBadge && (
-          <span className="absolute -right-2 -top-2 z-10 rounded-full bg-green-500 px-3 py-1 text-xs font-bold text-white shadow-md">
-            Replied
-          </span>
-        )}
-        {/* Simple email-client frame */}
-        <div className="overflow-hidden rounded-xl bg-white shadow-2xl">
-          <div className="flex items-center gap-1.5 border-b border-gray-100 bg-gray-50 px-4 py-2.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-gray-300" />
-          </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={imageSrc} alt={imageAlt} className="w-full" />
-        </div>
-      </div>
-      {imageCaption && (
-        <p className="mt-4 text-center text-xs text-white/50">{imageCaption}</p>
-      )}
-    </div>
-  );
+  const { leadIn = true } = props;
 
   return (
-    <section className="bg-[#0F172A] text-white">
-      <div className="mx-auto max-w-[1100px] px-6 py-14 min-[960px]:py-24">
-        <div className="grid grid-cols-1 items-center gap-10 min-[960px]:grid-cols-[55fr_45fr] min-[960px]:gap-16">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-blue">
-              Free Trial · No Credit Card
-            </p>
-            <h2 className="mt-4 text-[32px] font-bold leading-[1.1] min-[960px]:text-[44px]">
-              A Month of Outreach. One Sitting.
-            </h2>
-            <p className="mt-5 text-[17px] leading-relaxed text-white/80">
-              Search {EVENT_COUNT} speaking opportunities. Unlock the
-              decision-maker&apos;s verified email. SpeakerDrive writes bespoke
-              outreach — their event, your expertise, your voice — and sends it
-              on autopilot. You just pick up the conversations that come back.
-            </p>
+    <section className="mx-auto max-w-2xl px-5">
+      {/* Lead-in — rolls the page content into the pitch */}
+      {leadIn && (
+        <p className="text-center text-xl font-semibold text-gray-900">
+          Are you looking for paid speaking engagements?{" "}
+          <span aria-hidden="true">👇</span>
+        </p>
+      )}
 
-            {/* Visual sits here on mobile, right column on desktop */}
-            <div className="mt-8 min-[960px]:hidden">{visual}</div>
+      <div className={leadIn ? "mt-10 text-center" : "text-center"}>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0B82DD]">
+          Free Trial · No Credit Card
+        </p>
+        <h2 className="mt-3 text-[30px] font-bold leading-[1.15] text-gray-900 sm:text-[38px]">
+          Stop Waiting on Referrals. Go&nbsp;Get&nbsp;the&nbsp;Gig.
+        </h2>
+        <p className="mt-4 text-lg font-medium text-gray-700">
+          Referrals are great, until the calendar goes quiet.
+        </p>
+        <p className="mx-auto mt-3 max-w-xl leading-relaxed text-gray-600">
+          SpeakerDrive puts you directly in front of the decision-makers with
+          real budgets, writes the outreach, and follows up automatically. You
+          just pick up the conversations that come back.
+        </p>
+      </div>
 
-            {/* Stat row — the numbers are the design */}
-            <div className="mt-9 flex flex-col divide-y divide-white/15 min-[960px]:flex-row min-[960px]:divide-x min-[960px]:divide-y-0">
-              {STATS.map((stat, i) => (
-                <div
-                  key={stat.big}
-                  className={`py-4 min-[960px]:py-0 ${
-                    i === 0
-                      ? "min-[960px]:pr-6"
-                      : i === STATS.length - 1
-                        ? "min-[960px]:pl-6"
-                        : "min-[960px]:px-6"
-                  }`}
+      {/* Results — same block as the get-the-list page */}
+      <div className="mt-9 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
+        <p className="font-semibold text-gray-900">Real speakers, real results:</p>
+        <ul className="ml-1 mt-3 space-y-2 text-gray-600">
+          {RESULTS.map((r) => (
+            <li key={r.src} className="flex items-start">
+              <span className="mr-2">•</span>
+              <span>
+                {r.label}{" "}
+                <button
+                  onClick={() => setModal({ src: r.src, alt: r.label })}
+                  className="font-medium text-purple-600 underline hover:text-purple-700"
                 >
-                  <p
-                    className={`text-[28px] font-bold leading-tight ${
-                      stat.big.includes(" ") ? "" : "whitespace-nowrap"
-                    }`}
-                  >
-                    {stat.big}
-                  </p>
-                  <p className="mt-1.5 text-sm leading-snug text-white/70">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+                  [view screenshot →]
+                </button>
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-sm italic text-gray-500">
+          *Screenshots shared with permission
+        </p>
+        <p className="mt-3 text-gray-600">
+          Direct outreach means direct results.
+        </p>
+      </div>
 
-            <p className="mt-9 text-[15px] text-white/80">
-              Search your exact niche first. If your events aren&apos;t in
-              there, you&apos;ve spent ten minutes and zero dollars.
-            </p>
-
-            <div className="mt-5">
-              <CtaButton
-                label="Start Free →"
-                href={href}
-                slot={props.slot}
-                fullWidthMobile
-              />
-              <p className="mt-3 text-sm text-white/60">
-                No credit card · {FREE_UNLOCKS} free lead unlocks · Set up in
-                ~5 minutes
-              </p>
-            </div>
-
-            {founderStrip && (
-              <div className="mt-9 flex items-center gap-3 border-t border-white/10 pt-6">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/austin_benton_headshot.png"
-                  alt="Austin Benton"
-                  className="h-10 w-10 rounded-full object-cover"
-                />
-                <p className="text-sm leading-snug text-white/70">
-                  Built by Austin Benton. I&apos;ve run lead generation for a
-                  speaker bureau for 5+ years — SpeakerDrive is that entire
-                  system, productized.
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="hidden min-[960px]:block">{visual}</div>
+      {/* CTA — homepage hero button */}
+      <div className="mt-9 text-center">
+        <CtaButton href={href} slot={props.slot} />
+        <div className="mx-auto mt-6 max-w-md text-[15px] leading-relaxed text-gray-600">
+          <p>
+            SpeakerDrive is $99/month after a 7 day trial. 30 seconds to sign
+            up. No credit card needed. No tricks, no contracts.
+          </p>
+          <p className="mt-3 font-medium text-gray-800">
+            One $5K speaking gig covers 4 years of membership. Do the math.
+          </p>
         </div>
       </div>
+
+      {/* FAQ — same card treatment as the get-the-list page */}
+      <div className="mt-12 space-y-4">
+        {FAQS.map((faq) => (
+          <div
+            key={faq.question}
+            className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-gray-300 hover:shadow-md"
+          >
+            <div className="flex items-start gap-4">
+              <div
+                className={`h-10 w-10 flex-shrink-0 ${faq.color} flex items-center justify-center rounded-full transition-transform group-hover:scale-110`}
+              >
+                <span className="text-lg font-bold text-white">?</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="mb-2 text-lg font-semibold text-black">
+                  {faq.question}
+                </h3>
+                <p className="leading-relaxed text-gray-600">{faq.answer}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {modal && (
+        <ScreenshotModal
+          src={modal.src}
+          alt={modal.alt}
+          onClose={() => setModal(null)}
+        />
+      )}
     </section>
   );
 }
