@@ -46,33 +46,28 @@ const RESULTS = [
   { label: "$12.5K-$15K conference keynote booked", src: "/12k_keynote-mh.png" },
 ];
 
-const FAQS: { color: string; question: string; answer: string }[] = [
+const FAQS: { question: string; answer: string }[] = [
   {
-    color: "bg-green-500",
     question: "What is SpeakerDrive?",
     answer:
       "Events actively booking speakers, the decision-maker's verified email, and outreach that gets replies — one platform.",
   },
   {
-    color: "bg-blue-500",
     question: "Won't the leads get saturated?",
     answer:
       "No. Unlock a lead and it's pulled from the platform for everyone else, three weeks minimum. The planner hears from you — not a crowd.",
   },
   {
-    color: "bg-purple-500",
     question: "How does “a month of outreach in one sitting” work?",
     answer:
       "Pick your events, add them to Autopilot. It sends 25–30 personalized emails a day with automatic follow-ups — and stops the moment someone replies.",
   },
   {
-    color: "bg-orange-500",
     question: "What's the actual ROI?",
     answer:
       "The most popular plan is $99/month. One $5,000 keynote covers four years of it.",
   },
   {
-    color: "bg-rose-500",
     question: "Am I signing a contract?",
     answer:
       "No. Month-to-month, cancel anytime. The trial doesn't even ask for a card.",
@@ -209,26 +204,31 @@ export function CtaSection(props: CtaSectionProps) {
   const { leadIn = true } = props;
 
   return (
-    <section className="mx-auto max-w-2xl px-5">
+    <section className="container mx-auto max-w-6xl px-4 text-center">
       {/* Lead-in — rolls the page content into the pitch */}
       {leadIn && (
-        <p className="text-center text-xl font-semibold text-gray-900">
+        <p className="text-xl font-semibold text-gray-900">
           Are you looking for paid speaking engagements?{" "}
           <span aria-hidden="true">👇</span>
         </p>
       )}
 
-      <div className={leadIn ? "mt-10 text-center" : "text-center"}>
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#0B82DD]">
+      {/* Header — same treatment as the homepage map section */}
+      <div className={leadIn ? "mt-12" : ""}>
+        <p className="mb-4 text-base font-semibold uppercase tracking-wide text-gray-600 sm:text-lg">
           Free Trial · No Credit Card
         </p>
-        <h2 className="mt-3 text-[30px] font-bold leading-[1.15] text-gray-900 sm:text-[38px]">
-          Stop Waiting on Referrals. Go&nbsp;Get&nbsp;the&nbsp;Gig.
+        <h2 className="mb-6 text-3xl font-extrabold text-gray-900 sm:text-5xl lg:text-6xl">
+          Stop Waiting on Referrals.
+          <br className="hidden sm:block" />{" "}
+          <span className="bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 bg-clip-text text-transparent">
+            Go Get the Gig.
+          </span>
         </h2>
-        <p className="mt-4 text-lg font-medium text-gray-700">
+        <p className="mx-auto max-w-2xl text-lg font-medium text-gray-600 sm:text-xl">
           Referrals are great, until the calendar goes quiet.
         </p>
-        <p className="mx-auto mt-3 max-w-xl leading-relaxed text-gray-600">
+        <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-gray-600">
           SpeakerDrive puts you directly in front of the decision-makers with
           real budgets, writes the outreach, and follows up automatically. You
           just pick up the conversations that come back.
@@ -236,7 +236,7 @@ export function CtaSection(props: CtaSectionProps) {
       </div>
 
       {/* Results — same block as the get-the-list page */}
-      <div className="mt-9 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-7">
+      <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-sm sm:p-7">
         <p className="font-semibold text-gray-900">Real speakers, real results:</p>
         <ul className="ml-1 mt-3 space-y-2 text-gray-600">
           {RESULTS.map((r) => (
@@ -276,26 +276,14 @@ export function CtaSection(props: CtaSectionProps) {
         </div>
       </div>
 
-      {/* FAQ — same card treatment as the get-the-list page */}
-      <div className="mt-12 space-y-4">
+      {/* FAQ — two plain columns, easy to read */}
+      <div className="mx-auto mt-16 grid max-w-4xl gap-x-14 gap-y-10 text-left sm:grid-cols-2">
         {FAQS.map((faq) => (
-          <div
-            key={faq.question}
-            className="group rounded-2xl border border-gray-200 bg-white p-6 transition-all duration-300 hover:border-gray-300 hover:shadow-md"
-          >
-            <div className="flex items-start gap-4">
-              <div
-                className={`h-10 w-10 flex-shrink-0 ${faq.color} flex items-center justify-center rounded-full transition-transform group-hover:scale-110`}
-              >
-                <span className="text-lg font-bold text-white">?</span>
-              </div>
-              <div className="flex-1">
-                <h3 className="mb-2 text-lg font-semibold text-black">
-                  {faq.question}
-                </h3>
-                <p className="leading-relaxed text-gray-600">{faq.answer}</p>
-              </div>
-            </div>
+          <div key={faq.question}>
+            <h3 className="text-[17px] font-semibold text-gray-900">
+              {faq.question}
+            </h3>
+            <p className="mt-2 leading-relaxed text-gray-600">{faq.answer}</p>
           </div>
         ))}
       </div>
