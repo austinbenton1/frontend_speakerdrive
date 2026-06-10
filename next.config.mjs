@@ -26,6 +26,16 @@ const nextConfig = {
     unoptimized: true,
     domains: ['storage.googleapis.com'], // Allow loading from Google Storage
   },
+  async redirects() {
+    return [
+      {
+        // Old event-identifying slug, briefly live; replies pages use neutral numbered slugs
+        source: "/replies/safety-congress",
+        destination: "/replies/01",
+        permanent: true,
+      },
+    ];
+  },
   // Example: custom headers for .mp4 or .webm:
   async headers() {
     return [

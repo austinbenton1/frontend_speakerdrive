@@ -65,6 +65,60 @@ export function CopyTemplateButton({ text }: { text: string }) {
   );
 }
 
+function LightboxOverlay({
+  src,
+  alt,
+  onClose,
+}: {
+  src: string;
+  alt: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 cursor-zoom-out overflow-auto bg-black/80 p-3 backdrop-blur-sm sm:p-8"
+    >
+      <button
+        onClick={onClose}
+        aria-label="Close zoomed screenshot"
+        className="fixed right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="h-5 w-5"
+          aria-hidden="true"
+        >
+          <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        className="mx-auto my-auto min-h-full w-full max-w-3xl rounded-lg object-contain sm:min-h-0"
+      />
+    </div>
+  );
+}
+
 export function ScreenshotLightbox({
   src,
   alt,
@@ -75,19 +129,6 @@ export function ScreenshotLightbox({
   caption: string;
 }) {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open]);
 
   return (
     <figure className="my-0">
@@ -106,36 +147,37 @@ export function ScreenshotLightbox({
       </figcaption>
 
       {open && (
-        <div
-          onClick={() => setOpen(false)}
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 cursor-zoom-out overflow-auto bg-black/80 p-3 backdrop-blur-sm sm:p-8"
-        >
-          <button
-            onClick={() => setOpen(false)}
-            aria-label="Close zoomed screenshot"
-            className="fixed right-4 top-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white hover:bg-white/25"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="h-5 w-5"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt}
-            className="mx-auto my-auto min-h-full w-full max-w-3xl rounded-lg object-contain sm:min-h-0"
-          />
-        </div>
+        <LightboxOverlay src={src} alt={alt} onClose={() => setOpen(false)} />
       )}
     </figure>
+  );
+}
+
+/** One line of the "what the replies turn into" strip — text-first, screenshot in a lightbox. */
+export function ProofLink({
+  label,
+  src,
+  alt,
+}: {
+  label: string;
+  src: string;
+  alt: string;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <li className="flex items-baseline justify-between gap-3 py-2.5">
+      <span className="text-[15px] leading-snug text-gray-800">{label}</span>
+      <button
+        onClick={() => setOpen(true)}
+        style={{ color: ACCENT }}
+        className="flex-shrink-0 whitespace-nowrap text-sm font-semibold italic underline decoration-1 underline-offset-2 hover:opacity-75"
+      >
+        view screenshot
+      </button>
+      {open && (
+        <LightboxOverlay src={src} alt={alt} onClose={() => setOpen(false)} />
+      )}
+    </li>
   );
 }

@@ -5,6 +5,13 @@
 //   2. Add an entry below (sections 1–4 of the page). Section 5 (the
 //      SpeakerDrive pivot + CTA) is shared and lives in the page itself.
 //   3. Send people to speakerdrive.com/replies/<slug>
+//
+// Anonymity check, every entry:
+//   - Neutral numbered slug (01, 02, ...) — never event-identifying
+//   - No org/event identifiers in page copy
+//   - Screenshot blur covers org name, subject line, sender details, and
+//     exact dates. The copy and the image have to agree — one leak undoes
+//     the other.
 
 export type TemplateSegment = {
   /** 1–4 → renders ①–④ in the gutter, matching the teardown */
@@ -45,20 +52,20 @@ export type ReplyEntry = {
 
 export const REPLY_ENTRIES: ReplyEntry[] = [
   {
-    slug: "safety-congress",
+    slug: "01",
     eyebrow: "You commented “TEMPLATE” — here it is.",
-    headline: "The exact email behind this reply",
-    sub: "Four sentences, one tiny ask, sent cold to a senior event planner at a national safety council. Below: the real thread, the template, and the teardown of why it worked.",
-    screenshot: "/replies/safety-congress.png",
+    headline: "The 4-sentence email that got a yes",
+    sub: "Sent cold to a senior event planner. Here's the email — and a quick breakdown of why it worked.",
+    screenshot: "/replies/01.png",
     screenshotAlt:
-      "Email thread: a planner replying “Yes, please send over a clip” to a four-sentence cold email about a safety congress",
+      "Email thread: an event planner replying “Yes, please send over a clip” to a four-sentence cold email",
     caption: "The actual thread.",
     templateIntro:
       "Brackets are where your research goes. (More on that in a minute — it matters.)",
     template: [
       [{ text: "Hello [First Name]," }],
       [
-        { marker: 1, text: "I just saw [Event Name] (looks great)." },
+        { marker: 1, text: "I just saw [Event Name] (looks [compliment])." },
         {
           marker: 2,
           text: "I'm a speaker in this space, and have a talk that'd fit your [their audience].",
@@ -85,9 +92,9 @@ export const REPLY_ENTRIES: ReplyEntry[] = [
       {
         marker: 1,
         title: "It opens in their world, not yours.",
-        quote: "I just saw [Event Name] (looks great).",
+        quote: "I just saw [Event Name] (looks [compliment]).",
         paragraphs: [
-          "Most speaker pitches open with credentials — that's about you. This opens with their event and one small, specific compliment. By the end of line one, it doesn't read like a cold email anymore.",
+          "So many speaker pitches open with credentials — that's about you. This opens with their event, plus a small compliment. It doesn't need to be clever: even a one-word “(looks great)” takes the edge off a cold email. By the end of line one, it doesn't read like a pitch anymore.",
         ],
       },
       {

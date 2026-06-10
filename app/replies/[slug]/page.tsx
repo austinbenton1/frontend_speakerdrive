@@ -8,7 +8,50 @@ import {
   REPLY_ENTRIES,
   templateAsPlainText,
 } from "../data";
-import { CopyTemplateButton, ScreenshotLightbox } from "../ui";
+import { CopyTemplateButton, ProofLink, ScreenshotLightbox } from "../ui";
+
+// Section 5 is constant across weekly entries.
+const BRACKET_ROWS: { chip: string; fill: React.ReactNode }[] = [
+  {
+    chip: "[Event Name]",
+    fill: "A living database of events actively booking speakers — new opportunities added and verified daily",
+  },
+  {
+    chip: "[First Name]",
+    fill: "The person behind the event — scored by how close they sit to the booking decision",
+  },
+  {
+    chip: "their email",
+    fill: "Verified before it ever reaches you — and auto-refunded if one ever bounces",
+  },
+  {
+    chip: "[what their audience worries about]",
+    fill: null, // rendered inline so the ③ marker can be embedded
+  },
+];
+
+const PROOF_ITEMS = [
+  {
+    label: "First meeting booked in 3 days",
+    src: "/3rd_day-mh.png",
+    alt: "Screenshot: first meeting booked three days after outreach",
+  },
+  {
+    label: "7 minutes from outreach to booking",
+    src: "/7mins_meeting-mh.png",
+    alt: "Screenshot: meeting booked seven minutes after outreach",
+  },
+  {
+    label: "$45K corporate training budget approved",
+    src: "/45k_event-mh.png",
+    alt: "Screenshot: $45K corporate training budget approved",
+  },
+  {
+    label: "$12.5K–$15K conference keynote booked",
+    src: "/12k_keynote-mh.png",
+    alt: "Screenshot: $12.5K–$15K conference keynote booked",
+  },
+];
 
 const serif = Source_Serif_4({
   subsets: ["latin"],
@@ -223,26 +266,78 @@ export default async function ReplyTeardownPage({
           >
             The template is the easy part
           </h2>
-          <div className="mt-4 space-y-4 leading-relaxed text-gray-600">
+          <p className="mt-4 leading-relaxed text-gray-600">
+            Look back at the brackets. Every one of them is research the
+            template can&apos;t do for you — and per send, it&apos;s the
+            difference between 30 seconds and 30 minutes of digging. It&apos;s
+            where outreach quietly dies.
+          </p>
+
+          {/* Bracket chips → what fills them */}
+          <div className="mt-6 divide-y divide-gray-100 rounded-xl border border-gray-200 bg-gray-50 px-4 sm:px-5">
+            {BRACKET_ROWS.map((row) => (
+              <div
+                key={row.chip}
+                className="flex flex-col gap-1.5 py-3.5 sm:flex-row sm:items-baseline sm:gap-3"
+              >
+                <span className="flex flex-shrink-0 items-baseline gap-2 sm:w-[200px]">
+                  <code className="rounded-md border border-gray-200 bg-white px-1.5 py-0.5 font-mono text-[12px] leading-relaxed text-gray-800">
+                    {row.chip}
+                  </code>
+                  <span aria-hidden="true" className="text-gray-400">
+                    →
+                  </span>
+                </span>
+                <span className="text-[15px] leading-relaxed text-gray-600">
+                  {row.fill ?? (
+                    <>
+                      Event and audience context pulled from the web — so the
+                      hardest line,{" "}
+                      <span className="inline-flex translate-y-[3px]">
+                        <MarkerCircle n={3} />
+                      </span>
+                      , writes itself
+                    </>
+                  )}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 space-y-4 leading-relaxed text-gray-600">
             <p>
-              Look back at the brackets. The event name. The right contact.
-              Their verified email. What their audience actually worries about
-              — the thing line{" "}
-              <span className="inline-flex translate-y-[3px]">
-                <MarkerCircle n={3} />
-              </span>{" "}
-              runs on.
+              Here&apos;s the part you couldn&apos;t see in the screenshot:
+              that email wasn&apos;t written by hand. SpeakerDrive drafted it —
+              the event, the planner, the verified email, the audience context,
+              all four sentences — and the speaker reviewed it and hit approve.
+              The teardown you just read isn&apos;t a writing lesson. It&apos;s
+              the spec the product runs on.
             </p>
             <p>
-              None of that is template. That&apos;s research. It&apos;s the
-              difference between 30 seconds per send and 30 minutes of digging
-              — and it&apos;s where most speakers quietly give up.
+              One more thing, since you&apos;re holding the template now: when
+              a lead gets unlocked in SpeakerDrive, it comes off the board for
+              every other user — for a minimum of three full weeks (21 days).
+              Kelly got one email, not the same pitch from forty speakers.
             </p>
-            <p>
-              That&apos;s the part SpeakerDrive does: it finds events actively
-              booking speakers, the decision-maker behind each one, verified
-              contact info, and the audience context — then drafts the message
-              for you.
+          </div>
+
+          {/* Proof strip */}
+          <div className="mt-8">
+            <h3 className="text-base font-bold text-gray-900">
+              What the replies turn into:
+            </h3>
+            <ul className="mt-2 divide-y divide-gray-100">
+              {PROOF_ITEMS.map((item) => (
+                <ProofLink
+                  key={item.src}
+                  label={item.label}
+                  src={item.src}
+                  alt={item.alt}
+                />
+              ))}
+            </ul>
+            <p className="mt-1.5 text-xs italic text-gray-400">
+              Screenshots shared with permission.
             </p>
           </div>
 
@@ -258,6 +353,12 @@ export default async function ReplyTeardownPage({
               No credit card required · Find your first event in 2 minutes
             </p>
           </div>
+
+          <p className="mt-8 text-sm italic leading-relaxed text-gray-500">
+            P.S. Before SpeakerDrive, I spent years booking speakers at a
+            bureau — doing this exact research by hand. This product is that
+            work, automated. — Austin
+          </p>
         </section>
       </article>
 
