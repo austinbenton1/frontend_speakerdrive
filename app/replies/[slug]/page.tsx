@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CtaSection } from "@/components/cta/CtaSection";
 import { Footer5 } from "@/components/layout/Footer";
 import {
   getReplyEntry,
@@ -341,28 +342,25 @@ export default async function ReplyTeardownPage({
             </p>
           </div>
 
-          <div className="mt-8">
-            <a
-              href={ctaHref}
-              style={{ backgroundColor: ACCENT }}
-              className="inline-flex w-full items-center justify-center rounded-xl px-8 py-4 text-lg font-semibold text-white shadow-md transition-all hover:opacity-90 hover:shadow-lg sm:w-auto"
-            >
-              Start free trial
-            </a>
-            <p className="mt-3 text-sm text-gray-500">
-              No credit card required · Find your first event in 2 minutes
-            </p>
-          </div>
-
-          <p className="mt-8 text-sm italic leading-relaxed text-gray-500">
-            P.S. Before SpeakerDrive, I spent years booking speakers at a
-            bureau — doing this exact research by hand. This product is that
-            work, automated. — Austin
-          </p>
         </section>
       </article>
 
+      {/* Shared closer — full-bleed dark band, copy lives in components/cta */}
       <div className="mt-16">
+        <CtaSection
+          variant="primary"
+          slot={`replies-${entry.slug}`}
+          href={ctaHref}
+        />
+      </div>
+
+      <p className="mx-auto max-w-[640px] px-5 pt-10 text-sm italic leading-relaxed text-gray-500">
+        P.S. Before SpeakerDrive, I spent years booking speakers at a bureau —
+        doing this exact research by hand. This product is that work,
+        automated. — Austin
+      </p>
+
+      <div className="mt-6">
         <Footer5 />
       </div>
     </div>
