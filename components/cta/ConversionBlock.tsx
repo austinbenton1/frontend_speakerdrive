@@ -430,7 +430,7 @@ export function ConversionBlock({
                     </span>
                     <a
                       className="li-link"
-                      href="https://www.linkedin.com/in/austinbenton"
+                      href="https://www.linkedin.com/in/austin-benton/"
                       target="_blank"
                       rel="noopener"
                       style={{
