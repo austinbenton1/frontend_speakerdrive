@@ -19,7 +19,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { CtaButton } from "./CtaSection";
+import { CtaButton, ScreenshotModal } from "./CtaSection";
 
 // $99 × 12 — keep in sync with the "How much does it cost?" FAQ answer.
 const ANNUAL_COST = 1188;
@@ -62,30 +62,38 @@ const RESULTS: React.ReactNode[] = [
   </>,
 ];
 
+// Thumbs open the full screenshot in a lightbox (the old /replies/02–04
+// links were 404s — only teardown 01 exists).
 const SHOTS = [
   {
-    href: "/replies/01",
     src: "/3rd_day-mh.png",
     chip: "3 days",
     alt: "First meeting — 3 days",
+    label: "View reply →",
   },
   {
-    href: "/replies/02",
     src: "/7mins_meeting-mh.png",
     chip: "7 min",
     alt: "Outreach to booking — 7 min",
+    label: "View reply →",
   },
   {
-    href: "/replies/03",
     src: "/45k_event-mh.png",
     chip: "$45K",
     alt: "$45K budget approved",
+    label: "View reply →",
   },
   {
-    href: "/replies/04",
     src: "/12k_keynote-mh.png",
     chip: "$12.5–15K",
     alt: "$12.5K–$15K keynote",
+    label: "View reply →",
+  },
+  {
+    src: "/first_keynote_hit-mh.png",
+    chip: "First booking",
+    alt: "First keynote hit — “hopefully the start of many more”",
+    label: "View message →",
   },
 ];
 
@@ -156,6 +164,9 @@ export function ConversionBlock({
   const [fee, setFee] = useState(10000);
   const [showSticky, setShowSticky] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [shotModal, setShotModal] = useState<{ src: string; alt: string } | null>(
+    null,
+  );
 
   // Same tilt-up-on-scroll as the homepage hero shot (Hero.tsx), retargeted
   // to this panel: leans back 35° entering the viewport, upright by center.
@@ -547,28 +558,41 @@ export function ConversionBlock({
             ))}
           </div>
 
+          {/* 5 thumbs: 3 + 2 centered rows on desktop, stacking on mobile */}
           <div
             style={{
               marginTop: 18,
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
               gap: 10,
             }}
           >
             {SHOTS.map((s) => (
-              <a
-                key={s.href}
+              <button
+                key={s.src}
+                type="button"
                 className="shot"
-                href={s.href}
-                target="_blank"
-                rel="noopener"
-                style={{ textDecoration: "none", display: "block" }}
+                onClick={() => setShotModal({ src: s.src, alt: s.alt })}
+                aria-label={`Open screenshot: ${s.alt}`}
+                style={{
+                  flex: "1 1 240px",
+                  maxWidth: 320,
+                  minWidth: 0,
+                  display: "block",
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  textAlign: "left",
+                  cursor: "pointer",
+                  font: "inherit",
+                }}
               >
                 <span
                   className="shot-frame"
                   style={{
                     display: "block",
-                    height: 110,
+                    height: 150,
                     border: "1px solid #E5E7EB",
                     borderRadius: 8,
                     background: "#ffffff",
@@ -620,10 +644,10 @@ export function ConversionBlock({
                       whiteSpace: "nowrap",
                     }}
                   >
-                    View reply →
+                    {s.label}
                   </span>
                 </span>
-              </a>
+              </button>
             ))}
           </div>
 
@@ -637,6 +661,14 @@ export function ConversionBlock({
           >
             *Screenshots shared with permission
           </p>
+
+          {shotModal && (
+            <ScreenshotModal
+              src={shotModal.src}
+              alt={shotModal.alt}
+              onClose={() => setShotModal(null)}
+            />
+          )}
         </div>
       </section>
 

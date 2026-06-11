@@ -95,7 +95,7 @@ const SLIM_COPY = {
   },
 } as const;
 
-function ScreenshotModal({
+export function ScreenshotModal({
   src,
   alt,
   onClose,
