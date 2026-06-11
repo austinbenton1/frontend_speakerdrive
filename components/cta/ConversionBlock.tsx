@@ -381,17 +381,17 @@ export function ConversionBlock({
                   backfaceVisibility: "hidden",
                 }}
               >
+                {/* Transparent window mock — no CSS frame; drop-shadow follows
+                    the alpha so the shadow hugs the window, not the bounding box */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/new_hero_image.png"
+                  src="/conversion_block_hero.png"
                   alt="SpeakerDrive dashboard overview"
                   style={{
                     display: "block",
                     width: "100%",
                     height: "auto",
-                    border: "1px solid rgba(0,0,0,0.08)",
-                    borderRadius: 12,
-                    boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                    filter: "drop-shadow(0 4px 18px rgba(0,0,0,0.10))",
                   }}
                 />
               </motion.div>
