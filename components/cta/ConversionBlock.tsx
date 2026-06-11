@@ -233,7 +233,7 @@ export function ConversionBlock({
       {/* Hover states, slider chrome, and reduced-motion — ported from the
           design export's stylesheet, scoped under .sdcb. */}
       <style>{`
-        .sdcb .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .sdcb .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         @media (max-width: 920px) { .sdcb .proof-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 560px) { .sdcb .proof-grid { grid-template-columns: 1fr; } }
         .sdcb .proof-card:hover { border-color: #b9dcfb; box-shadow: 0 10px 24px -14px rgba(15,23,42,0.3); }
@@ -522,20 +522,22 @@ export function ConversionBlock({
 
       {/* ================================================== PROOF */}
       <section style={{ padding: "56px 0 8px" }}>
-        <div style={{ maxWidth: 1040, margin: "0 auto", padding: "0 32px" }}>
-          <p
+        <div style={{ maxWidth: 880, margin: "0 auto", padding: "0 24px" }}>
+          <h2
             style={{
-              fontSize: 18,
-              fontWeight: 700,
-              margin: "0 0 14px",
-              color: "#111827",
+              textAlign: "center",
+              margin: "0 0 8px",
+              fontWeight: 800,
+              fontSize: "clamp(26px, 3.2vw, 34px)",
+              letterSpacing: "-0.02em",
+              lineHeight: 1.1,
             }}
           >
-            SpeakerDrive customers are landing keynotes RIGHT NOW:
-          </p>
+            SpeakerDrive Customers Are Landing Keynotes Right Now
+          </h2>
           {/* Uniform 3×2 card grid (2-col tablet, 1-col mobile — see <style>).
               Whole card opens the full, uncropped screenshot in the lightbox. */}
-          <div className="proof-grid" style={{ marginTop: 18 }}>
+          <div className="proof-grid" style={{ marginTop: 32 }}>
             {SHOTS.map((s) => (
               <button
                 key={s.src}
@@ -560,7 +562,7 @@ export function ConversionBlock({
                 <span
                   style={{
                     display: "block",
-                    height: 240,
+                    height: 200,
                     overflow: "hidden",
                     background: "#ffffff",
                   }}
