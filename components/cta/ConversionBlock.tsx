@@ -299,7 +299,8 @@ export function ConversionBlock({
               background: "#FAFAF9",
               border: "1px solid #E5E7EB",
               borderRadius: 20,
-              padding: "clamp(28px, 4.5vw, 56px)",
+              padding:
+                "clamp(28px, 4.5vw, 56px) clamp(28px, 4.5vw, 56px) clamp(20px, 3vw, 32px)",
               display: "flex",
               flexWrap: "wrap",
               alignItems: "center",
@@ -397,11 +398,12 @@ export function ConversionBlock({
             </div>
 
             <div
+              className="quote-row"
               style={{
                 flex: "1 1 100%",
                 minWidth: 0,
                 borderTop: "1px solid #E5E7EB",
-                paddingTop: 28,
+                paddingTop: 20,
                 display: "flex",
                 justifyContent: "center",
               }}
@@ -410,21 +412,21 @@ export function ConversionBlock({
                 <p
                   style={{
                     margin: 0,
-                    fontSize: 16,
-                    lineHeight: 1.65,
-                    color: "#4B5563",
+                    fontSize: 14.5,
+                    lineHeight: 1.6,
+                    color: "#6B7280",
                   }}
                 >
-                  &ldquo;Over my career, I&apos;ve generated leads that became
-                  $6M+ in booked and paid keynotes. I&apos;ve simplified
-                  everything I know into one platform.&rdquo;
+                  &ldquo;I&apos;ve spent nearly a decade generating leads for
+                  individual speakers and bureaus. SpeakerDrive is everything I
+                  learned, simplified into one platform.&rdquo;
                 </p>
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 12,
-                    marginTop: 16,
+                    gap: 11,
+                    marginTop: 12,
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -432,8 +434,8 @@ export function ConversionBlock({
                     src="/austin_benton_head.png"
                     alt="Austin Benton"
                     style={{
-                      width: 44,
-                      height: 44,
+                      width: 40,
+                      height: 40,
                       borderRadius: "50%",
                       objectFit: "cover",
                       display: "block",
@@ -443,7 +445,7 @@ export function ConversionBlock({
                   <div style={{ display: "grid", gap: 3 }}>
                     <span
                       style={{
-                        fontSize: 14,
+                        fontSize: 13.5,
                         fontWeight: 700,
                         color: "#111827",
                         lineHeight: 1.2,
@@ -453,12 +455,21 @@ export function ConversionBlock({
                     </span>
                     <span
                       style={{
-                        fontSize: 13,
+                        fontSize: 12.5,
                         color: "#6B7280",
                         lineHeight: 1.2,
                       }}
                     >
                       Founder, SpeakerDrive
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 12.5,
+                        color: "#6B7280",
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      $6M+ in booked and paid keynotes generated
                     </span>
                     <a
                       className="li-link"
@@ -469,7 +480,7 @@ export function ConversionBlock({
                         display: "inline-flex",
                         alignItems: "center",
                         gap: 5,
-                        fontSize: 13,
+                        fontSize: 12.5,
                         fontWeight: 500,
                         color: "#0A66C2",
                         textDecoration: "none",
