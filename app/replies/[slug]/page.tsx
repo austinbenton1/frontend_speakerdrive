@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CtaSection } from "@/components/cta/CtaSection";
+import { ConversionBlock } from "@/components/cta/ConversionBlock";
 import { Footer5 } from "@/components/layout/Footer";
 import {
   getReplyEntry,
@@ -88,8 +88,6 @@ export default async function ReplyTeardownPage({
 }) {
   const entry = getReplyEntry((await params).slug);
   if (!entry) notFound();
-
-  const ctaHref = `https://app.speakerdrive.com/signup?utm_source=linkedin&utm_medium=template-comment&utm_campaign=${entry.slug}`;
 
   return (
     <div className="min-h-screen bg-white">
@@ -302,20 +300,10 @@ export default async function ReplyTeardownPage({
         </section>
       </article>
 
-      {/* Shared closer — results, pricing, FAQ live in components/cta */}
+      {/* Shared closer — hero pitch, proof, FAQ, ROI live in components/cta */}
       <div className="mt-16">
-        <CtaSection
-          variant="primary"
-          slot={`replies-${entry.slug}`}
-          href={ctaHref}
-        />
+        <ConversionBlock campaign={`replies-${entry.slug}`} />
       </div>
-
-      <p className="mx-auto max-w-[640px] px-5 pt-10 text-sm italic leading-relaxed text-gray-500">
-        P.S. Before SpeakerDrive, I spent years booking speakers at a bureau —
-        doing this exact research by hand. This product is that work,
-        automated. — Austin
-      </p>
 
       <div className="mt-6">
         <Footer5 />
