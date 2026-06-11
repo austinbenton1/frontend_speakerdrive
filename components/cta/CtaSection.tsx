@@ -149,7 +149,7 @@ function ScreenshotModal({
   );
 }
 
-function CtaButton({
+export function CtaButton({
   href,
   slot,
   label = "Get Started. It's FREE",
