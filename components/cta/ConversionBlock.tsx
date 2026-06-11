@@ -397,13 +397,18 @@ export function ConversionBlock({
               </motion.div>
             </div>
 
+            {/* White card for contrast against the stone panel (Austin's pick;
+                revert this block to a borderTop hairline for the quiet look) */}
             <div
               className="quote-row"
               style={{
                 flex: "1 1 100%",
                 minWidth: 0,
-                borderTop: "1px solid #E5E7EB",
-                paddingTop: 20,
+                background: "#ffffff",
+                border: "1px solid #E5E7EB",
+                borderRadius: 12,
+                padding: "18px 24px",
+                marginTop: -12,
                 display: "flex",
                 justifyContent: "center",
               }}
