@@ -13,6 +13,12 @@
 // Render inline, never in an iframe — the sticky bar pins to the viewport.
 
 import { useEffect, useRef, useState } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { CtaButton } from "./CtaSection";
 
 // $99 × 12 — keep in sync with the "How much does it cost?" FAQ answer.
@@ -146,9 +152,23 @@ export function ConversionBlock({
 }) {
   const heroCtaRef = useRef<HTMLDivElement>(null);
   const roiRef = useRef<HTMLElement>(null);
+  const heroShotRef = useRef<HTMLDivElement>(null);
   const [fee, setFee] = useState(10000);
   const [showSticky, setShowSticky] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+
+  // Same tilt-up-on-scroll as the homepage hero shot (Hero.tsx), retargeted
+  // to this panel: leans back 35° entering the viewport, upright by center.
+  const prefersReducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroShotRef,
+    offset: ["start end", "end center"],
+  });
+  const rotateX = useTransform(
+    scrollYProgress,
+    [0, 1],
+    prefersReducedMotion ? [0, 0] : [35, 0],
+  );
 
   // Same slug cleanup the design's setUtmCampaign() applied.
   const slug =
@@ -348,20 +368,32 @@ export function ConversionBlock({
               </div>
             </div>
 
-            <div style={{ flex: "11 1 400px", minWidth: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/Dashboard-mh.png"
-                alt="The SpeakerDrive dashboard — speaking opportunities with verified contact info"
+            <div
+              ref={heroShotRef}
+              style={{ flex: "11 1 400px", minWidth: 0, perspective: 1000 }}
+            >
+              <motion.div
                 style={{
-                  display: "block",
-                  width: "100%",
-                  height: "auto",
-                  border: "1px solid rgba(0,0,0,0.08)",
-                  borderRadius: 12,
-                  boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  rotateX,
+                  transformOrigin: "center bottom",
+                  willChange: "transform",
+                  backfaceVisibility: "hidden",
                 }}
-              />
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/new_hero_image.png"
+                  alt="SpeakerDrive dashboard overview"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    height: "auto",
+                    border: "1px solid rgba(0,0,0,0.08)",
+                    borderRadius: 12,
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                  }}
+                />
+              </motion.div>
             </div>
 
             <div
