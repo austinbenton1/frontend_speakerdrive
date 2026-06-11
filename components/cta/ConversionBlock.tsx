@@ -47,53 +47,52 @@ const CHECKLIST: React.ReactNode[] = [
   </>,
 ];
 
-const RESULTS: React.ReactNode[] = [
-  <>
-    <b style={bold}>First meeting booked in 3 days</b> using SpeakerDrive
-  </>,
-  <>
-    <b style={bold}>7 minutes</b> from outreach to booking
-  </>,
-  <>
-    <b style={bold}>$45K corporate training budget</b> approved
-  </>,
-  <>
-    <b style={bold}>$12.5K–$15K conference keynote</b> booked
-  </>,
-];
-
-// Thumbs open the full screenshot in a lightbox (the old /replies/02–04
-// links were 404s — only teardown 01 exists).
+// Proof cards open the full screenshot in a lightbox (the old /replies/02–04
+// links were 404s — only teardown 01 exists). The 240px card crop is for
+// visual order; `pos` (object-position) keeps each red-boxed highlight in
+// frame. The raw screenshot look (arrows, blur, mixed formats) is intentional.
 const SHOTS = [
   {
     src: "/3rd_day-mh.png",
     chip: "3 days",
-    alt: "First meeting — 3 days",
-    label: "View reply →",
+    alt: "First meeting booked in 3 days using SpeakerDrive",
+    label: "View message →",
+    pos: "left center",
   },
   {
     src: "/7mins_meeting-mh.png",
     chip: "7 min",
-    alt: "Outreach to booking — 7 min",
+    alt: "7 minutes from outreach to booking",
     label: "View reply →",
+    pos: "left top",
   },
   {
     src: "/45k_event-mh.png",
     chip: "$45K",
-    alt: "$45K budget approved",
+    alt: "$45K corporate training budget approved",
     label: "View reply →",
+    pos: "center",
   },
   {
     src: "/12k_keynote-mh.png",
     chip: "$12.5–15K",
-    alt: "$12.5K–$15K keynote",
+    alt: "$12.5K–$15K conference keynote booked",
     label: "View reply →",
+    pos: "center",
   },
   {
     src: "/first_keynote_hit-mh.png",
     chip: "First booking",
     alt: "First keynote hit — “hopefully the start of many more”",
     label: "View message →",
+    pos: "left top",
+  },
+  {
+    src: "/25k_on_fire-mh.png",
+    chip: "$25K",
+    alt: "“I need someone on fire, incredible, amazing for $25K”",
+    label: "View reply →",
+    pos: "center top",
   },
 ];
 
@@ -234,7 +233,10 @@ export function ConversionBlock({
       {/* Hover states, slider chrome, and reduced-motion — ported from the
           design export's stylesheet, scoped under .sdcb. */}
       <style>{`
-        .sdcb .shot:hover > .shot-frame { border-color: #b9dcfb; box-shadow: 0 6px 16px -10px rgba(15,23,42,0.25); }
+        .sdcb .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        @media (max-width: 920px) { .sdcb .proof-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px) { .sdcb .proof-grid { grid-template-columns: 1fr; } }
+        .sdcb .proof-card:hover { border-color: #b9dcfb; box-shadow: 0 10px 24px -14px rgba(15,23,42,0.3); }
         .sdcb .li-link:hover { text-decoration: underline !important; }
         .sdcb .sb-btn { transition: transform .25s cubic-bezier(0.17,0.67,0.35,1.25), box-shadow .25s cubic-bezier(0.17,0.67,0.35,1.25); }
         .sdcb .sb-btn:hover { transform: translateY(-2px) scale(1.02); }
@@ -531,73 +533,36 @@ export function ConversionBlock({
           >
             SpeakerDrive customers are landing keynotes RIGHT NOW:
           </p>
-          <div style={{ display: "grid", gap: 11 }}>
-            {RESULTS.map((item, i) => (
-              <div
-                key={i}
-                style={{
-                  display: "flex",
-                  gap: 12,
-                  fontSize: 16,
-                  lineHeight: 1.55,
-                  color: "#374151",
-                }}
-              >
-                <span
-                  style={{
-                    width: 6,
-                    height: 6,
-                    borderRadius: "50%",
-                    background: "#9CA3AF",
-                    flex: "none",
-                    marginTop: 9,
-                  }}
-                />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* 5 thumbs: 3 + 2 centered rows on desktop, stacking on mobile */}
-          <div
-            style={{
-              marginTop: 18,
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 10,
-            }}
-          >
+          {/* Uniform 3×2 card grid (2-col tablet, 1-col mobile — see <style>).
+              Whole card opens the full, uncropped screenshot in the lightbox. */}
+          <div className="proof-grid" style={{ marginTop: 18 }}>
             {SHOTS.map((s) => (
               <button
                 key={s.src}
                 type="button"
-                className="shot"
+                className="proof-card"
                 onClick={() => setShotModal({ src: s.src, alt: s.alt })}
-                aria-label={`Open screenshot: ${s.alt}`}
+                aria-label={`Open full screenshot: ${s.alt}`}
                 style={{
-                  flex: "1 1 240px",
-                  maxWidth: 320,
-                  minWidth: 0,
                   display: "block",
-                  background: "none",
-                  border: "none",
+                  minWidth: 0,
+                  background: "#ffffff",
+                  border: "1px solid rgba(0,0,0,0.08)",
+                  borderRadius: 12,
+                  overflow: "hidden",
                   padding: 0,
                   textAlign: "left",
                   cursor: "pointer",
                   font: "inherit",
+                  transition: "box-shadow .15s, border-color .15s",
                 }}
               >
                 <span
-                  className="shot-frame"
                   style={{
                     display: "block",
-                    height: 150,
-                    border: "1px solid #E5E7EB",
-                    borderRadius: 8,
-                    background: "#ffffff",
+                    height: 240,
                     overflow: "hidden",
-                    transition: "border-color .15s, box-shadow .15s",
+                    background: "#ffffff",
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -609,36 +574,36 @@ export function ConversionBlock({
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      objectPosition: "top",
+                      objectPosition: s.pos,
                     }}
                   />
                 </span>
                 <span
                   style={{
-                    marginTop: 6,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: 6,
+                    gap: 8,
+                    padding: "12px 14px",
+                    borderTop: "1px solid rgba(0,0,0,0.06)",
                   }}
                 >
                   <span
                     style={{
                       whiteSpace: "nowrap",
-                      fontSize: 11.5,
-                      fontWeight: 700,
+                      fontSize: 12,
+                      fontWeight: 600,
                       color: "#1F2937",
                       background: "#F3F4F6",
-                      border: "1px solid #E5E7EB",
                       borderRadius: 999,
-                      padding: "2px 9px",
+                      padding: "3px 10px",
                     }}
                   >
                     {s.chip}
                   </span>
                   <span
                     style={{
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: 600,
                       color: "#2563EB",
                       whiteSpace: "nowrap",
