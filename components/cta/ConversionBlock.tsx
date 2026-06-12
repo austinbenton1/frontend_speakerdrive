@@ -203,12 +203,23 @@ export function ConversionBlock({
       const roiTop = roiRef.current?.getBoundingClientRect().top ?? Infinity;
       setShowSticky(heroBottom < 0 && roiTop > window.innerHeight * 0.6);
     };
-    window.addEventListener("scroll", evalSticky, { passive: true });
-    window.addEventListener("resize", evalSticky);
+    // Coalesce to one layout read per frame — raw scroll events fire faster
+    // than frames and the rect reads were adding drag to the scroll path.
+    let ticking = false;
+    const onScrollOrResize = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        evalSticky();
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize);
     evalSticky();
     return () => {
-      window.removeEventListener("scroll", evalSticky);
-      window.removeEventListener("resize", evalSticky);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
   }, []);
 
@@ -392,10 +403,12 @@ export function ConversionBlock({
                   transformOrigin: "center bottom",
                   willChange: "transform",
                   backfaceVisibility: "hidden",
+                  contain: "paint layout",
                 }}
               >
-                {/* Transparent window mock — no CSS frame; drop-shadow follows
-                    the alpha so the shadow hugs the window, not the bounding box */}
+                {/* Transparent window mock — its own chrome is the frame.
+                    No filter here: a drop-shadow re-rasterizes the big PNG on
+                    every frame of the scroll tilt and makes scrolling drag. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/conversion_block_hero.png"
@@ -404,7 +417,6 @@ export function ConversionBlock({
                     display: "block",
                     width: "100%",
                     height: "auto",
-                    filter: "drop-shadow(0 4px 18px rgba(0,0,0,0.10))",
                   }}
                 />
               </motion.div>
