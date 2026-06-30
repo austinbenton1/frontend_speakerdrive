@@ -196,7 +196,9 @@ export default function PricingPage() {
         { text: "Unlimited Search & Discovery" },
         { text: "Autopilot Messaging" },
         { text: "50 Unlocks per Month" },
-        { text: "Bulk Lead Exports", disabled: true }
+        { text: "No Contracts (Cancel Anytime)" },
+        { text: "Bulk Lead Exports", disabled: true },
+        { text: "Export to CRM (Webhooks)", disabled: true }
       ]
     },
     {
@@ -216,7 +218,9 @@ export default function PricingPage() {
         { text: "Unlimited Search & Discovery" },
         { text: "Autopilot Messaging" },
         { text: "200 Unlocks per Month" },
-        { text: "Bulk Lead Exports" }
+        { text: "No Contracts (Cancel Anytime)" },
+        { text: "Bulk Lead Exports" },
+        { text: "Export to CRM (Webhooks)", disabled: true }
       ]
     },
     {
@@ -235,7 +239,9 @@ export default function PricingPage() {
         { text: "Unlimited Search & Discovery" },
         { text: "Autopilot Messaging" },
         { text: "750 Unlocks per Month" },
-        { text: "Bulk Lead Exports" }
+        { text: "No Contracts (Cancel Anytime)" },
+        { text: "Bulk Lead Exports" },
+        { text: "Export to CRM (Webhooks)" }
       ]
     }
   ];

@@ -102,39 +102,6 @@ export default function ThankYouPage() {
                 </p>
               </div>
             </div>
-
-            {/* YouTube Video Section */}
-            <div className="max-w-2xl mx-auto text-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                🎥 See SpeakerDrive in Action
-              </h3>
-              <p className="text-gray-600 mb-6">
-                Watch how speakers are using our platform to book premium engagements
-              </p>
-              
-              <div className="relative w-full rounded-xl overflow-hidden shadow-lg bg-gray-100">
-                <div className="relative" style={{ paddingTop: '56.25%' }}>
-                  <iframe 
-                    className="absolute top-0 left-0 w-full h-full"
-                    src="https://www.youtube.com/embed/bQYwZYRS9Z4?si=sFBhgETN5lFC1yQN&controls=0&rel=0&modestbranding=1"
-                    title="SpeakerDrive Demo Video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <a 
-                  href="https://app.speakerdrive.com/signup"
-                  className="inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
-                >
-                  Ready to get started? Start your free trial →
-                </a>
-              </div>
-            </div>
           </div>
         </section>
       </main>
