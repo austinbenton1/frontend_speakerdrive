@@ -128,24 +128,12 @@ function PricingCard({ plan }: PricingCardProps) {
 // ================== FAQ CONTENT ==================
 const PRICING_FAQ_ITEMS = [
   {
-    question: "I'm already too busy. How much time does this really take?",
-    answer: "Just 15-30 minutes daily. That's less time than scrolling LinkedIn, but instead of consuming content, you're booking paid gigs. Our smart composer means you can send 10 personalized messages in the time it used to take to write one."
-  },
-  {
     question: "How is this different from hiring an assistant or marketing agency?",
     answer: "Assistants cost $2,000-4,000/month and still need training. Marketing agencies charge even more than that for lead generation. SpeakerDrive gives you the same result for the price of a coffee per day, and you're in full control."
   },
   {
-    question: "What's the difference between Event and Contact Emails?",
-    answer: "Event Emails are general inboxes (events@, speakers@) while Contact Emails are personal addresses for specific decision-makers. LAUNCH plan unlocks Event Emails only. SCALE and DOMINATE unlock both types. ALL email addresses are double verified and you get a refund for invalid info."
-  },
-  {
-    question: "What if I'm not getting responses?",
-    answer: "If you're not getting responses, we'll personally help you refine your approach until you do. We only succeed when you're booking gigs."
-  },
-  {
     question: "How quickly will I see results?",
-    answer: "Many members see their first interested responses within a couple of days and are booking meetings in the first couple of weeks. The key is consistency - members who spend 15-30 minutes daily on outreach see the fastest results."
+    answer: "Many members see their first interested responses within a couple of days and are booking meetings in the first couple of weeks."
   },
   {
     question: "Are there any contracts?",
@@ -153,7 +141,7 @@ const PRICING_FAQ_ITEMS = [
   },
   {
     question: "What integrations do you offer?",
-    answer: "SpeakerDrive provides webhook functionality that allows you to push leads to most CRMs, email tools or marketing automation platforms. If you have specific integration questions, please reach out to our support team."
+    answer: "SpeakerDrive provides webhook functionality for Premium plan holders. This allows you to push leads to most CRMs, email tools or marketing automation platforms. The Scale plan lets you download leads to a CSV."
   }
 ];
 
@@ -224,7 +212,7 @@ export default function PricingPage() {
       ]
     },
     {
-      name: "DOMINATE",
+      name: "PREMIUM",
       subtitle: "Scale your impact",
       icon: <Zap className="h-10 w-10" />,
       ctaLink: signupUrl,
@@ -421,7 +409,7 @@ export default function PricingPage() {
                     </div>
                     
                     <div className="space-y-2">
-                      <p className="font-bold text-gray-900">DOMINATE Plan:</p>
+                      <p className="font-bold text-gray-900">PREMIUM Plan:</p>
                       <p className="text-sm text-gray-600">Book ONE $10,000 gig</p>
                       <p className="text-green-600 font-bold">= Paid for 3+ years</p>
                     </div>
@@ -459,7 +447,7 @@ export default function PricingPage() {
                 <div className="text-center p-6 rounded-lg bg-white/10 backdrop-blur">
                   <div className="text-3xl mb-3">👑</div>
                   <h3 className="font-bold mb-2 text-white">Going pro?</h3>
-                  <p className="text-sm text-white/90">DOMINATE gives you maximum reach and results</p>
+                  <p className="text-sm text-white/90">PREMIUM gives you maximum reach and results</p>
                 </div>
               </div>
 
