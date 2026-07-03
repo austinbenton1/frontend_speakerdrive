@@ -6,13 +6,12 @@ import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
-import { ArrowDownIcon } from "lucide-react";
+import { ArrowDownIcon, SearchIcon, SendIcon, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
-import { MessageComposer } from "@/components/sections/MessageComposer";
-import { ToolsSection } from "@/components/sections/ToolsSection";
 import Globe from "@/app/globe/page";
 import { ScrollArrows } from "@/components/ui/ScrollArrows"; // 1. Import the new component
 
@@ -46,8 +45,106 @@ export default function LandingPage() {
           <Hero />
         </section>
 
+        {/* What Is SpeakerDrive */}
+        <section id="what-is" className="bg-white pt-14 pb-6 px-4">
+          <div className="mx-auto max-w-4xl">
+            {/* Heading + Short Logo, centered */}
+            <div className="flex items-center justify-center gap-4 mb-8">
+              <img
+                src="/SpeakerDrive Logo - Short.png"
+                alt="SpeakerDrive"
+                className="w-9 h-9 object-contain"
+              />
+              <h2 className="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
+                What Is SpeakerDrive?
+              </h2>
+            </div>
+
+            {/* Definition + two-activities framing */}
+            <div className="max-w-3xl mx-auto text-center">
+              <p className="text-lg sm:text-2xl font-semibold text-gray-900 leading-snug mb-3">
+                SpeakerDrive is a speaker prospecting tool that streamlines the outreach process.
+              </p>
+              <p className="text-base sm:text-lg text-gray-600 font-medium mb-8">
+                It all boils down to two simple activities:
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-left">
+                <div className="flex items-center gap-4 bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-5">
+                  <span className="flex-none w-11 h-11 rounded-lg bg-blue-100 text-brand-blue flex items-center justify-center">
+                    <SearchIcon className="w-5 h-5" />
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                    Finding the right events and opportunities
+                  </h3>
+                </div>
+
+                <div className="flex items-center gap-4 bg-white rounded-xl border border-gray-200 shadow-sm px-6 py-5">
+                  <span className="flex-none w-11 h-11 rounded-lg bg-green-100 text-green-600 flex items-center justify-center">
+                    <SendIcon className="w-5 h-5" />
+                  </span>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                    Contacting the decision-makers who can hire you
+                  </h3>
+                </div>
+              </div>
+
+              {/* Bouncing scroll indicator into the globe section */}
+              <motion.div
+                className="mt-8 flex justify-center"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <motion.div
+                  animate={{ y: [0, 10, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ChevronDown className="h-8 w-8 text-gray-400" />
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Globe Section - UPDATED */}
         <section id="globe" className="bg-white py-12">
+          {/* Globe intro copy */}
+          <div className="container mx-auto max-w-6xl px-4 text-center pb-10">
+            <motion.p
+              className="text-gray-600 text-base sm:text-lg font-semibold tracking-wide uppercase mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Stop Searching The Web For Gigs
+            </motion.p>
+
+            <motion.h2
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 animate-gradient">$10K</span> Speaking Gig{" "}
+              <br className="hidden sm:block" />
+              Is One Click Away
+            </motion.h2>
+
+            <motion.p
+              className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Every dot is an opportunity. We&apos;ve done the work for you.
+            </motion.p>
+          </div>
+
           {/* This container constrains the globe's height and acts as a positioning
               parent for the fixed-position arrows. */}
           <div className="relative max-h-[600px] overflow-hidden">
@@ -60,59 +157,12 @@ export default function LandingPage() {
         </section>
 
         {/* "How It Works" and Steps 1-3 */}
-        <section id="how-it-works" className="bg-stone-50 pt-12 pb-12">
-          {/* Main container: now max-w-4xl for a narrower layout */}
-          <div className="mx-auto max-w-4xl px-4 mb-12">
-            {/* Heading + Short Logo above columns */}
-            <div className="flex items-center gap-4 mb-8">
-              <img
-                src="/SpeakerDrive Logo - Short.png"
-                alt="SpeakerDrive"
-                className="w-9 h-9 object-contain"
-              />
-              <h2 className="text-xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-                What Is SpeakerDrive?
-              </h2>
-            </div>
-
-            {/* Two-column layout (narrower video) */}
-            <div className="flex flex-col md:flex-row items-start gap-8">
-              {/* Left column: Text paragraphs (3/5 width) */}
-              <div className="md:w-3/5 space-y-8">
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                SpeakerDrive is the discovery platform for professional speakers and experts. 
-                Search 11,000+ gigs and unlock the decision-maker contact info.
-                </p>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium">
-                Go straight to the people who can hire you—decision-makers with real budgets.
-                Then use our outreach tools to craft the perfect message and connect instantly.
-                </p>
-              </div>
-
-              {/* Right column: Responsive video (2/5 width) */}
-<div className="md:w-3/5">
-  <div className="relative aspect-video w-full">
-    <video 
-      controls 
-      poster="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/690c89b95c1881511aded820.jpg"
-      className="w-full h-full object-cover rounded-lg"
-    >
-      <source src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/690c8283ac59276208439709.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </div>
-</div>
-            </div>
-
-            {/* Visual separator */}
-            <div className="mt-24 mb-12 relative">
-              <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-              <div className="flex justify-center">
-                <div className="bg-stone-50 px-6 py-1 relative -top-3 rounded-full border border-gray-200">
-                  <span className="text-gray-500 text-sm font-medium">How It Works</span>
-                </div>
-              </div>
-            </div>
+        <section id="how-it-works" className="bg-stone-50 pt-14 pb-12">
+          <div className="mx-auto max-w-4xl px-4 mb-10 text-center">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+              How It Works
+            </h2>
+            <div className="mt-4 mx-auto w-16 h-1 rounded-full bg-gradient-to-r from-brand-blue to-green-500"></div>
           </div>
 
           {/* Step 1: Find Qualified Leads */}
@@ -190,11 +240,63 @@ export default function LandingPage() {
         {/* Message Composer sections */}
         <section className="bg-white pt-16 pb-16 px-4">
           <MessageComposerFormula />
-          <MessageComposer />
         </section>
 
-        {/* Tools Section */}
-        <ToolsSection />
+        {/* Autopilot */}
+        <section className="bg-stone-50 py-16 px-4">
+          <div className="container mx-auto max-w-5xl">
+            <div className="text-center max-w-3xl mx-auto mb-10">
+              <span className="inline-block bg-green-100 text-green-700 text-sm font-bold tracking-wide uppercase rounded-full px-4 py-1 mb-4">
+                New
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-extrabold leading-tight text-black mb-5">
+                Or Put Your Outreach On{" "}
+                <span className="text-green-600">Autopilot</span>
+              </h2>
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed font-medium mb-4">
+                Load your leads. Autopilot writes every email, sends on a steady daily
+                drip, handles the follow-ups, and pauses the moment someone replies. You
+                only show up for the conversations that matter.
+              </p>
+              <p className="text-lg sm:text-xl font-semibold text-gray-900">
+                Do an entire month&apos;s outreach in one sitting.
+              </p>
+            </div>
+
+            <img
+              src="/autopilot-for-website.png"
+              alt="The SpeakerDrive Autopilot dashboard, showing leads moving from On Deck to Queued to In Autopilot, with replies collected automatically"
+              className="w-full rounded-xl border border-gray-200 shadow-lg mb-10"
+            />
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+              <div className="flex items-start gap-3">
+                <svg className="flex-none w-5 h-5 text-green-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <p className="text-sm sm:text-base text-gray-700 font-medium">
+                  Sends from your own Gmail — replies land in your inbox
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <svg className="flex-none w-5 h-5 text-green-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <p className="text-sm sm:text-base text-gray-700 font-medium">
+                  Every message is logged, so you always know what went out
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <svg className="flex-none w-5 h-5 text-green-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                <p className="text-sm sm:text-base text-gray-700 font-medium">
+                  Edit or remove any lead before it sends — you stay in control
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Perfect For */}
         <section className="bg-white py-16 overflow-hidden">
@@ -352,63 +454,6 @@ export default function LandingPage() {
         <section id="referral-trap">
           <TheProspectingEffect />
         </section>
-
-        {/* Founder Quote Section */}
-        <div className="max-w-2xl mx-auto px-6 sm:px-8 mb-20 mt-12">
-          <div className="flex flex-col gap-6">
-            {/* Clearer quote icon */}
-            <svg
-              aria-hidden="true"
-              className="w-8 h-8 text-[#0A66C2]"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 13a4 4 0 0 1-4 4h4V9H2a4 4 0 0 1 4 4zm10 0a4 4 0 0 1-4 4h4V9h-4a4 4 0 0 1 4 4z"/>
-            </svg>
-
-            {/* Smaller on mobile */}
-            <p className="text-base sm:text-xl font-normal text-gray-900 leading-relaxed">
-              SpeakerDrive combines what I know works: relationship-building systems that grew my
-              previous businesses, and authentic connections that have directly led to millions in
-              speaker bookings. I've simplified everything I know into one platform.
-            </p>
-
-            <div className="flex items-center mt-2">
-              <img
-                src="/austin_benton_head.png"
-                alt="Austin Benton"
-                className="w-16 h-16 rounded-full object-cover border-2 border-gray-100 mr-4"
-              />
-              <div className="flex flex-col">
-                <p className="text-base font-semibold text-gray-900">Austin Benton</p>
-                <p className="text-sm text-gray-600">Founder, SpeakerDrive</p>
-                <div className="flex items-center gap-2 mt-1">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="text-[#0A66C2]"
-                  >
-                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
-                  </svg>
-                  <a
-                    href="https://www.linkedin.com/in/austin-benton/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-medium text-[#0A66C2] hover:text-blue-800 transition-colors"
-                  >
-                    Connect on LinkedIn
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <GeneralFAQ />
       </main>

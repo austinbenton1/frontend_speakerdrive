@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ChevronRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
@@ -188,8 +188,8 @@ export function Hero() {
 
             {/* Subheading */}
             <p className="text-base tracking-wide font-medium text-neutral-700 sm:text-lg max-w-xl mx-auto mb-6 text-center">
-              Every gig in one place. Generate {" "}
-              <span className="relative inline-block handwritten-underline">authentic</span> outreach in a single click. Land stages on your terms.
+              Every gig in one place. Go straight to the decision-makers with real budgets. {" "}
+              <span className="relative inline-block handwritten-underline">Authentic</span> outreach in one click.
             </p>
 
             {/* Enhanced CTA Button */}
@@ -266,59 +266,6 @@ export function Hero() {
         </div>
 
         {/* MOBILE SCROLL INDICATOR - Removed as we'll have content below now */}
-      </div>
-
-      {/* NEW MARKETING SECTION - Added below hero image */}
-      <div className="bg-white pt-12 pb-6 sm:pt-16 sm:pb-8">
-        <div className="container mx-auto max-w-6xl px-4 text-center">
-        <motion.p 
-            className="text-gray-600 text-base sm:text-lg font-semibold tracking-wide uppercase mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Stop Searching The Web For Gigs
-          </motion.p>
-          
-          <motion.h2 
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 animate-gradient">$10K</span> Speaking Gig 
-            <br className="hidden sm:block" />
-            Is One Click Away
-          </motion.h2>
-          
-          <motion.p 
-            className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Every dot is an opportunity. We've done the work for you.
-          </motion.p>
-
-          {/* Optional: Add a scroll indicator or arrow pointing down */}
-          <motion.div 
-            className="mt-3 flex justify-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <motion.div 
-              animate={{ y: [0, 10, 0] }} 
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <ChevronDown className="h-8 w-8 text-gray-400" />
-            </motion.div>
-          </motion.div>
-        </div>
       </div>
 
       {/* CSS for the handwritten underline effect and gradient animation */}
