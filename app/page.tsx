@@ -2,7 +2,6 @@
 import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
 import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
-import { FAQ } from "@/components/sections/FAQ";
 import { Footer5 } from "@/components/layout/Footer";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { FeatureAccordion } from "@/components/sections/FeatureAccordion";
@@ -10,7 +9,6 @@ import { ArrowDownIcon, SearchIcon, SendIcon, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
-import { GeneralFAQ } from "@/components/sections/GeneralFAQ";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import Globe from "@/app/globe/page";
 import { ScrollArrows } from "@/components/ui/ScrollArrows"; // 1. Import the new component
@@ -48,8 +46,8 @@ export default function LandingPage() {
         {/* What Is SpeakerDrive */}
         <section id="what-is" className="bg-white pt-14 pb-6 px-4">
           <div className="mx-auto max-w-4xl">
-            {/* Heading + Short Logo, centered */}
-            <div className="flex items-center justify-center gap-4 mb-8">
+            {/* Heading + Short Logo */}
+            <div className="flex items-center gap-4 mb-8">
               <img
                 src="/SpeakerDrive Logo - Short.png"
                 alt="SpeakerDrive"
@@ -61,9 +59,11 @@ export default function LandingPage() {
             </div>
 
             {/* Definition + two-activities framing */}
-            <div className="max-w-3xl mx-auto text-center">
+            <div className="max-w-3xl">
               <p className="text-lg sm:text-2xl font-semibold text-gray-900 leading-snug mb-3">
-                SpeakerDrive is a speaker prospecting tool that streamlines the outreach process.
+                SpeakerDrive is a prospecting database and outreach platform built
+                specifically for speakers and experts to find and land more paid
+                opportunities.
               </p>
               <p className="text-base sm:text-lg text-gray-600 font-medium mb-8">
                 It all boils down to two simple activities:
@@ -88,6 +88,17 @@ export default function LandingPage() {
                   </h3>
                 </div>
               </div>
+
+              <p className="mt-6 text-base sm:text-lg text-gray-600 font-medium">
+                Learn more about{" "}
+                <Link
+                  href="/how-it-works"
+                  className="font-semibold text-brand-blue hover:text-blue-600 underline underline-offset-4 transition-colors"
+                >
+                  how it works
+                </Link>
+                .
+              </p>
 
               {/* Bouncing scroll indicator into the globe section */}
               <motion.div
@@ -455,7 +466,6 @@ export default function LandingPage() {
           <TheProspectingEffect />
         </section>
 
-        <GeneralFAQ />
       </main>
 
       <Footer5 />

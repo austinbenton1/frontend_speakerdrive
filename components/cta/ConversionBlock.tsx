@@ -273,7 +273,7 @@ export function ConversionBlock({
               maxWidth: 620,
             }}
           >
-            How to land more keynotes with SpeakerDrive{" "}
+            How it works{" "}
             <span aria-hidden="true">👇</span>
           </p>
 

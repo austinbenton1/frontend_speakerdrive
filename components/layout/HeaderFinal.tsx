@@ -14,6 +14,7 @@ declare global {
 // Full nav includes "Home" for mobile
 const DEFAULT_NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "Resources", href: "https://learn.speakerdrive.com/" },
   { label: "Pricing", href: "/pricing" },
   { label: "Contact", href: "/contact" },
