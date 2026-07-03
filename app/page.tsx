@@ -11,17 +11,8 @@ import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
 import Globe from "@/app/globe/page";
-import { ScrollArrows } from "@/components/ui/ScrollArrows"; // 1. Import the new component
 
 export default function LandingPage() {
-  // 2. Add the scroll handler function
-  const handleScroll = (targetId: string) => {
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
     <div className="min-h-screen bg-white">
       <div className="flex flex-col">
@@ -116,54 +107,6 @@ export default function LandingPage() {
                 </motion.div>
               </motion.div>
             </div>
-          </div>
-        </section>
-
-        {/* Globe Section - UPDATED */}
-        <section id="globe" className="bg-white py-12">
-          {/* Globe intro copy */}
-          <div className="container mx-auto max-w-6xl px-4 text-center pb-10">
-            <motion.p
-              className="text-gray-600 text-base sm:text-lg font-semibold tracking-wide uppercase mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              Stop Searching The Web For Gigs
-            </motion.p>
-
-            <motion.h2
-              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 animate-gradient">$10K</span> Speaking Gig{" "}
-              <br className="hidden sm:block" />
-              Is One Click Away
-            </motion.h2>
-
-            <motion.p
-              className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Every dot is an opportunity. We&apos;ve done the work for you.
-            </motion.p>
-          </div>
-
-          {/* This container constrains the globe's height and acts as a positioning
-              parent for the fixed-position arrows. */}
-          <div className="relative max-h-[600px] overflow-hidden">
-            <Globe />
-            <ScrollArrows
-              onScrollUp={() => handleScroll("hero")}
-              onScrollDown={() => handleScroll("how-it-works")}
-            />
           </div>
         </section>
 
@@ -464,6 +407,49 @@ export default function LandingPage() {
         {/* The Prospecting Effect */}
         <section id="referral-trap">
           <TheProspectingEffect />
+        </section>
+
+        {/* Globe Section — page closer */}
+        <section id="globe" className="bg-white py-12">
+          {/* Globe intro copy */}
+          <div className="container mx-auto max-w-6xl px-4 text-center pb-10">
+            <motion.p
+              className="text-gray-600 text-base sm:text-lg font-semibold tracking-wide uppercase mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Stop Searching The Web For Gigs
+            </motion.p>
+
+            <motion.h2
+              className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue via-blue-500 to-green-500 animate-gradient">$10K</span> Speaking Gig{" "}
+              <br className="hidden sm:block" />
+              Is One Click Away
+            </motion.h2>
+
+            <motion.p
+              className="text-lg sm:text-xl text-gray-600 font-medium max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Every dot is an opportunity. We&apos;ve done the work for you.
+            </motion.p>
+          </div>
+
+          {/* Constrains the globe's height */}
+          <div className="relative max-h-[600px] overflow-hidden">
+            <Globe />
+          </div>
         </section>
 
       </main>
