@@ -145,18 +145,24 @@ export function GlobalEngagementTracker(): null {
     // Initial idle timer
     resetIdleTimer()
 
-    // Send periodic engagement updates for long sessions
-    const engagementInterval = setInterval(() => {
-      const score = calculateEngagementScore()
-      if (score > 20) { // Only track engaged users
-        posthog.capture('engagement_checkpoint', {
-          path: pathname,
-          score: score,
-          time_elapsed: (Date.now() - data.startTime) / 1000,
-          scroll_depth: data.maxScroll,
-        })
-      }
-    }, 60000) // Every minute
+    // Send engagement checkpoints at fixed marks — max 3 per page view.
+    // Was setInterval(60s): an engaged user with a tab left open racked up
+    // one event per minute indefinitely (~113k events/mo, ~64% of project
+    // quota). Fixed marks keep the engagement signal at a capped cost.
+    const checkpointMarks = [30_000, 120_000, 300_000]
+    const checkpointTimers = checkpointMarks.map((delay) =>
+      setTimeout(() => {
+        const score = calculateEngagementScore()
+        if (score > 20) { // Only track engaged users
+          posthog.capture('engagement_checkpoint', {
+            path: pathname,
+            score: score,
+            time_elapsed: (Date.now() - data.startTime) / 1000,
+            scroll_depth: data.maxScroll,
+          })
+        }
+      }, delay)
+    )
 
     // Cleanup
     return () => {
@@ -166,7 +172,7 @@ export function GlobalEngagementTracker(): null {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
       window.removeEventListener('mousemove', resetIdleTimer)
       window.removeEventListener('keypress', resetIdleTimer)
-      clearInterval(engagementInterval)
+      checkpointTimers.forEach(clearTimeout)
       if (data.idleTimer) clearTimeout(data.idleTimer)
       clearTimeout(scrollTimeout)
       
