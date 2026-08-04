@@ -6,8 +6,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { createClient } from '@supabase/supabase-js';
 import ReactDOMServer from 'react-dom/server';
 
-// Initialize Mapbox
-mapboxgl.accessToken = 'pk.eyJ1IjoiYXVzdGluYmVudG9uMTIiLCJhIjoiY21lOHl0b2QxMGM0dDJscHh2dmJxazg3dCJ9.B0omB0MLFoHn7dqWqEhogA';
+// Public (pk.) Mapbox token, inlined at build time. Lives in the environment
+// (Netlify UI / .env.local) rather than the repo because GitHub push
+// protection blocks any commit whose blob contains it. If it's missing the
+// globe section renders without the map instead of crashing the page.
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? '';
+mapboxgl.accessToken = MAPBOX_TOKEN;
 
 // Initialize Supabase
 const supabase = createClient(
@@ -426,6 +430,7 @@ export default function GlobePage() {
 
   // Main map initialization
   useEffect(() => {
+    if (!MAPBOX_TOKEN) return;
     if (map.current || !mapContainer.current) return;
 
     const currentIsMobile = window.innerWidth < 1024;
@@ -492,14 +497,25 @@ export default function GlobePage() {
       contactImage.src = '/contact-circle.svg';
 
       try {
-        let allData: Lead[] = [];
+        // Only the columns the globe UI renders. select('*') pulled ~30KB/row
+        // (embedding vector + internal research text) — ~200MB total on page
+        // load, which crashed mobile Safari. detailed_info is desktop-only.
+        const columns = [
+          'id', 'region', 'state', 'city', 'lead_type', 'longitude', 'latitude',
+          'lead_name', 'event_name', 'organization', 'organization_type',
+          'job_title', 'image_url', 'event_format', 'fee_potential',
+          'industry:lead_industry',
+          ...(currentIsMobile ? [] : ['detailed_info'])
+        ].join(',');
+
+        const allData: Lead[] = [];
         let batchSize = 1000;
         let offset = 0;
         let hasMore = true;
         while (hasMore) {
-          const { data: batch, error } = await supabase.from('leads').select('*, latitude, longitude').not('latitude', 'is', null).not('longitude', 'is', null).eq('region', 'United States').range(offset, offset + batchSize - 1);
+          const { data: batch, error } = await supabase.from('leads').select(columns).not('latitude', 'is', null).not('longitude', 'is', null).eq('region', 'United States').range(offset, offset + batchSize - 1);
           if (error) { console.error('Error fetching batch:', error); break; }
-          if (batch && batch.length > 0) { allData = [...allData, ...batch]; offset += batchSize; } else { hasMore = false; }
+          if (batch && batch.length > 0) { allData.push(...(batch as unknown as Lead[])); offset += batchSize; } else { hasMore = false; }
         }
 
         const data = allData;
@@ -757,6 +773,10 @@ if (map.current) {
       map.current = null;
     };
   }, []); // Empty dependency array
+
+  // No token (env var not set at build time): skip the map entirely rather
+  // than mounting a broken canvas. Must stay below all hook calls.
+  if (!MAPBOX_TOKEN) return null;
 
   return (
     <div className="relative w-full h-screen overflow-hidden">

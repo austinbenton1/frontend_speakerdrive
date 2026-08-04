@@ -1,5 +1,7 @@
 "use client";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
 import { Footer5 } from "@/components/layout/Footer";
@@ -10,7 +12,41 @@ import { motion } from "framer-motion";
 import { EventExamples } from "@/components/sections/EventExamples";
 import { TheProspectingEffect } from "@/components/sections/TheProspectingEffect";
 import { MessageComposerFormula } from "@/components/sections/MessageComposerFormula";
-import Globe from "@/app/globe/page";
+// Globe = Mapbox WebGL + a multi-MB data fetch. Load its chunk only when the
+// section approaches the viewport, so it can't compete with the rest of the
+// page for memory on mobile (it was crashing iOS Safari mid-scroll).
+const Globe = dynamic(() => import("@/app/globe/page"), { ssr: false });
+
+function LazyGlobe() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!("IntersectionObserver" in window)) {
+      setShow(true);
+      return;
+    }
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShow(true);
+          obs.disconnect();
+        }
+      },
+      { rootMargin: "800px 0px" }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="relative max-h-[600px] overflow-hidden">
+      {show ? <Globe /> : <div className="h-[600px] bg-black" />}
+    </div>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -447,9 +483,7 @@ export default function LandingPage() {
           </div>
 
           {/* Constrains the globe's height */}
-          <div className="relative max-h-[600px] overflow-hidden">
-            <Globe />
-          </div>
+          <LazyGlobe />
         </section>
 
       </main>
