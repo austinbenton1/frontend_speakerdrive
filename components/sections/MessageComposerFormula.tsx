@@ -1,6 +1,8 @@
 "use client";
+import type { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
+import { LazyVideo } from "@/components/ui/LazyVideo";
 
 // Subtle fade-in animation
 const fadeIn = {
@@ -15,15 +17,8 @@ const fadeIn = {
   },
 };
 
-const downArrowAnimation = {
-  y: [0, 5, 0],
-  transition: {
-    duration: 2,
-    repeat: Infinity,
-    repeatType: "reverse" as const,
-    ease: "easeInOut",
-  },
-};
+// Down-arrow bob, run by the browser instead of JS (see .sd-float in globals.css)
+const downArrowFloat = { "--float-y": "5px", "--float-time": "2s" } as CSSProperties;
 
 export function MessageComposerFormula() {
   return (
@@ -62,30 +57,24 @@ export function MessageComposerFormula() {
           </p>
 
           <div className="mt-6">
-            <video
+            <LazyVideo
+              src="/videos/smart-matching.mp4"
+              poster="/videos/smart-matching-poster.webp"
+              width={1330}
+              height={844}
               className="w-full h-auto rounded-2xl"
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              <source
-                src="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67da1398e4d4f5758831a24d.mp4"
-                type="video/mp4"
-              />
-              <p>Your browser doesn't support HTML5 video.</p>
-            </video>
+            />
           </div>
         </div>
 
         {/* Arrow pointing down to next section */}
         <div className="flex flex-col items-center pb-6">
-          <motion.div
-            className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-lg mt-6 mb-4"
-            animate={downArrowAnimation}
+          <div
+            className="sd-float w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center shadow-lg mt-6 mb-4"
+            style={downArrowFloat}
           >
             <ArrowRight className="transform rotate-90 h-7 w-7 text-white" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

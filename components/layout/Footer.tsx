@@ -56,6 +56,14 @@ export function Footer5() {
                 Reviews
               </a>
               <a
+                href="https://learn.speakerdrive.com/"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Resources
+              </a>
+              <a
                 href="/contact"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >

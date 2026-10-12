@@ -90,8 +90,12 @@ export function TheProspectingEffect() {
                 {/* Image container with landscape aspect ratio */}
                 <div className="aspect-[16/9] w-full overflow-hidden flex items-center justify-center px-4">
                   <img
-                    src="/Bad.png"
+                    src="/referral-trap.webp"
                     alt="Inconsistent prospecting - inefficient and time-consuming"
+                    width={1600}
+                    height={900}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>

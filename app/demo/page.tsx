@@ -38,7 +38,7 @@ export default function DemoPage() {
             </div>
 
             {/* TidyCal Embed (shared with /reviews) */}
-            <TidyCalEmbed />
+            <TidyCalEmbed className="min-h-[940px] lg:min-h-[1060px]" />
           </div>
         </section>
 

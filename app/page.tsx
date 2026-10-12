@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Hero } from "@/components/sections/Hero";
 import { FeatureTwoItem } from "@/components/sections/features/FeatureTwoItem";
 import { Footer5 } from "@/components/layout/Footer";
@@ -135,12 +135,12 @@ export default function LandingPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                <div
+                  className="sd-float"
+                  style={{ "--float-y": "10px", "--float-time": "1.5s" } as CSSProperties}
                 >
                   <ChevronDown className="h-8 w-8 text-gray-400" />
-                </motion.div>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -171,7 +171,8 @@ export default function LandingPage() {
                   description: "Fresh engagements and decision-makers added as they emerge.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21aa6244f61209f98b0.mp4"
+              externalVideoSrc="/videos/step-1-find-leads.mp4"
+              posterSrc="/videos/step-1-find-leads-poster.webp"
               captionText="Search by events or contacts"
             />
           </div>
@@ -196,7 +197,8 @@ export default function LandingPage() {
                   description: "Connect with decision-makers on LinkedIn.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d21a5f250c02e2dc236c.mp4"
+              externalVideoSrc="/videos/step-2-unlock-contact.mp4"
+              posterSrc="/videos/step-2-unlock-contact-poster.webp"
               captionText="Find detailed info. Then, unlock the contact channel."
             />
           </div>
@@ -218,7 +220,8 @@ export default function LandingPage() {
                   description: "Connect via email, LinkedIn, or application forms—optimized for each opportunity.",
                 },
               ]}
-              externalVideoSrc="https://storage.googleapis.com/msgsndr/TT6h28gNIZXvItU0Dzmk/media/67d2d25922c810b65b2239ae.mp4"
+              externalVideoSrc="/videos/step-3-outreach.mp4"
+              posterSrc="/videos/step-3-outreach-poster.webp"
               captionText="Generate outreach in 1 click"
             />
           </div>
@@ -254,9 +257,13 @@ export default function LandingPage() {
             </div>
 
             <img
-              src="/autopilot-for-website.png"
+              src="/autopilot-dashboard.webp"
               alt="The SpeakerDrive Autopilot dashboard, showing leads moving from On Deck to Queued to In Autopilot, with replies collected automatically"
-              className="w-full rounded-xl border border-gray-200 shadow-lg mb-10"
+              width={1816}
+              height={1153}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-auto rounded-xl border border-gray-200 shadow-lg mb-10"
             />
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -307,8 +314,12 @@ export default function LandingPage() {
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-1 md:order-3 lg:col-span-1 lg:transform lg:scale-105">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
-                    src="/Keynote Speaker.png"
+                    src="/perfect-for/keynote-speaker.webp"
                     alt="Keynote Speakers"
+                    width={640}
+                    height={828}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
@@ -326,8 +337,12 @@ export default function LandingPage() {
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-2 md:order-1">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
-                    src="/Coach.png"
+                    src="/perfect-for/coach.webp"
                     alt="Leadership Development"
+                    width={640}
+                    height={828}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
@@ -345,8 +360,12 @@ export default function LandingPage() {
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-3 md:order-2">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
-                    src="/Trainer Facilitator.png"
+                    src="/perfect-for/trainer-facilitator.webp"
                     alt="Interactive Workshops"
+                    width={640}
+                    height={828}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
@@ -364,8 +383,12 @@ export default function LandingPage() {
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-4 md:order-4">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
-                    src="/Consultant.png"
+                    src="/perfect-for/consultant.webp"
                     alt="Strategic Advisory"
+                    width={640}
+                    height={828}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
@@ -383,8 +406,12 @@ export default function LandingPage() {
               <div className="text-center md:hover:scale-105 transition-transform duration-300 order-5 md:order-5">
                 <div className="relative aspect-[3/4] mb-4 max-w-[270px] mx-auto sm:max-w-none overflow-hidden">
                   <img
-                    src="/Expert Thought Leader.png"
+                    src="/perfect-for/expert-thought-leader.webp"
                     alt="Big Ideas & Insights"
+                    width={640}
+                    height={828}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>

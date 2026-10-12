@@ -17,6 +17,8 @@ interface FeatureTwoItemProps {
   imageSrc?: string;
   videoSrc?: string;
   externalVideoSrc?: string;
+  /** First frame of the video, shown until it starts playing. */
+  posterSrc?: string;
   stepNumber?: number;
   captionText?: string;
 }
@@ -28,6 +30,7 @@ export function FeatureTwoItem({
   imageSrc,
   videoSrc,
   externalVideoSrc,
+  posterSrc,
   stepNumber,
   captionText,
 }: FeatureTwoItemProps) {
@@ -201,6 +204,7 @@ export function FeatureTwoItem({
                   src={externalVideoSrc}
                   title={title}
                   caption={captionText || ""}
+                  poster={posterSrc}
                   className="w-full rounded-xl shadow-lg"
                 />
               ) : (
@@ -227,6 +231,7 @@ export function FeatureTwoItem({
                   src={videoSrc}
                   title={title}
                   caption={captionText || ""}
+                  poster={posterSrc}
                   className="w-full rounded-xl"
                 />
               ) : (
