@@ -42,6 +42,7 @@ export type Testimonial = {
 export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "weston-brandon",
+    photo: "/testimonials/weston-brandon.jpg",
     name: "Weston Brandon",
     shortName: "Weston B.",
     title: "Keynote speaker, Brandon Institute",
@@ -59,6 +60,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   },
   {
     id: "robert-siciliano",
+    photo: "/testimonials/robert-siciliano.jpg",
     name: "Robert Siciliano, CSP",
     shortName: "Robert S.",
     title: "Cybersecurity keynote speaker",
@@ -71,6 +73,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   },
   {
     id: "jared-kallen",
+    photo: "/testimonials/jared-kallen.jpg",
     name: "Jared Kallen",
     shortName: "Jared K.",
     title: "Executive-functioning coach",
@@ -85,6 +88,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   },
   {
     id: "nigel-romany",
+    photo: "/testimonials/nigel-romany.jpg",
     name: "Nigel Romany",
     shortName: "Nigel R.",
     title: "Student leadership and mental health speaker, Coach Romany Services",
@@ -96,6 +100,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   },
   {
     id: "terri-chrisman",
+    photo: "/testimonials/terri-chrisman.jpg",
     name: "Terri Chrisman",
     shortName: "Terri C.",
     quotes: [
