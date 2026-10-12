@@ -10,23 +10,35 @@
 //     words are already public under that name (a LinkedIn recommendation).
 //   - Demo reviews (TidyCal) carry the first name only, as the booking page
 //     shows them, until the person gives a full name.
-//   - No photo until the person sends one. `photo` is a path under /public.
+//   - No photo until the person sends one. Drop the file in
+//     public/testimonials/<id>.jpg and set `photo: "/testimonials/<id>.jpg"`.
+//   - The page shows `shortName` ("Terri C."), never the full name.
 //   - No invented stats: the rating numbers come from the entries below.
 
 export type TestimonialSource = "email" | "linkedin" | "tidycal";
 
 export type Testimonial = {
   id: string;
-  /** Display name. First name only until the person okays the full one. */
+  /** Full name, for our records and the review markup. */
   name: string;
+  /** What the page shows: first name + last initial, e.g. "Terri C.". */
+  shortName?: string;
   /** Role / company line under the name. Leave out when we do not have one. */
   title?: string;
   /** Path under /public, e.g. "/testimonials/weston-brandon.jpg". */
   photo?: string;
   /** One paragraph per entry. Each is the person's exact words. */
   quotes: string[];
-  /** Exact substrings of a quote to set in bold. Never new words. */
-  emphasis?: string[];
+  /**
+   * The cut the page shows when the full quote runs long: exact words from
+   * `quotes`, with … where words are skipped. Leave out to show the full quote.
+   */
+  excerpt?: string[];
+  /**
+   * The one-line cut for the card wall. Exact words with … for skips, except
+   * where Austin set the line himself (Jared, Nigel on 2026-10-12).
+   */
+  teaser?: string[];
   source: TestimonialSource;
   /** "YYYY-MM" — the month the words were written. */
   date: string;
@@ -38,62 +50,87 @@ export type Testimonial = {
 export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "weston-brandon",
+    photo: "/testimonials/weston-brandon.jpg",
     name: "Weston Brandon",
+    shortName: "Weston B.",
     title: "Keynote speaker, Brandon Institute",
     quotes: [
       "I landed a breakout session for a conference (very modest honorarium but paid for a couple months worth of your platform) within the first 25 leads, and that session gets me in the room of the people I want to advertise to anyhow.",
       "By far my favorite part of this is that I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
     ],
-    emphasis: [
-      "I landed a breakout session for a conference",
-      "within the first 25 leads",
-      "set up outreach sequences for 5 to 10 organizations within the span of 5 minutes",
+    excerpt: [
+      "I landed a breakout session for a conference … within the first 25 leads.",
+      "I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
+    ],
+    teaser: [
+      "I landed a breakout session for a conference … within the first 25 leads.",
     ],
     source: "email",
     date: "2026-08",
   },
   {
     id: "robert-siciliano",
+    photo: "/testimonials/robert-siciliano.jpg",
     name: "Robert Siciliano, CSP",
+    shortName: "Robert S.",
     title: "Cybersecurity keynote speaker",
     quotes: [
       "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers—most are fly-by-night operations that lack real substance and deliver on false promises. I rarely engage with them. Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin. He truly understands the nuances of a speaker's business—he gets it. He has assembled something that actually works, and I'm grateful to be a part of it. Thank you, Austin!",
     ],
-    emphasis: ["Speaker Drive is the rare exception."],
+    excerpt: [
+      "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers … Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin.",
+    ],
+    teaser: [
+      "The quality of this platform is undeniable.",
+    ],
     source: "linkedin",
     date: "2026-09",
   },
   {
     id: "jared-kallen",
+    photo: "/testimonials/jared-kallen.jpg",
     name: "Jared Kallen",
+    shortName: "Jared K.",
     title: "Executive-functioning coach",
     quotes: [
       "I give Austin Benton my strongest recommendation. He's the visionary behind SpeakerDrive, a platform that is reshaping how speakers and experts find high-value opportunities. Instead of chasing gigs or living in the 'feast or famine' cycle, SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages. Austin combines industry insight, innovation, and genuine care for the people he serves. He knows the challenges speakers face and has built a practical, effective solution that makes real results possible. If you're a speaker looking for more consistency, more opportunities, and more impact, you want Austin and SpeakerDrive in your corner.",
     ],
-    emphasis: [
-      "the built-in outreach tools actually convert those connections into booked stages",
+    excerpt: [
+      "SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages.",
+    ],
+    teaser: [
+      "SpeakerDrive actually converts connections into booked stages.",
     ],
     source: "linkedin",
     date: "2025-09",
   },
   {
     id: "nigel-romany",
+    photo: "/testimonials/nigel-romany.jpg",
     name: "Nigel Romany",
+    shortName: "Nigel R.",
     title: "Student leadership and mental health speaker, Coach Romany Services",
     quotes: [
       "I absolutely love this service!! It needs to be a staple of anyone looking to generate leads and is serious about Prospecting.",
+    ],
+    teaser: [
+      "I absolutely love SpeakerDrive",
     ],
     source: "email",
     date: "2026-08",
   },
   {
     id: "terri-chrisman",
+    photo: "/testimonials/terri-chrisman.jpg",
     name: "Terri Chrisman",
+    shortName: "Terri C.",
     quotes: [
       "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!! Thanks Austin.",
       "I got a second reply after that.",
     ],
-    emphasis: ["Only sent out 4 outreaches yesterday."],
+    teaser: [
+      "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!!",
+    ],
     source: "email",
     date: "2026-09",
   },
@@ -118,7 +155,7 @@ export const DEMO_REVIEWS: Testimonial[] = [
   { id: "tidycal-elaine-2026-08", name: "Elaine", quotes: ["This is an awesome system! Austin Benton has created a program that provides the types of leads every speaker wants and needs. It's easy to use, and it's affordable."], source: "tidycal", date: "2026-08", rating: 5 },
   { id: "tidycal-jeff-2026-08", name: "Jeff", quotes: ["Great conversation and demo. Thank you."], source: "tidycal", date: "2026-08", rating: 5 },
   { id: "tidycal-sam-2026-08", name: "Sam", quotes: ["Amazing! Austin is one of the real ones. Genuine guy that leads from a human approach and very trustworthy. Thank you!"], source: "tidycal", date: "2026-08", rating: 5 },
-  { id: "tidycal-kelly-2026-07", name: "Kelly", quotes: ["Austin is a class act - down to Earth, willing to help in any and every way you need, and he has such confidence in his product. He knows it’s working for people, it’s working for me, and will work for you. Best platform out there for speakers! Saves me hours and hours of cold emailing!"], source: "tidycal", date: "2026-07", rating: 5 },
+  { id: "tidycal-kelly-2026-07", name: "Kelly", quotes: ["Austin is a class act - down to Earth, willing to help in any and every way you need, and he has such confidence in his product. He knows it’s working for people, it’s working for me, and will work for you. Best platform out there for speakers! Saves me hours and hours of cold emailing!"], excerpt: ["Best platform out there for speakers! Saves me hours and hours of cold emailing!"], source: "tidycal", date: "2026-07", rating: 5 },
   { id: "tidycal-diane-2026-06", name: "Diane", quotes: ["FABULOUS - have a great weekend!"], source: "tidycal", date: "2026-06", rating: 5 },
   { id: "tidycal-stephen-2026-06", name: "Stephen", quotes: [], source: "tidycal", date: "2026-06", rating: 5 },
   { id: "tidycal-arthur-2026-06", name: "Arthur", quotes: ["Every question answered and some great starting tips to get moving."], source: "tidycal", date: "2026-06", rating: 5 },
@@ -142,6 +179,21 @@ export const DEMO_REVIEW_AVERAGE = (() => {
 export const DEMO_REVIEWS_WITH_TEXT = DEMO_REVIEWS.filter(
   (r) => r.quotes.length > 0 && r.quotes[0].trim().length > 0,
 );
+
+/** The paragraphs the page shows: the excerpt when there is one, else the full quote. */
+export function displayQuotes(t: Testimonial): string[] {
+  return t.excerpt ?? t.quotes;
+}
+
+/** The paragraphs the card wall shows: the teaser when there is one. */
+export function wallQuotes(t: Testimonial): string[] {
+  return t.teaser ?? displayQuotes(t);
+}
+
+/** The name the page shows. */
+export function displayName(t: Testimonial): string {
+  return t.shortName ?? t.name;
+}
 
 export const SOURCE_LABEL: Record<TestimonialSource, string> = {
   email: "Sent by email",

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
-import { TestimonialSlider } from "@/components/testimonials/TestimonialSlider";
+import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
 
 export const metadata: Metadata = {
   title: "Book a Demo | SpeakerDrive",
@@ -43,17 +43,14 @@ export default function DemoPage() {
         </section>
 
         {/* Named testimonials — the ones TidyCal's own review list does not show */}
-        <section className="bg-stone-50 py-16 sm:py-20">
+        <section className="bg-white pb-16 pt-4 sm:pb-20">
           <div className="container mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="mb-8 text-center">
-              <h2 className="text-2xl font-extrabold text-gray-900 sm:text-4xl">
+            <div className="mb-6 text-center">
+              <h2 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">
                 What customers say
               </h2>
-              <p className="mt-3 text-gray-600">
-                Named customers, in their own words.
-              </p>
             </div>
-            <TestimonialSlider />
+            <TestimonialCarousel />
           </div>
         </section>
       </main>

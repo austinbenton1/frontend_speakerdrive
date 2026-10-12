@@ -10,8 +10,15 @@ const EMBED_SRC = "https://asset-tidycal.b-cdn.net/js/embed.js";
 
 export function TidyCalEmbed({
   path = "austinbenton/speakerdrive",
+  showAvatar = true,
 }: {
   path?: string;
+  /**
+   * false hides TidyCal's top row (Austin's photo, name and "20 reviews")
+   * inside the widget. The event title, length, description and the review
+   * list are TidyCal's own and cannot be hidden from here.
+   */
+  showAvatar?: boolean;
 }) {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -31,5 +38,11 @@ export function TidyCalEmbed({
     };
   }, []);
 
-  return <div className="tidycal-embed" data-path={path}></div>;
+  return (
+    <div
+      className="tidycal-embed"
+      data-path={path}
+      data-showavatar={showAvatar ? undefined : "false"}
+    ></div>
+  );
 }

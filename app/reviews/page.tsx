@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
-import { Stars, TestimonialCard } from "@/components/testimonials/TestimonialCard";
-import { DemoReviewsWall } from "@/components/testimonials/DemoReviewsWall";
+import { Stars } from "@/components/testimonials/TestimonialCard";
+import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
+import { ReviewsWall } from "@/components/testimonials/ReviewsWall";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
 import {
   DEMO_REVIEWS_WITH_TEXT,
   DEMO_REVIEW_AVERAGE,
   DEMO_REVIEW_COUNT,
   NAMED_TESTIMONIALS,
+  displayName,
+  displayQuotes,
 } from "@/components/testimonials/data";
 
 const PAGE_URL = "https://speakerdrive.com/reviews";
-const TITLE = "SpeakerDrive Reviews | What Speakers Say";
+const TITLE = "SpeakerDrive Customer Reviews";
 const DESCRIPTION = `Rated ${DEMO_REVIEW_AVERAGE.toFixed(1)} out of 5 across ${DEMO_REVIEW_COUNT} demo reviews. Read what keynote speakers, coaches and experts say about finding and booking gigs with SpeakerDrive.`;
 
 export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  // Nested keys replace the root layout's, so the share image is repeated here.
+  // Nested keys replace the root layout's, so the share image is set here too.
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -29,12 +32,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-reviews.png",
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "SpeakerDrive",
-        secureUrl: "https://speakerdrive.com/og-image.png",
+        alt: "SpeakerDrive customer reviews",
+        secureUrl: "https://speakerdrive.com/og-reviews.png",
       },
     ],
   },
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: "/og-image.png", alt: "SpeakerDrive", width: 1200, height: 630 }],
+    images: [{ url: "/og-reviews.png", alt: "SpeakerDrive customer reviews", width: 1200, height: 630 }],
     site: "@speakerdrive",
     creator: "@austinbenton",
   },
@@ -66,8 +69,8 @@ const jsonLd = {
   review: [
     ...NAMED_TESTIMONIALS.map((t) => ({
       "@type": "Review",
-      author: { "@type": "Person", name: t.name },
-      reviewBody: t.quotes.join(" "),
+      author: { "@type": "Person", name: displayName(t) },
+      reviewBody: displayQuotes(t).join(" "),
       datePublished: t.date,
     })),
     ...DEMO_REVIEWS_WITH_TEXT.map((t) => ({
@@ -85,8 +88,6 @@ const jsonLd = {
 };
 
 export default function ReviewsPage() {
-  const [spotlight, ...rest] = NAMED_TESTIMONIALS;
-
   return (
     <div className="min-h-screen bg-white">
       <script
@@ -104,61 +105,35 @@ export default function ReviewsPage() {
         }
       />
 
-      <main className="pt-24">
-        {/* Intro */}
-        <section className="bg-white pb-10 pt-12 sm:pb-12 sm:pt-16">
-          <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <span className="mb-4 inline-block rounded-full bg-green-100 px-4 py-1 text-sm font-bold uppercase tracking-wide text-green-700">
-              Reviews
-            </span>
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-              What speakers say about SpeakerDrive
+      {/* The site header sits in the page flow, so no top padding is needed here. */}
+      <main>
+        {/* Header */}
+        <section className="bg-white pb-5 pt-6 sm:pb-6 sm:pt-8">
+          <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <Stars size={28} className="mb-3" />
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+              SpeakerDrive customer reviews
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600">
-              Real customers, in their own words.
-            </p>
-            <a
-              href="#demo-reviews"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm shadow-sm hover:border-gray-300"
-            >
-              <Stars size={16} />
-              <span className="font-bold text-gray-900">
-                {DEMO_REVIEW_AVERAGE.toFixed(1)}
-              </span>
-              <span className="text-gray-600">
-                from {DEMO_REVIEW_COUNT} demo reviews
-              </span>
-            </a>
           </div>
         </section>
 
-        {/* Named customers */}
-        <section className="bg-white pb-16 sm:pb-20">
+        {/* Named customers, one card that rotates */}
+        <section className="bg-white pb-4">
           <div className="container mx-auto max-w-5xl px-4 sm:px-6">
-            {spotlight && <TestimonialCard t={spotlight} variant="spotlight" />}
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              {rest.map((t) => (
-                <TestimonialCard key={t.id} t={t} />
-              ))}
-            </div>
+            <TestimonialCarousel />
           </div>
         </section>
 
-        <DemoReviewsWall />
+        {/* Every review, the named ones first */}
+        <ReviewsWall />
 
         {/* Calendar */}
-        <section className="relative bg-white py-16 sm:py-20">
+        <section className="relative bg-white py-10 sm:py-12">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-extrabold text-gray-900 sm:text-5xl">
-                See it for yourself
-              </h2>
-              <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                Pick a time below. Austin walks you through SpeakerDrive in 30
-                minutes.
-              </p>
-            </div>
-            <TidyCalEmbed />
+            <h2 className="mb-6 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              See it for yourself
+            </h2>
+            <TidyCalEmbed showAvatar={false} />
           </div>
         </section>
       </main>
