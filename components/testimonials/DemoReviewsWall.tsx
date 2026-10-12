@@ -5,14 +5,13 @@ import {
   DEMO_REVIEWS_WITH_TEXT,
   DEMO_REVIEW_AVERAGE,
   DEMO_REVIEW_COUNT,
-  TIDYCAL_URL,
   formatMonth,
 } from "./data";
 import { Stars } from "./TestimonialCard";
 
 export function DemoReviewsWall() {
   return (
-    <section id="demo-reviews" className="bg-stone-50 py-16 sm:py-20">
+    <section id="demo-reviews" className="bg-white py-16 sm:py-20">
       <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
           <Stars size={26} className="mb-3" />
@@ -21,21 +20,6 @@ export function DemoReviewsWall() {
           </p>
           <p className="mt-1 text-base font-semibold text-gray-700">
             out of 5 · {DEMO_REVIEW_COUNT} demo reviews
-          </p>
-          <h2 className="mt-6 text-2xl font-extrabold text-gray-900 sm:text-3xl">
-            Left right after a demo call with Austin
-          </h2>
-          <p className="mt-3 text-gray-600">
-            Collected by TidyCal, our booking tool. First names only, the way
-            TidyCal shows them.{" "}
-            <a
-              href={TIDYCAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand-blue hover:underline"
-            >
-              See them on TidyCal
-            </a>
           </p>
         </div>
 

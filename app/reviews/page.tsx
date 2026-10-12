@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
-import { Stars, TestimonialCard } from "@/components/testimonials/TestimonialCard";
+import { Stars } from "@/components/testimonials/TestimonialCard";
+import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
 import { DemoReviewsWall } from "@/components/testimonials/DemoReviewsWall";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
 import {
@@ -9,6 +10,7 @@ import {
   DEMO_REVIEW_AVERAGE,
   DEMO_REVIEW_COUNT,
   NAMED_TESTIMONIALS,
+  displayName,
 } from "@/components/testimonials/data";
 
 const PAGE_URL = "https://speakerdrive.com/reviews";
@@ -66,7 +68,7 @@ const jsonLd = {
   review: [
     ...NAMED_TESTIMONIALS.map((t) => ({
       "@type": "Review",
-      author: { "@type": "Person", name: t.name },
+      author: { "@type": "Person", name: displayName(t) },
       reviewBody: t.quotes.join(" "),
       datePublished: t.date,
     })),
@@ -85,8 +87,6 @@ const jsonLd = {
 };
 
 export default function ReviewsPage() {
-  const [spotlight, ...rest] = NAMED_TESTIMONIALS;
-
   return (
     <div className="min-h-screen bg-white">
       <script
@@ -132,22 +132,17 @@ export default function ReviewsPage() {
           </div>
         </section>
 
-        {/* Named customers */}
-        <section className="bg-white pb-16 sm:pb-20">
+        {/* Named customers: one wide card, rotating */}
+        <section className="bg-stone-50 py-12 sm:py-16">
           <div className="container mx-auto max-w-5xl px-4 sm:px-6">
-            {spotlight && <TestimonialCard t={spotlight} variant="spotlight" />}
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              {rest.map((t) => (
-                <TestimonialCard key={t.id} t={t} />
-              ))}
-            </div>
+            <TestimonialCarousel />
           </div>
         </section>
 
         <DemoReviewsWall />
 
         {/* Calendar */}
-        <section className="relative bg-white py-16 sm:py-20">
+        <section className="relative bg-stone-50 py-16 sm:py-20">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6">
             <div className="mb-12 text-center">
               <h2 className="mb-4 text-3xl font-extrabold text-gray-900 sm:text-5xl">

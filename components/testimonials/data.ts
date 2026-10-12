@@ -10,15 +10,19 @@
 //     words are already public under that name (a LinkedIn recommendation).
 //   - Demo reviews (TidyCal) carry the first name only, as the booking page
 //     shows them, until the person gives a full name.
-//   - No photo until the person sends one. `photo` is a path under /public.
+//   - No photo until the person sends one. Drop the file in
+//     public/testimonials/<id>.jpg and set `photo: "/testimonials/<id>.jpg"`.
+//   - The page shows `shortName` ("Terri C."), never the full name.
 //   - No invented stats: the rating numbers come from the entries below.
 
 export type TestimonialSource = "email" | "linkedin" | "tidycal";
 
 export type Testimonial = {
   id: string;
-  /** Display name. First name only until the person okays the full one. */
+  /** Full name, for our records and the review markup. */
   name: string;
+  /** What the page shows: first name + last initial, e.g. "Terri C.". */
+  shortName?: string;
   /** Role / company line under the name. Leave out when we do not have one. */
   title?: string;
   /** Path under /public, e.g. "/testimonials/weston-brandon.jpg". */
@@ -39,6 +43,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "weston-brandon",
     name: "Weston Brandon",
+    shortName: "Weston B.",
     title: "Keynote speaker, Brandon Institute",
     quotes: [
       "I landed a breakout session for a conference (very modest honorarium but paid for a couple months worth of your platform) within the first 25 leads, and that session gets me in the room of the people I want to advertise to anyhow.",
@@ -55,6 +60,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "robert-siciliano",
     name: "Robert Siciliano, CSP",
+    shortName: "Robert S.",
     title: "Cybersecurity keynote speaker",
     quotes: [
       "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers—most are fly-by-night operations that lack real substance and deliver on false promises. I rarely engage with them. Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin. He truly understands the nuances of a speaker's business—he gets it. He has assembled something that actually works, and I'm grateful to be a part of it. Thank you, Austin!",
@@ -66,6 +72,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "jared-kallen",
     name: "Jared Kallen",
+    shortName: "Jared K.",
     title: "Executive-functioning coach",
     quotes: [
       "I give Austin Benton my strongest recommendation. He's the visionary behind SpeakerDrive, a platform that is reshaping how speakers and experts find high-value opportunities. Instead of chasing gigs or living in the 'feast or famine' cycle, SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages. Austin combines industry insight, innovation, and genuine care for the people he serves. He knows the challenges speakers face and has built a practical, effective solution that makes real results possible. If you're a speaker looking for more consistency, more opportunities, and more impact, you want Austin and SpeakerDrive in your corner.",
@@ -79,6 +86,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "nigel-romany",
     name: "Nigel Romany",
+    shortName: "Nigel R.",
     title: "Student leadership and mental health speaker, Coach Romany Services",
     quotes: [
       "I absolutely love this service!! It needs to be a staple of anyone looking to generate leads and is serious about Prospecting.",
@@ -89,6 +97,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
   {
     id: "terri-chrisman",
     name: "Terri Chrisman",
+    shortName: "Terri C.",
     quotes: [
       "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!! Thanks Austin.",
       "I got a second reply after that.",
@@ -142,6 +151,11 @@ export const DEMO_REVIEW_AVERAGE = (() => {
 export const DEMO_REVIEWS_WITH_TEXT = DEMO_REVIEWS.filter(
   (r) => r.quotes.length > 0 && r.quotes[0].trim().length > 0,
 );
+
+/** The name the page shows. */
+export function displayName(t: Testimonial): string {
+  return t.shortName ?? t.name;
+}
 
 export const SOURCE_LABEL: Record<TestimonialSource, string> = {
   email: "Sent by email",

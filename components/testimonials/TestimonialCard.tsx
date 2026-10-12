@@ -1,13 +1,14 @@
-// One customer quote. Used on /reviews (every named entry) and inside the
-// /demo slider. Server-safe: no hooks, no browser APIs.
+// One customer quote as a wide card: photo on the left (when we have one),
+// the quote on the right, name and title under it. Used by the carousel on
+// /reviews and /demo. Server-safe: no hooks, no browser APIs.
 //
 // Everything on the card comes from components/testimonials/data.ts. The card
-// never invents a title, a photo or a number: if the entry has no `title`
-// there is no title line, if it has no `photo` there is no picture.
+// never invents a title or a photo: no `title`, no title line; no `photo`, no
+// picture and the quote takes the full width.
 
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SOURCE_LABEL, formatMonth, type Testimonial } from "./data";
+import { displayName, type Testimonial } from "./data";
 
 function escapeRegExp(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -29,7 +30,7 @@ export function Emphasized({
     <>
       {parts.map((part, i) =>
         hits.includes(part) ? (
-          <strong key={i} className="font-semibold text-gray-900">
+          <strong key={i} className="font-bold text-gray-900">
             {part}
           </strong>
         ) : (
@@ -72,71 +73,49 @@ export function Stars({
 
 export function TestimonialCard({
   t,
-  variant = "default",
   className,
 }: {
   t: Testimonial;
-  /** `spotlight` = the big one at the top of /reviews. */
-  variant?: "default" | "spotlight";
   className?: string;
 }) {
-  const spotlight = variant === "spotlight";
-  const meta = `${SOURCE_LABEL[t.source]} · ${formatMonth(t.date)}`;
+  const name = displayName(t);
 
   return (
     <figure
       className={cn(
-        "flex h-full flex-col rounded-2xl border bg-white",
-        spotlight
-          ? "border-brand-blue/40 p-7 shadow-[0_18px_50px_-30px_rgba(60,180,255,0.6)] sm:p-10"
-          : "border-gray-200 p-6 sm:p-7",
+        "flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8",
         className,
       )}
     >
-      {spotlight && (
-        <span
-          aria-hidden="true"
-          className="mb-2 block font-serif text-6xl leading-none text-brand-blue"
-        >
-          &ldquo;
-        </span>
+      {t.photo && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={t.photo}
+          alt={name}
+          className="h-28 w-28 flex-none rounded-2xl object-cover sm:h-36 sm:w-36"
+        />
       )}
-      <blockquote className="flex-1">
-        {t.quotes.map((q, i) => (
-          <p
-            key={i}
-            className={cn(
-              "text-gray-700",
-              spotlight
-                ? "text-lg leading-relaxed sm:text-2xl sm:leading-relaxed"
-                : "text-base leading-relaxed",
-              i > 0 && "mt-4",
-            )}
-          >
-            {i === 0 && !spotlight && <>&ldquo;</>}
-            <Emphasized text={q} emphasis={t.emphasis} />
-            {i === t.quotes.length - 1 && !spotlight && <>&rdquo;</>}
-          </p>
-        ))}
-      </blockquote>
-      <figcaption className="mt-6 flex items-center gap-3 border-t border-gray-100 pt-5">
-        {t.photo && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={t.photo}
-            alt={t.name}
-            className="h-12 w-12 flex-none rounded-full object-cover"
-          />
-        )}
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <span className="font-bold text-gray-900">{t.name}</span>
-            {t.rating && <Stars size={14} />}
-          </div>
+      <div className="min-w-0 flex-1">
+        <blockquote>
+          {t.quotes.map((q, i) => (
+            <p
+              key={i}
+              className={cn(
+                "text-lg font-medium leading-snug text-gray-900 sm:text-[22px] sm:leading-snug",
+                i > 0 && "mt-3",
+              )}
+            >
+              {i === 0 && <>&ldquo;</>}
+              <Emphasized text={q} emphasis={t.emphasis} />
+              {i === t.quotes.length - 1 && <>&rdquo;</>}
+            </p>
+          ))}
+        </blockquote>
+        <figcaption className="mt-5">
+          <div className="font-bold text-gray-900">{name}</div>
           {t.title && <div className="text-sm text-gray-600">{t.title}</div>}
-          <div className="text-xs text-gray-500">{meta}</div>
-        </div>
-      </figcaption>
+        </figcaption>
+      </div>
     </figure>
   );
 }

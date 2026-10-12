@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
-import { TestimonialSlider } from "@/components/testimonials/TestimonialSlider";
+import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
 
 export const metadata: Metadata = {
   title: "Book a Demo | SpeakerDrive",
@@ -49,11 +49,8 @@ export default function DemoPage() {
               <h2 className="text-2xl font-extrabold text-gray-900 sm:text-4xl">
                 What customers say
               </h2>
-              <p className="mt-3 text-gray-600">
-                Named customers, in their own words.
-              </p>
             </div>
-            <TestimonialSlider />
+            <TestimonialCarousel />
           </div>
         </section>
       </main>
