@@ -1,29 +1,16 @@
-"use client"
-
+import type { Metadata } from "next";
 import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
-import { useEffect } from "react";
+import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
+import { TestimonialSlider } from "@/components/testimonials/TestimonialSlider";
+
+export const metadata: Metadata = {
+  title: "Book a Demo | SpeakerDrive",
+  description:
+    "Pick a time with Austin Benton, the founder of SpeakerDrive, and see how speakers find decision-makers and book more gigs.",
+};
 
 export default function DemoPage() {
-  // Initialize TidyCal script
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const script = document.createElement("script");
-      script.src = "https://asset-tidycal.b-cdn.net/js/embed.js";
-      script.async = true;
-      document.head.appendChild(script);
-    }
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        const script = document.querySelector('script[src="https://asset-tidycal.b-cdn.net/js/embed.js"]');
-        if (script) {
-          script.remove();
-        }
-      }
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-white">
       <HeaderFinal
@@ -50,8 +37,23 @@ export default function DemoPage() {
               </p>
             </div>
 
-            {/* TidyCal Embed */}
-            <div className="tidycal-embed" data-path="austinbenton/speakerdrive"></div>
+            {/* TidyCal Embed (shared with /reviews) */}
+            <TidyCalEmbed />
+          </div>
+        </section>
+
+        {/* Named testimonials — the ones TidyCal's own review list does not show */}
+        <section className="bg-stone-50 py-16 sm:py-20">
+          <div className="container mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mb-8 text-center">
+              <h2 className="text-2xl font-extrabold text-gray-900 sm:text-4xl">
+                What customers say
+              </h2>
+              <p className="mt-3 text-gray-600">
+                Named customers, in their own words.
+              </p>
+            </div>
+            <TestimonialSlider />
           </div>
         </section>
       </main>
