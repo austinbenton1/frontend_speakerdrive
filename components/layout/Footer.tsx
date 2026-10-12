@@ -50,6 +50,12 @@ export function Footer5() {
                 Pricing
               </a>
               <a
+                href="/reviews"
+                className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
+              >
+                Reviews
+              </a>
+              <a
                 href="/contact"
                 className="text-sm text-zinc-100 hover:text-brand-blue transition-colors"
               >
