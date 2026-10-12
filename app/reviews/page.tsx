@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: PAGE_URL },
-  // Nested keys replace the root layout's, so the share image is repeated here.
+  // Nested keys replace the root layout's, so the share image is set here too.
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -32,12 +32,12 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-reviews.png",
         width: 1200,
         height: 630,
         type: "image/png",
-        alt: "SpeakerDrive",
-        secureUrl: "https://speakerdrive.com/og-image.png",
+        alt: "SpeakerDrive customer reviews",
+        secureUrl: "https://speakerdrive.com/og-reviews.png",
       },
     ],
   },
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: [{ url: "/og-image.png", alt: "SpeakerDrive", width: 1200, height: 630 }],
+    images: [{ url: "/og-reviews.png", alt: "SpeakerDrive customer reviews", width: 1200, height: 630 }],
     site: "@speakerdrive",
     creator: "@austinbenton",
   },

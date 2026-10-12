@@ -25,6 +25,9 @@ const inter = InterFont({
 });
 
 export const metadata: Metadata = {
+  // Makes every relative image in page metadata (og:image, twitter:image)
+  // resolve to the real site, not http://localhost:3000.
+  metadataBase: new URL("https://speakerdrive.com"),
   title: "SpeakerDrive | Find & Book Speaking Opportunities",
   description:
     "Find speaking opportunities, connect with decision-makers, and book more gigs. The all-in-one platform for speakers, coaches, and experts to grow their business.",

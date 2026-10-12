@@ -34,7 +34,10 @@ export type Testimonial = {
    * `quotes`, with … where words are skipped. Leave out to show the full quote.
    */
   excerpt?: string[];
-  /** The one-line cut for the card wall. Same rule: exact words, … for skips. */
+  /**
+   * The one-line cut for the card wall. Exact words with … for skips, except
+   * where Austin set the line himself (Jared, Nigel on 2026-10-12).
+   */
   teaser?: string[];
   source: TestimonialSource;
   /** "YYYY-MM" — the month the words were written. */
@@ -96,7 +99,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages.",
     ],
     teaser: [
-      "The built-in outreach tools actually convert those connections into booked stages.",
+      "SpeakerDrive actually converts connections into booked stages.",
     ],
     source: "linkedin",
     date: "2025-09",
@@ -111,7 +114,7 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "I absolutely love this service!! It needs to be a staple of anyone looking to generate leads and is serious about Prospecting.",
     ],
     teaser: [
-      "I absolutely love this service!!",
+      "I absolutely love SpeakerDrive",
     ],
     source: "email",
     date: "2026-08",
