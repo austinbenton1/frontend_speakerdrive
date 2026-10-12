@@ -53,7 +53,7 @@ export default function ContactPage() {
 
             {/* AidaForm Embed */}
             <div 
-              className="relative"
+              className="relative min-h-[700px]"
               data-aidaform-app="form202405" 
               data-url="https://speakerdrive.aidaform.com/speakerdrive-main-website" 
               data-width="100%" 

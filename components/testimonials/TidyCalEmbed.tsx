@@ -11,8 +11,15 @@ const EMBED_SRC = "https://asset-tidycal.b-cdn.net/js/embed.js";
 export function TidyCalEmbed({
   path = "austinbenton/speakerdrive",
   showAvatar = true,
+  className = "",
 }: {
   path?: string;
+  /**
+   * Reserve the calendar's height (a min-h class) so the page below doesn't
+   * jump when TidyCal's script fills the box in. Heights differ per page
+   * (measured 10/12: /demo ~943px phone, ~1064px desktop; /reviews ~1610-1710px).
+   */
+  className?: string;
   /**
    * false hides TidyCal's top row (Austin's photo, name and "20 reviews")
    * inside the widget. The event title, length, description and the review
@@ -38,11 +45,16 @@ export function TidyCalEmbed({
     };
   }, []);
 
+  // The reserve sits on a wrapper: TidyCal's script writes its own inline
+  // min-height (500px) onto .tidycal-embed while it loads, which overrode a
+  // class placed there.
   return (
-    <div
-      className="tidycal-embed"
-      data-path={path}
-      data-showavatar={showAvatar ? undefined : "false"}
-    ></div>
+    <div className={className}>
+      <div
+        className="tidycal-embed"
+        data-path={path}
+        data-showavatar={showAvatar ? undefined : "false"}
+      ></div>
+    </div>
   );
 }

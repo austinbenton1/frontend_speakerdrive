@@ -442,6 +442,10 @@ export default function GlobePage() {
       zoom: 1.5,
       pitch: 35,
       projection: 'globe' as any,
+      // The globe sits inside a scrolling page. Without this, a plain wheel or
+      // one-finger swipe over it moved the map and the page stopped scrolling.
+      // Now ⌘/Ctrl + scroll zooms and two fingers pan; everything else scrolls on.
+      cooperativeGestures: true,
       // Start with interactions disabled during loading
       interactive: false,
       dragRotate: false,

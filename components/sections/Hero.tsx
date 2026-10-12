@@ -4,7 +4,7 @@ import { ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextEffect } from "@/components/ui/text-effect";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, type CSSProperties } from "react";
 
 // Extend Window interface for affiliate tracking
 declare global {
@@ -22,10 +22,6 @@ const floatLeft = {
     y: 0,
     transition: { duration: 1.2, ease: "easeInOut" },
   },
-  float: {
-    y: [0, -8, 0],
-    transition: { duration: 3, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-  },
 };
 
 const floatRight = {
@@ -36,10 +32,6 @@ const floatRight = {
     y: 0,
     transition: { duration: 1.2, ease: "easeInOut" },
   },
-  float: {
-    y: [0, -8, 0],
-    transition: { duration: 3.5, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-  },
 };
 
 const fadeUp = {
@@ -47,7 +39,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, filter: "blur(0px)" },
 };
 
-// Restored export cards animation with minimized float
+// Export cards entrance (the small float is the CSS .sd-float class)
 const exportCardsAnimation = {
   hidden: {
     opacity: 0.6,
@@ -60,11 +52,11 @@ const exportCardsAnimation = {
     scale: 0.94,
     transition: { duration: 0.5, ease: "easeOut" },
   },
-  float: {
-    y: [0, -3, 0],
-    transition: { duration: 3, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" },
-  },
 };
+
+// Up-and-down float, run by the browser instead of JS (see .sd-float in globals.css)
+const floatStyle = (distance: string, seconds: number) =>
+  ({ "--float-y": distance, "--float-time": `${seconds}s` }) as CSSProperties;
 
 export function Hero() {
   const MotionLink = motion(Link);
@@ -72,12 +64,41 @@ export function Hero() {
   const imageRef = useRef<HTMLImageElement>(null);
   const [signupUrl, setSignupUrl] = useState('https://app.speakerdrive.com/signup');
 
-  // Adjusted scroll behavior: starts at 35° and ends fully upright (0°)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-  const rotateX = useTransform(scrollYProgress, [0, 1], [35, 0]);
+  // Adjusted scroll behavior: starts at 35° and ends fully upright (0°).
+  // Same range framer's ["start start", "end end"] gave (hero top at screen top
+  // -> hero bottom at screen bottom), measured here so it can have a 120px
+  // floor. Without it, once the hero is about as tall as the screen the range
+  // collapses or runs backwards: 1080p monitors flipped the shot flat in a few
+  // pixels, and bigger monitors and big phones tilted it back as you scrolled.
+  const { scrollY } = useScroll();
+  const tiltRange = useRef<[number, number]>([0, 1]);
+  const tiltAt = (y: number) => {
+    const [start, end] = tiltRange.current;
+    const progress = Math.min(1, Math.max(0, (y - start) / (end - start)));
+    return 35 * (1 - progress);
+  };
+  const rotateX = useTransform(scrollY, tiltAt);
+
+  useEffect(() => {
+    const hero = containerRef.current;
+    if (!hero) return;
+    const measure = () => {
+      const start = hero.getBoundingClientRect().top + window.scrollY;
+      const end = start + hero.offsetHeight - document.documentElement.clientHeight;
+      tiltRange.current = [start, Math.max(end, start + 120)];
+      rotateX.set(tiltAt(window.scrollY));
+    };
+    measure();
+    // Re-measure when the hero's own size changes (images, fonts) or the window resizes
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(hero);
+    window.addEventListener("resize", measure);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Listen for affiliate ID changes and update signup URL
   useEffect(() => {
@@ -112,7 +133,10 @@ export function Hero() {
   }, []);
 
   return (
-    <div className="px-4 pt-16 sm:pt-20 pb-0" ref={containerRef}>
+    // overflow-x-clip: the hero shot is wider than the screen on purpose (sm:w-[120%]),
+    // which let iPads scroll the whole page sideways. Clip trims the spill at the
+    // screen edge without making a scroll box.
+    <div className="px-4 pt-16 sm:pt-20 pb-0 overflow-x-clip" ref={containerRef}>
       <div className="container mx-auto max-w-6xl">
         {/* Grid with left image / center text / right image */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2.5fr_1fr] gap-4 relative">
@@ -125,14 +149,14 @@ export function Hero() {
               animate="visible"
               style={{ zIndex: 10 }}
             >
-              <motion.div variants={floatLeft} animate="float">
+              <div className="sd-float" style={floatStyle("-8px", 3)}>
                 <div className="absolute -top-6 -left-6 w-24 h-24 bg-gradient-to-br from-brand-blue/20 to-transparent rounded-full blur-xl" />
                 <img
                   src="/Left Hero-mh.png"
                   alt="Speaker contact cards"
                   className="max-w-full h-auto w-10/12 mx-auto"
                 />
-              </motion.div>
+              </div>
             </motion.div>
           </div>
 
@@ -143,11 +167,20 @@ export function Hero() {
               className="block lg:hidden mx-auto mb-6 w-64 max-w-full relative transform-gpu"
               variants={exportCardsAnimation}
               initial="hidden"
-              animate={["visible", "float"]}
+              animate="visible"
               transition={{ delay: 0.1 }}
-              style={{ zIndex: 5, willChange: "transform" }}
+              style={{ zIndex: 5 }}
             >
-              <img src="/export_cards.svg" alt="Export Cards" className="w-full h-auto" />
+              <div className="sd-float" style={floatStyle("-3px", 3)}>
+                {/* export_cards.svg drawn once at 3x phone size: 15 KB instead of 3.5 MB */}
+                <img
+                  src="/export-cards.webp"
+                  alt="Export Cards"
+                  width={768}
+                  height={222}
+                  className="w-full h-auto"
+                />
+              </div>
             </motion.div>
 
             {/* Small label/pill */}
@@ -217,14 +250,14 @@ export function Hero() {
               animate="visible"
               style={{ zIndex: 10 }}
             >
-              <motion.div variants={floatRight} animate="float">
+              <div className="sd-float" style={floatStyle("-8px", 3.5)}>
                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-bl from-brand-blue/20 to-transparent rounded-full blur-xl" />
                 <img
                   src="/Right Hero-mh.png"
                   alt="Speaker contact cards"
                   className="max-w-full h-auto w-10/12 mx-auto"
                 />
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </div>

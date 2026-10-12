@@ -133,7 +133,7 @@ export default function ReviewsPage() {
             <h2 className="mb-6 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
               See it for yourself
             </h2>
-            <TidyCalEmbed showAvatar={false} />
+            <TidyCalEmbed showAvatar={false} className="min-h-[1600px]" />
           </div>
         </section>
       </main>

@@ -242,3 +242,26 @@
 .animate-bounce-horizontal {
   animation: bounceHorizontal 1s infinite;
 }
+
+/* ====== Gentle up-and-down float (hero cards, scroll arrows) ======
+   The browser runs this on its own, with no script work each frame, so it
+   never competes with scrolling. Set the distance with --float-y and the
+   length of one cycle with --float-time. */
+@keyframes sd-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(var(--float-y, -8px));
+  }
+}
+
+.sd-float {
+  animation: sd-float var(--float-time, 3s) ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-float {
+    animation: none;
+  }
+}
