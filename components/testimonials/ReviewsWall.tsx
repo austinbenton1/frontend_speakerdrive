@@ -1,6 +1,7 @@
-// The card wall on /reviews: the named customers first (photo, "Terri C.",
-// title), then every TidyCal demo review that has words (stars, first name,
-// month). Server-safe. Everything comes from data.ts.
+// The card wall on /reviews: the named customers first ("Terri C." + title),
+// then every TidyCal demo review that has words (stars, first name, month).
+// Uniform cards, no photos (the slider above is the only place a photo
+// shows). Server-safe. Everything comes from data.ts.
 
 import { cn } from "@/lib/utils";
 import {
@@ -11,7 +12,7 @@ import {
   formatMonth,
   type Testimonial,
 } from "./data";
-import { Emphasized, Stars } from "./TestimonialCard";
+import { Stars } from "./TestimonialCard";
 
 function Tile({ t }: { t: Testimonial }) {
   const quotes = displayQuotes(t);
@@ -23,20 +24,12 @@ function Tile({ t }: { t: Testimonial }) {
         {quotes.map((q, i) => (
           <p key={i} className={i > 0 ? "mt-2" : undefined}>
             {i === 0 && <>&ldquo;</>}
-            <Emphasized text={q} emphasis={t.emphasis} />
+            {q}
             {i === quotes.length - 1 && <>&rdquo;</>}
           </p>
         ))}
       </blockquote>
-      <figcaption className="mt-4 flex items-center gap-3">
-        {t.photo && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={t.photo}
-            alt={displayName(t)}
-            className="h-10 w-10 flex-none rounded-full object-cover"
-          />
-        )}
+      <figcaption className="mt-4">
         <div className="min-w-0 text-sm">
           <div className="font-bold text-gray-900">
             {displayName(t)}

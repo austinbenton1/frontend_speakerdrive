@@ -1,6 +1,6 @@
 // One customer quote as a wide card: photo on the left (when we have one),
 // the quote on the right, name and title under it. Used by the carousel on
-// /reviews and /demo. Server-safe: no hooks, no browser APIs.
+// /reviews and /demo, the only place a photo shows. Server-safe.
 //
 // Everything on the card comes from components/testimonials/data.ts. The card
 // never invents a title or a photo: no `title`, no title line; no `photo`, no
@@ -9,37 +9,6 @@
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { displayName, displayQuotes, type Testimonial } from "./data";
-
-function escapeRegExp(s: string) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
-
-/** The quote, with the entry's `emphasis` substrings set in bold. */
-export function Emphasized({
-  text,
-  emphasis,
-}: {
-  text: string;
-  emphasis?: string[];
-}) {
-  const hits = (emphasis ?? []).filter((e) => e && text.includes(e));
-  if (hits.length === 0) return <>{text}</>;
-  const re = new RegExp(`(${hits.map(escapeRegExp).join("|")})`, "g");
-  const parts = text.split(re);
-  return (
-    <>
-      {parts.map((part, i) =>
-        hits.includes(part) ? (
-          <strong key={i} className="font-bold text-gray-900">
-            {part}
-          </strong>
-        ) : (
-          <span key={i}>{part}</span>
-        ),
-      )}
-    </>
-  );
-}
 
 export function Stars({
   count = 5,
@@ -107,7 +76,7 @@ export function TestimonialCard({
               )}
             >
               {i === 0 && <>&ldquo;</>}
-              <Emphasized text={q} emphasis={t.emphasis} />
+              {q}
               {i === quotes.length - 1 && <>&rdquo;</>}
             </p>
           ))}

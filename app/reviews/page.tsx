@@ -105,18 +105,15 @@ export default function ReviewsPage() {
         }
       />
 
-      <main className="pt-24">
+      {/* The site header sits in the page flow, so no top padding is needed here. */}
+      <main>
         {/* Header */}
-        <section className="bg-white pb-6 pt-8 sm:pb-8 sm:pt-10">
+        <section className="bg-white pb-5 pt-6 sm:pb-6 sm:pt-8">
           <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6">
-            <Stars size={28} className="mb-4" />
+            <Stars size={28} className="mb-3" />
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
               Reviews from SpeakerDrive customers
             </h1>
-            <p className="mt-3 text-gray-600">
-              {DEMO_REVIEW_AVERAGE.toFixed(1)} out of 5 from {DEMO_REVIEW_COUNT}{" "}
-              demo reviews
-            </p>
           </div>
         </section>
 
@@ -131,18 +128,12 @@ export default function ReviewsPage() {
         <ReviewsWall />
 
         {/* Calendar */}
-        <section className="relative bg-white py-12 sm:py-16">
+        <section className="relative bg-white py-10 sm:py-12">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6">
-            <div className="mb-10 text-center">
-              <h2 className="mb-3 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                See it for yourself
-              </h2>
-              <p className="mx-auto max-w-2xl text-lg text-gray-600">
-                Pick a time below. Austin walks you through SpeakerDrive in 30
-                minutes.
-              </p>
-            </div>
-            <TidyCalEmbed />
+            <h2 className="mb-6 text-center text-3xl font-extrabold text-gray-900 sm:text-4xl">
+              See it for yourself
+            </h2>
+            <TidyCalEmbed showAvatar={false} />
           </div>
         </section>
       </main>

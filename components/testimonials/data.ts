@@ -34,8 +34,6 @@ export type Testimonial = {
    * `quotes`, with … where words are skipped. Leave out to show the full quote.
    */
   excerpt?: string[];
-  /** Exact substrings of a quote to set in bold. Never new words. */
-  emphasis?: string[];
   source: TestimonialSource;
   /** "YYYY-MM" — the month the words were written. */
   date: string;
@@ -59,11 +57,6 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "I landed a breakout session for a conference … within the first 25 leads.",
       "I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
     ],
-    emphasis: [
-      "I landed a breakout session for a conference",
-      "within the first 25 leads",
-      "set up outreach sequences for 5 to 10 organizations within the span of 5 minutes",
-    ],
     source: "email",
     date: "2026-08",
   },
@@ -79,7 +72,6 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     excerpt: [
       "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers … Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin.",
     ],
-    emphasis: ["Speaker Drive is the rare exception."],
     source: "linkedin",
     date: "2026-09",
   },
@@ -94,9 +86,6 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     ],
     excerpt: [
       "SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages.",
-    ],
-    emphasis: [
-      "the built-in outreach tools actually convert those connections into booked stages",
     ],
     source: "linkedin",
     date: "2025-09",
@@ -122,7 +111,6 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!! Thanks Austin.",
       "I got a second reply after that.",
     ],
-    emphasis: ["Only sent out 4 outreaches yesterday."],
     source: "email",
     date: "2026-09",
   },
