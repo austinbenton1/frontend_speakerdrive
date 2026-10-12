@@ -3,7 +3,7 @@ import { HeaderFinal } from "@/components/layout/HeaderFinal";
 import { Footer5 } from "@/components/layout/Footer";
 import { Stars } from "@/components/testimonials/TestimonialCard";
 import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
-import { DemoReviewsWall } from "@/components/testimonials/DemoReviewsWall";
+import { ReviewsWall } from "@/components/testimonials/ReviewsWall";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
 import {
   DEMO_REVIEWS_WITH_TEXT,
@@ -11,6 +11,7 @@ import {
   DEMO_REVIEW_COUNT,
   NAMED_TESTIMONIALS,
   displayName,
+  displayQuotes,
 } from "@/components/testimonials/data";
 
 const PAGE_URL = "https://speakerdrive.com/reviews";
@@ -69,7 +70,7 @@ const jsonLd = {
     ...NAMED_TESTIMONIALS.map((t) => ({
       "@type": "Review",
       author: { "@type": "Person", name: displayName(t) },
-      reviewBody: t.quotes.join(" "),
+      reviewBody: displayQuotes(t).join(" "),
       datePublished: t.date,
     })),
     ...DEMO_REVIEWS_WITH_TEXT.map((t) => ({
@@ -105,47 +106,35 @@ export default function ReviewsPage() {
       />
 
       <main className="pt-24">
-        {/* Intro */}
-        <section className="bg-white pb-10 pt-12 sm:pb-12 sm:pt-16">
-          <div className="container mx-auto max-w-4xl px-4 text-center sm:px-6">
-            <span className="mb-4 inline-block rounded-full bg-green-100 px-4 py-1 text-sm font-bold uppercase tracking-wide text-green-700">
-              Reviews
-            </span>
-            <h1 className="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-              What speakers say about SpeakerDrive
+        {/* Header */}
+        <section className="bg-white pb-6 pt-8 sm:pb-8 sm:pt-10">
+          <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6">
+            <Stars size={28} className="mb-4" />
+            <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+              Reviews from SpeakerDrive customers
             </h1>
-            <p className="mx-auto max-w-2xl text-lg text-gray-600">
-              Real customers, in their own words.
+            <p className="mt-3 text-gray-600">
+              {DEMO_REVIEW_AVERAGE.toFixed(1)} out of 5 from {DEMO_REVIEW_COUNT}{" "}
+              demo reviews
             </p>
-            <a
-              href="#demo-reviews"
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm shadow-sm hover:border-gray-300"
-            >
-              <Stars size={16} />
-              <span className="font-bold text-gray-900">
-                {DEMO_REVIEW_AVERAGE.toFixed(1)}
-              </span>
-              <span className="text-gray-600">
-                from {DEMO_REVIEW_COUNT} demo reviews
-              </span>
-            </a>
           </div>
         </section>
 
-        {/* Named customers: one wide card, rotating */}
-        <section className="bg-stone-50 py-12 sm:py-16">
+        {/* Named customers, one card that rotates */}
+        <section className="bg-white pb-4">
           <div className="container mx-auto max-w-5xl px-4 sm:px-6">
             <TestimonialCarousel />
           </div>
         </section>
 
-        <DemoReviewsWall />
+        {/* Every review, the named ones first */}
+        <ReviewsWall />
 
         {/* Calendar */}
-        <section className="relative bg-stone-50 py-16 sm:py-20">
+        <section className="relative bg-white py-12 sm:py-16">
           <div className="container mx-auto max-w-4xl px-4 sm:px-6">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-extrabold text-gray-900 sm:text-5xl">
+            <div className="mb-10 text-center">
+              <h2 className="mb-3 text-3xl font-extrabold text-gray-900 sm:text-4xl">
                 See it for yourself
               </h2>
               <p className="mx-auto max-w-2xl text-lg text-gray-600">

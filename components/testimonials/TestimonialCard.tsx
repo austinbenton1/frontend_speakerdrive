@@ -8,7 +8,7 @@
 
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { displayName, type Testimonial } from "./data";
+import { displayName, displayQuotes, type Testimonial } from "./data";
 
 function escapeRegExp(s: string) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -79,11 +79,12 @@ export function TestimonialCard({
   className?: string;
 }) {
   const name = displayName(t);
+  const quotes = displayQuotes(t);
 
   return (
     <figure
       className={cn(
-        "flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8",
+        "flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6",
         className,
       )}
     >
@@ -92,26 +93,26 @@ export function TestimonialCard({
         <img
           src={t.photo}
           alt={name}
-          className="h-28 w-28 flex-none rounded-2xl object-cover sm:h-36 sm:w-36"
+          className="h-20 w-20 flex-none rounded-2xl object-cover sm:h-24 sm:w-24"
         />
       )}
       <div className="min-w-0 flex-1">
         <blockquote>
-          {t.quotes.map((q, i) => (
+          {quotes.map((q, i) => (
             <p
               key={i}
               className={cn(
-                "text-lg font-medium leading-snug text-gray-900 sm:text-[22px] sm:leading-snug",
-                i > 0 && "mt-3",
+                "text-base font-medium leading-snug text-gray-900 sm:text-lg sm:leading-snug",
+                i > 0 && "mt-2",
               )}
             >
               {i === 0 && <>&ldquo;</>}
               <Emphasized text={q} emphasis={t.emphasis} />
-              {i === t.quotes.length - 1 && <>&rdquo;</>}
+              {i === quotes.length - 1 && <>&rdquo;</>}
             </p>
           ))}
         </blockquote>
-        <figcaption className="mt-5">
+        <figcaption className="mt-4">
           <div className="font-bold text-gray-900">{name}</div>
           {t.title && <div className="text-sm text-gray-600">{t.title}</div>}
         </figcaption>

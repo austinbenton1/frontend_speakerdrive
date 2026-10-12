@@ -65,7 +65,7 @@ export function TestimonialCarousel({
       role="region"
       aria-roledescription="carousel"
       aria-label="Customer testimonials"
-      className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-10"
+      className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm sm:p-7"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -102,7 +102,7 @@ export function TestimonialCarousel({
 
       {items.length > 1 && (
         <div
-          className="mt-6 flex items-center justify-center gap-2 sm:justify-end"
+          className="mt-4 flex items-center justify-center gap-2 sm:justify-end"
           role="group"
           aria-label="Choose a testimonial"
         >

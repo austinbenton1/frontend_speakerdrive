@@ -29,6 +29,11 @@ export type Testimonial = {
   photo?: string;
   /** One paragraph per entry. Each is the person's exact words. */
   quotes: string[];
+  /**
+   * The cut the page shows when the full quote runs long: exact words from
+   * `quotes`, with … where words are skipped. Leave out to show the full quote.
+   */
+  excerpt?: string[];
   /** Exact substrings of a quote to set in bold. Never new words. */
   emphasis?: string[];
   source: TestimonialSource;
@@ -50,6 +55,10 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "I landed a breakout session for a conference (very modest honorarium but paid for a couple months worth of your platform) within the first 25 leads, and that session gets me in the room of the people I want to advertise to anyhow.",
       "By far my favorite part of this is that I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
     ],
+    excerpt: [
+      "I landed a breakout session for a conference … within the first 25 leads.",
+      "I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
+    ],
     emphasis: [
       "I landed a breakout session for a conference",
       "within the first 25 leads",
@@ -67,6 +76,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     quotes: [
       "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers—most are fly-by-night operations that lack real substance and deliver on false promises. I rarely engage with them. Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin. He truly understands the nuances of a speaker's business—he gets it. He has assembled something that actually works, and I'm grateful to be a part of it. Thank you, Austin!",
     ],
+    excerpt: [
+      "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers … Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin.",
+    ],
     emphasis: ["Speaker Drive is the rare exception."],
     source: "linkedin",
     date: "2026-09",
@@ -79,6 +91,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     title: "Executive-functioning coach",
     quotes: [
       "I give Austin Benton my strongest recommendation. He's the visionary behind SpeakerDrive, a platform that is reshaping how speakers and experts find high-value opportunities. Instead of chasing gigs or living in the 'feast or famine' cycle, SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages. Austin combines industry insight, innovation, and genuine care for the people he serves. He knows the challenges speakers face and has built a practical, effective solution that makes real results possible. If you're a speaker looking for more consistency, more opportunities, and more impact, you want Austin and SpeakerDrive in your corner.",
+    ],
+    excerpt: [
+      "SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages.",
     ],
     emphasis: [
       "the built-in outreach tools actually convert those connections into booked stages",
@@ -132,7 +147,7 @@ export const DEMO_REVIEWS: Testimonial[] = [
   { id: "tidycal-elaine-2026-08", name: "Elaine", quotes: ["This is an awesome system! Austin Benton has created a program that provides the types of leads every speaker wants and needs. It's easy to use, and it's affordable."], source: "tidycal", date: "2026-08", rating: 5 },
   { id: "tidycal-jeff-2026-08", name: "Jeff", quotes: ["Great conversation and demo. Thank you."], source: "tidycal", date: "2026-08", rating: 5 },
   { id: "tidycal-sam-2026-08", name: "Sam", quotes: ["Amazing! Austin is one of the real ones. Genuine guy that leads from a human approach and very trustworthy. Thank you!"], source: "tidycal", date: "2026-08", rating: 5 },
-  { id: "tidycal-kelly-2026-07", name: "Kelly", quotes: ["Austin is a class act - down to Earth, willing to help in any and every way you need, and he has such confidence in his product. He knows it’s working for people, it’s working for me, and will work for you. Best platform out there for speakers! Saves me hours and hours of cold emailing!"], source: "tidycal", date: "2026-07", rating: 5 },
+  { id: "tidycal-kelly-2026-07", name: "Kelly", quotes: ["Austin is a class act - down to Earth, willing to help in any and every way you need, and he has such confidence in his product. He knows it’s working for people, it’s working for me, and will work for you. Best platform out there for speakers! Saves me hours and hours of cold emailing!"], excerpt: ["Best platform out there for speakers! Saves me hours and hours of cold emailing!"], source: "tidycal", date: "2026-07", rating: 5 },
   { id: "tidycal-diane-2026-06", name: "Diane", quotes: ["FABULOUS - have a great weekend!"], source: "tidycal", date: "2026-06", rating: 5 },
   { id: "tidycal-stephen-2026-06", name: "Stephen", quotes: [], source: "tidycal", date: "2026-06", rating: 5 },
   { id: "tidycal-arthur-2026-06", name: "Arthur", quotes: ["Every question answered and some great starting tips to get moving."], source: "tidycal", date: "2026-06", rating: 5 },
@@ -156,6 +171,11 @@ export const DEMO_REVIEW_AVERAGE = (() => {
 export const DEMO_REVIEWS_WITH_TEXT = DEMO_REVIEWS.filter(
   (r) => r.quotes.length > 0 && r.quotes[0].trim().length > 0,
 );
+
+/** The paragraphs the page shows: the excerpt when there is one, else the full quote. */
+export function displayQuotes(t: Testimonial): string[] {
+  return t.excerpt ?? t.quotes;
+}
 
 /** The name the page shows. */
 export function displayName(t: Testimonial): string {
