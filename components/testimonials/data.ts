@@ -34,6 +34,8 @@ export type Testimonial = {
    * `quotes`, with … where words are skipped. Leave out to show the full quote.
    */
   excerpt?: string[];
+  /** The one-line cut for the card wall. Same rule: exact words, … for skips. */
+  teaser?: string[];
   source: TestimonialSource;
   /** "YYYY-MM" — the month the words were written. */
   date: string;
@@ -57,6 +59,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
       "I landed a breakout session for a conference … within the first 25 leads.",
       "I can sit on my couch during commercial breaks of a college football game and set up outreach sequences for 5 to 10 organizations within the span of 5 minutes.",
     ],
+    teaser: [
+      "I landed a breakout session for a conference … within the first 25 leads.",
+    ],
     source: "email",
     date: "2026-08",
   },
@@ -71,6 +76,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     ],
     excerpt: [
       "In my 30+ years in this business, I've seen countless companies pitch products and services to speakers … Speaker Drive is the rare exception. The quality of this platform is undeniable, and that is entirely due to Austin.",
+    ],
+    teaser: [
+      "The quality of this platform is undeniable.",
     ],
     source: "linkedin",
     date: "2026-09",
@@ -87,6 +95,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     excerpt: [
       "SpeakerDrive connects speakers directly with decision-makers and events—and the built-in outreach tools actually convert those connections into booked stages.",
     ],
+    teaser: [
+      "The built-in outreach tools actually convert those connections into booked stages.",
+    ],
     source: "linkedin",
     date: "2025-09",
   },
@@ -99,6 +110,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     quotes: [
       "I absolutely love this service!! It needs to be a staple of anyone looking to generate leads and is serious about Prospecting.",
     ],
+    teaser: [
+      "I absolutely love this service!!",
+    ],
     source: "email",
     date: "2026-08",
   },
@@ -110,6 +124,9 @@ export const NAMED_TESTIMONIALS: Testimonial[] = [
     quotes: [
       "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!! Thanks Austin.",
       "I got a second reply after that.",
+    ],
+    teaser: [
+      "Omg! I got a reply!! Only sent out 4 outreaches yesterday. Whoo hoo!!",
     ],
     source: "email",
     date: "2026-09",
@@ -163,6 +180,11 @@ export const DEMO_REVIEWS_WITH_TEXT = DEMO_REVIEWS.filter(
 /** The paragraphs the page shows: the excerpt when there is one, else the full quote. */
 export function displayQuotes(t: Testimonial): string[] {
   return t.excerpt ?? t.quotes;
+}
+
+/** The paragraphs the card wall shows: the teaser when there is one. */
+export function wallQuotes(t: Testimonial): string[] {
+  return t.teaser ?? displayQuotes(t);
 }
 
 /** The name the page shows. */

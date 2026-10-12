@@ -66,6 +66,7 @@ export function TestimonialCard({
         />
       )}
       <div className="min-w-0 flex-1">
+        <Stars size={16} className="mb-3" />
         <blockquote>
           {quotes.map((q, i) => (
             <p

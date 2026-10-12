@@ -15,7 +15,7 @@ import {
 } from "@/components/testimonials/data";
 
 const PAGE_URL = "https://speakerdrive.com/reviews";
-const TITLE = "SpeakerDrive Reviews | What Speakers Say";
+const TITLE = "SpeakerDrive Customer Reviews";
 const DESCRIPTION = `Rated ${DEMO_REVIEW_AVERAGE.toFixed(1)} out of 5 across ${DEMO_REVIEW_COUNT} demo reviews. Read what keynote speakers, coaches and experts say about finding and booking gigs with SpeakerDrive.`;
 
 export const metadata: Metadata = {
@@ -112,7 +112,7 @@ export default function ReviewsPage() {
           <div className="container mx-auto max-w-3xl px-4 text-center sm:px-6">
             <Stars size={28} className="mb-3" />
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
-              Reviews from SpeakerDrive customers
+              SpeakerDrive customer reviews
             </h1>
           </div>
         </section>
