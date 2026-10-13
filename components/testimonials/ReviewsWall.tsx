@@ -1,6 +1,7 @@
 // The card wall on /reviews. The named customers fan out across the top
-// (one row of uniform cards, left to right), then every TidyCal demo review
-// that has words flows below in columns. Every card: stars, the quote,
+// (one row of uniform cards, left to right), then the live reviews from the
+// speakerdrive.com/review form (newest first) and every TidyCal demo review
+// that has words flow below in columns. Every card: stars, the quote,
 // the name. No photos here; the slider above is the only place a photo
 // shows. Server-safe. Everything comes from data.ts.
 
@@ -16,7 +17,7 @@ import { Stars } from "./TestimonialCard";
 
 function Tile({ t, className }: { t: Testimonial; className?: string }) {
   const quotes = wallQuotes(t);
-  const demo = t.source === "tidycal";
+  const dated = t.source === "tidycal" || t.source === "form";
   return (
     <figure
       className={
@@ -24,7 +25,7 @@ function Tile({ t, className }: { t: Testimonial; className?: string }) {
         (className ?? "")
       }
     >
-      <Stars size={16} />
+      <Stars size={16} count={t.rating ?? 5} />
       <blockquote className="mt-3 flex-1 leading-relaxed text-gray-700">
         {quotes.map((q, i) => (
           <p key={i} className={i > 0 ? "mt-2" : undefined}>
@@ -37,7 +38,7 @@ function Tile({ t, className }: { t: Testimonial; className?: string }) {
       <figcaption className="mt-4 min-w-0 text-sm">
         <div className="font-bold text-gray-900">
           {displayName(t)}
-          {demo && (
+          {dated && (
             <span className="font-normal text-gray-500"> · {formatMonth(t.date)}</span>
           )}
         </div>

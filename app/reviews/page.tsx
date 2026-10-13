@@ -5,6 +5,7 @@ import { Stars } from "@/components/testimonials/TestimonialCard";
 import { TestimonialCarousel } from "@/components/testimonials/TestimonialCarousel";
 import { ReviewsWall } from "@/components/testimonials/ReviewsWall";
 import { TidyCalEmbed } from "@/components/testimonials/TidyCalEmbed";
+import { fetchLiveReviews } from "@/components/testimonials/live";
 import {
   DEMO_REVIEWS_WITH_TEXT,
   DEMO_REVIEW_AVERAGE,
@@ -13,6 +14,9 @@ import {
   displayName,
   displayQuotes,
 } from "@/components/testimonials/data";
+
+// New reviews from speakerdrive.com/review show within about a minute.
+export const revalidate = 60;
 
 const PAGE_URL = "https://speakerdrive.com/reviews";
 const TITLE = "SpeakerDrive Customer Reviews";
@@ -87,7 +91,8 @@ const jsonLd = {
   ],
 };
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const live = await fetchLiveReviews();
   return (
     <div className="min-h-screen bg-white">
       <script
@@ -124,8 +129,8 @@ export default function ReviewsPage() {
           </div>
         </section>
 
-        {/* Every review, the named ones first */}
-        <ReviewsWall />
+        {/* Every review: the named ones first, then the form's live ones (newest first), then TidyCal */}
+        <ReviewsWall items={[...live, ...DEMO_REVIEWS_WITH_TEXT]} />
 
         {/* Calendar */}
         <section className="relative bg-white py-10 sm:py-12">
