@@ -15,7 +15,7 @@
 //   - The page shows `shortName` ("Terri C."), never the full name.
 //   - No invented stats: the rating numbers come from the entries below.
 
-export type TestimonialSource = "email" | "linkedin" | "tidycal";
+export type TestimonialSource = "email" | "linkedin" | "tidycal" | "form";
 
 export type Testimonial = {
   id: string;
@@ -42,8 +42,8 @@ export type Testimonial = {
   source: TestimonialSource;
   /** "YYYY-MM" — the month the words were written. */
   date: string;
-  /** Stars left on TidyCal (demo reviews only). */
-  rating?: 5;
+  /** Stars left on TidyCal or on the speakerdrive.com/review form (1 to 5). */
+  rating?: number;
 };
 
 /** Named customers, in the order they appear on /reviews and in the /demo slider. */
@@ -199,6 +199,7 @@ export const SOURCE_LABEL: Record<TestimonialSource, string> = {
   email: "Sent by email",
   linkedin: "LinkedIn recommendation",
   tidycal: "Demo review on TidyCal",
+  form: "Sent from speakerdrive.com/review",
 };
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];

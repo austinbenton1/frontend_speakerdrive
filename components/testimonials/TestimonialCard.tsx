@@ -25,12 +25,12 @@ export function Stars({
       role="img"
       aria-label={`${count} out of 5 stars`}
     >
-      {Array.from({ length: count }).map((_, i) => (
+      {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
           width={size}
           height={size}
-          className="text-amber-400"
+          className={i < count ? "text-amber-400" : "text-gray-200"}
           fill="currentColor"
           strokeWidth={0}
           aria-hidden="true"
