@@ -39,6 +39,8 @@ const MESSAGES = {
 
 type Field = "stars" | "name" | "review" | "email" | "photo" | "form";
 
+const FIELD_IDS = { stars: "review-stars", name: "review-name", review: "review-text", email: "review-email" } as const;
+
 /** Three starters, never the same three as now. */
 function pickThree(current: string[]): string[] {
   const rest = STARTERS.filter((s) => !current.includes(s));
@@ -127,7 +129,14 @@ export function ReviewForm() {
     if (review.trim().length < 3) next.review = MESSAGES.review;
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) next.email = MESSAGES.email;
     setErrors(next);
-    if (Object.keys(next).length) return;
+    if (Object.keys(next).length) {
+      // Bring the first problem into view (a missing star sits far above the button).
+      const first = (["stars", "name", "review", "email"] as const).find((f) => next[f]);
+      const el = first ? document.getElementById(FIELD_IDS[first]) : null;
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (el && first !== "stars") el.focus({ preventScroll: true });
+      return;
+    }
 
     setSending(true);
     try {
@@ -168,7 +177,13 @@ export function ReviewForm() {
     <form onSubmit={submit} noValidate className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
       <h1 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">How is SpeakerDrive working for you?</h1>
 
-      <div className="mt-4 flex gap-1" role="radiogroup" aria-label="Your rating" onMouseLeave={() => setHover(0)}>
+      <div
+        id="review-stars"
+        className="mt-4 flex gap-1 scroll-mt-24"
+        role="radiogroup"
+        aria-label="Your rating"
+        onMouseLeave={() => setHover(0)}
+      >
         {[1, 2, 3, 4, 5].map((n) => (
           <button
             key={n}
